@@ -9,9 +9,177 @@
 
 
 \chapter{???}
-\section{???}
+\section{Motivating and Defining Representations}
 \begin{itemize}
-    \item \marginnote{9/27:}
+    \item \marginnote{9/27:}Rudenko would happily approve my final substitution, but it's not his call; it's Boller's.
+    \item HW will be due every week on Wednesday or thereabouts.
+    \begin{itemize}
+        \item Submit in paper in a mailbox, location TBA.
+        \item First HW due next Wednesday.
+    \end{itemize}
+    \item Midterm eventually and an in-class final.
+    \item Grading scheme in the syllabus.
+    \item OH not available MW after class (Rudenko has to run to something else), but F after class, we can ask him anything.
+    \begin{itemize}
+        \item Regular OH MTh, time TBA.
+    \end{itemize}
+    \item There is no specific book for the course.
+    \begin{itemize}
+        \item First 8 lectures come from \textcite{bib:Serre}; amazing book but very concise; gets confusing later on. Most lectures are made up by Rudenko.
+    \end{itemize}
+    \item Course outline.
+    \begin{enumerate}
+        \item Character theory: Beautiful, not too hard.
+        \item Non-commutative algebra: More abstract/general approach to the same thing.
+        \item Advanced topics, $S_n$.
+    \end{enumerate}
+    \item This course's focus: Representations of finite groups in finite dimensions over $\C$.
+    \item This course is for math-inclined people (not quite physics) and lays the foundation for all other Rep Theory.
+    \begin{itemize}
+        \item The ideas would be presented in a very different way in Physics Rep Theory.
+    \end{itemize}
+    \item We can always ask questions and stop him to correct mistakes during class.
+    \item Why we care about representations.
+    \begin{itemize}
+        \item Start with a group $G$, finite. For example, let $G\equiv S_1$.
+        \item People started to play with $S_4$ (permutations of roots of a polynomial of degree 4) in Galois theory.
+        \begin{itemize}
+            \item Galois theory primer: Consider a polynomial like $x^4+3x+1=0$; the roots $\alpha_1,\alpha_2,\alpha_3,\alpha_4$ satisfy tons of equations, e.g., $\alpha_1\alpha_2\alpha_3\alpha_4=1$ since 1 is the $x^0$ term.
+        \end{itemize}
+        \item But groups also occur in much more natural places, e.g., isometries of $\R^3$ that preserve a tetrahedron.
+        \item $S_4$ is also orientation-preserving isometries of $\R^3$ that preserve a cube.
+        \item Many things lead to the same group!
+        \item Theory of abstract groups developed far later than any of these perspectives; was developed to unify them.
+    \end{itemize}
+    \item Recall group actions: Take $G,X=\{x_1,\dots,x_n\}$ both finite. We want $G\acts X$, which is a homomorphism $A:G\to S_n$.
+    \item What can we do now?
+    \begin{itemize}
+        \item We can look at orbits, which are smaller pieces.
+        \item We can look at the stabilizer.
+        \item We can identify orbits with cosets.
+        \item If we understand all possible subgroups, we understand all possible actions.
+    \end{itemize}
+    \item This story is not boring, but it's simplistic.
+    \item Rudenko doesn't assume we remember everything (phew!).
+    \item Main definition (general to start, then we simplify).
+    \item \textbf{Group representation} (of $G$ on $V$): A group homomorphism $G\to GL(V)$, for $G$ a group, $V$ a finite-dimensional vector space over some field $\F$ with basis $\{e_1,\dots,e_n\}$, and $GL(V)$ the set of isomorphic linear maps $L:V\to V$. \emph{Denoted by} $\bm{\rho}$.
+    \begin{itemize}
+        \item Recall that $GL(V)=GL_n(\F)$ is the set of all $n\times n$ invertible matrices.
+    \end{itemize}
+    \item For every element $g\in G$, $g\mapsto\rho(g)=A_g$. Essentially, you're mapping to elements that satisfy certain equations.
+    \begin{itemize}
+        \item For example, $A_e=E_n$, $A_{g_1g_2}=A_{g_1}A_{g_2}$, and $A_{g^{-1}}={A_g}^{-1}$.
+        \item Thus, representations are a "concrete way to think about groups."
+        \item If you don't understand abstract group $G$, let us compare it to a group that we do understand! Like a group can \emph{act} on $S_n$, we can \emph{represent} a group in a vector space.
+    \end{itemize}
+    \item In this course, $G$ is finite, $\F=\C$, and $V$ is finite dimensional.
+    \begin{itemize}
+        \item This is the most simple case, but also a very interesting one. The theory is much, much easier, so we can get much more complicated, but this is a good place to start.
+        \item We could make $G$ compact, but we're not gonna go that far.
+    \end{itemize}
+    \item Examples to get an idea of what's going on.
+    \begin{enumerate}
+        \item $\dim\rho=1$ (means $\dim V=1$). Then $\rho:G\to GL_1(V)=\C^\times$. The codomain is referred to as the \textbf{character} of the group.
+        \begin{itemize}
+            \item An example group homomorphism $S_n\to\C^\times$ is the sign function $\sigma\to\sign(\sigma)=\{\pm 1\}$.
+            \item Another example is the \textbf{trivial representation}, $G\to\C^\times$ and $g\mapsto 1$.
+        \end{itemize}
+        \item Smallest one: Let $G=S_3$. The structure is already pretty rich, and this will be part of the homework.
+        \begin{itemize}
+            \item \textbf{Trivial representation} again.
+            \item \textbf{Alternating representation}.
+            \item \textbf{Standard representation}.
+            \item \textbf{Regular representation}.
+        \end{itemize}
+    \end{enumerate}
+    \item \textbf{Trivial representation}: The representation $\rho:G\to V$ sending $g\mapsto 1$ for all $g\in G$. \emph{Denoted by} $\pmb{\ydiagram{3}}$, $\bm{(3)}$.
+    \begin{itemize}
+        \item The boxes notation is too much of a detour to explain now.
+    \end{itemize}
+    \item \textbf{Alternating representation}: The representation $\rho:G\to V$ sending $g\mapsto\sign(g)$ for all $g\in G$. \emph{Denoted by} $\pmb{\ydiagram{1,1,1}}$, $\bm{(1,1,1)}$.
+    \item \textbf{Standard representation}: The representation $\rho:S_n\to V$ sending $\sigma\mapsto(x_{\sigma(1)},\dots,x_{\sigma(n)})$, where $V=\{(x_1,\dots,x_n)\in\C^n\mid x_1+\cdots+x_n=0\}$ is a $(n-1)$-dimensional vector space. \emph{Denoted by} $\pmb{\ydiagram{2,1}}$, $\bm{(2,1)}$.
+    \begin{itemize}
+        \item A 2D representation like rotating a triangle.
+        \item This gives something with real numbers.
+        \item Example: $S_3\acts V$ by $\sigma((x_1,x_2,x_3))=(x_{\sigma(1)},x_{\sigma(2)},x_{\sigma(3)})$.
+    \end{itemize}
+    \item \textbf{Regular representation}: The representation $\rho:G\to\Hom(\C^n)$ defined by $g\mapsto\sigma_g$, where $G=\{g_1,\dots,g_n\}$, $\{e_{g_1},\dots,e_{g_n}\}$ is a basis of $\C^n$, $\cdot$ is the group action of $\rho(G)\acts\C^n$ by $\rho(g)\cdot e_g=e_{gg_i}$, and $\sigma_g(e_{g_i})=\rho(g)\cdot e_g=e_{gg_i}$.
+    \begin{itemize}
+        \item This is a permutation of vectors.
+        \item Thus, for $S_3$, it will already be 6-dimensional (it's very high dimensional).
+    \end{itemize}
+    \item How do we know that representation theory is tractable? Sure, we can define all these things, but how do we know that it will lead anywhere? Here's an example.
+    \begin{itemize}
+        \item Let $G=\Z/2\Z=\{e,g\}$, $V=\C^n$, $A$ an $n\times n$ matrix over $\C$, $\rho:G\to GL_n(\C)$, and $A:=\rho(g)$. Since $g^2=e$, we know for example that $A^2=E_n$.
+        \item But how do we find the matrices $A$?
+        If we look at eigenvalues of $A$, there are only two possibilities: $\pm 1$. The structure of $A$ can be very complicated with Jordan normal form and all that, but in fact, these are the \textbf{semisimple matrices}, so it's not that bad.
+        \item Since $A^2=E$, we know that $(A-E)(A+E)=0$. Consider $(A-E):V\to V$. Naturally, it has $\ker(A-E)$ and $\im(A-E)$. In this particular case, Rudenko claims that $\ker(A-E)\cap\im(A-E)=\{0\}$.
+        \begin{itemize}
+            \item Proof: Let $v\in\ker(A-E)\cap\im(A-E)$ be arbitrary. Since $v\in\im(A-E)$, there exists $w\in V$ such that $v=(A-E)w=Aw-w$. Since $v\in\ker(A-E)$, we have $(A-E)v=0$, so $Av=v$. It follows that $A(Aw-w)=Aw-w$ but also $A(Aw-w)=Ew-Aw=w-Aw$. Thus,
+            \begin{align*}
+                Aw-w &= w-Aw\\
+                2Aw &= 2w\\
+                Aw &= w
+            \end{align*}
+            But then $w\in\ker(A-E)$, so $v=(A-E)w=0$.
+        \end{itemize}
+        \item This combined with the fact that every vector in a vector space is in either the image or the kernel of a linear map\footnote{See Theorem 3.6 of \textcite{bib:Axler}.} implies that $V=\ker(A-E)\oplus\im(A-E)$.
+        \item Let the kernel have basis $e_1,\dots,e_k$ and the image have basis $e_{k+1},\dots,n$; then all $A$ are of the following form.
+        \begin{equation*}
+            \begin{bNiceArray}{ccc|ccc}[margin,first-row,first-col]
+                    & 1 &        & k & k+1 &        &  n\\
+                1   & 1 &        &   &     &        &   \\
+                    &   & \ddots &   &     &        &   \\
+                k   &   &        & 1 &     &        &   \\
+                \hline
+                k+1 &   &        &   & -1  &        &   \\
+                    &   &        &   &     & \ddots &   \\
+                n   &   &        &   &     &        & -1\\
+            \end{bNiceArray}
+        \end{equation*}
+        \item Next time, we will discuss sums of representations, of which this is an example of the theory.
+    \end{itemize}
+    \item The same kind of thing, \textbf{simple representations}, happens with all finite groups?? This is where we're going. It's not rocket science; in fact, we'll see it next week.
+    \item Last thing for today: A remarkable story.
+    \begin{itemize}
+        \item The story of representation theory started quite different.
+        \item A beautiful theorem that we can prove now!
+        \item Frobenius determinant.
+        \item Think of $G=\{g_1,\dots,g_n\}$. Picture its multiplication table.
+        \item In every row and column, you see each element once.
+        \item Let's associate to the multiplication table an actual determinant in the linear algebra sense. Consider elements $x_{g_1},\dots,x_{g_n}$. Define the $n\times n$ matrix $(x_{g_ig_j})$. Take its determinant. It will be a polynomial in $n$ variables, i.e., an element of the ring $\Z[x_{g_1},\dots,x_{g_n}]$.
+        \item Example: Consider
+        \begin{equation*}
+            \begin{vmatrix}
+                e & g\\
+                g & e\\
+            \end{vmatrix}
+        \end{equation*}
+        \begin{itemize}
+            \item The determinant is $x_e^2-x_g^2=(x_e-x_g)(x_e+x_g)$.
+        \end{itemize}
+        \item Example: $G=\Z/3\Z$.
+        \begin{itemize}
+            \item If the elements are $e,g,g^2$ and we map these, respectively, to variables $a,b,c$, we get the matrix
+            \begin{equation*}
+                \begin{bNiceMatrix}
+                    e & g & g^2\\
+                    g & g^2 & e\\
+                    g^2 & e & g\\
+                \end{bNiceMatrix}
+                \mapsto
+                \begin{vNiceMatrix}
+                    a & b & c\\
+                    b & c & a\\
+                    c & a & b\\
+                \end{vNiceMatrix}
+            \end{equation*}
+            \item The determinant is $3abc-a^3-b^3-c^3=(a+b+c)(a^2+b^2+c^2-ab-bc-ac)=(a+b+c)(a+\zeta b+\zeta^2c)(a+\zeta^2b+\zeta c)$ where $\zeta^3=1$ is a root of unity.
+        \end{itemize}
+        \item Frobenius's theorem: If $G$ is a finite group and we take this Frobenius determinant, then this determinant is equal to ${P_1}^{d_1}\cdots{P_k}^{d_k}$ where $P_1,\dots,P_k$ are irreducible polynomials in $x_g,\dots,x_{g_j}$, then $\deg P_i=d_i$ and $k$ is the number of conjugacy classes.
+        \item Example: Take $S_3$; we'll get a polynomial of degree $|S_3|=6$ but the Frobenius determinant $FD=(x_{g_1}+\cdots+x_{g_k})(x_{g_1}\pm\cdots)(\text{some pol. of deg 2})^2$
+        \item The proof is remarkable and deep and uses what would become character theory. These polynomials are related to representations and the number of simplest irreducible representations. The theory that came out came as a way to understand this miracle. We'll forget FD's for now, but then come back and prove it later.
+    \end{itemize}
 \end{itemize}
 
 
