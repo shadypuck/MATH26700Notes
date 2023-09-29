@@ -7,8 +7,8 @@
 \usepackage[bottom]{footmisc}
 \usepackage[style=apa]{biblatex}
 \usepackage{tikz}
-\usepackage{amsmath,amssymb,amsbsy}
-\usepackage{bm,ytableau,nicematrix}
+\usepackage{amsmath,amssymb,amsbsy,amsthm}
+\usepackage{bm,ytableau,nicematrix,physics}
 \usepackage[hidelinks]{hyperref}
 \usepackage{subfiles}
 
@@ -32,12 +32,13 @@
 \deffootnotemark{\textsuperscript{\textup{[}\thefootnotemark\textup{]}}}
 \deffootnote[1.8em]{0em}{0em}{\textsuperscript{\thefootnote}}
 
-\addbibresource{\subfix{../main.bib}}
+\addbibresource{\subfix{main.bib}}
 \DefineBibliographyStrings{english}{bibliography={References}}
 
 \DeclareMathOperator{\sign}{sign}
 \DeclareMathOperator{\Hom}{Hom}
 \DeclareMathOperator{\im}{Im}
+\DeclareMathOperator{\evl}{ev}
 
 \ytableausetup{smalltableaux}
 

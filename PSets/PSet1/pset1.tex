@@ -8,9 +8,34 @@
 
 
 
-\section{???}
+\section{Introduction to Representations}
 \begin{enumerate}
-    \item \marginnote{??/??:}
+    \item \marginnote{10/5:}Read Section 1.3 in \textcite{bib:FultonHarris}.
+    \item Let $V,W$ be finite-dimensional vector spaces. Construct canonical isomorphisms\dots
+    \begin{enumerate}
+        \item $\Lambda^2(V\oplus W)\cong(\Lambda^2V)\oplus(V\otimes W)\oplus(\Lambda^2W)$;
+        \item $S^2(V\oplus W)\cong(S^2V)\oplus(V\otimes W)\oplus(S^2W)$.
+    \end{enumerate}
+    \item 
+    \begin{enumerate}
+        \item Factorize the group determinant for $G=\Z/2\Z\oplus\Z/2\Z$.
+        \item A \textbf{circulant matrix} is a square matrix in which all row vectors are composed of the same elements and each row vector is rotated one element to the right relative to the preceding row vector. Prove that for $\zeta\in\mu_n$, vector $(1,\zeta,\dots,\zeta^{n-1})$ is an eigenvector of any circulant matrix of size $n$.
+        \item Compute the eigenvalues and the determinant of a circulant matrix. Factorize the group determinant for $G=\Z/n\Z$.
+    \end{enumerate}
+    \item \textbf{Plethysm for $\bm{S_3}$}. Let $(3)$, $(1,1,1)$, and $(2,1)$ be the trivial, alternating, and standard representations of $S_3$.
+    \begin{enumerate}
+        \item Consider the permutational representation $V\cong(3)\oplus(2,1)$. Decompose $\Lambda^2V$ into irreducibles.
+        \item Decompose $S^2(2,1)$ and $S^3(2,1)$ into irreducibles.
+        \item Decompose the regular representation $R$ into irreducibles.
+        \item Prove that $S^{k+6}(2,1)\cong S^k(2,1)\oplus R$. Compute $S^k(2,1)$ for all $k$.
+    \end{enumerate}
+    \item Let $V$ be a vector space over $F$ with a basis $e_1,\dots,e_n$; let $e^1,\dots,e^n$ be the dual basis. Prove the following.
+    \begin{enumerate}
+        \item Element $e_1\otimes e^1+\cdots+e_n\otimes e^n\in V\otimes V^\vee$ does not depend on the choice of basis.
+        \item Consider a linear map $\evl:V\otimes V^*\to F$ sending $v\otimes\alpha$ to $\alpha(v)\in F$. Prove that $\evl(L)=\tr(L)$.
+        \item A \textbf{projector} is a linear map $P:V\to V$ such that $P^2=P$. Prove that $\tr(P)=\dim(\im(P))$.
+        \item Let $V$ be a representation of a finite group $G$. Prove that the representation $V\otimes V^*$ has a trivial subrepresentation.
+    \end{enumerate}
 \end{enumerate}
 
 
