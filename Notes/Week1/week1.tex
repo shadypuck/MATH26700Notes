@@ -8,7 +8,7 @@
 
 
 
-\chapter{???}
+\chapter{Introduction to Representation Theory}
 \section{Motivating and Defining Representations}
 \begin{itemize}
     \item \marginnote{9/27:}Rudenko would happily approve my final substitution, but it's not his call; it's Boller's.
@@ -92,12 +92,13 @@
             \item \textbf{Regular representation}.
         \end{itemize}
     \end{enumerate}
-    \item \textbf{Trivial representation}: The representation $\rho:G\to V$ sending $g\mapsto 1$ for all $g\in G$. \emph{Denoted by} $\pmb{\ydiagram{3}}$, $\bm{(3)}$.
+    \item \textbf{Trivial representation}: The representation $\rho:G\to GL(V)$ sending $g\mapsto 1$ for all $g\in G$. \emph{Denoted by} $\pmb{\ydiagram{3}}$, $\bm{(3)}$.
     \begin{itemize}
         \item The boxes notation is too much of a detour to explain now.
+        \item Note that $1\in GL(V)$ is the identity map on $V$!
     \end{itemize}
-    \item \textbf{Alternating representation}: The representation $\rho:G\to V$ sending $g\mapsto\sign(g)$ for all $g\in G$. \emph{Denoted by} $\pmb{\ydiagram{1,1,1}}$, $\bm{(1,1,1)}$.
-    \item \textbf{Standard representation}: The representation $\rho:S_n\to V$ sending $\sigma\mapsto(x_{\sigma(1)},\dots,x_{\sigma(n)})$, where $V=\{(x_1,\dots,x_n)\in\C^n\mid x_1+\cdots+x_n=0\}$ is a $(n-1)$-dimensional vector space. \emph{Denoted by} $\pmb{\ydiagram{2,1}}$, $\bm{(2,1)}$.
+    \item \textbf{Alternating representation}: The representation $\rho:G\to GL(V)$ sending $g\mapsto\sign(g)$ for all $g\in G$. \emph{Denoted by} $\pmb{\ydiagram{1,1,1}}$, $\bm{(1,1,1)}$.
+    \item \textbf{Standard representation}: The representation $\rho:S_n\to GL(V)$ sending $\sigma\mapsto(x_{\sigma(1)},\dots,x_{\sigma(n)})$, where $V=\{(x_1,\dots,x_n)\in\C^n\mid x_1+\cdots+x_n=0\}$ is a $(n-1)$-dimensional vector space. \emph{Denoted by} $\pmb{\ydiagram{2,1}}$, $\bm{(2,1)}$.
     \begin{itemize}
         \item A 2D representation like rotating a triangle.
         \item This gives something with real numbers.
@@ -179,6 +180,258 @@
         \item Frobenius's theorem: If $G$ is a finite group and we take this Frobenius determinant, then this determinant is equal to ${P_1}^{d_1}\cdots{P_k}^{d_k}$ where $P_1,\dots,P_k$ are irreducible polynomials in $x_g,\dots,x_{g_j}$, then $\deg P_i=d_i$ and $k$ is the number of conjugacy classes.
         \item Example: Take $S_3$; we'll get a polynomial of degree $|S_3|=6$ but the Frobenius determinant $FD=(x_{g_1}+\cdots+x_{g_k})(x_{g_1}\pm\cdots)(\text{some pol. of deg 2})^2$
         \item The proof is remarkable and deep and uses what would become character theory. These polynomials are related to representations and the number of simplest irreducible representations. The theory that came out came as a way to understand this miracle. We'll forget FD's for now, but then come back and prove it later.
+    \end{itemize}
+\end{itemize}
+
+
+
+\section{Key Definitions and Category Theory Primer}
+\begin{itemize}
+    \item \marginnote{9/29:}OH: TW 4:30 or 5:00 most likely; he will confirm later.
+    \item Today: Definitions in greater generality.
+    \item As before, let $G$ be a finite group and $V$ be a finite-dimensional vector space.
+    \item Goal of this course: Understand representations of $G$, that is\dots
+    \begin{itemize}
+        \item Homomorphisms $\rho:G\to GL(V)=GL_n(\C)$;
+        \item That send $g\mapsto A_g\in GL_n(\C)$;
+        \item And satisfy $A_e=E$, $A_{g_1}A_{g_2}=A_{g_1g_2}$, and $A_{g^{-1}}={A_g}^{-1}$.
+    \end{itemize}
+    \item What are some things we might want to do?
+    \begin{itemize}
+        \item Build new representations from old? Investigate and/or classify irreducible representations?
+        \item Before we can see if any of this works or not, we need a ton of definitions: Sum, equality, etc.
+    \end{itemize}
+    \item Rudenko will start today's lecture with some general thoughts on the \textbf{category} of representations.
+    \item Categories are things that now permeates math.
+    \item \textbf{Category}: A \emph{class} (not a set) of \emph{objects} (some things; you don't know anything about them), and then a bunch of properties.
+    \begin{figure}[h!]
+        \centering
+        \begin{tikzpicture}
+            \coordinate (0) at ($(0,0)  +rand*(0.2,0)+rand*(0,0.2)$);
+            \coordinate (1) at ($(0:1)  +rand*(0.2,0)+rand*(0,0.2)$);
+            \coordinate (2) at ($(60:1) +rand*(0.2,0)+rand*(0,0.2)$);
+            \coordinate (3) at ($(120:1)+rand*(0.2,0)+rand*(0,0.2)$);
+            \coordinate (4) at ($(180:1)+rand*(0.2,0)+rand*(0,0.2)$);
+            \coordinate (5) at ($(240:1)+rand*(0.2,0)+rand*(0,0.2)$);
+            \coordinate (6) at ($(300:1)+rand*(0.2,0)+rand*(0,0.2)$);
+    
+            \foreach \c in {0,...,6} {
+                \fill (\c) circle (2pt);
+            }
+    
+            \draw [thick,->,shorten >=4pt,shorten <=4pt] (0) to[bend left=20] (4);
+            \draw [thick,->,shorten >=4pt,shorten <=4pt] (4) to[bend left=20] (0);
+            \draw [thick,->,shorten >=4pt,shorten <=4pt] (0) to[bend left=20] (3);
+            \draw [thick,->,shorten >=4pt,shorten <=4pt] (3) to[bend left=20] (2);
+            \draw [thick,->,shorten >=4pt,shorten <=4pt] (2) to[bend left=20] (1);
+            \draw [thick,->,shorten >=4pt,shorten <=4pt] (2) to[bend left=20] (0);
+            \draw [thick,->,shorten >=4pt,shorten <=4pt] (5) to[bend left=20] (6);
+            \draw [thick,->,shorten >=4pt,shorten <=4pt] (6) to[bend left=20] (5);
+        \end{tikzpicture}
+        \caption{The general structure of a category.}
+        \label{fig:category}
+    \end{figure}
+    \begin{itemize}
+        \item Objects $a,b$ in category $C$ are denoted by $a,b\in\bm{\Ob(C)}$.
+        \item There are also \textbf{morphisms} between the objects. These are drawn as arrows and lie in $\Hom(a,b)$.
+        \item There is also composition: $\Hom(a,b)\times\Hom(b,c)\to\Hom(a,c)$.
+        \begin{itemize}
+            \item What does this notation mean??
+        \end{itemize}
+        \item Properties.
+        \begin{enumerate}
+            \item Associativity.
+            \item Existence of a unit: For any object $a$, there exists $\id_a\in\Hom(a,a)$ such that any morphism pre- or post-composed to this identity yields the same morphism.
+            \begin{itemize}
+                \item Example: If $f\in\Hom(a,b)$, then $\id_b\circ f=f=f\circ\id_a$.
+            \end{itemize}
+        \end{enumerate}
+        \item Rudenko: So a category is basically two pieces of data and a bunch of properties.
+    \end{itemize}
+    \item Examples of categories:
+    \begin{itemize}
+        \item Category of sets and maps between them.
+        \item Category of vector spaces over $\F$ where $\Ob(C)$ is the vector spaces and $\Hom(V,W)$ is filled with \emph{linear} maps because you don't just want maps --- you want maps that respect the structure.
+        \item Category of groups where $\Hom(G_1,G_2)$ is the set of group homomorphisms.
+        \item Category of topological spaces and continuous maps.
+        \item Category of abelian groups.
+        \item Trivial category and the identity map; thus, categories need not be chonky.
+    \end{itemize}
+    \pagebreak
+    \item Comments on category theory.
+    \begin{itemize}
+        \item We'll see some pretty significant category theory at the end of the course.
+        \item We'll see categories in every course we take; some people try to avoid them. Rudenko doesn't want to go into the material in depth, but he wants to use language from it.
+        \item Surprisingly, even under the stripped-down of axioms of category theory, you can say quite a lot.
+        \item Why any of this discussion of category theory matters: If you know the basics of category theory, you can guess the definitions of direct sum, equality, etc. for representations.
+    \end{itemize}
+    \item \textbf{Category of representations}. \emph{Denoted by} $\bm{\Rep_G}$.
+    \item Take two $G$-representations $V,W$; how do we define a map between them?
+    \begin{itemize}
+        \item Recall that $V,W$ are vector spaces.
+    \end{itemize}
+    \item \textbf{Morphism} (of $G$-representations): A map $f:V\to W$ such that\dots
+    \begin{enumerate}
+        \item $f$ is linear;
+        \item $f$ respects the structure of the representations; explicitly, for every $g\in G$, $\rho_V(g)\circ f=f\circ\rho_W(g)$\footnote{Recall that the object, $\rho_V(g)$ is a linear map! Thus, it can be composed with other linear maps like $f$.}.
+    \end{enumerate}
+    \item On constraint 2, above: This condition is summarized via a \textbf{commutative diagram}.
+    \begin{figure}[h!]
+        \centering
+        \DisableQuotes
+        \begin{tikzcd}
+            V \arrow[d,"\rho_V^{}(g)"'] \arrow[r,"f"] & W \arrow[d,"\rho_W^{}(g)"]\\
+            V \arrow[r,"f"'] & W\\
+        \end{tikzcd}
+        \begin{tikzpicture}[remember picture,overlay]
+            \draw [-{[bend]>}] (-2.07,0.3) arc[start angle=180,end angle=-150,radius=2mm];
+        \end{tikzpicture}
+        \EnableQuotes
+        \vspace{-1.5em}
+        \caption{Commutative diagram, morphisms.}
+        \label{fig:CDmorphisms}
+    \end{figure}
+    \begin{itemize}
+        \item Commutative diagrams are very category-theory-esque things.
+    \end{itemize}
+    \item That was a very abstract definition; let's make it concrete.
+    \begin{itemize}
+        \item Suppose you have a pair of representations $V=\C^n,W=\C^m$, and we have our map $f$ between them given by an $m\times n$ matrix.
+        \item Let $\rho_V(g)=A_g$ be an $n\times n$ matrix, and let $\rho_W(g)=B_g$ be an $m\times m$ matrix.
+        \item Then $FA_g=B_gF$.
+    \end{itemize}
+    \item Examples.
+    \begin{enumerate}
+        \item An interesting example: Let's look at $S_3\acts V_\text{perm}=\C^3$, a \textbf{permutation representation}.
+        \begin{itemize}
+            \item For all $\sigma\in S_3$, $\rho(\sigma):(x_1,x_2,x_3)\mapsto(x_{\sigma(1)},x_{\sigma(2)},x_{\sigma(3)})$.
+        \end{itemize}
+        \item There's also the trivial representation $S_3\acts V_{(3)}=\C$ defined by $\rho(\sigma):x\mapsto x$.
+    \end{enumerate}
+    \item Are the above 2 representations related?
+    \begin{itemize}
+        \item Yes! We can, in fact, find a \emph{morphism} between them.
+        \item In particular, define $f:V_{(3)}\to V_\text{perm}$ by $f(x)=(x,x,x)$.
+        \begin{itemize}
+            \item Since permuting 3 of the same thing does nothing, the commutativity of Figure \ref{fig:CDmorphisms} holds. Therefore, $f$ is a morphism of $G$-representations as defined above.
+            \item More explicitly,
+            \begin{equation*}
+                f[\rho_{(3)}(\sigma)(x)] = f(x)
+                = (x,x,x)
+                = \rho_\text{perm}(\sigma)((x,x,x))
+                = \rho_\text{perm}(\sigma)[f(x)]
+            \end{equation*}
+        \end{itemize}
+        \item Is $f$ \textbf{reversible}?
+        \begin{itemize}
+            \item Is "reversible" the right word??
+        \end{itemize}
+        \item Define $\tilde{f}:V_\text{perm}\to V_{(3)}$ by $\tilde{f}:(x_1,x_2,x_3)\mapsto x_1+x_2+x_3$.
+        \begin{itemize}
+            \item Since addition is commutative, the commutativity of Figure \ref{fig:CDmorphisms} holds.
+            \item More explicitly,
+            \begin{align*}
+                f[\rho_\text{perm}(\sigma)((x_1,x_2,x_3))] &= f((x_{\sigma(1)},x_{\sigma(2)},x_{\sigma(3)}))\\
+                &= x_{\sigma(1)}+x_{\sigma(2)}+x_{\sigma(3)}\\
+                &= x_1+x_2+x_3\tag*{Commutativity of addition}\\
+                &= f((x_1,x_2,x_3))\\
+                &= \rho_{(3)}(\sigma)[f((x_1,x_2,x_3))]\\
+            \end{align*}
+        \end{itemize}
+        \item Takeaway: The existence of maps between representations is interesting.
+    \end{itemize}
+    \item Next question: How do we define an \textbf{isomorphism} of two representations?
+    \item \textbf{Isomorphism} (of $G$-representations): A morphism of G-reps that is an isomorphism of vector spaces.
+    \item Category theory helps us again here because it generalizes the concepts of an isomorphism!
+    \begin{itemize}
+        \item If $f:V\to W$ and $g:W\to V$ are category-theoretic morphisms, then the constraints $f\circ g=\id_W$ and $g\circ f=\id_V$ make $f$ and $g$ into category-theoretic \emph{iso}morphisms, regardless of what $V$ and $W$ might be.
+        \item Back in the context of representations, let $f:V\to V$ be an isomorphism of vector spaces. Then we do indeed have $\rho_V(g)\circ f=f\circ\rho_V(g)$, as we would hope from category theory!
+    \end{itemize}
+    \item Recall the condition $FA_g=B_gF$. Supposing $F$ is an isomorphism (and thus has an inverse), we get $FA_gF^{-1}=B_g$ as our new condition.
+    \begin{itemize}
+        \item Essentially, we can do \emph{simultaneous conjugation} of all matrices.
+        \item As per usual with isomorphisms, we get to \emph{change bases}.
+        \item Essentially, we can represent the nice permutation representation in a very nasty basis but still have it be valid.
+    \end{itemize}
+    \item Many other notions (e.g., direct sum) will not be explained by Rudenko, but we can read about them!
+    \item However, we'll do a few more.
+    \item A representation sitting inside another: a \textbf{subrepresentation}.
+    \item \textbf{Subrepresentation} (of $V$): A subspace $W\subset V$ such that for all $w\in W$ and $g\in G$, we have that $\rho_V(g)W\subset W$, where $V$ is a $G$-representation with $\rho_V:G\to GL(V)$.
+    \begin{itemize}
+        \item Many people will just write the critical condition as $gW\subset W$.
+    \end{itemize}
+    \item Subrepresentations in category theory: We have another commutative diagram.
+    \begin{figure}[h!]
+        \centering
+        \DisableQuotes
+        \begin{tikzcd}
+            W \arrow[d,"\rho_V^{}(g)"'] \arrow[r,hook] & V \arrow[d,"\rho_V^{}(g)"]\\
+            W                           \arrow[r,hook] & V                         \\
+        \end{tikzcd}
+        \EnableQuotes
+        \vspace{-1.5em}
+        \caption{Commutative diagram, subrepresentations.}
+        \label{fig:CDsubreps}
+    \end{figure}
+    \item Example: The trivial representation, the standard representation, and (of course) the \textbf{zero representation} are subrepresentations of the permutation representation.
+    \item \textbf{Zero representation}: The representation $\rho:G\to GL(\{0\})$ sending $g\mapsto 1$ for all $g\in G$. \emph{Denoted by} $\bm{(0)}$.
+    \item What about representations that don't have subrepresentations?
+    \item \textbf{Simple} (representation): A $G$-representation $V$ that has only two subrerpesentations: $(0)$ and $V$. \emph{Also known as} \textbf{irreducible}, \textbf{irreps}.
+    \item Example irreducible representations: Line in $\C^2$, triangle in $\C^2$, $A_5$ and dodecahedron in $\C^3$.
+    \item Notion of a direct sum.
+    \item \textbf{Direct sum} (of $V_1,V_2$): The $G$-rep with the space $V_1\oplus V_2=\{(v_1,v_2)\mid v_1\in V_1,v_2\in V_2\}$ where $\rho_{V_1\oplus V_2}(g)(v_1,v_2)=(\rho_{V_1}(g)v_1,\rho_{V_2}(g)v_2)$. \emph{Denoted by} $\bm{V_1\oplus V_2}$.
+    \begin{itemize}
+        \item The matrix of $\rho_{V_1\oplus V_2}(g)$ is the following block matrix.
+        \begin{equation*}
+            \rho_{V_1\oplus V_2}^{}(g) =
+            \begin{bNiceArray}{w{c}{1cm}c|w{c}{1cm}c}[margin]
+                \Block{2-2}{\rho_{V_1}^{}(g)} & & \Block{2-2}{0} & \\
+                 & & & \\
+                \hline
+                \Block{2-2}{0} & & \Block{2-2}{\rho_{V_1}^{}(g)} & \\
+                 & & & \\
+            \end{bNiceArray}
+        \end{equation*}
+    \end{itemize}
+    \item Example: $V_\text{perm}=V_{(3)}\oplus V_{(2,1)}$, with $\C^3=\C\oplus \C^2$ where
+    \begin{align*}
+        \C &= \langle(1,1,1)\rangle&
+        \C^2 &= \langle(x_1,x_2,x_3)\mid x_1+x_2+x_3=0\rangle
+    \end{align*}
+    \begin{itemize}
+        \item The decomposition is into simple representations.
+        \item Relate this to the fact that the JCF of any $3\times 3$ permutation matrix has at most a 1-block and a 2-block, if not three 1-blocks. There will always be one 1D subspace on which the permutation matrix is an identity, i.e., $\spn(1,1,1)$, and a 2D orthogonal complement!
+        \item As a fun and simple exercise, prove that there is no line fixed under the standard representation.
+    \end{itemize}
+    \item A simple and important theorem to prove next week.
+    \item Theorem: Let $G$ be a finite group and $\F=\C$. Then\dots
+    \begin{enumerate}
+        \item There are finitely many irreps $V_1,\dots,V_s$ up to isomorphism.
+        \begin{itemize}
+            \item Later on, we will see that $s$ is equal to the number of conjugacy classes.
+        \end{itemize}
+        \item For every $G$-rep $V$, there exists a unique $n_1,\dots,n_s\geq 0$ such that $V\cong{V_1}^{n_1}\oplus\cdots\oplus{V_s}^{n_s}$.
+    \end{enumerate}
+    \item This theorem tells us that if we want to study rep theory, we want to study irreps (which can be kind of complicated) because if we understand them, everything breaks down into them.
+    \item Examples.
+    \begin{enumerate}
+        \item $G=\Z/2\Z=S_2$.
+        \begin{itemize}
+            \item $V_1=\C e$ with $ge=e$ and $V_{-1}=\C e$ with $ge=-e$.
+            \item It follows that $V\cong{V_1}^{n_1}\oplus{V_{-1}}^{n_{-1}}$.
+            \item We get a diagonal matrix with only 1s and $-1$s.
+        \end{itemize}
+        \item $G=S_3$.
+        \begin{itemize}
+            \item $V_{(3)},V_{(1,1,1)},V_{(2,1)}$.
+            \item $GL_5(\F_4)$.
+            \item Proven in an elementary way in Section 1.3 of \textcite{bib:FultonHarris}, which we have to read for the HW; will be useful for later in the course's HW.
+        \end{itemize}
+    \end{enumerate}
+    \item Plan: Next time, we'll talk about some more abstract stuff; tensor products of vector spaces.
+    \begin{itemize}
+        \item Tensor products are something we should read up on now! The definition is hard and abstract.
+        \item Then he'll prove the above theorem.
     \end{itemize}
 \end{itemize}
 
