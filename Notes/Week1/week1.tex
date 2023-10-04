@@ -115,15 +115,15 @@
         \item But how do we find the matrices $A$?
         If we look at eigenvalues of $A$, there are only two possibilities: $\pm 1$. The structure of $A$ can be very complicated with Jordan normal form and all that, but in fact, these are the \textbf{semisimple matrices}, so it's not that bad.
         \item Since $A^2=E$, we know that $(A-E)(A+E)=0$. Consider $(A-E):V\to V$. Naturally, it has $\ker(A-E)$ and $\im(A-E)$. In this particular case, Rudenko claims that $\ker(A-E)\cap\im(A-E)=\{0\}$.
-        \begin{itemize}
-            \item Proof: Let $v\in\ker(A-E)\cap\im(A-E)$ be arbitrary. Since $v\in\im(A-E)$, there exists $w\in V$ such that $v=(A-E)w=Aw-w$. Since $v\in\ker(A-E)$, we have $(A-E)v=0$, so $Av=v$. It follows that $A(Aw-w)=Aw-w$ but also $A(Aw-w)=Ew-Aw=w-Aw$. Thus,
+        \begin{proof}
+            Let $v\in\ker(A-E)\cap\im(A-E)$ be arbitrary. Since $v\in\im(A-E)$, there exists $w\in V$ such that $v=(A-E)w=Aw-w$. Since $v\in\ker(A-E)$, we have $(A-E)v=0$, so $Av=v$. It follows that $A(Aw-w)=Aw-w$ but also $A(Aw-w)=Ew-Aw=w-Aw$. Thus,
             \begin{align*}
                 Aw-w &= w-Aw\\
                 2Aw &= 2w\\
                 Aw &= w
             \end{align*}
             But then $w\in\ker(A-E)$, so $v=(A-E)w=0$.
-        \end{itemize}
+        \end{proof}
         \item This combined with the fact that every vector in a vector space is in either the image or the kernel of a linear map\footnote{See Theorem 3.6 of \textcite{bib:Axler}.} implies that $V=\ker(A-E)\oplus\im(A-E)$.
         \item Let the kernel have basis $e_1,\dots,e_k$ and the image have basis $e_{k+1},\dots,n$; then all $A$ are of the following form.
         \begin{equation*}
@@ -216,17 +216,17 @@
             \coordinate (6) at ($(300:1)+rand*(0.2,0)+rand*(0,0.2)$);
     
             \foreach \c in {0,...,6} {
-                \fill (\c) circle (2pt);
+                \fill [blx] (\c) circle (2pt);
             }
     
-            \draw [thick,->,shorten >=4pt,shorten <=4pt] (0) to[bend left=20] (4);
-            \draw [thick,->,shorten >=4pt,shorten <=4pt] (4) to[bend left=20] (0);
-            \draw [thick,->,shorten >=4pt,shorten <=4pt] (0) to[bend left=20] (3);
-            \draw [thick,->,shorten >=4pt,shorten <=4pt] (3) to[bend left=20] (2);
-            \draw [thick,->,shorten >=4pt,shorten <=4pt] (2) to[bend left=20] (1);
-            \draw [thick,->,shorten >=4pt,shorten <=4pt] (2) to[bend left=20] (0);
-            \draw [thick,->,shorten >=4pt,shorten <=4pt] (5) to[bend left=20] (6);
-            \draw [thick,->,shorten >=4pt,shorten <=4pt] (6) to[bend left=20] (5);
+            \draw [bly,thick,->,shorten >=4pt,shorten <=4pt] (0) to[bend left=20] (4);
+            \draw [bly,thick,->,shorten >=4pt,shorten <=4pt] (4) to[bend left=20] (0);
+            \draw [bly,thick,->,shorten >=4pt,shorten <=4pt] (0) to[bend left=20] (3);
+            \draw [bly,thick,->,shorten >=4pt,shorten <=4pt] (3) to[bend left=20] (2);
+            \draw [bly,thick,->,shorten >=4pt,shorten <=4pt] (2) to[bend left=20] (1);
+            \draw [bly,thick,->,shorten >=4pt,shorten <=4pt] (2) to[bend left=20] (0);
+            \draw [bly,thick,->,shorten >=4pt,shorten <=4pt] (5) to[bend left=20] (6);
+            \draw [bly,thick,->,shorten >=4pt,shorten <=4pt] (6) to[bend left=20] (5);
         \end{tikzpicture}
         \caption{The general structure of a category.}
         \label{fig:category}
@@ -432,6 +432,169 @@
     \begin{itemize}
         \item Tensor products are something we should read up on now! The definition is hard and abstract.
         \item Then he'll prove the above theorem.
+    \end{itemize}
+\end{itemize}
+
+
+
+\section{S Chapter 1: Generalities on Linear Representations}
+\emph{From \textcite{bib:Serre}.}
+\begin{itemize}
+    \item \marginnote{10/3:}Part I (what we'll be covering) is written for quantum chemists, and thus gives proofs "as elementary as possible, using only the definition of a group and the rudiments of linear algebra" \parencite[v]{bib:Serre}.
+    \begin{itemize}
+        \item Recall the story about Serre and his wife, the chemist, who needed to explain group theory and rep theory to her students.
+    \end{itemize}
+    \item Indeed, although the book seemed very fast when I first looked at it two years ago, it reads much more easily now and has enough context for most anyone who is comfortable with group theory and theoretical linear algebra.
+\end{itemize}
+
+
+\subsection*{Section 1.1: Definitions}
+\begin{itemize}
+    \item Definitions of $\bm{GL(V)}$, \textbf{invertible square matrix}, and \textbf{finite group}.
+    \item \textbf{Linear representation}: See class notes. \emph{Also known as} \textbf{group representation}.
+    \begin{itemize}
+        \item \textcite{bib:Serre} will frequenty write $\rho_s$ for $\rho(s)$.
+    \end{itemize}
+    \item \textbf{Representation space} (of $G$): The vector space $V$ corresponding to the linear representation $
+    \rho:G\to GL(V)$ of $G$. \emph{Also known as} \textbf{representation}.
+    \begin{itemize}
+        \item The latter term is a self-identified "abuse of language" \parencite[3]{bib:Serre}.
+    \end{itemize}
+    \item "For most applications, one is interested in dealing with a \emph{finite number of elements} $x_i$ of $V$, and can always find a subrepresentation of $V$\dots of finite dimension, which contains the $x_i$; just take the vector subspace generated by the images $\rho_s(x_i)$ of the $x_i$" \parencite[4]{bib:Serre}.
+    \item \textbf{Degree} (of a representation): The dimension of the representation space of this representation.
+    \item To give a representation \textbf{in matrix form} is to give a set of invertible matrices that are isomorphic to the group elements.
+    \item Important converse: Given invertible matrices satisfying the appropriate homomorphism identities, there is a corresponding group that these matrices represent.
+    \item \textbf{Similar} (representations of $G$): Two representations $\rho:G\to GL(V)$ and $\rho':G\to GL(V')$ of $G$ for which there exists a linear isomorphism $\tau:V\to V'$ such that
+    \begin{equation*}
+        \tau\circ\rho(s) = \rho'(s)\circ\tau
+    \end{equation*}
+    for all $s\in G$. \emph{Also known as} \textbf{isomorphic}.
+    \begin{itemize}
+        \item Equivalent definition (in matrix form): There exists $T$ invertible such that $R_s'=TR_sT^{-1}$.
+        \item Isomorphic representations have the same degree.
+    \end{itemize}
+\end{itemize}
+
+
+\subsection*{Section 1.2: Basic Examples}
+\begin{itemize}
+    \item Degree 1 representation: A homomorphism $\rho:G\to\C^*$, where $\C^*$ denotes the roots of unity (all $z\in\C$ with $|z|=1$).
+    \begin{itemize}
+        \item The fact that every $s\in G$ has \emph{finite} order by assumption is what permits this representation.
+    \end{itemize}
+    \item \textbf{Unit representation}: See class notes. \emph{Also known as} \textbf{trivial representation}.
+    \item \textbf{Regular representation}: The representation $\rho:G\to GL(V)$ defined by $s\mapsto[e_t\mapsto e_{st}]$ for all $s\in G$, where $V$ has basis $(e_t)_{t\in G}$.
+    \begin{itemize}
+        \item $\deg\rho=|G|$.
+        \item $e_s=\rho_s(e_1)$.
+        \begin{itemize}
+            \item Implication: The images of $e_1$ under the $\rho_s$'s form a basis of $V$, i.e., $\{\rho_s(e_1)\mid s\in G\}$ is a basis of $V$.
+        \end{itemize}
+        \item Converse of above: If $W$ is a representation of $G$ containing a vector $w$ such that $\{\rho_s(w)\mid s\in G\}$ forms a basis of $W$, then $W$ is isomorphic to the regular representation $V$ via $\tau:V\to W$ defined by $\tau(e_s)=\rho_s(w)$.
+    \end{itemize}
+    \item \textbf{Permutation representation} (associated with $X$): The representation $\rho:G\to GL(V)$ defined by $s\mapsto[e_x\mapsto e_{s\cdot x}]$ for all $s\in G$, where $G\acts X$ a finite set and $V$ has a basis $(e_x)_{x\in X}$.
+\end{itemize}
+
+
+\subsection*{Section 1.3: Subrepresentations}
+\begin{itemize}
+    \item Definition of \textbf{subrepresentation}.
+    \begin{itemize}
+        \item Example: Trivial representation $\C(x,\dots,x)$ is a subrepresentation of the regular representation.
+    \end{itemize}
+    \item Definitions of \textbf{direct sum} of vector spaces and \textbf{kernel}.
+    \item \textbf{Complement} (of a subspace): Any $(n-m)$-dimensional subspace $U$ that\dots
+    \begin{enumerate}
+        \item Satisfies $W\oplus U=V$;
+        \item Intersects $W$ trivially;
+    \end{enumerate}
+    where $\dim V=n$ and $\dim W=m\leq n$.
+    \begin{itemize}
+        \item This means that a single subspace can have multiple complements!
+        \begin{itemize}
+            \item Only one \textbf{orthogonal} complement, but many \emph{complements}.
+            \item Example: Consider a line through the origin in $\R^2$; any other line through the origin is a complement of it!
+        \end{itemize}
+        \item It follows that there is a bijection between the complements $W'$ of $W$ in $V$ and the projections $p$ of $V$ onto $W$ (since non-orthogonal complements require non-orthogonal projections).
+    \end{itemize}
+    \item \textbf{Projection} (of $V$ onto $W$ associated with the decomposition $V=W\oplus W'$): The mapping that sends each $x\in V$ to its component $w\in W$. \emph{Denoted by} $\bm{p}$.
+    \begin{itemize}
+        \item Consequence: The two properties defining a $p$ are (1) $\im(p)=W$ and (2) $p(x)=x$ for all $x\in W$.
+        \item Consequence: These two properties also imply that a map is a projection and $V=W\oplus\ker(p)$.
+    \end{itemize}
+    \item If a representation has a subrepresentation, then some complement of this subrepresentation is also a subrepresentation.
+    \begin{theorem}\label{trm:complements}
+        Let $\rho:G\to GL(V)$ be a linear representation of $G$ in $V$ and let $W$ be a vector subspace of $V$ stable under $G$. Then there exists a complement $W^0$ of $W$ in $V$ which is stable under $G$.
+        \begin{proof}[Proof 1 (limited conditions)]
+            % We need a projection operator that commutes with all $\rho_s$, so we build one called $\rho_0$. This allows us to prove that $\rho_sx$ doesn't vary into $W$ for any $s\in G$ and $x\in W^0$.
+            % What is the exact form of the projection operator??
+
+            Let $p$ be the projection of $V$ onto $W$ that corresponds to some arbitrary complement of $W$ in $V$. To begin, we may legally --- albeit with little motivation --- form the average $p^0$ of the conjugates of $p$ by the elements of $G$:
+            \begin{equation*}
+                p^0 := \frac{1}{|G|}\sum_{t\in G}\rho_t\cdot p\cdot\rho_t^{-1}
+            \end{equation*}
+            We now seek to prove that $p^0$ is a projection by showing that it satisfies the two properties of a "$p$." First, notice that by assumption, every $\rho_t$ (and thus $\rho_t^{-1}$) preserves $W$. This combined with the fact that $p(V)=W$ implies that $p^0(V)=W$, as desired. Additionally, for any $x\in W$ and $t\in G$, we know by property (2) of a $p$ and the fact that $p_t^{-1}(x)\in W$ that $p\cdot p_t^{-1}(x)=p_t^{-1}(x)$. Applying $p_t$ to both sides of this equation yields $[p_t\cdot p\cdot p_t^{-1}](x)=x$. Hence, $p^0(x)=x$, as desired. Thus, $p^0$ is a projection of $V$ onto $W$, associated with some complement $W^0$ of $W$.\par
+            So that we can make a substitution later, we will now prove that
+            \begin{equation*}
+                \rho_s\cdot p^0 = p^0\cdot\rho_s
+            \end{equation*}
+            for all $s\in G$. Pick such an $s$. Then
+            \begin{equation*}
+                \rho_s\cdot p^0\cdot\rho_s^{-1} = \frac{1}{|G|}\sum_{t\in G}\rho_s\cdot\rho_t\cdot p\cdot\rho_t^{-1}\cdot\rho_s^{-1}
+                = \frac{1}{|G|}\sum_{t\in G}\rho_{st}\cdot p\cdot\rho_{st}^{-1}
+                = p^0
+            \end{equation*}
+            so we can precompose both sides of the above equation with $\rho_s$ to yield the final result. This line here should make it clear why we needed to form a projection like $p^0$.\par
+            We now have all of the tools we need to prove that $W^0$ is stable under $G$. To do so, it will suffice to show that for all $x\in W^0$ and $s\in G$, we have $\rho_s(x)\in W^0$. Let $x\in W^0$ and $s\in G$ be arbitrary. Since $x\in W^0$, $p^0(x)=0$ by definition. This combined with the above commutativity rule implies that $p^0\cdot\rho_s(x)=\rho_s\cdot p^0(x)=\rho_s(0)=0$. But the only way that $p^0$ could map $\rho_s(x)$ to 0 is if $\rho_s(x)\in W^0$, as desired.
+        \end{proof}
+        \begin{proof}[Proof 2 (orthogonal complement)]
+            Let $W^0$ be the orthogonal complement of $W$, and endow $V$ with a \textbf{scalar product} $(x\mid y)$ to turn it into an inner product space. Replace $(x\mid y)$ with the new inner product $\sum_{t\in G}(\rho_tx\mid\rho_ty)$. Now, if it wasn't already, the inner product is invariant under $\rho_s$ for all $s$, i.e., for $s$ arbitrary, we have
+            \begin{equation*}
+                (\rho_sx\mid\rho_sy) = (x\mid y)
+            \end{equation*}
+            This means that vectors that were orthogonal before $\rho_s$ is applied to $V$, stay orthogonal after $\rho_s$ is applied to $V$. In particular, since $\rho_s$ preserves $W$ by hypothesis, all vectors orthogonal to $W$ (i.e., all vectors in $W^0$) stay orthogonal to $W$ (i.e., stay in $W^0$) after $\rho_s$ is applied. Thus, $W^0$ is stable under $\rho_s$ as well.
+        \end{proof}
+    \end{theorem}
+    \item Consequence of the second, stronger proof: The representations $W$ and $W^0$ determine the representation $V$.
+    \begin{itemize}
+        \item This allows us to rigorously say that the representation $V=W\oplus W^0$.
+        \item If $W,W^0$ are given in matrix form by $R_s,R_s^0$, then $W\oplus W^0$ is given in matrix form by
+        \begin{equation*}
+            \begin{pNiceArray}{c|c}[margin]
+                R_s & 0\\
+                \hline
+                0 & R_s^0\\
+            \end{pNiceArray}
+        \end{equation*}
+    \end{itemize}
+    \item We can extend this method of directly summing representations to an arbitrary finite number of them.
+\end{itemize}
+
+
+
+\subsection*{Section 1.4: Irreducible Representations}
+\begin{itemize}
+    \item Definition of \textbf{irreducible} representation.
+    \item Fact: Each nonabelian group possesses at least one irreducible representation with $\deg\geq 2$.
+    \begin{itemize}
+        \item Proven later.
+    \end{itemize}
+    \item Irreducible representations construct all representations via the direct sum.
+    \begin{theorem}
+        Every representation is a direct sum of irreducible representations.
+        \begin{proof}
+            We induct on $\dim(V)$.\par
+            Suppose $\dim(V)=0$. Since 0 is the direct sum of the empty family of irreducible representations, the theorem is vacuously true.\par
+            Suppose $\dim(V)\geq 1$. We divide into two cases ($V$ is irreducible and $V$ is reducible). In the first case, we are done. In the second case, $V=V'\oplus V''$ for some $V'\perp V''$ (see Theorem \ref{trm:complements}). Since $\dim(V')<\dim(V)$ and $\dim(V'')<\dim(V)$ by definition, the induction hypothesis implies that $V'$ and $V''$ are direct sums of irreducible representations. Therefore, the same is true of $V$.
+        \end{proof}
+    \end{theorem}
+    \item Fact: The direct-sum decomposition is not necessarily unique.
+    \begin{itemize}
+        \item Counterexample: If $\rho_s=1$ for all $s\in G$, then there are a plethora of decompositions of a vector space into a direct sum of lines.
+    \end{itemize}
+    \item Fact: The number of $W_i$ isomorphic to a given irreducible representation \emph{does not} depend on the chosen decomposition.
+    \begin{itemize}
+        \item Proven later.
     \end{itemize}
 \end{itemize}
 
