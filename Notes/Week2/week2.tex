@@ -1,0 +1,264 @@
+\documentclass[../notes.tex]{subfiles}
+
+\pagestyle{main}
+\renewcommand{\chaptermark}[1]{\markboth{\chaptername\ \thechapter\ (#1)}{}}
+\stepcounter{chapter}
+
+\begin{document}
+
+
+
+
+\chapter{The Structure of Representations}
+\section{The Tensor Product}
+\begin{itemize}
+    \item \marginnote{10/2:}Before lecture, I chatted with a few people about tensor products and the exterior and symmetric powers.
+    \begin{itemize}
+        \item Patrick: A \textbf{tensor} $v\otimes w$ is just an element of a vector space, indexed differently than in a column.
+        \item Raman: There is no canonical way to transform tensors into column vectors.
+    \end{itemize}
+    \item Course logistics.
+    \begin{itemize}
+        \item OH: T 5:30-6:30(+) and W 5:30-6:30(+). We can also meet one-on-one.
+        \item HW is due Thursdays at midnight.
+    \end{itemize}
+    \item Today: Constructing new representations from old.
+    \begin{itemize}
+        \item Rudenko will skim through tensor products really quickly.
+    \end{itemize}
+    \item Reminder: Last time, we talked about how representation theory is really quite simple. If $G$ is a finite group and $F=\C$, there exist a finite set $V_1,\dots,V_s$ of irreps up to isomorphism, and every finite-dimensional representation $V\cong V_1^{n_1}\oplus\cdots\oplus V_s^{n_s}$.
+    \item If $V$ is a representation of $G$, then there are loads of things we can do with it.
+    \begin{itemize}
+        \item We can construct the dual representation $V^*$.
+        \item We can construct the representation $V\otimes V$.
+        \item We can construct symmetric powers.
+        \item We can construct wedge powers.
+        \item There are more, but this is enough for now.
+    \end{itemize}
+    \item Even when we take a very simple group and representation, there are some very interesting things that can fall out.
+    \begin{itemize}
+        \item Example: If you take the symmetric powers of $S_3$, as in the homework, you get something really interesting.
+    \end{itemize}
+    \item Now, we go to linear algebra.
+    \item Let $V,W$ be vector spaces over a field $F$. How do we produce a new vector space out of these?
+    \item $\Hom_F(V,W)$ is the vector space of linear maps $F:V\to W$!
+    \begin{itemize}
+        \item $\dim=(\dim V)(\dim W)$.
+    \end{itemize}
+    \item Can we make $\Hom_F(V,W)$ into a representation of $G$? Yes!
+    \begin{figure}[H]
+        \centering
+        \DisableQuotes
+        \begin{tikzcd}
+            V \arrow[d,"\rho_V^{}(g)"'] \arrow[r,"L"] & W \arrow[d,"\rho_W^{}(g)"]\\
+            V \arrow[r,"gL"'] & W\\
+        \end{tikzcd}
+        \EnableQuotes
+        \vspace{-1.5em}
+        \caption{Commutative diagram, linear maps space representation.}
+        \label{fig:CDlinMapsRep}
+    \end{figure}
+    \begin{itemize}
+        \item Suppose that $V,W$ are $G$-reps, which gives us $\rho_V:G\to GL(V)$ and $\rho_W:G\to GL(W)$.
+        \item Suppose also that we have $L\in\Hom_F(V,W)$.
+        \item Now infer from the commutative diagram that it will work to define $gL=\rho_W(g)\circ L\circ\rho_V(g)^{-1}$.
+        \item This is pretty standard.
+    \end{itemize}
+    \item Recall that there is a different space $\Hom_G(V,W)$ of morphisms of $G$-representations (see Figure \ref{fig:CDmorphisms} and the associated discussion).
+    \begin{itemize}
+        \item This is a very very small subspace of $\Hom_F(V,W)$.
+    \end{itemize}
+    \item Special case of the above construction: \textbf{Dual representation}.
+    \begin{itemize}
+        \item Consider $\Hom_F(V,F)$. This the \textbf{dual vector space}.
+        \item Basic fact 1: Let $e_1,\dots,e_n$ be a basis of $V$. Then $V^*$ also has a corresponding basis $e^1,\dots,e^n$, known as its \textbf{dual basis}.
+        \begin{itemize}
+            \item Computing coordinates already depends on a basis, and having bases is super nice.
+            \item Corollary: $\dim V=\dim V^*$.
+            \item This is the first time \textbf{canonical} comes into linear algebra. Canonical (nobody understands what it means) basically means that something doesn't depend on choices.
+            \item In particular, $V,V^*$ are isomorphic because they have the same dimension, but for no more natural reason. They can be the same representation, or they can be different.
+        \end{itemize}
+        \item Basic fact 2: If $V$ is finite-dimensional, then $(V^*)^*\cong V$. The formula for this isomorphism is canonical, because it does not depend on a choice of basis. In particular, choose the map $V\to(V^*)^*$ sending $v$ to the map sending $\varphi\in V^*$ to $\varphi(v)$.
+        \item If $V$ is infinite dimensional, none of this is true and you are in the realm of functional analysis.
+        \item Ok, so all of this was good information about the dual \emph{space}, but what is the dual \emph{representation}?? Does it matter, and do we need to know for now?
+    \end{itemize}
+    \item \textbf{Dual vector space} (of $V$): The vector space defined as follows, given that $V$ is a vector space over $F$. \emph{Denoted by} $\bm{V^*}$. \emph{Given by}
+    \begin{equation*}
+        V^* = \Hom_F(V,F)
+    \end{equation*}
+    \item \textbf{Dual basis} (of $V^*$ to $e_1,\dots,e_n$): The basis defined as follows for $i=1,\dots,n$, where $e_1,\dots,e_n$ is a basis of $V$. \emph{Denoted by} $\bm{e^1,\ldots,e^n}$. \emph{Given by}
+    \begin{equation*}
+        e^i(x_1e_1+\cdots+x_ne_n) = x_i
+    \end{equation*}
+    \item We now move onto the tensor product.
+    \begin{itemize}
+        \item The tensor product is very hard to understand. If you learn about it and you feel you don't understand it, that's typical; nobody understands it at first.
+        \item For now, we'll discuss two ways of thinking about tensor products that won't bring us any comfort.
+    \end{itemize}
+    \item Let $V,W$ be two vector spaces over a field $F$.
+    \item Abstract definition of the tensor product.
+    \begin{itemize}
+        \item We have discussed maps from $V\to W$, but there is another related space.
+        \item Indeed, we can look at the space of bilinear maps from $V\times W\to F$.
+        \begin{itemize}
+            \item Example: A map $f:V\times W\to F$ that satisfies the constraints $f(\lambda v,w)=\lambda f(v,w)$, $f(v_1+v_2,w)=f(v_1,w)+f(v_2,w)$, and likewise for the second index. Recall that this is a \textbf{bilinear map}.
+        \end{itemize}
+        \item Let $V$ have basis $e_1,\dots,e_n$ and $W$ have basis $f_1,\dots,f_m$.
+        \item Notice that every bilinear map $f$ can be defined as a linear combination of the $f(e_i,f_j)$. In other words, the $f(e_i,f_j)$ form the basis of a function space.
+        \begin{itemize}
+            \item This "bilinear maps space" has dimension $nm$.
+        \end{itemize}
+        \item Now, one way to understand a tensor product: Is this "bilinear maps space" actually some other space? It is! It is $(V\otimes W)^*$.
+        \item Bilinear maps are linear maps from where? From $V\otimes W$!
+    \end{itemize}
+    \item \textbf{Bilinear} (map): A function $f:V\times W\to Z$ that satisfies the following constraints, where $V,W,Z$ are vector spaces over $F$, $v,v_1,v_2\in V$, $w,w_1,w_2\in W$, and $\lambda\in F$. \emph{Constraints}
+    \begin{align*}
+        f(v_1+v_2,w) &= f(v_1,w)+f(v_2,w)&
+            f(\lambda v,w) &= \lambda f(v,w)\\
+        f(v,w_1+w_2) &= f(v,w_1)+f(v,w_2)&
+            f(v,\lambda w) &= \lambda f(v,w)
+    \end{align*}
+    \item We now look at a much more elementary definition of the tensor product.
+    \item Explicit definition of the tensor product.
+    \begin{itemize}
+        \item $V\otimes W$ is equal to a huge vector space with basis consisting of pairs of elements $(v,w)$. Even if $V,W$ are one dimensional, this is like all pairs of real numbers; it's huge. Then, we quotient it by the space of all elements satisfying $\lambda(v,w)=(\lambda v,w)=(v,\lambda w)$, $(v_1+v_2,w)=(v_1,w)+(v_2,w)$, and the like. This forces these relationships to be true.
+        \begin{itemize}
+            \item Clarify this methodology??
+            \item Essentially, this allows us to treat tensor multiplication much like real multiplication, endowing the operation with distributivity, etc.
+            \item For example, the rule $(v_1+v_2,w)=(v_1,w)+(v_2,w)$ becomes, in tensor product notation, $(v_1+v_2)\otimes w=v_1\otimes w+v_2\otimes w$.
+        \end{itemize}
+        \item Example: Suppose $V=\C e_1+\C e_2$. We want to look at $V\otimes V$.
+        \begin{itemize}
+            \item A priori\footnote{I.e., it follows from some logic. In particular, it follows from the logic that any element $v\in V$ is of the form $v=ae_1+be_2$, so of course all $v\otimes v$ must be of the given form for choices of $a,b,c,d$.}, it's spanned by $(ae_1+be_2)\otimes(ce_1+de_2)=ace_1\otimes e_1+ade_1\otimes e_2+bce_2\otimes e_1+cde_2\otimes e_2$.
+            \item Thus, $V_1\otimes V_2$ has 4-element basis $e_1\otimes e_1,e_1\otimes e_2,e_2\otimes e_1,e_2\otimes e_2$.
+        \end{itemize}
+    \end{itemize}
+    \item These two definitions constitute a first approximation to what the tensor product is.
+    \item Takeaway: What is true in general is that if $V$ has basis $e_1,\dots,e_n$ and $W$ has basis $f_1,\dots,f_m$, then $V\otimes W$ has basis $e_i\otimes f_j$ ($i=1,\dots,n$ and $j=1,\dots,m$).
+    \item Having discussed the tensor product of vector spaces, let's think about the tensor product of \emph{representations}.
+    \begin{itemize}
+        \item Suppose $g:V\to V$ and $g:W\to W$.
+        \begin{itemize}
+            \item We're starting to make notation sloppy.
+        \end{itemize}
+        \item How does $g:V\otimes W\to V\otimes W$? Well, we just send $v\otimes w\mapsto(gv)\otimes(gw)$.
+        \begin{itemize}
+            \item Why is this map well-defined?
+            \item We invoke the \textbf{universal property of the tensor product operation}.
+            \item This guarantees us that given $g$ --- which is effectively a map from $V\times W\to V\otimes W$ as defined --- there nevertheless exists a complete extension $\tilde{g}:V\otimes W\to V\otimes W$.
+        \end{itemize}
+        \item As a matrix, this map is pretty strange!
+        \begin{itemize}
+            \item Example: Let $g:V\to V$ be a $2\times 2$ matrix. What is the matrix of $g:V\otimes V\to V\otimes V$?
+            \item If
+            \begin{equation*}
+                \rho_V(g) = g =
+                \begin{pmatrix}
+                    a & b\\
+                    c & d\\
+                \end{pmatrix}
+                =: A
+            \end{equation*}
+            then we have
+            \begin{align*}
+                g(e_1\otimes e_1) &= ge_1\otimes ge_1\\
+                &= (ae_1+ce_2)\otimes(ae_1+ce_2)\\
+                &= a^2e_1\otimes e_1+ace_1\otimes e_2+ace_2\otimes e_1+c^2e_2\otimes e_2
+            \end{align*}
+            \item Evaluating similarly for all basis vectors, we get a very curious block matrix:
+            \begin{equation*}
+                \begin{bNiceArray}{cccc}[first-row,first-col]
+                     & e_1\otimes e_1 & e_1\otimes e_2 & e_2\otimes e_1 & e_2\otimes e_2\\
+                    e_1\otimes e_1 & a^2 & ab & ab & b^2\\
+                    e_1\otimes e_2 & ac  & ad & bc & bd\\
+                    e_2\otimes e_1 & ac  & bc & ad & bd\\
+                    e_2\otimes e_2 & c^2 & cd & cd & d^2\\
+                \end{bNiceArray}
+                =
+                % \begin{bNiceArray}{c|c}[margin]
+                %     aA & bA\\
+                %     \hline
+                %     cA & dA\\
+                % \end{bNiceArray}
+                \begin{bNiceArray}{cc|cc}[margin]
+                    \Block{2-2}{aA} & & \Block{2-2}{bA} & \\
+                     & & & \\
+                    \hline
+                    \Block{2-2}{cA} & & \Block{2-2}{dA} & \\
+                     & & & \\
+                \end{bNiceArray}
+            \end{equation*}
+            \item Notice how, for example, this takes the tensor $e_1\otimes e_1$, represented as $(1,0,0,0)$, to the tensor $a^2e_1\otimes e_1+ace_1\otimes e_2+ace_2\otimes e_1+c^2e_2\otimes e_2$, represented as $(a^2,ac,ac,c^2)$.
+            \item Does this construction imply a canonical way to convert from tensors to column vectors??
+        \end{itemize}
+        \item Classically, this is called the \textbf{Kronecker product} of two matrices.
+        \item People discovered all of this stuff before they unified it as tensor math.
+    \end{itemize}
+    \item \textbf{Universal property of the tensor product operation}: For every bilinear map $h:V\times W\to Z$, there exists a \emph{unique} linear map $\tilde{h}:V\otimes W\to Z$ such that $h=\tilde{h}\circ\otimes$.
+    \begin{figure}[h!]
+        \centering
+        \DisableQuotes
+        \begin{tikzcd}
+            V\times W \arrow[r,"\otimes"] \arrow[rd,"h"'] & V\otimes W \arrow[d,"\tilde{h}"]\\
+             & Z\\
+        \end{tikzcd}
+        \EnableQuotes
+        \vspace{-1.5em}
+        \caption{Universal property, tensor product operation.}
+        \label{fig:UPtensorProd}
+    \end{figure}
+    \begin{proof}
+        See the solid explanation \href{https://math.stackexchange.com/a/4248460/340652}{linked here}. Write out at a later date, and/or review MATH 25800 notes further.
+    \end{proof}
+    \item \textbf{Kronecker product} (of $A,B$): The matrix product defined as follows. \emph{Denoted by} $\bm{A\otimes B}$. \emph{Given by}
+    \begin{equation*}
+        A\otimes B =\
+        \begin{bNiceArray}{c}[first-row,first-col]
+              & n\\
+            n & A\\
+        \end{bNiceArray}
+        \otimes\
+        \begin{bNiceArray}{c}[first-row,first-col]
+              & m\\
+            m & B\\
+        \end{bNiceArray}
+        =\
+        \begin{bNiceArray}{ccc}[first-row,first-col]
+               &         & nm     &        \\
+               & a_{11}B & \cdots & a_{1n}B\\
+            nm & \vdots  & \ddots & \vdots \\
+               & a_{n1}B & \cdots & a_{nn}B\\
+        \end{bNiceArray}
+    \end{equation*}
+    \begin{itemize}
+        \item The Kronecker product is \emph{not} commutative, but the matrices you get are related by conjugacy and by commuting the columns.
+    \end{itemize}
+    \item Vector spaces of the same dimension are all alike, but vector space representations are very interesting. By the end of this course, we'll understand what's going on.
+    \item How we understand tensor stuff: Look at the abstract definition, look at the concrete definition, look at 5 examples, and then go in a circle. Repeat again and again until it makes sense.
+    \item He's just trying to tell us all relevant words so that they will fit together later.
+    \item Fact: If $V,W$ finite-dimensional, $\Hom_F(V,W)\cong V\otimes W^*$.
+    \begin{itemize}
+        \item Tensor products are very nice to construct maps from.
+        \item Let's construct a reverse map, then.
+        \item Take $\alpha\otimes w\in V^*\otimes W$, where $\alpha:V\to F$ by definition. Send $\alpha\otimes w$ to the map $v\mapsto\alpha(v)w$. This is a \emph{canonical} map!! We can show that they span everything.
+        \begin{itemize}
+            \item For example, if we want to choose $\alpha\otimes w$ mapping to the matrix with a 1 in the upper left-hand corner and zeroes everywhere else, let $w=e_1\in W$ and let $\alpha=e^1\in V^*$.
+            \item We can do similarly for all other such matrices, mapping this basis of $\Hom_F(V,W)$ to $e^i\otimes e_j$ ($i=1,\dots,n$ and $j=1,\dots,m$).
+            \item Note that this also allows us to define a (noncanonical) inverse map.
+        \end{itemize}
+        \item This inverse map from $\Hom_F(V,W)\to V^*\otimes W$ is clearly a bit harder to work out.
+        \item Hidden in this story is why trace is invariant under conjugation (see below discussion).
+    \end{itemize}
+    \item If we now take $\Hom_F(V,V)$, then this is isomorphic to $V^*\otimes V$. There is a very natural map from these isomorphic spaces to $F$ defined by the trace, and/or $\alpha\otimes v\mapsto\alpha(v)$. We can prove this. And this is canonical, as well. This is why the main property of the trace is that it's invariant under conjugation. This fact is hidden in the story very nicely.
+    \item Tensor products are hard, it will be a pain, we will understand them very well, but it will not be nice for now.
+    \item Symmetric products and wedge powers will be discussed briefly next time.
+    \begin{itemize}
+        \item There is a nice description in \textcite{bib:Serre} that we can use for the homework.
+    \end{itemize}
+    \item Extra homework: Please read about tensor products in whatever textbook you like, try some examples, and repeat.
+\end{itemize}
+
+
+
+
+\end{document}
