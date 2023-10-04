@@ -260,5 +260,83 @@
 
 
 
+\section{Office Hours (Rudenko)}
+\begin{itemize}
+    \item \marginnote{10/3:}Problem 2a:
+    \begin{itemize}
+        \item $\Lambda^2V$ is \emph{exterior powers}.
+        \item The exact canonical isomorphism we need is briefly discussed on \textcite[473]{bib:FultonHarris}.
+        \item I.e., we have to construct isomorphisms between the structures that don't rely on the choice of any basis. Recall the classic example of $V\cong V^{**}$, as explained in the well-written MSE post "basic difference between canonical isomorphism and isomorphims." Recall that the isomorphism from $V\to V^*$ defined by sending each element of the basis of $V$ to the corresponding element of the dual basis of $V^*$ is \emph{not} canonical because \emph{it involves choosing bases}. Definitions of canonical maps are available in MATH20510Notes, p. 2.
+        \item From a quick look at this, it looks like the proof may be analogous to the classic middle-school algebra identity $(v+w)^2=v^2+vw+w^2$.
+        \item The second exterior power $\Lambda^2V$ of a finite-dimensional vector space $V$ is the dual space of the vector space of alternating bilinear forms on $V$. Elements of $\Lambda^2V$ are called 2-vectors.
+    \end{itemize}
+    \item Problem 2b:
+    \begin{itemize}
+        \item $S^2V$ is \emph{symmetric powers}.
+        \item The exact canonical isomorphism we need is briefly discussed on \textcite[473]{bib:FultonHarris}.
+    \end{itemize}
+    \item Problem 3a:
+    \begin{itemize}
+        \item This is the determinant of the multiplication table, in relation to that theorem that you showed us at the end of the first class? Yep!
+    \end{itemize}
+    \item Problem 3b:
+    \begin{itemize}
+        \item So a circulant matrix is a matrix like the multiplication table from (a)? Yep!
+        \item Is $\zeta=e^{2\pi i/n}$? Sort of. It can be any $n^\text{th}$ root of unity.
+    \end{itemize}
+    \item Problem 4d:
+    \begin{itemize}
+        \item We'll cover higher symmetric powers in class tomorrow.
+        \item However, it basically just means that we're now working with elements of the form $e_1\otimes e_2\otimes e_3\in S^3V$ and on and on.
+    \end{itemize}
+    \item Problem 5a:
+    \begin{itemize}
+        \item Is $V^\vee=V^*$? Yes. This is "vee check," and is a notation that some people prefer.
+    \end{itemize}
+    \item Problem 5b:
+    \begin{itemize}
+        \item Is "tr" the trace function of the linear map corresponding to $L$? Yes.
+        \item What is $L$?
+        \begin{itemize}
+            \item An element of $V\otimes V^*$ is a linear combination of elements of the form $v\otimes\alpha$, not necessarily just one of these "decomposable" products.
+            \item There is an isomorphism $V\otimes V^*\cong\Hom(V)$.
+            \item Consider the matrix
+            \begin{equation*}
+                \begin{pmatrix}
+                    1 & 0\\
+                    0 & 0\\
+                \end{pmatrix}
+            \end{equation*}
+            It sends $e_1\mapsto e_1$ and $e_2\mapsto 0$. Thus, it is well-matched with $e_1\otimes e^1$, which also grabs $e_1$ (with $e^1$) and sends it to $e_1$.
+            \item Consider the matrix
+            \begin{equation*}
+                \begin{pmatrix}
+                    0 & 1\\
+                    0 & 0\\
+                \end{pmatrix}
+            \end{equation*}
+            It sends $e_1\mapsto 0$ and $e_2\mapsto e_1$. Thus, it is well-matched with $e_1\otimes e^2$, which also grabs $e_2$ (with $e^2$) and sends it to $e_1$.
+            \item In full,
+            \begin{equation*}
+                \begin{pmatrix}
+                    a & b\\
+                    c & d\\
+                \end{pmatrix}
+                \mapsto
+                ae_1\otimes e^1+be_1\otimes e^2+ce_2\otimes e^1+de_2\otimes e^2
+            \end{equation*}
+            \item This map \emph{is} canonical! This is because the bases must be chosen to even begin talking about matrices.
+            \item If you change the matrix, the bases change, too??
+            \item Takeaway: We have to walk backwards from matrix to linear transformation to representation in $V\otimes V^*$ to a scalar in $F$.
+        \end{itemize}
+    \end{itemize}
+    \item Problem 5c:
+    \begin{itemize}
+        \item So trace of such a map is equal to the dimension of its image? Yes.
+    \end{itemize}
+\end{itemize}
+
+
+
 
 \end{document}
