@@ -338,5 +338,100 @@
 
 
 
+\section{S Chapter 1: Generalities on Linear Representations}
+\emph{From \textcite{bib:Serre}.}
+\subsection*{Section 1.5: Tensor Product of Two Representations}
+\begin{itemize}
+    \item \marginnote{10/4:}\textbf{Tensor product} (of $V_1,V_2$): The vector space $W$ that (a) is furnished with a map $V_1\times V_2\to W$ sending $(x_1,x_2)\mapsto x_1\cdot x_2$ and (b) satisfies the following two conditions.
+    \begin{enumerate}[label={(\roman*)}]
+        \item $x_1\cdot x_2$ is bilinear.
+        \item If $(e_{i_1})$ is a basis of $V_1$ and $(e_{i_2})$ is a basis of $V_2$, the family of products $e_{i_1}\cdot e_{i_2}$ is a basis of $W$.
+    \end{enumerate}
+    \emph{Denoted by} $\bm{V_1\otimes V_2}$.
+    \begin{itemize}
+        \item It can be shown that such a space exists and is unique up to isomorphism (see proof \href{https://www-users.cse.umn.edu/~garrett/m/algebra/notes/27.pdf}{here}).
+    \end{itemize}
+    \item This definition allows us to say some things quite expediently. For example, (ii) implies that
+    \begin{equation*}
+        \dim(V_1\otimes V_2) = \dim(V_1)\cdot\dim(V_2)
+    \end{equation*}
+    \item \textbf{Tensor product} (of $\rho^1,\rho^2$): The representation $\rho:G\to GL(V_1\otimes V_2)$ defined as follows for all $s\in G$, $x_1\in V_1$, and $x_2\in V_2$, where $\rho^1:G\to GL(V_1)$ and $\rho^2:G\to GL(V_2)$ are representations. \emph{Given by}
+    \begin{equation*}
+        [\rho_s^1\otimes\rho_s^2](x_1\cdot x_2) = \rho_s^1(x_1)\cdot\rho_s^2(x_2)
+    \end{equation*}
+    \item A more formal write up of the matrix translation of this definition.
+    \begin{itemize}
+        \item Let $(e_{i_1})$ be a basis for $V_1$, and let $(e_{i_2})$ be a basis for $V_2$.
+        \item Let $r_{i_1j_1}(s)$ be the matrix of $\rho_s^1$ with respect to this basis, and let $r_{i_2j_2}(s)$ be the matrix of $\rho_s^2$ with respect to this basis.
+        \item It follows that
+        \begin{align*}
+            \rho_s^1(e_{j_1}) &= \sum_{i_1}r_{i_1j_1}(s)e_{i_1}&
+            \rho_s^2(e_{j_2}) &= \sum_{i_2}r_{i_2j_2}(s)e_{i_2}
+        \end{align*}
+        \item Therefore,
+        \begin{equation*}
+            [\rho_s^1\otimes\rho_s^2](e_{j_1}\cdot e_{j_2}) = \sum_{i_1,i_2}r_{i_1j_1}(s)r_{i_2j_2}(s)e_{i_1}\cdot e_{i_2}
+        \end{equation*}
+        and
+        \begin{equation*}
+            \mathcal{M}(\rho_s^1\otimes\rho_s^2) = (r_{i_1j_1}(s)r_{i_2j_2}(s))
+        \end{equation*}
+    \end{itemize}
+    \item Aside on quantum chemistry to come back to later; I can't quite connect the dots yet.
+\end{itemize}
+
+
+\subsection*{Section 1.6: Symmetric Square and Alternating Square}
+\begin{itemize}
+    \item Herein, we investigate the tensor product when $V_1=V_2=V$.
+    \item Let $(e_i)$ be a basis of $V$.
+    \item Define the automorphism $\theta:V\otimes V\to V\otimes V$ by
+    \begin{equation*}
+        \theta(e_i\cdot e_j) = e_j\cdot e_i
+    \end{equation*}
+    for all 2-indices $(i,j)$.
+    \item Properties of $\theta$.
+    \begin{itemize}
+        \item Since $\theta$ is linear, it follows that
+        \begin{equation*}
+            \theta(x\cdot y) = y\cdot x
+        \end{equation*}
+        for all $x,y\in V$.
+        \begin{itemize}
+            \item Implication: $\theta$ is independent of the chosen basis $(e_i)$!
+        \end{itemize}
+        \item $\theta^2=1$, where 1 is the identity map on $V\otimes V$.
+    \end{itemize}
+    \item Assertion: $V\otimes V$ decomposes into
+    \begin{equation*}
+        V\otimes V = S^2(V)\oplus\Lambda^2(V)
+    \end{equation*}
+    \begin{itemize}
+        \item Rudenko: We do not have to worry about proving this\dots yet, at least.
+    \end{itemize}
+    \item \textbf{Symmetric square representation}: The subspace of $V\otimes V$ containing all elements $z$ satisfying $\theta(z)=z$. \emph{Denoted by} $\bm{S^2V}$, $\bm{S^2(V)}$, $\pmb{\mathbb{S}}\bm{{}^2V}$, $\pmb{\textbf{Sym}}\,\bm{{}^2(V)}$.
+    \begin{itemize}
+        \item Basis: $(e_i\cdot e_j+e_j\cdot e_i)_{i\leq j}$.
+        \begin{itemize}
+            \item Rudenko: How do we know everything is linearly independent? Well, when we add two linearly independent vectors out of a set, the sum is still linearly independent from everything else!
+            \item Example when $\dim V=2$: The basis of $V\otimes V$ is $e_1\otimes e_1,e_1\otimes e_2,e_2\otimes e_1,e_2\otimes e_2$, where all four of these vectors are linearly independent. So naturally, the basis of the corresponding symmetric square representation --- which is $2e_1\otimes e_1,e_1\otimes e_2+e_2\otimes e_1,2e_2\otimes e_2$ --- will still be a linearly independent list of vectors.
+        \end{itemize}
+        \item Dimension: If $\dim V=n$, then
+        \begin{equation*}
+            \dim S^2(V) = \frac{n(n+1)}{2}
+        \end{equation*}
+    \end{itemize}
+    \item \textbf{Symmetric square representation}: The subspace of $V\otimes V$ containing all elements $z$ satisfying $\theta(z)=-z$. \emph{Denoted by} $\bm{S^2V}$, $\bm{S^2(V)}$, $\pmb{\mathbb{S}}\bm{{}^2V}$, $\pmb{\textbf{Sym}}\,\bm{{}^2(V)}$.
+    \begin{itemize}
+        \item Basis: $(e_i\cdot e_j-e_j\cdot e_i)_{i<j}$.
+        \item Dimension: If $\dim V=n$, then
+        \begin{equation*}
+            \dim\Lambda^2(V) = \frac{n(n-1)}{2}
+        \end{equation*}
+    \end{itemize}
+\end{itemize}
+
+
+
 
 \end{document}
