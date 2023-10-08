@@ -278,7 +278,7 @@
 
 
 
-\section{Office Hours (Rudenko)}
+\section{Office Hours}
 \begin{itemize}
     \item \marginnote{10/3:}Problem 2a:
     \begin{itemize}
@@ -618,11 +618,93 @@
 
 
 
+\section{Office Hours}
+\begin{itemize}
+    \item \marginnote{10/5:}Problem 2a:
+    \begin{itemize}
+        \item $(V\oplus W)\otimes(V\oplus W)\stackrel{?}{=}V\otimes V\oplus V\otimes W\oplus W\otimes V\oplus W\otimes W$.
+        \item Check linearity in all terms and then with universal property. Check antisymmetric, linear, injective, surjective; dimensions are the same, so no need to check \emph{both} injectivity and surjectivity (surjectivity is easier to check). We can go to basis to check various properties; we can't use a basis to write the map, but we can use bases to check surjectivity and the like.
+    \end{itemize}
+    \item Problem 3a:
+    \begin{itemize}
+        \item Bezout and Gauss's lemma is good to learn on my own. Put polynomials in each variable. Throw some stuff about this shit into my answers.
+        \item Relearn polynomial division.
+        \item $(1,1,1,1)$, $(1,1,-1,-1)$, $(1,-1,1,-1)$, and $(1,-1,-1,1)$.
+        \item This is a symmetric matrix.
+        \item The upper-left and lower-right blocks of this matrix match; so do the lower-left and upper-right.
+        \item When the eigenvalue is equal to zero, the determinant is equal to zero. So look for eigenvectors to calculate eigenvalues, and then just express the determinant as a product of these.
+    \end{itemize}
+    \item Problem 3b:
+    \begin{itemize}
+        \item Corresponding eigenvalue is $\sum_{i=1}^nx_iz^{i-1}$.
+        \item Can I use representation theory to do this? What group has a multiplication table like this? $\Z/n\Z$. The elements of $\Z/n\Z$ are of the form $\{1,\zeta,\dots,\zeta^{n-1}\}$.
+        \item If that's an eigenvector, then it's a subrepresentation; it is a space that is fixed under the action of the matrix.
+        \item Other eigenvectors: $(1,1,1)$, $(1,z^2,z)$.
+        \item We don't need to do induction or anything fancy like that; we can just do dots. As long as your argument is complete and clear, you're good.
+    \end{itemize}
+    \item Problem 4a:
+    \begin{itemize}
+        \item See FH 1.3. Standard rep, not wedge. Treat $\tau,\sigma$ (generators of the action) on the basis vectors.
+        \item If both fix, it's the trivial; if one flips, you have alternating; if both flip, you have standard.
+        \item $(2,1)\oplus(1,1,1)$. Use problem 2.
+        \item See FH Exercise 1.2??
+        \item The action of $\tau$ on this basis vector can be computed:
+        \begin{equation*}
+            \tau(\alpha\wedge\beta) = 1\alpha\wedge\beta
+        \end{equation*}
+        \item Having obtained an eigenvalue of 1, we can rule out the standard representation. 
+    \end{itemize}
+    \item Problem 4b:
+    \begin{itemize}
+        \item $\{\alpha\otimes\alpha\otimes\alpha,\alpha\otimes\alpha\otimes\beta+\alpha\otimes\beta\otimes\alpha+\beta\otimes\alpha\otimes\alpha,\beta\otimes\beta\otimes\beta\}$
+    \end{itemize}
+    \item Problem 5a:
+    \begin{itemize}
+        \item Consider an alternate basis $f_1,\dots,f_n$ and dual basis $f^1,\dots,f^n$. Consider the element $f_1\otimes f^1+\cdots+f_n\otimes f^n\in V\otimes V^\vee$. We want to prove that it equals the one asked about in the question.
+        \item Under the isomorphism to $\Hom(V,V)$, we send $e_1\otimes e^1$ to $[v\mapsto e^1(v)e_1]$. More generally, we end $e_i\otimes e^i$ to $[v\mapsto e^i(v)e_i]$. Adding all these maps together yields the map $[v\mapsto e^1(v)e_1+\cdots+e^n(v)e_n]$, which is just the identity $1\in\Hom(V,V)$, regardless of basis.
+    \end{itemize}
+    \item Problem 5b:
+    \begin{itemize}
+        \item Example:
+        \begin{equation*}
+            \begin{pmatrix}
+                a & b\\
+                c & d\\
+            \end{pmatrix}
+            \to
+            ae_1\otimes e^1+be_1\otimes e^2+ce_2\otimes e^1+de_2\otimes e^2
+        \end{equation*}
+        \item Evaluating this gives
+        \begin{equation*}
+            e^1(ae_1)+e^2(be_1)+e^1(ce_2)+e^2(de_2) = a+d
+        \end{equation*}
+        since it's only when the indices match (i.e., along the diagonal) that we get a nonzero value.
+    \end{itemize}
+    \item Problem 5c:
+    \begin{itemize}
+        \item $P$ should have a block-diagonal matrix corresponding to the decomposition $V=W\oplus W^0$. $P$ is the identity on $\im(P)$. So if our basis is vectors spanning $W$ and then vectors spanning $W^0$, the matrix should be the identity and then the zero matrix. That should do the trick. How rigorous does this need to be?
+        \item Let $e_1,\dots,e_k$ be an orthonormal basis of $\im(P)$. Extend this basis to an orthonormal basis $e_1,\dots,e_n$ of $V$.\par
+    \end{itemize}
+    \item Problem 5d:
+    \begin{itemize}
+        \item Trivial representation: All $g\in G$ get mapped to $1\in GL(V)$.
+        \item Part (a) gives us the identity in $\Hom(V,V)$.
+        \item So we have $\rho:G\to GL(V)$.
+        \item Is any line acceptable? Span of the identity function? Rudenko: It depends on $V$. It has \emph{infinitely many} trivial sub representations.
+        \item Example: $G\acts \C^2$. with $\rho(g)=I_2$.
+        \item Dual representation: Defined analogously to the $\Hom_F(V,W)$ representation. We also need an inverse.
+    \end{itemize}
+    \item Psets will likely get easier; right now, we have to relearn a lot of old stuff and we are being challenged with harder problems. As the questions become more based on course content and thus will get easier.
+    \item He'll do hard PSets, easy exams, and everythign is curved; he agrees that this is a hard pset, and probably harder than necessary.
+\end{itemize}
+
+
+
 \section{S Chapter 1: Generalities on Linear Representations}
 \emph{From \textcite{bib:Serre}.}
 \subsection*{Section 1.5: Tensor Product of Two Representations}
 \begin{itemize}
-    \item \textbf{Tensor product} (of $V_1,V_2$): The vector space $W$ that (a) is furnished with a map $V_1\times V_2\to W$ sending $(x_1,x_2)\mapsto x_1\cdot x_2$ and (b) satisfies the following two conditions.
+    \item \marginnote{10/4:}\textbf{Tensor product} (of $V_1,V_2$): The vector space $W$ that (a) is furnished with a map $V_1\times V_2\to W$ sending $(x_1,x_2)\mapsto x_1\cdot x_2$ and (b) satisfies the following two conditions.
     \begin{enumerate}[label={(\roman*)}]
         \item $x_1\cdot x_2$ is bilinear.
         \item If $(e_{i_1})$ is a basis of $V_1$ and $(e_{i_2})$ is a basis of $V_2$, the family of products $e_{i_1}\cdot e_{i_2}$ is a basis of $W$.
