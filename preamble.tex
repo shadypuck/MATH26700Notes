@@ -49,8 +49,14 @@
 \DeclareMathOperator{\id}{id}
 \DeclareMathOperator{\Rep}{Rep}
 \DeclareMathOperator{\spn}{span}
+\DeclareMathOperator{\coker}{Coker}
+\let\ker\relax
+\DeclareMathOperator{\ker}{Ker}
 
 \newtheorem{theorem}{Theorem}
+\newcounter{FHchapter}
+\newtheorem{FHlemma}{Lemma}[FHchapter]
+\newtheorem{FHproposition}[FHlemma]{Proposition}
 
 \ytableausetup{smalltableaux}
 
@@ -59,6 +65,8 @@
 \newcommand{\R}{\mathbb{R}}
 \newcommand{\C}{\mathbb{C}}
 \newcommand{\F}{\mathbb{F}}
+
+\newcommand{\e}[1][]{\text{e}^{#1}}
 
 \DeclareFontFamily{U}{mathb}{}
 \DeclareFontShape{U}{mathb}{m}{n}{

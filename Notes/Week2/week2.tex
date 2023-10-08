@@ -980,5 +980,272 @@
 
 
 
+\section{FH Chapter 1: Representations of Finite Groups}
+\emph{From \textcite{bib:FultonHarris}.}
+\begin{itemize}
+    \item \marginnote{10/1:}Starts with a justification for beginning their investigation of rep theory with finite groups.
+\end{itemize}
+
+
+\subsection*{Section 1.1: Definitions}
+\begin{itemize}
+    \item Definition of a \textbf{representation}.
+    \item $\rho$ "gives $V$ the structure of a $G$-module!" \parencite[3]{bib:FultonHarris}.
+    \item When there is little ambiguity about $\rho$, we call $V$ itself a representation of $G$.
+    \begin{itemize}
+        \item This is what Rudenko has been doing in class!
+    \end{itemize}
+    \item We also often write $g\cdot v$ for $\rho(g)(v)$, and $g$ for $\rho(g)$.
+    \item \textbf{Degree} (of $\rho$): The dimension of $V$.
+    \item \textbf{$\bm{G}$-linear} (map): See class notes. \emph{Also known as} \textbf{map}, \textbf{morphism}.
+    \item The \textbf{kernel}, \textbf{image}, and \textbf{cokernel} of $\varphi$ are all $G$-submodules.
+    \item \textbf{Kernel} (of a map): The vector subspace containing all $v\in V$ for which $\varphi(v)=0$. \emph{Denoted by} $\bm{\ker\varphi}$.
+    \item \textbf{Image} (of a map): The vector subspace containing all $w\in W$ for which there exists $v\in V$ such that $\varphi(v)=w$. \emph{Denoted by} $\bm{\im\varphi}$.
+    \item \textbf{Cokernel} (of a map): The quotient space $W/\im\varphi$.
+    \item Definitions of \textbf{subrepresentation}, \textbf{irreducible} representation, and \textbf{direct sum} of representations.
+    \item \textbf{Tensor product} (of $V,W$): The representation with the space $V\otimes W$ where $g(v\otimes w)=gv\otimes gw$.
+    \begin{itemize}
+        \item \marginnote{10/5:}The $n^\text{th}$ tensor power is also a representation by this rule.
+        \item The $n^\text{th}$ exterior and symmetric powers are subrepresentations of the $n^\text{th}$ tensor power.
+    \end{itemize}
+    \item \textbf{Natural pairing} (between $V^*,V$): The pairing defined as follows for all $v^*\in V^*$ and $v\in V$. \emph{Denoted by} $\bm{\langle\ ,\ \rangle}$. \emph{Given by}
+    \begin{equation*}
+        \langle v^*,v \rangle = v^*(v) = (v^*)^Tv
+    \end{equation*}
+    \item \textbf{Dual representation}: The representation from $G\to GL(V^*)$ defined as follows. \emph{Denoted by} $\bm{\rho^*}$. \emph{Given by}
+    \begin{equation*}
+        \rho^*(g) = \rho(g^{-1})^T
+    \end{equation*}
+    \begin{itemize}
+        \item We should --- and do --- have
+        \begin{equation*}
+            \langle \rho^*(g)(v^*),\rho(g)(v) \rangle = \langle v^*,v \rangle
+        \end{equation*}
+        \item Indeed,
+        \begin{align*}
+            \langle \rho^*(g)(v^*),\rho(g)(v) \rangle &= \rho^*(g)(v^*)^T\rho(g)v\\
+            &= [\rho(g^{-1})^T(v^*)]^T\rho(g)v\\
+            &= (v^*)^T\rho(g^{-1})T\rho(g)v\\
+            &= (v^*)^Tv\\
+            &= \langle v^*,v \rangle
+        \end{align*}
+    \end{itemize}
+    \item $\Hom(V,W)$ is a representation.
+    \begin{itemize}
+        \item Definition via the commutative diagram (from class): $g(L)v=[g\circ L\circ g^{-1}]v$.
+        \item Definition analogously to $V^*\otimes W$: $g(v^*\otimes w)=gv^*\otimes gw=(g^{-1})^Tv^*\otimes gw=[(g^{-1})^Tv^*](gw)=[(g^{-1})^Tv^*]^Tgw=(v^*)^Tg^{-1}gw=v^*(v)$??
+    \end{itemize}
+    \item The rules for normal vector spaces hold for representations as well, e.g.,
+    \begin{align*}
+        V\otimes(U\oplus W) &= (V\otimes U)\oplus(V\otimes W)&
+        \Lambda^k(V\oplus W) &= \bigoplus_{a+b=k}\Lambda^aV\oplus\Lambda^bW&
+        \Lambda^k(V^*) &= \lambda^k(V)^*
+    \end{align*}
+    \item Definition of \textbf{permutation representation} and \textbf{regular representation}.
+\end{itemize}
+
+
+\subsection*{Section 1.2: Complete Reducibility, Schur's Lemma}
+\begin{itemize}
+    \item \textbf{Indecomposable} (representation): See class notes. \emph{Also known as} \textbf{irreducible}.
+    \item Proof of Theorem \ref{trm:complements} as in \textcite{bib:Serre}.
+    \begin{itemize}
+        \item The method is called "integration over the group (with respect to an invariant measure on the group)" \parencite[6]{bib:FultonHarris}.
+    \end{itemize}
+    \item \textbf{Complete reducibility}: The property that any representation is a direct sum of irreducible representations. \emph{Also known as} \textbf{semisimplicity}.
+    \begin{itemize}
+        \item Stated here as a corollary; proven as Theorem \ref{trm:dirSumIrrep} in \textcite{bib:Serre}.
+    \end{itemize}
+    \item The following lemma has several consequences, among which is that it determines how much a representation's direct-sum decomposition is unique.
+    \setcounter{FHchapter}{1}
+    \setcounter{FHlemma}{6}
+    \begin{FHlemma}[Schur's Lemma]\label{lem:Schur}
+        If $V$ and $W$ are irreducible representations of $G$ and $\varphi:V\to W$ is a $G$-module homomorphism, then\dots
+        \begin{enumerate}
+            \item Either $\varphi$ is an isomorphism, or $\varphi=0$;
+            \item If $V=W$, then $\varphi=\lambda I$ for some $\lambda\in\C$, $I$ being the identity.
+        \end{enumerate}
+        \begin{proof}
+            Suppose for the sake of contradiction that $\varphi$ is neither an isomorphism nor zero. Then it has a nontrivial kernel and image, both of which are necessarily invariant under the representation. Therefore, neither $V$ nor $W$ are irreducible representations of $G$, a contradiction.\par
+            Since $\C$ is algebraically closed, $\varphi$ must have an eigenvalue $\lambda$. Equivalently, for some $\lambda\in\C$, $\varphi-\lambda I$ has nonzero kernel. But then by part (1), we must have $\varphi-\lambda I=0$, implying that $\varphi=\lambda I$, as desired.
+        \end{proof}
+    \end{FHlemma}
+    \item Direct sum irreducible decomposition.
+    \begin{FHproposition}
+        For any representation $V$ of a finite group $G$, there is a decomposition
+        \begin{equation*}
+            V = V_1^{\oplus a_1}\oplus\cdots\oplus V_k^{\oplus a_k}
+        \end{equation*}
+        where the $V_i$ are distinct irreducible representations. The decomposition of $V$ into a direct sum of the $k$ factors is unique, as are the $V_i$ that occur and their multiplicities $a_i$.
+        \begin{proof}
+            Let $W$ be another representation of $G$, possibly of different dimension. Let $\varphi:V\to W$ be a map of representations. Restrict $\varphi$ to $V_i^{\oplus a_i}$, a subrepresentation of $V$. It follows from \hyperref[lem:Schur]{Schur's Lemma} that this restriction either maps into the $W_j^{\oplus b_j}$ satisfying $W_j\cong V_i$, or it does not map it at all.\par
+            Uniqueness for the decomposition of $V$ follows by applying \hyperref[lem:Schur]{Schur's Lemma} to the identity map on $V$.
+        \end{proof}
+    \end{FHproposition}
+    \item Goals going forward.
+    \begin{enumerate}
+        \item Describe all the irreducible representations of $G$.
+        \begin{itemize}
+            \item We can find all \emph{irreducible} representations of $G$, then describe \emph{any} representation as a linear combination of these.
+        \end{itemize}
+        \item Find techniques for giving the direct sum decomposition and the multiplicities of an arbitrary representation.
+        \item \textbf{Plethysm}: Describe the decompositions, with multiplicities, of representations derived from a given representation $V$, such as $V\otimes V$, $V^*$, $\Lambda^kV$, $S^kV$, and $\Lambda^k(\Lambda^1V)$.
+        \begin{itemize}
+            \item Note: If $V$ decomposes into two representations, these representations decompose accordingly, e.g., if $V=U\oplus W$, we may invoke the earlier identity to learn that $\Lambda^kV=\oplus_{i+j=k}\Lambda^iU\otimes\Lambda^jW$.
+            \item \textbf{Clebsch-Gordon problem}: Decompose $V\otimes W$, given two irreducible representations $V$ and $W$.
+        \end{itemize}
+    \end{enumerate}
+\end{itemize}
+
+
+\subsection*{Section 1.3: Examples --- Abelian Groups, $\bm{S_3}$}
+\begin{itemize}
+    \item Classifying the irreducible representations of abelian groups.
+    \begin{itemize}
+        % \item Let $G$ be an arbitrary finite group (abelian or not), and let $V$ be a representation of it.
+        % \item Notice that an arbitrary map $\rho(g):V\to V$ is \emph{not} a 
+        \item \emph{Return to later??}
+    \end{itemize}
+    \item Classifying the irreducible representations of $S_3$.
+    \begin{itemize}
+        \item There exist two one-dimensional representations of $S_3$ (and of ever other nontrivial symmetric group).
+        \begin{itemize}
+            \item \textbf{Trivial representation} (irreducible).
+            \item \textbf{Alternating representation} (irreducible).
+        \end{itemize}
+        \item Using the fact that $S_3$ is a permutation group, we can locate the\dots
+        \begin{itemize}
+            \item Permutation representation (reducible);
+            \item \textbf{Standard represenatation} (irreducible).
+        \end{itemize}
+        \item Let $W$ be an arbitrary representation of $S_3$.
+        \begin{itemize}
+            \item Easily done with \textbf{character theory}, but we'll only get there later.
+        \end{itemize}
+        \item Since the representation theory of finite abelian groups was jut proven to be very simple, we'll start by looking at the action of the finite abelian subgroup $A_3=\Z/3\Z\subset S_3$ on $W$.
+        \begin{itemize}
+            \item Let $\tau$ be a generator of $A_3$. Explicitly, this means $\tau=(1,2,3)$ or $\tau=(1,3,2)$.
+            \item Then $W$ is spanned by eigenvectors $v_1,\dots,v_n$ of $\tau$ (why?? Schur's Lemma part 2? Relation to classification of abelian groups?) with corresponding eigenvalues $\omega=\e[2\pi i/3]$.
+            \item Thus, $W=\bigoplus V_i$ where $V_i=\C v_i$ and $\tau v_i=\omega^{\alpha_i}v_i$.
+            \item An example representation of $A_3$ (in the chemistry sense) is
+            \begin{equation*}
+                \begin{bmatrix}
+                    1 & \cdots & 0\\
+                    \vdots & \ddots & \vdots\\
+                    0 & \cdots & 1\\
+                \end{bmatrix},\
+                \begin{bmatrix}
+                    \e[2\pi i/3] & \cdots & 0\\
+                    \vdots & \ddots & \vdots\\
+                    0 & \cdots & \e[2\pi i/3]\\
+                \end{bmatrix},\
+                \begin{bmatrix}
+                    \e[4\pi i/3] & \cdots & 0\\
+                    \vdots & \ddots & \vdots\\
+                    0 & \cdots & \e[4\pi i/3]\\
+                \end{bmatrix}
+            \end{equation*}
+        \end{itemize}
+        \item Now we want to see how the remainder of $S_3$ acts on $W$.
+        \begin{itemize}
+            \item Let $\sigma$ be an arbitrary transposition in $S_3$.
+            \item Note: $\{\sigma,\tau\}$ generates $S_3$.
+            \item Recall the relationship $\sigma\tau\sigma=\tau^2$.
+            \item The action of $\sigma$ on the eigenvectors of $\tau$: Let $v$ be an arbitrary eigenvector of $\tau$, with corresponding eigenvalue $\omega^j$. Notice that
+            \begin{equation*}
+                \tau(\sigma(v)) = \sigma(\tau^2(v))
+                = \sigma(\omega^{2j}v)
+                = \omega^{2j}\sigma(v)
+            \end{equation*}
+            Takeaway: $v$ an eigenvector for $\tau$ with eigenvalue $\omega^j$ implies $\sigma(v)$ an eigenvector for $\tau$ with eigenvalue $\omega^{2j}$.
+        \end{itemize}
+        \item Exercise 1.10 (A basis for the standard representation of $S_3$): Verify that with $\sigma=(12)$ and $\tau=(123)$, the standard representation has a basis $\alpha=(\omega,1,\omega^2),\beta(1,\omega,\omega^2)$, with
+        \begin{align*}
+            \tau\alpha &= \omega\alpha&
+            \tau\beta &= \omega^2\beta&
+            \sigma\alpha &= \beta&
+            \sigma\beta &= \alpha
+        \end{align*}
+        \begin{itemize}
+            \item $1+\omega+\omega^2=0$ in the complex plane.
+            \item We do, indeed, get
+            \begin{align*}
+                \tau\alpha &= (\omega^2,\omega,1)&
+                    \tau\beta &= (\omega^2,1,\omega)&
+                        \sigma\alpha &= (1,\omega,\omega^2)&
+                            \sigma\beta &= (\omega,1,\omega^2)\\
+                &= \omega(\omega,1,\omega^2)&
+                    &= \omega^2(1,\omega,\omega^2)&
+                        &= \beta&
+                            &= \alpha\\
+                &= \omega\alpha&
+                    &= \omega^2\beta
+            \end{align*}
+            \item We also get --- per the aforementioned rule --- that
+            \begin{equation*}
+                \tau\alpha = \omega\alpha
+            \end{equation*}
+            but
+            \begin{equation*}
+                \tau(\sigma\alpha) = \tau\beta = \omega^2\beta = \omega^2(\sigma\alpha)
+            \end{equation*}
+            for instance, as predicted.
+            \item Note that both $\alpha,\beta$ are orthogonal to $(1,1,1)$, but while they are linearly independent, they are not orthogonal to each other. This is fine, because they're computationally simple, but it is noteworthy.
+        \end{itemize}
+        \item The difference in eigenvalues between $v$ and $\sigma(v)$ indicates that these vectors are \emph{not} linearly dependent.
+        \begin{itemize}
+            \item Rather, they span a 2D subspace $V'$ that is invariant under $S_3$!! This is because $v=\sigma(\sigma(v))$ as well.
+            \item In fact, $V'$ is isomorphic to the standard representation!
+        \end{itemize}
+        \item What if the eigenvalue of $v$ is 1?
+        \begin{itemize}
+            \item If $\sigma(v)$ is not linearly independent of $v$, then the two span a 1D subrepresentation of $W$, isomorphic to the trivial representation (if $\sigma(v)=v$) and isomorphic to the alternating representation (if $\sigma(v)=-v$).
+            \item If $\sigma(v)$ is linearly independent of $v$, then $v+\sigma(v)$ spans a 1D subrepresentation of $W$ isomorphic to the trivial representation and $v-\sigma(v)$ spans a 1D subrepresentation of $W$ isomorphic to the alternating representation. 
+        \end{itemize}
+        \item It follows that the only three irreps of $S_3$ are the trivial, alternating, and standard ones.
+    \end{itemize}
+    \item Using the above approach to find the decomposition of the tensor product.
+    \begin{itemize}
+        \item Let $V$ be the standard two-dimensional representation. Recall that the basis of $V$ is $\{\alpha,\beta\}$.
+        \item It follows that the basis of $V\otimes V$ is $\{\alpha\otimes\alpha,\alpha\otimes\beta,\beta\otimes\alpha,\beta\otimes\beta\}$.
+        \item These are eigenvectors for $\tau$, and we can find their corresponding eigenvalues via direct computation:
+        \begin{align*}
+            \tau(\alpha\otimes\alpha) &= \tau\alpha\otimes\tau\alpha&
+                \tau(\alpha\otimes\beta) &= \tau\alpha\otimes\tau\beta\\
+            &= (\omega\alpha)\otimes(\omega\alpha)&
+                &= (\omega\alpha)\otimes(\omega^2\beta)\\
+            &= \omega^2\alpha\otimes\alpha&
+                &= 1\alpha\otimes\beta
+        \end{align*}
+        \begin{align*}
+            \tau(\beta\otimes\alpha) &= \tau\beta\otimes\tau\alpha&
+                \tau(\beta\otimes\beta) &= \tau\beta\otimes\tau\beta\\
+            &= (\omega^2\beta)\otimes(\omega\alpha)&
+                &= (\omega^2\beta)\otimes(\omega^2\beta)\\
+            &= 1\beta\otimes\alpha&
+                &= \omega\beta\otimes\beta
+        \end{align*}
+        \item Similarly, we can calculate the effect of $\sigma$.
+        \begin{align*}
+            \sigma(\alpha\otimes\alpha) &= \sigma\alpha\otimes\sigma\alpha&
+                \sigma(\alpha\otimes\beta) &= \sigma\alpha\otimes\sigma\beta&
+                    \sigma(\beta\otimes\alpha) &= \sigma\beta\otimes\sigma\alpha&
+                        \sigma(\beta\otimes\beta) &= \sigma\beta\otimes\sigma\beta\\
+            &= \beta\otimes\beta&
+                &= \beta\otimes\alpha&
+                    &= \alpha\otimes\beta&
+                        &= \alpha\otimes\alpha
+        \end{align*}
+        \item Because the transformations for $\alpha\otimes\alpha$ and $\beta\otimes\beta$ are directly analogous to the untensored case of $\alpha$ and $\beta$, these basis vectors span a subrepresentation isomorphic to the standard representation.
+        \item Because $\sigma(\alpha\otimes\beta)=\beta\otimes\alpha$ is linearly independent of $\alpha\otimes\beta$ (they are literally different basis vectors), $\alpha\otimes\beta+\beta\otimes\alpha$ spans a trivial representation and $\alpha\otimes\beta-\beta\otimes\alpha$ spans an alternating representation.
+        \item Altogether, we get that if $V=(2,1)$, then
+        \begin{equation*}
+            V\otimes V \cong (2,1)\oplus(3)\oplus(1,1,1)
+        \end{equation*}
+    \end{itemize}
+\end{itemize}
+
+
+
 
 \end{document}
