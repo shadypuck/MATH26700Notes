@@ -8,33 +8,495 @@
 
 
 
-\section{Introduction to Representations}
+\section{Applications of Linear Algebra to Representation Theory}
 \begin{enumerate}
     \item \marginnote{10/5:}Read Section 1.3 in \textcite{bib:FultonHarris}.
     \item Let $V,W$ be finite-dimensional vector spaces. Construct canonical isomorphisms\dots
     \begin{enumerate}
         \item $\Lambda^2(V\oplus W)\cong(\Lambda^2V)\oplus(V\otimes W)\oplus(\Lambda^2W)$;
+        \begin{proof}
+            Define the map $\tilde{f}$ on the subset of $\Lambda^2(V\oplus W)$ containing all decomposable antisymmetric tensors by the rule
+            \begin{equation*}
+                (v_1,w_1)\wedge(v_2,w_2) \mapsto (v_1\wedge v_2,v_1\otimes w_2-v_2\otimes w_1,w_1\wedge w_2)
+            \end{equation*}
+            We now have to prove that this map is bilinear.\par
+            To prove linearity in the first argument, we have
+            \begin{align*}
+                \tilde{f}[((v_1,w_1)+(v_1',w_1'))\wedge(v_2,w_2)] ={}& \tilde{f}[(v_1+v_1',w_1+w_1')\wedge(v_2,w_2)]\\
+                \begin{split}
+                    ={}& ((v_1+v_1')\wedge v_2,\\
+                    &\quad (v_1+v_1')\otimes w_2-v_2\otimes(w_1+w_1'),\\
+                    &\quad (w_1+w_1')\wedge w_2)
+                \end{split}\\
+                \begin{split}
+                    ={}& (v_1\wedge v_2+v_1'\wedge v_2,\\
+                    &\quad v_1\otimes w_2+v_1'\otimes w_2-v_2\otimes w_1-v_2\otimes w_1',\\
+                    &\quad w_1\wedge w_2+w_1'\wedge w_2)
+                \end{split}\\
+                \begin{split}
+                    ={}& (v_1\wedge v_2,v_1\otimes w_2-v_2\otimes w_1,w_1\wedge w_2)\\
+                    &+ (v_1'\wedge v_2,v_1'\otimes w_2-v_2\otimes w_1',w_1'\wedge w_2)
+                \end{split}\\
+                ={}& \tilde{f}[(v_1,w_1)\wedge(v_2,w_2)]+f[(v_1',w_1')\wedge(v_2,w_2)]
+            \end{align*}
+            and
+            \begin{align*}
+                \tilde{f}[(\lambda(v_1,w_1))\wedge(v_2,w_2)] &= \tilde{f}[(\lambda v_1,\lambda w_1)\wedge(v_2,w_2)]\\
+                &= (\lambda v_1\wedge v_2,\lambda v_1\otimes w_2-v_2\otimes\lambda w_1,\lambda w_1\wedge w_2)\\
+                &= (\lambda(v_1\wedge v_2),\lambda(v_1\otimes w_2-v_2\otimes w_1),\lambda(w_1\wedge w_2))\\
+                &= \lambda(v_1\wedge v_2,v_1\otimes w_2-v_2\otimes w_1,w_1\wedge w_2)\\
+                &= \lambda\tilde{f}[(v_1,w_1)\wedge(v_2,w_2)]
+            \end{align*}
+            The proof is symmetric in the second argument.\par
+            To prove that $f$ respects the antisymmetry of the wedge product, it will suffice to show that
+            \begin{equation*}
+                f[(v_1,w_1)\wedge(v_2,w_2)] = -f[(v_2,w_2)\wedge(v_1,w_1)]
+            \end{equation*}
+            in general. Let $(v_1,w_1)\wedge(v_2,w_2)$ be an arbitrary decomposable element of $\Lambda^2(V\oplus W)$. Then we have that
+            \begin{align*}
+                f[(v_1,w_1)\wedge(v_2,w_2)] &= (v_1\wedge v_2,v_1\otimes w_2-v_2\otimes w_1,w_1\wedge w_2)\\
+                &= (-v_2\wedge v_1,-(v_2\otimes w_1-v_1\otimes w_2),-w_2\wedge w_1)\\
+                &= -(v_2\wedge v_1,v_2\otimes w_1-v_1\otimes w_2,w_2\wedge w_1)\\
+                &= -f[(v_2,w_2)\wedge(v_1,w_1)]
+            \end{align*}
+            as desired.\par\smallskip
+            Since $\tilde{f}$ an alternating bilinear map, the universal property of the exterior powers\footnote{See \textcite[472]{bib:FultonHarris}.} implies that there exists a map $f:\Lambda^2(V\oplus W)\to(\Lambda^2V)\oplus(V\otimes W)\oplus(\Lambda^2W)$.\par\smallskip
+            Since the domain and codomain have the same dimension, to prove that $f$ is an isomorphism, it will suffice to prove that it's surjective. Let
+            \begin{equation*}
+                \left( \sum_{i=1}^rv_{i_1}\wedge v_{i_2},\sum_{i=1}^sv_{i_3}\otimes w_{i_3},\sum_{i=1}^tw_{i_1}\wedge w_{i_2} \right)
+            \end{equation*}
+            be an arbitrary element of $(\Lambda^2V)\oplus(V\otimes W)\oplus(\Lambda^2W)$. Decompose it into a sum of elements of the form $(a,0,0)$, $(0,a,0)$, or $(0,0,a)$. Explicitly, the above element is equal to
+            \begin{equation*}
+                \sum_{i=1}^r(v_{i_1}\wedge v_{i_2},0,0)+\sum_{i=1}^s(0,v_{i_3}\otimes w_{i_3},0)+\sum_{i=1}^t(0,0,w_{i_1}\wedge w_{i_2})
+            \end{equation*}
+            Now, by the definition of $f$, we know that each of the individual terms in the three sums above satisfy one of
+            \begin{align*}
+                (v_1\wedge v_2,0,0) &= f[(v_1,0)\wedge(v_2,0)]\\
+                (0,v\otimes w,0) &= f[(v,0)\wedge(0,w)]\\
+                (0,0,w_1\wedge w_2) &= f[(0,w_1)\wedge(0,w_2)]
+            \end{align*}
+            Therefore, we have that the initial arbitrary element of $(\Lambda^2V)\oplus(V\otimes W)\oplus(\Lambda^2W)$ is equal to
+            \begin{equation*}
+                f\left[ \sum_{i=1}^r(v_{i_1},0)\wedge(v_{i_2},0)+\sum_{i=1}^s(v_{i_3},0)\wedge(0,w_{i_3})+\sum_{i=1}^t(0,w_{i_1})\wedge(0,w_{i_2}) \right]
+            \end{equation*}
+            as desired.
+        \end{proof}
         \item $S^2(V\oplus W)\cong(S^2V)\oplus(V\otimes W)\oplus(S^2W)$.
+        \begin{proof}
+            Define the map $\tilde{f}$ on the subset of $S^2(V\oplus W)$ containing all decomposable symmetric tensors by the rule
+            \begin{equation*}
+                (v_1,w_1)\cdot(v_2,w_2) \mapsto (v_1\cdot v_2,v_1\otimes w_2+v_2\otimes w_1,w_1\cdot w_2)
+            \end{equation*}
+            The rest of the proof is symmetric to that of part (a).
+        \end{proof}
     \end{enumerate}
     \item 
     \begin{enumerate}
         \item Factorize the group determinant for $G=\Z/2\Z\oplus\Z/2\Z$.
+        \begin{proof}
+            The multiplication table for $G$ is
+            \begin{center}
+                \small
+                \renewcommand{\arraystretch}{1.2}
+                \begin{tabular}{c|c|c|c|c|}
+                          & (0,0) & (0,1) & (1,0) & (1,1)\\ \hline
+                    (0,0) & (0,0) & (0,1) & (1,0) & (1,1)\\ \hline
+                    (0,1) & (0,1) & (0,0) & (1,1) & (1,0)\\ \hline
+                    (1,0) & (1,0) & (1,1) & (0,0) & (0,1)\\ \hline
+                    (1,1) & (1,1) & (1,0) & (0,1) & (0,0)\\ \hline
+                \end{tabular}
+            \end{center}
+            Thus, the group determinant is
+            \begin{align*}
+                \begin{vmatrix}
+                    a & b & c & d\\
+                    b & a & d & c\\
+                    c & d & a & b\\
+                    d & c & b & a\\
+                \end{vmatrix}
+                % &= a^4+b^4+c^4+d^4-2a^2b^2-2a^2c^2-2a^2d^2-2b^2c^2-2b^2d^2-2c^2d^2+8abcd\\
+                % &= (a+b+c+d)(a+b-c-d)(a-b+c-d)(a-b-c+d)
+            \end{align*}
+            To factorize this group determinant, it will suffice to find the eigenvalues of the matrix it encloses. To find the eigenvalues, we may start by inspecting it for eigenvectors.\par
+            First off, recall the Sudoku Lemma from MATH 25700. It implies that every row of the matrix will list each element once, and we can confirm that this is true in this example by looking at it. It follows that if we propose $(1,1,1,1)$ as an eigenvector, we'll be able to extract an eigenvalue via the commutativity of multiplication as follows.
+            \begin{equation*}
+                \begin{bmatrix}
+                    a & b & c & d\\
+                    b & a & d & c\\
+                    c & d & a & b\\
+                    d & c & b & a\\
+                \end{bmatrix}
+                \begin{bmatrix}
+                    1\\
+                    1\\
+                    1\\
+                    1\\
+                \end{bmatrix}
+                =
+                \begin{bmatrix}
+                    a+b+c+d\\
+                    b+a+d+c\\
+                    c+d+a+b\\
+                    d+c+b+a\\
+                \end{bmatrix}
+                =
+                \begin{bmatrix}
+                    a+b+c+d\\
+                    a+b+c+d\\
+                    a+b+c+d\\
+                    a+b+c+d\\
+                \end{bmatrix}
+                = (a+b+c+d)
+                \begin{bmatrix}
+                    1\\
+                    1\\
+                    1\\
+                    1\\
+                \end{bmatrix}
+            \end{equation*}
+            Second, we may observe that the upper-left and lower-right blocks of this matrix match, as do the lower-left and upper-right blocks. Indeed, this matrix is a block matrix of the form $
+                [
+                    \begin{smallmatrix}
+                        A & C\\
+                        C & A
+                    \end{smallmatrix}
+                ]
+            $. Thus, since the eigenvector of this block matrix that is not $(1,1)$ is $(1,-1)$, the analogous relevant eigenvector of the full matrix is $(1,1,-1,-1)$. Once again, we obtain
+            \begin{equation*}
+                \begin{bmatrix}
+                    a & b & c & d\\
+                    b & a & d & c\\
+                    c & d & a & b\\
+                    d & c & b & a\\
+                \end{bmatrix}
+                \begin{bmatrix}
+                    1\\
+                    1\\
+                    -1\\
+                    -1\\
+                \end{bmatrix}
+                =
+                \begin{bmatrix}
+                    a+b-c-d\\
+                    b+a-d-c\\
+                    c+d-a-b\\
+                    d+c-b-a\\
+                \end{bmatrix}
+                =
+                \begin{bmatrix}
+                    (a+b-c-d)\cdot 1\\
+                    (a+b-c-d)\cdot 1\\
+                    (a+b-c-d)\cdot -1\\
+                    (a+b-c-d)\cdot -1\\
+                \end{bmatrix}
+                = (a+b-c-d)
+                \begin{bmatrix}
+                    1\\
+                    1\\
+                    -1\\
+                    -1\\
+                \end{bmatrix}
+            \end{equation*}
+            Third, we may observe that each of the blocks referred to above is also of the form $
+                [
+                    \begin{smallmatrix}
+                        x & y\\
+                        y & x
+                    \end{smallmatrix}
+                ]
+            $. Thus, we can also apply $(1,-1)$ twice --- once to each block --- with the eigenvector $(1,-1,1,-1)$. Once again, we obtain
+            \begin{equation*}
+                \begin{bmatrix}
+                    a & b & c & d\\
+                    b & a & d & c\\
+                    c & d & a & b\\
+                    d & c & b & a\\
+                \end{bmatrix}
+                \begin{bmatrix}
+                    1\\
+                    -1\\
+                    1\\
+                    -1\\
+                \end{bmatrix}
+                =
+                \begin{bmatrix}
+                    a-b+c-d\\
+                    b-a+d-c\\
+                    c-d+a-b\\
+                    d-c+b-a\\
+                \end{bmatrix}
+                =
+                \begin{bmatrix}
+                    (a-b+c-d)\cdot 1\\
+                    (a-b+c-d)\cdot -1\\
+                    (a-b+c-d)\cdot 1\\
+                    (a-b+c-d)\cdot -1\\
+                \end{bmatrix}
+                = (a-b+c-d)
+                \begin{bmatrix}
+                    1\\
+                    -1\\
+                    1\\
+                    -1\\
+                \end{bmatrix}
+            \end{equation*}
+            Lastly, we may observe while the two side columns have $a$ or $d$ in the top and bottom slots and $b$ or $c$ in the middle two slots, it is vice versa for the two middle columns. Thus, we can apply $(1,-1,-1,1)$ to obtain
+            \begin{equation*}
+                \begin{bmatrix}
+                    a & b & c & d\\
+                    b & a & d & c\\
+                    c & d & a & b\\
+                    d & c & b & a\\
+                \end{bmatrix}
+                \begin{bmatrix}
+                    1\\
+                    -1\\
+                    -1\\
+                    1\\
+                \end{bmatrix}
+                =
+                \begin{bmatrix}
+                    a-b-c+d\\
+                    b-a-d+c\\
+                    c-d-a+b\\
+                    d-c-b+a\\
+                \end{bmatrix}
+                =
+                \begin{bmatrix}
+                    (a-b-c+d)\cdot 1\\
+                    (a-b-c+d)\cdot -1\\
+                    (a-b-c+d)\cdot -1\\
+                    (a-b-c+d)\cdot 1\\
+                \end{bmatrix}
+                = (a-b+c-d)
+                \begin{bmatrix}
+                    1\\
+                    -1\\
+                    -1\\
+                    1\\
+                \end{bmatrix}
+            \end{equation*}
+            Thus, we have found four distinct eigenvectors for a $4\times 4$ matrix. Therefore, we have found all of the eigenvalues. Their product equals the determinant, and is also a factorization of the determinant. In particular, the factorized group determinant for $K_4$ is
+            \begin{equation*}
+                \boxed{(a+b+c+d)(a+b-c-d)(a-b+c-d)(a-b-c+d)}
+            \end{equation*}
+        \end{proof}
         \item A \textbf{circulant matrix} is a square matrix in which all row vectors are composed of the same elements and each row vector is rotated one element to the right relative to the preceding row vector. Prove that for $\zeta\in\mu_n$, vector $(1,\zeta,\dots,\zeta^{n-1})$ is an eigenvector of any circulant matrix of size $n$.
+        \begin{proof}
+            Let
+            \begin{equation*}
+                \begin{bmatrix}
+                    x_1     & x_2    & x_3    & \cdots & x_n    \\
+                    x_n     & x_1    & x_2    & \cdots & x_{n-1}\\
+                    x_{n-1} & x_n    & x_1    & \cdots & x_{n-2}\\
+                    \vdots  & \vdots & \vdots & \ddots & \vdots \\
+                    x_2     & x_3    & x_4    & \cdots & x_1    \\
+                \end{bmatrix}
+            \end{equation*}
+            be an arbitrary circulant matrix of size $n$. It follows that
+            \begin{align*}
+                \begin{bmatrix}
+                    x_1     & x_2    & x_3    & \cdots & x_n    \\
+                    x_n     & x_1    & x_2    & \cdots & x_{n-1}\\
+                    x_{n-1} & x_n    & x_1    & \cdots & x_{n-2}\\
+                    \vdots  & \vdots & \vdots & \ddots & \vdots \\
+                    x_2     & x_3    & x_4    & \cdots & x_1    \\
+                \end{bmatrix}
+                \begin{bmatrix}
+                    1\\
+                    \zeta\\
+                    \zeta^2\\
+                    \vdots\\
+                    \zeta^{n-1}
+                \end{bmatrix}
+                &=
+                \begin{bmatrix}
+                    x_1+x_2\zeta+x_3\zeta^2+\cdots+x_n\zeta^{n-1}\\
+                    x_n+x_1\zeta+x_2\zeta^2+\cdots+x_{n-1}\zeta^{n-1}\\
+                    x_{n-1}+x_n\zeta+x_1\zeta^2+\cdots+x_{n-2}\zeta^{n-1}\\
+                    \vdots\\
+                    x_2+x_3\zeta+x_4\zeta^2+\cdots+x_1\zeta^{n-1}
+                \end{bmatrix}\\
+                &=
+                \begin{bmatrix}
+                    x_1\zeta^0+x_2\zeta^1+x_3\zeta^2+\cdots+x_n\zeta^{n-1}\\
+                    x_n\zeta^n+x_1\zeta^1+x_2\zeta^2+\cdots+x_{n-1}\zeta^{n-1}\\
+                    x_{n-1}\zeta^n+x_n\zeta^{n+1}+x_1\zeta^2+\cdots+x_{n-2}\zeta^{n-1}\\
+                    \vdots\\
+                    x_2\zeta^n+x_3\zeta^{n+1}+x_4\zeta^{n+2}+\cdots+x_1\zeta^{n-1}
+                \end{bmatrix}\\
+                &=
+                \begin{bmatrix}
+                    x_1\zeta^0+x_2\zeta^1+x_3\zeta^2+\cdots+x_n\zeta^{n-1}\\
+                    x_1\zeta^1+x_2\zeta^2+x_3\zeta^3+\cdots+x_n\zeta^n\\
+                    x_1\zeta^2+x_2\zeta^3+x_3\zeta^4+\cdots+x_n\zeta^{n+1}\\
+                    \vdots\\
+                    x_1\zeta^{n-1}+x_2\zeta^n+x_3\zeta^{n+1}+\cdots+x_n\zeta^{2n-2}
+                \end{bmatrix}\\
+                &= \left( \sum_{i=1}^nx_i\zeta^{i-1} \right)
+                \begin{bmatrix}
+                    1\\
+                    \zeta\\
+                    \zeta^2\\
+                    \vdots\\
+                    \zeta^{n-1}
+                \end{bmatrix}
+            \end{align*}
+            as desired.
+        \end{proof}
         \item Compute the eigenvalues and the determinant of a circulant matrix. Factorize the group determinant for $G=\Z/n\Z$.
+        \begin{proof}
+            By the same logic used in part (a), one can find by inspection that the $n$ distinct eigenvectors are of the form $(\zeta^{j(0)},\dots,\zeta^{j(n-1)})$, $j=0,\dots,n-1$. It follows by similar logic once again that the corresponding eigenvalues are of the form
+            \begin{equation*}
+                \boxed{\lambda_j = \sum_{i=1}^nx_i\zeta^{j(i-1)},\ j=0,\dots,n-1}
+            \end{equation*}
+            Moreover, since the determinant is the product of the eigenvalues,
+            \begin{equation*}
+                \boxed{\det = \lambda_0\cdots\lambda_{n-1}}
+            \end{equation*}
+            where $\lambda_j$ is defined as above.\par
+            Therefore, since the multiplication table of $\Z/n\Z$ converts into an $n\times n$ circulant matrix, the factorization of its group determinant is \fbox{equal to the above determinant expression.}
+        \end{proof}
     \end{enumerate}
     \item \textbf{Plethysm for $\bm{S_3}$}. Let $(3)$, $(1,1,1)$, and $(2,1)$ be the trivial, alternating, and standard representations of $S_3$.
     \begin{enumerate}
         \item Consider the permutational representation $V\cong(3)\oplus(2,1)$. Decompose $\Lambda^2V$ into irreducibles.
+        \begin{proof}
+            Fix a basis of $V$ equal to $\{(1,1,1),(\omega,1,\omega^2),(1,\omega,\omega^2)\}=\{\gamma,\alpha,\beta\}$. Let $\tau=(123)\in S_3$ and $\sigma=(12)\in S_3$. By Problem 2a,
+            \begin{equation*}
+                \Lambda^2V = \Lambda^2((3)\oplus(2,1))
+                = [\Lambda^2(3)]\oplus[(3)\otimes(2,1)]\oplus[\Lambda^2(2,1)]
+            \end{equation*}
+            We now divide into three cases.\par\smallskip
+            Case 1 ($\Lambda^2(3)$): The basis for this vector space is $\{\gamma\wedge\gamma\}=\{0\}$, so
+            \begin{equation*}
+                \Lambda^2(3) = 0
+            \end{equation*}
+            Case 2 ($(3)\otimes(2,1)$): The basis for this vector space is $\{\gamma\otimes\alpha,\gamma\otimes\beta\}$. The action of $\tau$ on these basis vectors can be computed:
+            \begin{align*}
+                \tau(\gamma\otimes\alpha) &= \omega\gamma\otimes\alpha&
+                \tau(\gamma\otimes\beta) &= \omega^2\gamma\otimes\beta
+            \end{align*}
+            These equations are directly analogous to the untensored $\alpha$ and $\beta$ equations, so this is the standard representation. Formally,
+            \begin{equation*}
+                (3)\otimes(2,1) = (2,1)
+            \end{equation*}
+            Case 3 ($\Lambda^2(2,1)$): The basis for this vector space is $\{\alpha\wedge\beta\}$. Thus, $\dim\Lambda^2(2,1)=1$, so $\Lambda^2(2,1)\neq(2,1)$, and we can more on to discriminating between the trivial and alternating representations. In particular, the action of $\sigma$ on this basis vector is
+            \begin{equation*}
+                \sigma(\alpha\wedge\beta) = -\alpha\wedge\beta
+            \end{equation*}
+            Thus, $\sigma(v)$ is not linearly independent of $v$. Moreover, $\sigma(v)=-v$. Thus, this is the alternating representation. Formally,
+            \begin{equation*}
+                \Lambda^2(2,1) = (1,1,1)
+            \end{equation*}
+            Putting everything back together, we obtain
+            \begin{align*}
+                \Lambda^2V &\cong [\Lambda^2(3)]\oplus[(3)\otimes(2,1)]\oplus[\Lambda^2(2,1)]\\
+                &\cong 0\oplus(2,1)\oplus(1,1,1)\\
+                \Aboxed{\Lambda^2V &\cong (2,1)\oplus(1,1,1)}
+            \end{align*}
+        \end{proof}
         \item Decompose $S^2(2,1)$ and $S^3(2,1)$ into irreducibles.
+        \begin{proof}
+            We will treat each case separately.\par
+            \underline{$S^2(2,1)$}: The basis for this vector space is $\{\alpha\cdot\alpha,\alpha\cdot\beta,\beta\cdot\beta\}$. The action of $\tau$ on these basis vectors can be computed:
+            \begin{align*}
+                \tau(\alpha\cdot\alpha) &= \omega^2\alpha\cdot\alpha&
+                \tau(\alpha\cdot\beta) &= 1\alpha\cdot\beta&
+                \tau(\beta\cdot\beta) &= \omega\beta\cdot\beta
+            \end{align*}
+            The action of $\sigma$ on these basis vectors can also be computed:
+            \begin{align*}
+                \sigma(\alpha\cdot\alpha) &= \beta\cdot\beta&
+                \sigma(\alpha\cdot\beta) &= \alpha\cdot\beta&
+                \sigma(\beta\cdot\beta) &= \alpha\cdot\alpha
+            \end{align*}
+            Thus, $\alpha\cdot\alpha$ and $\beta\cdot\beta$ span a standard representation, and $\alpha\cdot\beta$ spans a trivial representation. Putting everything together, we obtain
+            \begin{equation*}
+                \boxed{S^2(2,1) \cong (2,1)\oplus(3)}
+            \end{equation*}
+            \underline{$S^3(2,1)$}: The basis for this vector space is $\{\alpha\cdot\alpha\cdot\alpha,\alpha\cdot\alpha\cdot\beta,\alpha\cdot\beta\cdot\beta,\beta\cdot\beta\cdot\beta\}$. The action of $\tau$ on these basis vectors can be computed:
+            \begin{align*}
+                \tau(\alpha\cdot\alpha\cdot\alpha) &= 1\alpha\cdot\alpha\cdot\alpha&
+                \tau(\alpha\cdot\alpha\cdot\beta) &= \omega\alpha\cdot\alpha\cdot\beta
+            \end{align*}
+            \begin{align*}
+                \tau(\alpha\cdot\beta\cdot\beta) &= \omega^2\alpha\cdot\beta\cdot\beta&
+                \tau(\beta\cdot\beta\cdot\beta) &= 1\beta\cdot\beta\cdot\beta
+            \end{align*}
+            The action of $\sigma$ on these basis vectors can also be computed:
+            \begin{align*}
+                \sigma(\alpha\cdot\alpha\cdot\alpha) &= \beta\cdot\beta\cdot\beta&
+                \sigma(\alpha\cdot\alpha\cdot\beta) &= \alpha\cdot\beta\cdot\beta
+            \end{align*}
+            \begin{align*}
+                \sigma(\alpha\cdot\beta\cdot\beta) &= \alpha\cdot\alpha\cdot\beta&
+                \sigma(\beta\cdot\beta\cdot\beta) &= \alpha\cdot\alpha\cdot\alpha
+            \end{align*}
+            Thus, $\alpha\cdot\alpha\cdot\beta$ and $\alpha\cdot\beta\cdot\beta$ span a standard representation, $\alpha\cdot\alpha\cdot\alpha+\beta\cdot\beta\cdot\beta$ spans a trivial representation, and $\alpha\cdot\alpha\cdot\alpha-\beta\cdot\beta\cdot\beta$ spans an alternating representation. Putting everything together, we obtain
+            \begin{equation*}
+                \boxed{S^3(2,1) \cong (2,1)\oplus(3)\oplus(1,1,1)}
+            \end{equation*}
+        \end{proof}
         \item Decompose the regular representation $R$ into irreducibles.
+        \begin{proof}
+            The regular representation is 6-dimensional. We're in $\C^6$ with basis $\{e_e,e_{(12)},e_{(13)},e_{(23)},e_{(123)},e_{(132)}\}$. Let $\tau=(123)$ again. We get $\tau(1,1,1,1,1,1)=1(1,1,1,1,1,1)$.
+            We have $\tau v_1=\omega^{\alpha_1}v_1$
+        \end{proof}
         \item Prove that $S^{k+6}(2,1)\cong S^k(2,1)\oplus R$. Compute $S^k(2,1)$ for all $k$.
     \end{enumerate}
     \item Let $V$ be a vector space over $F$ with a basis $e_1,\dots,e_n$; let $e^1,\dots,e^n$ be the dual basis. Prove the following.
     \begin{enumerate}
         \item Element $e_1\otimes e^1+\cdots+e_n\otimes e^n\in V\otimes V^\vee$ does not depend on the choice of basis.
+        \begin{proof}
+            To prove that the given element of $V\otimes V^*$ does not depend on the choice of basis, it will suffice to show that for any choice of basis and associated dual basis, the given element maps to the same place in the isomorphic space $\Hom(V,V)$. Let's begin.\par
+            Let $e_1,\dots,e_n$ be an arbitrary basis of $V$, and let $e^1,\dots,e^n$ be its dual basis. Under the isomorphism constructed in class, the element
+            \begin{equation*}
+                e_1\otimes e^1+\cdots+e_n\otimes e^n \mapsto [v\mapsto e^1(v)e_1]+\cdots+[v\mapsto e^n(v)e_n]
+            \end{equation*}
+            where $[v\mapsto e^i(v)e_i]$ denotes the linear map in $\Hom(V,V)$ sending $v$ to its $i^\text{th}$ component. Importantly, under the usual rules of adding functions, we can see that linear map on the right above is equal to
+            \begin{equation*}
+                [v\mapsto e^1(v)e_1+\cdots+e^n(v)e_n] = [v\mapsto v_1e_1+\cdots+v_ne_n] = [v\mapsto v] = 1
+            \end{equation*}
+            where $1\in\Hom(V,V)$ is the identity map.
+        \end{proof}
         \item Consider a linear map $\evl:V\otimes V^*\to F$ sending $v\otimes\alpha$ to $\alpha(v)\in F$. Prove that $\evl(L)=\tr(L)$.
+        \begin{proof}
+            Let $L\in\Hom(V,V)$ be an arbitrary linear map, let it's matrix be $(\ell_{ij})\in\mathcal{M}(V,V)$ with respect to some basis $e_1,\dots,e_n$, and let $e^1,\dots,e^n$ be dual to this basis. Define a map from $\mathcal{M}(V,V)$ to $V\otimes V^*$ by sending the standard basis $(a_{ij})$ of $\mathcal{M}(V,V)$ to $e_i\otimes e^j$. It follows that the image of $\mathcal{M}(L)$ under this map is $\sum_{i,j=1}^n\ell_{ij}e_i\otimes e^j\in V\otimes V^*$. It follows by the constructions up to this point and the definition of the trace that
+            \begin{align*}
+                \evl(L) &= \evl\left( \sum_{i,j=1}^n\ell_{ij}e_i\otimes e^j \right)\\
+                &= \sum_{i,j=1}^n\ell_{ij}\evl(e_i\otimes e^j)\\
+                &= \sum_{i,j=1}^n\ell_{ij}e^j(e_i)\\
+                &= \sum_{i,j=1}^n\ell_{ij}\delta_{ij}\\
+                &= \sum_{i=1}^n\ell_{ii}\\
+                &= \tr(L)
+            \end{align*}
+            as desired.
+        \end{proof}
         \item A \textbf{projector} is a linear map $P:V\to V$ such that $P^2=P$. Prove that $\tr(P)=\dim(\im(P))$.
+        \begin{proof}
+            Let $v\in\im(P)$ be arbitrary. Since $v\in\im(P)$, we have that $v=Pw$ for some $w\in V$. But since $P=P^2$, it follows that
+            \begin{equation*}
+                Pv = P^2w = Pw = v
+            \end{equation*}
+            Thus, the restriction $P_1$ of $P$ to $\im(P)$ is equal to the identity on $\im(P)$.\par
+            Let $v\in V\setminus\im(P)$ be arbitrary. Since $v\notin\im(P)$, $v\in\ker(P)$ so
+            \begin{equation*}
+                Pv = 0
+            \end{equation*}
+            Thus, the restriction $P_2$ of $P$ to $\ker(P)$ is equal to the zero map on $\ker(P)$.\par
+            Since $V=\im(P)\oplus\ker(P)$, $P=P_1\oplus P_2$. In particular, there will exist an orthonormal basis in which the first $k$ vectors form a basis of $\im(P)$ and the next $n-k$ vectors form a basis of $\ker(P)$. Thus, $\dim(\im(P))=k$. Moreover, with respect to this basis, the $n\times n$ matrix of $P$ will have a $k\times k$ block in the upper left-hand corner in which $I_k$ resides, and it will be zeroes everywhere else. Since the trace is invariant under similarity transformations, it can be read off from this matrix as $k$ as well.
+        \end{proof}
         \item Let $V$ be a representation of a finite group $G$. Prove that the representation $V\otimes V^*$ has a trivial subrepresentation.
+        \begin{proof}
+            Consider the element from part (a). When considered as an element of $\Hom(V,V)$, it is the identity map. Additionally, we know from class that a representation on $\Hom(V,V)$ is a homomorphism $\rho:G\to GL(\Hom(V,V))$ defined by $\rho(g)L=\rho_V(g)\circ L\circ\rho_V(g)^{-1}$. Thus, substituting in $I$ for $L$, we learn that
+            \begin{equation*}
+                \rho(g)I = \rho_V(g)\circ I\circ\rho_V(g)^{-1}
+                = \rho_V(g)\circ\rho_V(g)^{-1}
+                = I
+            \end{equation*}
+            Thus, regardless of what $G,\rho,V$ are, $\rho$ will preserve $I$. Therefore, $\spn(I)$ is a subrepresentation and, importantly, it is the trivial subrepresentation since all elements of $G$ act as the identity on it.
+        \end{proof}
     \end{enumerate}
 \end{enumerate}
 
