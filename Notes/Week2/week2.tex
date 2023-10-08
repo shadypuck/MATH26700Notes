@@ -795,5 +795,190 @@
 
 
 
+\section{FH Appendix B: On Multilinear Algebra}
+\emph{From \textcite{bib:FultonHarris}.}
+\subsection*{Section B.1: Tensor Products}
+\begin{itemize}
+    \item \marginnote{10/5:}\textbf{Tensor product} (of $V,W$ over $F$): A vector space $U$ equipped with a bilinear map $V\times W\to U$ sending $v\times w\to v\otimes w$ that is universal, i.e., for any bilinear map $\beta:V\times W\to Z$, there is a unique linear map from $U\to Z$ that takes $v\otimes w\mapsto\beta(v,w)$. \emph{Denoted by} $\bm{V\otimes W}$, $\bm{V\otimes_FW}$.
+    \begin{itemize}
+        \item The so-called \emph{universal property} determines the tensor product up to canonical isomorphism.
+    \end{itemize}
+    \item One construction of $V\otimes W$: From the basis $\{e_i\otimes f_j\}$.
+    \begin{itemize}
+        \item This construction is \textbf{functorial}, implying that linear maps from $f:V\to V'$ and $g:W\to W'$ determine a linear map $f\otimes g:V\otimes W\to V'\otimes W'$, namely that defined by $f\otimes g:v\otimes w\to fv\otimes gw$.
+    \end{itemize}
+    \item Definition of the \textbf{$n$-fold tensor product}.
+    \item \textbf{Multilinear} (map): A map from a Cartesian product $V_1\times\cdots\times V_n$ of vector spaces to a vector space $U$ such that when all but one of the factors $V_i$ are fixed, the resulting map from $V_i\to U$ is linear.
+    \item Properties of the tensor product.
+    \begin{enumerate}
+        \item \emph{Commutativity}:
+        \begin{equation*}
+            V\otimes W\cong W\otimes V
+        \end{equation*}
+        by $v\otimes w\mapsto w\otimes v$.
+        \item \emph{Distributivity}:
+        \begin{equation*}
+            (V_1\oplus V_2)\otimes W \cong (V_1\otimes W)\oplus(V_2\otimes W)
+        \end{equation*}
+        by $(v_1,v_2)\otimes w\mapsto(v_1\otimes w,v_2\otimes w)$.
+        \item \emph{Associativity}:
+        \begin{equation*}
+            (U\otimes V)\otimes W \cong U\otimes(V\otimes W) \cong U\otimes V\otimes W
+        \end{equation*}
+        by $(u\otimes v)\otimes w\mapsto u\otimes(v\otimes w)\mapsto u\otimes v\otimes w$.
+    \end{enumerate}
+    \item \textbf{Tensor power} (of $V$ to $n$): The tensor product defined as follows. \emph{Denoted by} $\bm{V^{\otimes n}}$. \emph{Given by}
+    \begin{equation*}
+        V^{\otimes n} = \underbrace{V\otimes\cdots\otimes V}_{n\text{ times}}
+    \end{equation*}
+    \begin{itemize}
+        \item Convention: $V^{\otimes 0}=F$.
+    \end{itemize}
+    \item Analogous construction of the tensor product for generalized algebras and modules.
+\end{itemize}
+
+
+\subsection*{Section B.2: Exterior and Symmetric Powers}
+\begin{itemize}
+    \item \textbf{Alternating} (multilinear map): A multilinear map $\beta$ such that $\beta(v_1,\dots,v_n)=0$ whenever $v_i=v_j$ for some $i,j\in[n]$.
+    \begin{itemize}
+        \item Implication: $\beta(v_1,\dots,v_n)$ changes sign whenever two of the vectors are interchanged.
+        \begin{itemize}
+            \item Follows from the definition and the \textbf{standard polarization}.
+        \end{itemize}
+        \item Implication:
+        \begin{equation*}
+            \beta(v_{\sigma(1)},\dots,v_{\sigma(n)}) = (-1)^\sigma\beta(v_1,\dots,v_n)
+        \end{equation*}
+        for all $\sigma\in S_n$.
+    \end{itemize}
+    \item \textbf{Standard polarization}: The equality
+    \begin{equation*}
+        \beta(v,w)+\beta(w,v) = \beta(v+w,v+w)-\beta(v,v)-\beta(w,w)
+        = 0-0-0
+        = 0
+    \end{equation*}
+    \item \textbf{Exterior powers} (of $V$): The vector space $U$ equipped with an alternating multilinear map $V\times\cdots\times V\to\Lambda^nV$ sending $v_1\times\cdots\times v_n\mapsto v_1\wedge\cdots\wedge v_n$ that is universal, i.e., for any alternating multilinear map $\beta:V^n\to Z$, there is a unique linear map from $U$ to $Z$ that takes $v_1\wedge\cdots\wedge v_n\mapsto\beta(v_1,\dots,v_n)$. \emph{Denoted by} $\bm{\Lambda^nV}$.
+    \begin{itemize}
+        \item Convention: $\Lambda^0V=F$.
+    \end{itemize}
+    \item Quotient space construction of the exterior powers.
+    \item Projecting from $V^{\otimes n}\to\Lambda^nV$: Define $\pi:V^{\otimes n}\to\Lambda^nV$ by
+    \begin{equation*}
+        \pi(v_1\otimes\cdots\otimes v_n) = v_1\wedge\cdots\wedge v_n
+    \end{equation*}
+    \item Basis for the exterior powers.
+    \item There is a canonical linear map $\Lambda^aV\otimes\Lambda^bW\to\Lambda^{a+b}(V\oplus W)$, which takes $(v_1\wedge\cdots\wedge v_a)\otimes(w_1\wedge\cdots\wedge w_b)\mapsto v_1\wedge\cdots\wedge v_a\wedge w_1\wedge\cdots\wedge w_b$.
+    \begin{itemize}
+        \item This determines (how??) an isomorphism
+        \begin{equation*}
+            \Lambda^n(V\oplus W) \cong \bigoplus_{a=0}^n\Lambda^aV\otimes\Lambda^{n-a}W
+        \end{equation*}
+        \item This isomorphism plus induction on $n$ can justify (how??) the basis for $\Lambda^nV$ as the increasing indices.
+    \end{itemize}
+    \item \textbf{Symmetric} (multilinear map): A multilinear map $\beta$ such that $\beta(v_1,\dots,v_n)$ is unchanged when any two factors are interchanged, that is
+    \begin{equation*}
+        \beta(v_{\sigma(1)},\dots,v_{\sigma(n)}) = \beta(v_1,\dots,v_n)
+    \end{equation*}
+    for all $\sigma\in S_n$.
+    \item \textbf{Symmetric powers} (of $V$): The vector space $U$ equipped with a symmetric multilinear map $V\times\cdots\times V\to S^nV$ sending $v_1\times\cdots\times v_n\mapsto v_1\cdot\ldots\cdot v_n$ that is universal, i.e., for any symmetric multilinear map $\beta:V^n\to Z$, there is a unique linear map from $U$ to $Z$ that takes $v_1\cdot\ldots\cdot v_n\mapsto\beta(v_1,\dots,v_n)$. \emph{Denoted by} $\bm{S^nV}$.
+    \begin{itemize}
+        \item Convention: $S^0V=F$.
+    \end{itemize}
+    \item Quotient space construction of the symmetric powers.
+    \begin{itemize}
+        \item Quotient out all $v_1\otimes\cdots\otimes v_n-v_{\sigma(1)}\otimes\cdots\otimes v_{\sigma(n)}$, that is, those elements of $V^{\otimes n}$ in which $\sigma$ permutes two successive factors. How does this work??
+    \end{itemize}
+    \item Projecting from $V^{\otimes n}\to S^nV$: Define $\pi:V^{\otimes n}\to S^nV$ by
+    \begin{equation*}
+        \pi(v_1\otimes\cdots\otimes v_n) = v_1\cdot\ldots\cdot v_n
+    \end{equation*}
+    \item Basis for the symmetric powers.
+    \begin{itemize}
+        \item It follows from the basis construction that $S^nV$ can be regarded as the space of homogeneous polynomials of degree $n$ in the variable $e_i$, since each element is of the form $e_{i_1}\cdot\ldots\cdot e_{i_n}$ and we can add them.
+    \end{itemize}
+    \item Canonical isomorphism:
+    \begin{equation*}
+        S^n(V\oplus W) \cong \bigoplus_{a=0}^nS^aV\otimes S^{n-a}W
+    \end{equation*}
+    \item More on $\Lambda^nV,S^nV$ as subspaces of $V^{\otimes n}$.
+    \begin{itemize}
+        \item We inject $\iota:\Lambda^nV\to V^{\otimes n}$ with
+        \begin{equation*}
+            \iota(v_1\wedge\cdots\wedge v_n) = \sum_{\sigma\in S_n}(-1)^\sigma v_{\sigma(1)}\otimes\cdots\otimes v_{\sigma(n)}
+        \end{equation*}
+        \begin{itemize}
+            \item This relates to Rudenko's note that $v_1\wedge v_2=v_1\otimes v_2-v_2\otimes v_2$!
+            \item There are some more advanced notes on the implications of $\iota$; $[\iota\circ\pi/n!](V^{\otimes n})=V^{\otimes n}$ is brought up.
+        \end{itemize}
+        \item We inject $\iota:S^nV\to V^{\otimes n}$ with
+        \begin{equation*}
+            \iota(v_1\cdot\ldots\cdot v_n) = \sum_{\sigma\in S_n}v_{\sigma(1)}\otimes\cdots\otimes v_{\sigma(n)}
+        \end{equation*}
+        \begin{itemize}
+            \item More, related advanced notes; includes the $1/n!$ thing again.
+        \end{itemize}
+    \end{itemize}
+    \item \textbf{Wedge product}: The function $\Lambda^mV\otimes\Lambda^nV\to\Lambda^{m+n}V$ defined as follows. \emph{Denoted by} $\bm{\wedge}$. \emph{Given by}
+    \begin{equation*}
+        (v_1\wedge\cdots\wedge v_m)\otimes(v_{m+1}\wedge\cdots\wedge v_{m+n}) \mapsto v_1\wedge\cdots\wedge v_m\wedge v_{m+1}\wedge\cdots\wedge v_{m+n}
+    \end{equation*}
+    \item Properties of the wedge product.
+    \begin{enumerate}
+        \item \emph{Associativity}:
+        \begin{equation*}
+            (v_1\wedge v_2)\wedge v_3 = v_1\wedge(v_2\wedge v_3) = v_1\wedge v_2\wedge v_3
+        \end{equation*}
+        \item \emph{Skew-commutativity}:
+        \begin{equation*}
+            v_1\wedge v_2 = -v_2\wedge v_2
+        \end{equation*}
+    \end{enumerate}
+    \item Note that both of the above properties hold in higher-dimensional cases as well.
+    \item Commutativity of the products.
+    \begin{figure}[h!]
+        \centering
+        \DisableQuotes
+        \begin{subfigure}[b]{0.35\linewidth}
+            \centering
+            \begin{tikzcd}
+                \Lambda^mV\otimes\Lambda^nV \arrow[d,hook,"\iota\otimes\iota"'] \arrow[r,"\wedge"] & \Lambda^{m+n}V \arrow[d,hook,"\iota"]\\
+                V^{\otimes m}\otimes V^{\otimes n} \arrow[r,"f_1"'] & V^{\otimes(m+n)}\\
+            \end{tikzcd}
+            \vspace{-1.5em}
+            \caption{Wedge product.}
+            \label{fig:CDwedgeSyma}
+        \end{subfigure}
+        \begin{subfigure}[b]{0.35\linewidth}
+            \centering
+            \begin{tikzcd}
+                S^mV\otimes S^nV \arrow[d,hook,"\iota\otimes\iota"'] \arrow[r,"\cdot"] & S^{m+n}V \arrow[d,hook,"\iota"]\\
+                V^{\otimes m}\otimes V^{\otimes n} \arrow[r,"f_2"'] & V^{\otimes(m+n)}\\
+            \end{tikzcd}
+            \vspace{-1.5em}
+            \caption{Symmetric product.}
+            \label{fig:CDwedgeSymb}
+        \end{subfigure}
+        \EnableQuotes
+        \caption{Commutative diagram, wedge and symmetric products.}
+        \label{fig:CDwedgeSym}
+    \end{figure}
+    \begin{itemize}
+        \item $f_1$ is defined by
+        \begin{equation*}
+            (v_1\otimes\cdots\otimes v_m)\otimes(v_{m+1}\otimes\cdots\otimes v_{m+n}) \mapsto \sum_{\sigma\in G}(-1)^\sigma v_{\sigma(1)}\otimes\cdots\otimes v_{\sigma(m)}\otimes v_{\sigma(m+1)}\otimes\cdots\otimes v_{\sigma(m+n)}
+        \end{equation*}
+        where $G$ is the subgroup of $S_{m+n}$ preserving the order of the subsets $\{1,\dots,m\}$ and $\{m+1,\dots,m+n\}$.
+        \item $f_2$ is defined analogously.
+    \end{itemize}
+    \item The above mappings all commute with linear maps of vector spaces.
+    \begin{itemize}
+        \item Example: Our definition $g(v\otimes w)=gv\otimes gw$ could be redrawn as $[g\circ\otimes](v,w)=[\otimes\circ g](v,w)$, where the latter $g:(v,w)\mapsto(gv,gw)$ by abuse of notation.
+    \end{itemize}
+    \item Tensor, exterior, and symmetric algebras.
+\end{itemize}
+
+
+
 
 \end{document}
