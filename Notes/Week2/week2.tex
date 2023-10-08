@@ -208,7 +208,25 @@
         \label{fig:UPtensorProd}
     \end{figure}
     \begin{proof}
-        See the solid explanation \href{https://math.stackexchange.com/a/4248460/340652}{linked here}. Write out at a later date, and/or review MATH 25800 notes further.
+        See the solid explanation \href{https://math.stackexchange.com/a/4248460/340652}{linked here}. Alternatively, here's my write up.\par\smallskip
+        Let $V=\C e_1\oplus\cdots\oplus\C e_n$, $W=\C f_1\oplus\cdots\oplus\C f_m$, $Z$, and $h:V\times W\to Z$ be arbitrary. Define $\tilde{h}:V\otimes W\to Z$ by
+        \begin{equation*}
+            \tilde{h}(e_i\otimes f_j) := h(e_i,f_j)
+        \end{equation*}
+        for $i=1,\dots,n$ and $j=1,\dots,m$. Since a linear map is wholly defined by its action on the basis of its domain, this set of equations suffices to define $\tilde{h}$ on all of $V\otimes W$.\par
+        \underline{Existence}: To prove that $\tilde{h}$ satisfies the "universal property," it will suffice to show that $h=\tilde{h}\circ\otimes$. Let $(v,w)\in V\times W$ be arbitrary, and suppose $v=\sum_{i=1}^na_ie_i\in V$, and $w=\sum_{i=1}^nb_if_i\in W$. Then
+        \begin{align*}
+            [\tilde{h}\circ\otimes](v,w) &= \tilde{h}(v\otimes w)\\
+            &= \sum_{i=1}^n\sum_{j=1}^ma_ib_i\tilde{h}(e_i\otimes f_i)\\
+            &= \sum_{i=1}^n\sum_{j=1}^ma_ib_ih(e_i,f_j)\\
+            &= h(v,w)
+        \end{align*}
+        as desired.\par
+        \underline{Uniqueness}: Now suppose $\tilde{g}:V\otimes W\to Z$ also satisfies the "universal property," that is, $h=\tilde{g}\circ\otimes$. Then by definition,
+        \begin{equation*}
+            \tilde{h}(e_i\otimes f_j) = h(e_i,f_j) = \tilde{g}(e_i\otimes f_j)
+        \end{equation*}
+        for $i=1,\dots,n$ and $j=1,\dots,m$. But since a linear map is wholly defined by its action on the basis of its domain, it follows that $\tilde{h}=\tilde{g}$, as desired.
     \end{proof}
     \item \textbf{Kronecker product} (of $A,B$): The matrix product defined as follows. \emph{Denoted by} $\bm{A\otimes B}$. \emph{Given by}
     \begin{equation*}
@@ -338,11 +356,273 @@
 
 
 
+\section{Wedge and Symmetric Powers}
+\begin{itemize}
+    \item \marginnote{10/4:}OH slightly later today at 5:45-6:45 PM.
+    \item Recap: Last time, we built new reps from old.
+    \begin{itemize}
+        \item This stuff can't be learned in 1.5 lectures; he can point us around, but we have to learn it ourselves.
+    \end{itemize}
+    \item Tensor product review.
+    \begin{itemize}
+        \item Given $V,W$, make $V\otimes_FW$.
+        \item This vector space is hard to describe directly, so we more often talk about its dual $(V\otimes W)^*$ because this is actually easier to describe.
+        \item If you want to work with $V\otimes W$ hands-on, you can do the following.
+        \begin{itemize}
+            \item Start with the following easy-to-work-with vector space: The (probably infinite-dimensional) vector space where each $v\otimes w$ is a basis vector for all $v\in V$ and $w\in W$.
+            \item Then quotient it by relations to force them to hold in the final space.
+        \end{itemize}
+        \item Here's an example of this construction.
+        \begin{itemize}
+            \item Let $V=W$ be the one-dimensional vector space over the finite field $F_2=\Z/2\Z$.
+            \item Thus, the elements of $V$ are $\{0,1\}$ (which is, literally, all linear combinations $a0+b1$ where $a,b\in F_2$ as well; this hearkens back to $V$'s definition as an $F_2$-module).
+            \item Then the easy-to-work-with vector space we're talking about is the 4-dimensional \textbf{free} vector space $U=\spn(0\otimes 0,0\otimes 1,1\otimes 0,1\otimes 1)$.
+            \item Note that in this space, for example, $(0+1)\otimes 0\neq 0\otimes 0+1\otimes 0$; representing the basis as column vectors, this is equivalent the obvious observation that
+            \begin{equation*}
+                \begin{bmatrix}
+                    0\\
+                    0\\
+                    1\\
+                    0\\
+                \end{bmatrix}
+                \neq
+                \begin{bmatrix}
+                    1\\
+                    0\\
+                    0\\
+                    0\\
+                \end{bmatrix}
+                +
+                \begin{bmatrix}
+                    0\\
+                    0\\
+                    1\\
+                    0\\
+                \end{bmatrix}
+            \end{equation*}
+            \item But we want such relationships to hold true in our conceptual "tensor product space." Thus, we quotient it by the subspace spanning all elements of the form $(a+b)\otimes c-a\otimes c-b\otimes c$.
+            \item By direct computation, this subspace is $\spn(0\otimes 0,0\otimes 1)$:
+            \begin{align*}
+                (0+0)\otimes 0-0\otimes 0-0\otimes 0 &= -0\otimes 0&
+                    (0+0)\otimes 1-0\otimes 1-0\otimes 1 &= -0\otimes 1\\
+                (0+1)\otimes 0-0\otimes 0-1\otimes 0 &= -0\otimes 0&
+                    (0+1)\otimes 1-0\otimes 1-1\otimes 1 &= -0\otimes 1\\
+                (1+1)\otimes 0-1\otimes 0-1\otimes 0 &= 0\otimes 0&
+                    (1+1)\otimes 1-1\otimes 1-1\otimes 1 &= 0\otimes 1
+            \end{align*}
+            Note that once we've considered $(a+b)\otimes c$, we don't need to consider $(b+a)\otimes c$ because of the commutativity of addition in $V$. That is, it is axiomatic that $a+b=b+a$ for all $a,b\in V$. Additionally, in the last line above, we are using the facts that $1+1=2=0$ in $F_2$ and $a\otimes b+a\otimes b=2a\otimes b=0$ in any $F_2$-module to simplify the expressions.
+            \item Similarly, the subspace corresponding to $a\otimes(b+c)-a\otimes b-a\otimes c$ is $\spn(0\otimes 0,1\otimes 0)$. Thus, altogether, we quotient out the subspace $X=\spn(0\otimes 0,0\otimes 1,1\otimes 0)$. This leaves us with a 1-dimensional $V\otimes V$, as expected for the tensor product of two one-dimensional vector spaces. It is interesting to note that the one vector we didn't quotient out ($1\otimes 1$) is analogous to $e_1\otimes e_1$ since $e_1\in V$ might as well be defined $e_1:=1$.
+            \item Now let's see how well this quotienting worked. First off, a bit of notation: let $\pi:U\to V\otimes V$ be the projection $\pi:v\mapsto v+X$, and denote elements $\pi(v_1\otimes v_2)\in V\otimes V$ by $v_1\otimes_\pi v_2$ for now to differentiate them from elements of $U$.
+            \item Let $(0+1)\otimes_\pi 0=(0+1)\otimes 0+X$ be an element of the quotient space $V\otimes V$. Certainly, the elements $0\otimes_\pi 0$ and $1\otimes_\pi 0$ are also elements of this quotient space. Moreover, we can fairly form the linear combination $(0+1)\otimes_\pi 0-0\otimes_\pi 0-1\otimes_\pi 0$. However, this element lies in the quotiented-out subspace $X$. Thus,
+            \begin{equation*}
+                (0+1)\otimes_\pi 0-0\otimes_\pi 0-1\otimes_\pi 0 = [(0+1)\otimes 0-0\otimes 0-1\otimes 0]+X
+                = 0+X
+                = 0
+            \end{equation*}
+            \item But
+            \begin{equation*}
+                (0+1)\otimes_\pi 0-0\otimes_\pi 0-1\otimes_\pi 0 = 0
+                \quad\Longrightarrow\quad
+                (0+1)\otimes_\pi 0 = 0\otimes_\pi 0+1\otimes_\pi 0
+            \end{equation*}
+            as desired.
+            \item Note that this construction also gives us nice things like $0\otimes_\pi 0=0$, $0\otimes_\pi 1=0$, etc. which were not true in $U$! It should not be concluded, though, that all we need to quotient out of $U$ for any $V$ is $\spn(0\otimes 0,0\otimes v,v\otimes 0)$ for every $v\in V$; indeed, $V=\R$, for example, will contain 
+        \end{itemize}
+        \item If $V$ has basis $e_1,\dots,e_n$ and $W$ has basis $f_1,\dots,f_m$, then $e_i\otimes f_j$ is a basis of $V\otimes W$.
+        \item Interesting fact 1: If $V,W$ are finite dimensional, $V^*\otimes W\cong\Hom(V,W)$.
+        \item If we want to work with the tensor product in practice in \emph{rep theory}, the only thing we need to know is the basis of the tensor product space, which can tell us how any map $\rho(g)$ acts on both sides of a $v\otimes w\in V\otimes W$. From here, we recover the Kronecker product of matrices.
+        \item So many things are explained by the concept of tensor products!
+        \item A tensor in \emph{physics} is something with lots of indices that changes in some way.
+        \begin{itemize}
+            \item It does come from the math concept.
+            \item We'll get a huge basis because we have a massive product like $V\otimes\cdots\otimes V\otimes V^*\otimes\cdots\otimes V^*$.
+        \end{itemize}
+    \end{itemize}
+    \item \textbf{Free} (vector space): A vector space that has a basis consisting of linearly independent elements.
+    \begin{itemize}
+        \item Example: Think of $V=\C e_1\oplus\C e_2$ as a $\C$-module. A free version $F(V)$ of $V$ is infinite dimensional with every $v\in V$ a linearly independent basis vector. Elements of $F(V)$ are of the form $a_1v_1+\cdots+a_kv_k$ for $a_1,\dots,a_k\in\C$ and $v_1,\dots,v_k\in V$. If $u=v+w$ where $u,v,w\in V$ are all nonzero, then $u\neq v+w$ in $F(V)$ because they are all linearly independent basis vectors.
+        \item Example: What we formally start with in the example above is $V\times V$, the free $F_2$-module not the Cartesian product vector space $V^2$.
+        \item A terrific explanation of free vector spaces is available \href{https://math.stackexchange.com/questions/18315/free-vector-space-and-vector-space}{here}.
+    \end{itemize}
+    \item Last 2 useful notions: Wedge powers and symmetric powers.
+    \begin{itemize}
+        \item Again, it's much easier to think about the dual space.
+    \end{itemize}
+    \item Consider the space $V^{\otimes n}$ (dimension $(\dim V)^n$).
+    \begin{itemize}
+        \item $(V^{\otimes n})^*$ are \textbf{polylinear} maps $f:V^n\to F$.
+        \begin{itemize}
+            \item Note: By contrast, $(V^n)^*$ is the space of all \emph{linear} maps $f:V^n\to F$.
+            \item This distinction is subtle but important. Note, for instance, that $\dim V^{\otimes n}\neq\dim V^n$ and likewise for the duals.
+            \item The distinction comes out fully when considering that if, for example, $V=\R^3$, then $V^2\cong\R^6$ and any map in $(V^2)^*$ is determined by its action on $(e_1,0),(e_2,0),(e_3,0),(0,e_1),(0,e_2),(0,e_3)$. By contrast, any map in $(V^{\otimes 2})^*$ is determined by its action on $(e_1,e_1),(e_1,e_2),(e_1,e_3),(e_2,e_1)$, $(e_2,e_2),(e_2,e_3),(e_3,e_1),(e_3,e_2),(e_3,e_3)$.
+            \item Important note: What $(V^{\otimes 2})^*$ does is consider these nine elements of $V^2$ as the basis of another space. This is what it truly means when we say "a bilinear map on $V^2$ is a linear map on $V^{\otimes 2}$."
+            \item Takeaway: Polylinearity changes the basis upon which a function $f:V^n\to F$ fundamentally acts.
+        \end{itemize}
+        \item A polylinear map may be \textbf{symmetric}, \textbf{antisymmetric}, or\footnote{This is an exclusive "or."} neither.
+        \item These maps form vector spaces and the dimension is actually pretty meaningful.
+    \end{itemize}
+    \item \textbf{Symmetric} (polylinear map): A polylinear map $f:V^n\to F$ that satisfies the following property. \emph{Constraint}
+    \begin{equation*}
+        f(v_{\sigma(1)},\dots,v_{\sigma(n)}) = f(v_1,\dots,v_n)
+    \end{equation*}
+    \item \textbf{Antisymmetric} (polylinear map): A polylinear map $f:V^n\to F$ that satisfies the following property. \emph{Constraint}
+    \begin{equation*}
+        f(v_{\sigma(1)},\dots,v_{\sigma(n)}) = (-1)^\sigma f(v_1,\dots,v_n)
+    \end{equation*}
+    \item Suppose you take $V=\C e_1\oplus\C e_2$\footnote{Note that this notation allows you to define a vector space \emph{and} its basis in one go! I.e., the alternative is saying "Let $V$ be a complex vector space with basis $e_1,e_2$."}.
+    \begin{itemize}
+        \item Consider a symmetric polylinear map $f:V\times V\times V\to\C$.
+        \item To compute it, we'll need the action of $f$ on the basis of $V^3$. In particular, we'll need\dots
+        \begin{equation*}
+            f(x_1e_1+y_1e_2,x_2e_1+y_2e_2,x_3e_1+y_3e_2) = x_1x_2x_3f(e_1,e_1,e_1)+x_1x_2y_3f(e_1,e_1,e_2)+\cdots
+        \end{equation*}
+        \begin{itemize}
+            \item Somewhere in there, you'll also have a $x_1y_2x_3f(e_1,e_2,e_1)$ term as well.
+            \item However, because $f$ is symmetric, you know by symmetry that these "bases" are the same, so you don't count them as 2 towards the dimension but as 1.
+            \item Thus, $\dim=4$ for symmetric maps.
+        \end{itemize}
+        \item What about antisymmetric maps?
+        \item Suppose $g:V^3\to\C$ is an antisymmetric polylinear map.
+        \begin{itemize}
+            \item Consider $g(e_1,e_1,e_1)$. Suppose you apply $(12)$. Interchanging the first two indices (for instance) obviously won't do anything, so we'll get
+            \begin{align*}
+                g(e_1,e_1,e_1) &= (-1)^{(12)}g(e_1,e_1,e_1)\\
+                g(e_1,e_1,e_1) &= -g(e_1,e_1,e_1)\\
+                2g(e_1,e_1,e_1) &= 0\\
+                g(e_1,e_1,e_1) &= 0
+            \end{align*}
+            \item But what about $g(e_1,e_1,e_2)$? We could apply $(23)$ and get $g(e_1,e_2,e_1)$, right? So it appears that we would just be shrinking two options into one. Technically, this is true, but what's more important is that applying $(12)$ again yields the same thing, meaning that $g(e_1,e_1,e_2)=g(e_1,e_2,e_1)=0$.
+            \item And thus, since $V$ has dimension 2 but $g$ takes three vectors, any argument submitted to $g$ will always be linearly dependent. Thus, $g=0$ and, in fact, the space of antisymmetric maps on $V^3$ has dimension 0.
+        \end{itemize}
+        \item Note: It's not always a rule that $V^{\otimes m}\cong S^mV\oplus\Lambda^mV$.
+    \end{itemize}
+    \item Mathematically, there's a more natural object to work with than symmetric and antisymmetric maps.
+    \begin{itemize}
+        \item Wedge powers and symmetric powers!
+        \item Given $V$ and $n\in\N$, we can construct $S^nV$ and $\Lambda^nV$. $(S^nV)^*$ is symmetric polylinear maps taking $n$ arguments from $V$. $(\Lambda^nV)^*$ is antisymmetric polylinear maps taking $n$ arguments from $V$.
+    \end{itemize}
+    \item How about a concrete way to see these? We can relate them to tensor powers.
+    \begin{itemize}
+        \item Take a tensor power $V^{\otimes n}$, then look at those tensors which are symmetric and antisymmetric under permutation.
+        \item Example: Let $V$ be the same as before. Then $V^{\otimes 2}$ has $\dim=4$.
+        \begin{itemize}
+            \item Take as basis elements for $S^2V$ those that don't change when you change the coordinates.
+            \item Take as basis elements for $\Lambda^2V$ those that flip sign when you change the coordinates.
+            \item In this case, the basis of $V^{\otimes 2}$ is $e_1\otimes e_1,e_1\otimes e_2,e_2\otimes e_1,e_2\otimes e_2$. The basis of $S^2V$ will be $e_1\otimes e_1,e_1\otimes e_2+e_2\otimes e_1,e_2\otimes e_2$. The basis of $\Lambda^2V$ will be $e_1\otimes e_2-e_2\otimes e_1$. Notice that these bases are identical (up to scaling) with those in \textcite{bib:Serre} and those produced by applying the \href{https://en.wikipedia.org/wiki/Symmetrization}{\textbf{symmetrization}} and \href{https://en.wikipedia.org/wiki/Exterior_algebra#Alternating_tensor_algebra}{\textbf{alternation}} operators to the basis of $V^{\otimes 2}$.
+        \end{itemize}
+        \item $S^2V$ and $\Lambda^2V$ direct sum because the dimensions match and they don't intersect, so we're good to go!
+        \item Everything we're doing is representations, so $g(v_1\otimes\cdots\otimes v_n)=gv_1\otimes\cdots\otimes gv_n$.
+    \end{itemize}
+    \item Relating this to something we've seen, but that's a little confusing.
+    \begin{itemize}
+        \item The product notation is suggestive for symmetric vectors; you can commute $e_1\cdot e_2\in S^2V$, for instance.
+        \item This allows us to, for example, shrink $e_1\otimes e_1$ to $2e_1^2$\footnote{Why the 2 coefficient??}, but $e_1\otimes e_2+e_2\otimes e_1$ only to $e_1\cdot e_2$.
+        \item Note that $e_1\wedge e_2=e_1\otimes e_2-e_2\otimes e_1$ by definition.
+        \item Fact/exercise: Let $V$ be a vector space of dimension $n$. $V^*$ is the dual space, but it is also a function space. If $V=\R^k$, its a space of \emph{functions from the blackboard}.
+        \begin{itemize}
+            \item Note that $(\Lambda^kV)^*=\Lambda^kV^*$.
+        \end{itemize}
+        \item $S^nV^*$ is homogeneous polynomials of degree $n$.
+        \item You can take higher degree polynomials and just keep pushing through.
+        \begin{itemize}
+            \item Ask about this??
+        \end{itemize}
+        \item Wedge powers now.
+        \item By convention, $\Lambda^0V=F$ and $\Lambda^1V=V$. But then you get to $\Lambda^2V$ and $\Lambda^3V$. They grow but then shrink down as the power approaches $\dim V$.
+        \item Truth: The dimension of wedge powers $\Lambda^iV$ is $\binom{k}{i}$ for $\dim V=k$. Figuring out why this is the case is another good exercise.
+    \end{itemize}
+    \item An interesting connection between wedge powers and the determinant.
+    \begin{itemize}
+        \item Let $V=\C e_1\oplus\cdots\oplus\C e_n$.
+        \item Recall that $\Lambda^nV^*$ is the space of antisymmetric polylinear functions $V\times\cdots\times V\to F$ taking $n$ arguments from $V$, and it has a single basis vector $e^1\wedge\cdots\wedge e^n$.
+        \item Let $v_1=\sum a_{i1}e_i$, $v_2=\sum a_{i2}e_i$, etc.
+        \item Let $f\in\Lambda^nV^*$, so that $f$ is an alternating polylinear map that takes $n$ arguments.
+        \item Since $f$ is polylinear, we have that
+        \begin{equation*}
+            f(v_1,\dots,v_n) = \sum_{i_1,\dots,i_n=1}^na_{i_11}\cdots a_{i_nn}f(e_{i_1},\dots,e_{i_n})
+        \end{equation*}
+        \item Because of antisymmetry, we need only look at elements where the indices are all different. Thus, the above equals
+        \begin{equation*}
+            \sum_{\sigma\in S_n}a_{\sigma(1)1}\cdots a_{\sigma(n)n}f(e_{\sigma(1)},\dots,e_{\sigma(n)})
+        \end{equation*}
+        \item Additionally, $f(e_{\sigma(1)},\dots,e_{\sigma(n)})=(-1)^\sigma f(e_1,\dots,e_n)$ for any $\sigma\in S_n$. Moreover, $f(e_1,\dots,e_n)\in\C$ by definition, so define a constant $\lambda:=f(e_1,\dots,e_n)$. Thus, the above equals
+        \begin{equation*}
+            \lambda\sum_{\sigma\in S_n}a_{\sigma(1)1}\cdots a_{\sigma(n)n}
+        \end{equation*}
+        \item But the term following the $\lambda$ is just the determinant of the $n\times n$ matrix $(a_{ij})$. Thus, all said,
+        \begin{equation*}
+            f(v_1,\dots,v_n) = \lambda\det(v_1\mid\cdots\mid v_n)
+        \end{equation*}
+        \item Implication: Wedge powers are something like the determinant.
+        \begin{itemize}
+            \item In particular, because $\Lambda^nV^*$ has only a single basis vector as mentioned above, $f=\lambda e^1\wedge\cdots\wedge e^n$. It follows that $e^1\wedge\cdots\wedge e^n=\det$.
+        \end{itemize}
+        \item Takeaway: Wedge powers are something interesting; there's a reason to study them.
+    \end{itemize}
+    \item The basis of the wedge powers consists of wedge monomials $e_{j_1}\wedge\cdots\wedge e_{j_i}$. Moreover, no need to have the same list twice, so choose some way of indexing them, e.g., increasing indexes.
+    \begin{itemize}
+        \item This is why we do \emph{increasing} bases! There's no particular reason, it's just an arbitrary way of making sure we don't do the same thing twice! We could just as well choose decreasing or any other means of guaranteeing that we don't have duplicates.
+    \end{itemize}
+    \item Now let's relate all of this exterior and symmetric product stuff back to representation theory.
+    \begin{itemize}
+        \item Let $V=\C e_1\oplus\cdots\oplus\C e_n$.
+        \item Let $G\acts V$ via the homomorphism $G\to GL(V)\cong GL_n(\C)$.
+        \item Focusing more on the \emph{matrix} aspect this time, note that under this homomorphism, $g\mapsto A_g$ subject to the homomorphism constraints.
+        \item Consider the set $\{A_{g_1},\dots,A_{g_k}\}$ of all matrices in the image of the homomorphism. If we transpose all of them, will they still obey the homomorphism constraints?
+        \begin{itemize}
+            \item Nope!
+            \item Indeed, if we do this, we'll get in trouble. More specifically, transposition is not a representation because $A_{g_1}^TA_{g_2}^T\neq A_{g_1g_2}^T=A_{g_2}^TA_{g_1}^T$.
+        \end{itemize}
+        \item It's the same story with inverses.
+        \item \emph{However}, combining the two operations, we get
+        \begin{equation*}
+            (A_{g_1g_2}^T)^{-1} = (A_{g_1}^T)^{-1}(A_{g_2}^T)^{-1}
+        \end{equation*}
+        \begin{itemize}
+            \item This is exactly when we take a representation and then go to the dual\footnote{Relation to MATH 20510 when we discussed dual matrices and pullbacks of matrices.}.
+        \end{itemize}
+        \item This will be on next week's homework!
+        \item Takeaway: This is an application of $\Lambda^jV^*$ to representation theory, $j\neq k,n$.
+    \end{itemize}
+    \item Another relation: An application of $\Lambda^nV^*$ to representation theory.
+    \begin{itemize}
+        \item Suppose we have a representation $G\acts V$ that we want to flatten into $G\acts\C$. How can we turn a relation between a group of matrices into a relation between a group of numbers?
+        \item Use the determinant!
+        \item Indeed, we already know that
+        \begin{align*}
+            \det(A_e) &= 1&
+            \det(A_{g_1g_2}) &= (\det A_{g_1})(\det A_{g_2})&
+            \det(A_{g^{-1}}) &= \det(A_g)^{-1}
+        \end{align*}
+        \item In particular, we make formal the transition $G\to GL_j(\C)\to\C$ with the \textbf{top wedge power} $\Lambda^nV^*$.
+    \end{itemize}
+    \item A last note.
+    \begin{itemize}
+        \item Don't think that we're limited to top wedge powers.
+        \item Recall that we can define tensor products of matrices via the Kronecker product. Well, we can prove that
+        \begin{equation*}
+            A_{g_1g_2}^{\otimes 2} = A_{g_1}^{\otimes 2}A_{g_2}^{\otimes 2}
+        \end{equation*}
+        and the like as well!
+        \item Similarly, we can define $\Lambda^2$ of a matrix.
+        \item We'll get into some weird Kronecker product stuff again, but we can sort through it.
+    \end{itemize}
+    \item Plan for Friday and next time.
+    \begin{itemize}
+        \item Prove the theorem that every representation is a sum of irreducible representations.
+        \item He will use projectors.
+        \item Then a horror story.
+        \item Then associative algebra.
+    \end{itemize}
+\end{itemize}
+
+
+
 \section{S Chapter 1: Generalities on Linear Representations}
 \emph{From \textcite{bib:Serre}.}
 \subsection*{Section 1.5: Tensor Product of Two Representations}
 \begin{itemize}
-    \item \marginnote{10/4:}\textbf{Tensor product} (of $V_1,V_2$): The vector space $W$ that (a) is furnished with a map $V_1\times V_2\to W$ sending $(x_1,x_2)\mapsto x_1\cdot x_2$ and (b) satisfies the following two conditions.
+    \item \textbf{Tensor product} (of $V_1,V_2$): The vector space $W$ that (a) is furnished with a map $V_1\times V_2\to W$ sending $(x_1,x_2)\mapsto x_1\cdot x_2$ and (b) satisfies the following two conditions.
     \begin{enumerate}[label={(\roman*)}]
         \item $x_1\cdot x_2$ is bilinear.
         \item If $(e_{i_1})$ is a basis of $V_1$ and $(e_{i_2})$ is a basis of $V_2$, the family of products $e_{i_1}\cdot e_{i_2}$ is a basis of $W$.
@@ -421,7 +701,7 @@
             \dim S^2(V) = \frac{n(n+1)}{2}
         \end{equation*}
     \end{itemize}
-    \item \textbf{Symmetric square representation}: The subspace of $V\otimes V$ containing all elements $z$ satisfying $\theta(z)=-z$. \emph{Denoted by} $\bm{S^2V}$, $\bm{S^2(V)}$, $\pmb{\mathbb{S}}\bm{{}^2V}$, $\pmb{\textbf{Sym}}\,\bm{{}^2(V)}$.
+    \item \textbf{Alternating square representation}: The subspace of $V\otimes V$ containing all elements $z$ satisfying $\theta(z)=-z$. \emph{Denoted by} $\bm{\Lambda^2V}$, $\bm{\Lambda^2(V)}$, $\pmb{\textbf{Alt}}\,\bm{{}^2(V)}$.
     \begin{itemize}
         \item Basis: $(e_i\cdot e_j-e_j\cdot e_i)_{i<j}$.
         \item Dimension: If $\dim V=n$, then
