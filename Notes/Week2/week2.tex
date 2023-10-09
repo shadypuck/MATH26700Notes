@@ -700,6 +700,135 @@
 
 
 
+\section{Complete Reducibility}
+\begin{itemize}
+    \item \marginnote{10/6:}Let $G$ be a finite group.
+    \item We want to study finite dimensional representations over $\C$.
+    \begin{itemize}
+        \item Characteristic $F$, $|G|=1$.
+        \item What is this stuff about characteristic??
+    \end{itemize}
+    \item Theorem: Any f.d. representation can be decomposed into a sum of irreps via
+    \begin{equation*}
+        V = V_1^{n_1}\oplus\cdots\oplus V_k^{n_k}
+    \end{equation*}
+    Moreover, this decomposition is unique.
+    \begin{itemize}
+        \item See Proposition \ref{prp:completeReducibility}.
+    \end{itemize}
+    \item Example: We have already seen $S_2,S_3$ in the homework; now, let $G=\Z/n\Z$.
+    \begin{itemize}
+        \item Consider $V_0,\dots,V_{n-1}$.
+        \item Let $V_i$ be a 1-dimensional rep.
+        \begin{itemize}
+            \item We have $\rho:G\to C^\times$ defined by $[k]\mapsto(\e[2\pi i/n])^k$.
+        \end{itemize}
+        \item These are all 1-dimensional representations up to isomorphism.
+    \end{itemize}
+    \item Example: Let $G=\Z$. What is a representation of $\Z$? We just need to say what happens to 1.
+    \begin{itemize}
+        \item For example, if the map $G\to GL_n(\C)$ sends $1\mapsto A$, then $2\mapsto A^2$, and on and on.
+        \item A place where you run into trouble: $n=2$ and
+        \begin{equation*}
+            A =
+            \begin{pmatrix}
+                1 & 1\\
+                0 & 1\\
+            \end{pmatrix}
+        \end{equation*}
+        \item The matrix has a fixed subrepresentation (i.e., eigenvector $(1,1)$).
+        \begin{itemize}
+            \item More specifically, $\C(1,0)\hookrightarrow V$ is a 1D subrepresentation.
+        \end{itemize}
+        \item The theorem basically tells us that $V=\C(1,0)+\C w$.
+        \item This is an example of how things can go wrong. How??
+    \end{itemize}
+    \item Proving the theorem; we need a miracle!
+    \item Existence: We need a lemma.
+    \item Lemma: Let $G$ be finite, $F=\C$, and $V$ a $G$-representation. Let $W\leq V$ be a subrepresentation or \textbf{invariant subspace}. Then there exists another invariant subspace $W'\subset V$ such that $V=W\oplus W'$.
+    \begin{itemize}
+        \item See Theorem \ref{trm:complements} (Rudenko replicates all aspects of the "limited conditions" proof).
+        \item This lemma implies existence.
+        \item Two proofs: One that only works over complex numbers. He suggests we read about it. Name??
+        \item He'll do the slightly less intuitive one, which involves \textbf{projectors}.
+    \end{itemize}
+    \item \textbf{Projector}: A linear map $P:V\to V$ such that $P^2=P$, that is, is \textbf{idempotent}.
+    \begin{itemize}
+        \item Example: Consider $W:=\im(P)\leq V$. $P|_W$ does nothing; it's the identity.
+        \item A good mental picture: Things are falling from 3D space onto some smaller space.
+        \item On the kernel.
+        \begin{itemize}
+            \item Importantly, $\ker P\cap\im P=0$.
+            \item It follows that $V=\im(P)\oplus\ker(P)$.
+            \item Within the space, $v=(w,w')=w+w'$. What the projector does is $(w,w')\mapsto(w,0)$.
+        \end{itemize}
+        \item What else can we say about projectors?
+        \begin{itemize}
+            \item There is a correspondence between projectors and direct sum decompositions.
+        \end{itemize}
+    \end{itemize}
+    \item So to prove the lemma, we need a projector $P:V\to V$ with image $W$ and certain properties.
+    \begin{itemize}
+        \item More specifically, the goal is to find a projector $P$ (1) with image $W$ and (2) that is a morphism of $G$-reps.
+        \item On the second condition, that is, we want $P(gv)=gP(v)$. In this case, $\ker(P)$ will be a shuffle??
+    \end{itemize}
+    \item Strategy.
+    \begin{itemize}
+        \item Take any projector $P_0:V\to W$. And then you can get $g$-projectors $gP=gPg^{-1}$.
+        \item So define a new projector
+        \begin{equation*}
+            P = \frac{1}{|G|}\sum_{g\in G}\underbrace{gP_0g^{-1}}_{gP_0}
+        \end{equation*}
+        One didn't work, so we hope the average will work, and it will!
+        \item For any $w\in W$, we can prove that the sum thing does fix $W$'s, so it is a projector!
+        \item $P(hv)$ example.
+        \item Note: This computation will be done again later in a different context; this averaging construction is \emph{central} to representation theory.
+    \end{itemize}
+    \item Constraints we used in the proof: $G$ is finite (or compact), $|G|$ is invertible.
+    \begin{itemize}
+        \item Only when we get into \textbf{modular representation theory} is where we get into trouble; this theorem actually kills \textbf{extensions}, which are very interesting but are not in finite group rep theory.
+    \end{itemize}
+    \item Hermitian inner product isn't common here, but it shows up in physics. Point of this??
+    \item Now for the other part of the original proof: Uniqueness.
+    \item Schur's Lemma: Let $G$ be a finite group, let the field $F=\C$, and let $V,W$ be irreps over $F$. Let $f\in\Hom_G(V,W)$, which we may recall is the space of morphisms between $G$-reps $V$ and $W$, that is, all $h:V\to W$ satisfying $h(gv)=gh(v)$. Then\dots
+    \begin{enumerate}
+        \item $f=0$ if $V\ncong W$. If $V\cong W$, then these maps are isomorphisms.
+        \item In particular, if $V$ is an irrep and $f:V\to V$ is such that $f(gv)=gf(v)$, then $f(v)=\lambda v$.
+    \end{enumerate}
+    Altogether, we have that
+    \begin{equation*}
+        \Hom_G(V,W) \cong
+        \begin{cases}
+            0 & V\ncong W\\
+            \C & V\cong W
+        \end{cases}
+    \end{equation*}
+    \begin{itemize}
+        \item The statement "$\Hom_G(V,W)=\C$" does not literally mean that the left space is the complex numbers; rather, it is the space of all scalar isomorphisms $\lambda I$ for scalars in $\C$, which happens to be isomorphic to $\C$.
+        \item Gist: If you want a certain kind of matrix between certain spaces, in some cases, you'll just fail.
+    \end{itemize}
+    \item Proof.
+    \begin{itemize}
+        \item See Lemma \ref{lem:Schur} (Rudenko replicates all aspects of the "limited conditions" proof).
+        \item For $f:V\to V$, consider $\ker(f)$ and $\im(f)$. The latter two are subrepresentations of $V,W$, respectively. $\ker(f)=V$ implies $f=0$; symmetric with $\im(f)$. If nonzero, then $\ker=0$ and $\im=W$, implies $f$ is an isomorphism.
+    \end{itemize}
+    \item Schur's Lemma is the easiest step to learn in the whole story.
+    \item Last 2 minutes: Finish the proof of the original theorem.
+    \begin{itemize}
+        \item Don't worry if we're confused by this last line; it will be repeated later in a much more powerful way.
+        \item Analogous to Proposition \ref{prp:completeReducibility}.
+        \item I might have missed some stuff here??
+    \end{itemize}
+    \item Plan for next week.
+    \begin{itemize}
+        \item Character theory.
+        \item \textcite{bib:Serre} is still the best source for tracking lecture content for right now.
+    \end{itemize}
+    \item This would have been an interesting but wholly nonessential lecture to pay attention to, since I already did all of the readings.
+\end{itemize}
+
+
+
 \section{S Chapter 1: Generalities on Linear Representations}
 \emph{From \textcite{bib:Serre}.}
 \subsection*{Section 1.5: Tensor Product of Two Representations}
@@ -1071,7 +1200,7 @@
         \end{proof}
     \end{FHlemma}
     \item Direct sum irreducible decomposition.
-    \begin{FHproposition}
+    \begin{FHproposition}\label{prp:completeReducibility}
         For any representation $V$ of a finite group $G$, there is a decomposition
         \begin{equation*}
             V = V_1^{\oplus a_1}\oplus\cdots\oplus V_k^{\oplus a_k}
