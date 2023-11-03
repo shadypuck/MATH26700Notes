@@ -1,0 +1,239 @@
+\documentclass[../notes.tex]{subfiles}
+
+\pagestyle{main}
+\renewcommand{\chaptermark}[1]{\markboth{\chaptername\ \thechapter\ (#1)}{}}
+\setcounter{chapter}{2}
+
+\begin{document}
+
+
+
+
+\chapter{Character Theory}
+\section{Characters}
+\begin{itemize}
+    \item \marginnote{10/9:}Today, we talk about \textbf{characters}, arguably the most important idea in rep theory.
+    \item As per usual, we begin by letting $G$ a finite group.
+    \begin{itemize}
+        \item We've been discussing finite dimensional representations of $G$ over $\C$.
+        \item We've also already talked about irreps, and we know that it's enough to understand those because every rep is a sum of them.
+    \end{itemize}
+    \item Goal of characters: Understand the irreps $V_1,\dots,V_k$ of $G$.
+    \begin{itemize}
+        \item Recall the surprising fact about $k$: It is the number of conjugacy classes of $G$!
+        \begin{itemize}
+            \item We haven't yet proven this, but we will soon!
+        \end{itemize}
+        \item Game plan: Use characters to relate irreps to something that is counted by conjugacy classes.
+    \end{itemize}
+    \item Let $V=\C e_1\oplus\cdots\oplus\C e_n$ be a $G$-rep.
+    \begin{itemize}
+        \item Then there exists a homomorphism $\rho:g\mapsto A_g\in GL_n(\C)$.
+    \end{itemize}
+    \item Motivating question: What doesn't change when we change the basis of $V$?
+    \begin{itemize}
+        \item To isolate the "essence" of the $A_g$, we want to construct a function $f:GL_n(\C)\to\C$ such that $f(XAX^{-1})=f(A)$.
+    \end{itemize}
+    \item Ideas.
+    \begin{enumerate}
+        \item The determinant is a great example of such a function, but it's kind of boring because this rank 1 representation doesn't characterize your product representation.
+        \item Trace is the main example of such a function.
+    \end{enumerate}
+    \item Indeed, you can also take $\tr(A^k)$ for any $k$.
+    \begin{itemize}
+        \item Traces of powers are ubiquitous in physics and math because they contain the same information as the coefficients of the characteristic polynomial. In particular, we can express the determinant in terms of them.
+    \end{itemize}
+    \item In fact, we could also take any coefficient of the characteristic polynomial, but others would get complicated.
+    \begin{itemize}
+        \item Any characteristic polynomial coefficient can be expressed in terms of traces; this will be an exercise in PSet 3; it's not hard.
+    \end{itemize}
+    \item So what do we have at this point?
+    \begin{itemize}
+        \item We can associate to $\rho$ a function $\chi_\rho:G\to\C$ defined by $\chi_\rho(g)=\tr(A_g)=\tr(\rho(g))$.
+        \item This function is invariant under isomorphism.
+        \item If we know $\tr(A)$, we know $\tr(A^2)$ since $A_g^2=A_{g^2}$. Thus, if we know all traces, we know all power traces.
+        \begin{itemize}
+            \item Something about the following??
+            \begin{equation*}
+                \sum\lambda_i\lambda_j = \frac{\tr(A)^2-\tr(A^2)}{2}
+            \end{equation*}
+        \end{itemize}
+        \item We form a ring of polynomials??
+        \begin{itemize}
+            \item Equivalently, $\chi_\rho$ has a representation as a polynomial with coefficients in $\C$??
+        \end{itemize}
+    \end{itemize}
+    \item If $V$ is a $G$-rep, $\chi_V:G\to\C$ will be our notation for its character.
+    \item Properties.
+    \begin{enumerate}
+        \item $\chi_V(xgx^{-1})=\chi_V(g)$ for any $x,g\in G$.
+        \begin{itemize}
+            \item Implication: $\chi_V$ is a \textbf{class function}.
+            \item Let $\C[G]$ be the vector space of all functions from $G\to\C$. Its $\dim=|G|$.
+            \item Inside this space, there is the subspace $\C_\text{cl}[G]$ of functions $f:G\to\C$ such that $f(xgx^{-1})=f(g)$ for all $x,g\in G$. These are functions from the sets of conjugacy classes, isomorphic to functions that are constant on conjugacy classes. $\dim\C_\text{cl}[G]$ is the number of conjugacy classes.
+            \item Thus, for every $V$ a $G$-rep, we get a vector $\chi_V\in\C_\text{cl}[G]$. These class functions form a basis of the space; each $\chi_V$ for $V$ an irrep forms a linearly independent vector; the set is an \emph{orthogonal} basis. This is the reason for the original theorem holding true!
+        \end{itemize}
+        \item $\chi_{V_1\oplus V_2}=\chi_{V_1}+\chi_{V_2}$.
+        \begin{itemize}
+            \item Proof: It's basically tautological (not actually, but it's easy). Let $g\in G$. Compute $\chi_{V_1\oplus V_2}(g)$. We can compute a basis $e_1,\dots,e_{n+m}$ where the first $n$ vectors form a basis of $V_1$, and the next $m$ vectors are a basis of $V_2$. This gives us a block matrix from which we show that the trace of the matrix is the sum of traces.
+            \begin{equation*}
+                \chi_{V_1\oplus V_2}(g) = \tr
+                \begin{bmatrix}
+                    \rho_{V_1}(g) & 0\\
+                    0 & \rho_{V_2}(g)\\
+                \end{bmatrix}
+                = \tr\rho_{V_1}(g)+\tr\rho_{V_2}(g)
+                = \chi_{V_1}(g)+\chi_{V_2}(g)
+            \end{equation*}
+            \item Corollary:
+            \begin{equation*}
+                \chi_{V_1^{n_1}\oplus\cdots\oplus V_k^{n_k}} = n_1\chi_{V_1}+\cdots+n_k\chi_{V_k}
+            \end{equation*}
+        \end{itemize}
+    \end{enumerate}
+    \item We now pause for a fact that will be instrumental in proving the next property, which is a bit more involved.
+    \begin{itemize}
+        \item He will explain two ways to prove it; we can also just prove it on our own.
+    \end{itemize}
+    \item Fact: $A$ a matrix such that $A^n=1$. Then $A$ is diagonalizable or "semi-simple."
+    \begin{itemize}
+        \item We can prove this with Jordan normal form.
+        \item It's a slightly surprising statement.
+        \item Obviously eigenvalues are roots of unity, but still needs some work.
+        \item This proof is left as an exercise.
+    \end{itemize}
+    \item We now resume the list of properties.
+    \begin{enumerate}[resume]
+        \item $\chi_V(g)$ is a sum of roots of unity.
+        \begin{itemize}
+            \item Proof: We know that $g^{|G|}=e$. Thus, $A_g^{|G|}=1$. It follows by the fact above that $A_g$ is diagonalizable with eigenvalues $\lambda_1,\dots,\lambda_n$, each of which satisfies $\lambda_i^{|G|}=1$.
+            \begin{itemize}
+                \item Note: Eigenvalues can repeat in the list $\lambda_1,\dots,\lambda_n$, i.e., we are not asserting $n$ distinct eigenvalues here.
+            \end{itemize}
+            \item Therefore, since each $\lambda_i$ is, individually, a root of unity, we have that $\chi_V(g)=\tr A_g=\lambda_1+\cdots+\lambda_n$, as desired.
+        \end{itemize}
+        \item $\chi_{V^*}=\bar{\chi}_V$.
+        \begin{itemize}
+            \item This property begins to address how characters behave under other operations.
+            \begin{itemize}
+                \item Naturally, this is something specific for complex numbers, because the idea of "conjugates" doesn't exist everywhere.
+            \end{itemize}
+            \item Proof: Recall that $\rho_{V^*}(g)=(\rho_V(g)^{-1})^T$.
+            \begin{itemize}
+                \item If we know that $\rho_V(G)\sim\diag(\lambda_1,\dots,\lambda_n)$, then we know that $\rho_V^{-1}(g)^T\sim\diag(\lambda_1^{-1},\dots,\lambda_n^{-1})$.
+                \item Thus, $\chi_{V^*}(g)=\lambda_1^{-1}+\cdots+\lambda_n^{-1}$.
+                \item But since we're in the complex plane, $|\lambda_i|=1$ (equiv. $\lambda_i\bar{\lambda}_i=1$), so $\lambda_i^{-1}=1/\lambda_i=\bar{\lambda}_i$.
+                \item This means that $\chi_{V^*}(g)=\bar{\lambda}_1+\cdots+\bar{\lambda}_n=\overline{\lambda_1+\cdots+\lambda_n}$.
+            \end{itemize}
+            \item Note: Every representation we have is \textbf{unitary} in certain bases, but unitary representations are not covered in this course.
+        \end{itemize}
+        \item $\chi_{V_1\otimes V_2}=\chi_{V_1}\cdot\chi_{V_2}$.
+        \begin{itemize}
+            \item Proof: We can use a basis or not use a basis.
+            \item Let's use a basis for now.
+            \begin{itemize}
+                \item Let $g\in G$ be arbitrary. Then there exist bases $e_1,\dots,e_n$ of $V_1$ and $f_1,\dots,f_m$ of $V_2$ such that $\rho_{V_1}(g)$ and $\rho_{V_2}(g)$ are diagonal.
+                \item It follows that $\rho_{V_1}(g)e_i=\lambda_ie_i$ ($i=1,\dots,n$) and $\rho_{V_2}(g)f_i=\mu_if_i$ ($i=1,\dots,m$).
+                \item $V_1\otimes V_2$ thus has basis $e_i\otimes f_j$.
+                \item But then it follows that $\rho_{V_1\otimes V_2}(g)e_i\otimes f_j=(\lambda_ie_i)\otimes(\mu_jf_j)=\lambda_i\mu_j(e_i\otimes f_j)$.
+                \item Thus,
+                \begin{equation*}
+                    \tr(\rho_{V_1\otimes V_2}(g)) = \sum_{i,j=1}^{n,m}\lambda_i\mu_j
+                    = (\lambda_1+\cdots+\lambda_n)(\mu_1+\cdots+\mu_m)
+                    = \tr(\rho_{V_1}(g))\cdot\tr(\rho_{V_2}(g))
+                \end{equation*}
+            \end{itemize}
+            \item Alternate approach.
+            \begin{itemize}
+                \item If we don't want to think of eigenvalues, think of tensor product of matrices, the Kronecker product.
+                \item We get trace is the product of traces once again! \emph{Write this out.}
+            \end{itemize}
+        \end{itemize}
+    \end{enumerate}
+    \item \textbf{Class function}: A function on a group $G$ that is constant on the conjugacy classes of $G$.
+    \item Examples.
+    \begin{enumerate}
+        \item Let $A$ be an abelian group.
+        \begin{itemize}
+            \item Then $\chi:A\to\C^\times$.
+            \item Implication: Character of a character is $\chi_\chi=\chi$.
+            \begin{itemize}
+                \item This is horribly repetitive but true.
+            \end{itemize}
+        \end{itemize}
+        \item $G=S_3$.
+        \begin{table}[h!]
+            \centering
+            \small
+            \renewcommand{\arraystretch}{1.4}
+            \begin{tabular}{c|c|c|c|}
+                 & $e$ & \renewcommand{\arraystretch}{1}\begin{tabular}{c}$(12)$\\$(13)$\\$(23)$\end{tabular} & \renewcommand{\arraystretch}{1}\begin{tabular}{c}$(123)$\\$(132)$\end{tabular}\\
+                \hline
+                Trivial & 1 & 1 & 1\\ \hline
+                Sign & 1 & $-1$ & 1\\ \hline
+                Standard & 2 & 0 & $-1$\\ \hline
+            \end{tabular}
+            \caption{Character table for $S_3$.}
+            \label{tab:charTableS3}
+        \end{table}
+        \begin{itemize}
+            \item The conjugacy classes of this group are $\{e\}$, $\{(12),(13),(23)\}$, and $\{(123),(132)\}$.
+            \item We construct a \textbf{character table} to define all characters.
+            \item Computing the characters for the trivial representation.
+            \begin{itemize}
+                \item We know that $\rho$ sends each $g$ to the matrix $(1)$, which has trace 1.
+            \end{itemize}
+            \item Computing the characters for the sign representation.
+            \begin{itemize}
+                \item $e$ and $(123)$ have sign 1 and thus get sent to the matrix $(1)$.
+                \item $(12)$ has sign $-1$ and thus gets sent to the matrix $(-1)$.
+            \end{itemize}
+            \item Computing the characters for the standard representation.
+            \begin{itemize}
+                \item We can compute these traces via a thought experiment.
+                \item Visualize a triangle in a plane.
+                \item The $2\times 2$ identity matrix (the standard representation of $e\in G$) acts on it by doing nothing, and has trace 2.
+                \item In \emph{some} basis, our matrix fixes one vector and inverts another, so matrix is
+                \begin{equation*}
+                    \begin{pmatrix}
+                        1 & 0\\
+                        0 & -1\\
+                    \end{pmatrix}
+                \end{equation*}
+                and character is 0.
+                \item Last one is rotation by $2\pi/3$, so
+                \begin{equation*}
+                    \begin{pmatrix}
+                        \cos(2\pi/3) & \sin(2\pi/3)\\
+                        -\sin(2\pi/3) & \cos(2\pi/3)\\
+                    \end{pmatrix}
+                \end{equation*}
+                so character is $-1=2\cdot -1/2=2\cdot\cos(2\pi/3)$.
+            \end{itemize}
+            \item If $V$ is the standard representation, we can also compute the characters of $V^{\otimes 2}$ for instance. Indeed, by the product rule of characters, they will be the squares of the standard representation's characters, i.e., $(4,0,1)$.
+            \item Similarly, since the permutational representation is the direct sum of the standard and trivial representations, we can add their characters to get its characters $(3,1,0)$.
+        \end{itemize}
+        \item A very general and very pretty example. Let $G\acts X$ a finite set.
+        \begin{itemize}
+            \item Assign the permutational representation.
+            \item Let $X=\{x_1,\dots,x_n\}$. Think of these elements as the basis of a vector space; in particular, consider $V=\C e_{x_1}\oplus\cdots\oplus\C e_{x_n}$. Recall that $g(a_1e_{x_1}+\cdots+a_ne_{x_n})=a_1e_{gx_1}+\cdots+a_ne_{gx_n}$. The fact that this is a representation follows immediately from the properties of the group action.
+            \item Computing the character $\chi_V$ of this $V$: Look at $g$ and write its matrix. In particular, the trace is the number of unmoved/fixed elements, sometimes denoted $\Fix(g)$.
+            \item This gives us another way of computing $V_\text{perm}$ from above!
+        \end{itemize}
+    \end{enumerate}
+    \item \textbf{Character table}: A table that lists the conjugacy classes across the top, the irreps down the left side, and at each point within it, the value of an irrep's character over that conjugacy class.
+    \begin{itemize}
+        \item The character table is a very nice matrix with very nice properties.
+        \item It is almost orthogonal; not exactly, but very close.
+        \begin{itemize}
+            \item Rows aren't orthogonal, but columns are (take direct products)!
+            \item It is full rank, though.
+        \end{itemize}
+    \end{itemize}
+    \item The midterm: Take the character table and do fun things with it.
+\end{itemize}
+
+
+
+
+\end{document}
