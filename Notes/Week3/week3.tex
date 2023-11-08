@@ -170,7 +170,7 @@
                  & $e$ & \renewcommand{\arraystretch}{1}\begin{tabular}{c}$(12)$\\$(13)$\\$(23)$\end{tabular} & \renewcommand{\arraystretch}{1}\begin{tabular}{c}$(123)$\\$(132)$\end{tabular}\\
                 \hline
                 Trivial & 1 & 1 & 1\\ \hline
-                Sign & 1 & $-1$ & 1\\ \hline
+                Alternating & 1 & $-1$ & 1\\ \hline
                 Standard & 2 & 0 & $-1$\\ \hline
             \end{tabular}
             \caption{Character table for $S_3$.}
@@ -257,6 +257,293 @@
         \item This is a hard problem!
         \item Show that eigenvalues sum to 1; we know that the eigenvalues are roots of unity! Thus, they have to both be 1!
         \item When the problem in group theory is harder, that's when you need to go to rep theory.
+    \end{itemize}
+\end{itemize}
+
+
+
+\section{Characters are Orthonormal}
+\begin{itemize}
+    \item \marginnote{10/11:}Announcement: Zoom OH today.
+    \item Recap: The big picture.
+    \begin{itemize}
+        \item Representations.
+        \begin{itemize}
+            \item We have representations, which are vector spaces on which a group acts.
+            \item With these representations, we can do a bunch of operations we've discussed: $\oplus,\otimes,V^*,\Lambda^n,S^n$.
+            \item We'll focus on the first 3 for now, though.
+        \end{itemize}
+        \item Class functions.
+        \begin{itemize}
+            \item We also have class functions: Functions $f:G\to\C$ such that for all $g,x\in G$, $f(gxg^{-1})=f(x)$.
+            \item The space of class functions forms a ring, since you can add, multiply, and take the complex conjugate of these functions.
+            \item Moreover, this ring is a vector space and it has dimension equal to the number of conjugacy classes of $G$.
+        \end{itemize}
+        \item The big idea: These two things (representations and class functions) are closely related!
+        \begin{itemize}
+            \item There is a map, called a \emph{character}, that pairs a representation to a class function.
+            \item Indeed, $V\to\chi_V$.
+            \item Under this map, operations of representations become operations of functions:
+            \begin{align*}
+                \oplus &\mapsto +&
+                \otimes &\mapsto \cdot&
+                V^* &\mapsto \bar{f}
+            \end{align*}
+            \item Additionally, $V_1,\dots,V_s$ become $\chi_{V_1},\dots,\chi_{V_s}$.
+        \end{itemize}
+    \end{itemize}
+    \item Theorem we will prove over the next couple of lectures: Irreps become \emph{linearly independent} class functions, and all irreps form a basis of the space of class functions.
+    \begin{itemize}
+        \item This theorem is huge! It is our main takeaway for now.
+        \item For the first part of the course, this is the main thing that we should remember.
+    \end{itemize}
+    \item How do we prove that multiple vectors are linearly independent?
+    \begin{itemize}
+        \item A strong condition would be to introduce an inner product and prove that the pairwise inner product of the vectors is zero.
+    \end{itemize}
+    \item \textbf{Orthonormal basis}: A basis for which $\inp{e_i,e_j}=\delta_{ij}$.
+    \item Let's begin carrying out this plan by defining an inner product on $\C[G]$. Indeed, let $f_1,f_2$ be two functions on $G$ and take
+    \begin{equation*}
+        \inp{f_1,f_2} := \frac{1}{|G|}\sum_{g\in G}f_1(g)\overline{f_2(g)}
+    \end{equation*}
+    \item Motivation for this definition.
+    \begin{itemize}
+        \item Recall the \textbf{Hermitian inner product} on $\C^n$.
+        \begin{itemize}
+            \item We are essentially mapping $f_1,f_2$ to $(f_1(g_1),\dots,f_1(g_{|G|})),(f_2(g_1),\dots,f_2(g_{|G|}))\in\C^{|G|}$ and taking the Hermitian inner product there.
+            \item Thus, we can see that all properties hold for both the Hermitian inner product on $\C^n$ and the one defined above on $\C[G]$.
+            \item In other words, this kind of construction should inherit its status as a linear, positive definite bilinear form from the Hermitian inner product.
+        \end{itemize}
+        \item Note: The Hermitian product above is \textbf{$\bm{G}$-invariant}.
+        \begin{itemize}
+            \item This means that the functions on $G$ from $G\to\C$ in $\C[G]$ form a representation of $G$.
+            \item In particular, if $\varphi:G\to\C$, then $g=\rho(g)$ moves it as follows: $g\cdot\varphi=\varphi^g$ where $\varphi^g(h):=\varphi(g^{-1}h)$. Thus, we have an action of $G$ on every $\varphi$!
+            \item Such representations are isomorphic for finite groups??
+        \end{itemize}
+        \item If we have $\inp{f_1,f_2}$, we can ask if
+        \begin{equation*}
+            \inp{f_1,f_2} \stackrel{?}{=} \inp{f_1^g,f_2^g}
+        \end{equation*}
+        \begin{itemize}
+            \item Left as an exercise that this \emph{is} true!
+        \end{itemize}
+    \end{itemize}
+    \item \textbf{Hermitian inner product} (on $\C^n$): The inner product defined as follows for all $z,w\in\C^n$. \emph{Denoted by} $\bm{\inp{\ ,\ }}$. \emph{Given by}
+    \begin{equation*}
+        \inp{z,w} = \sum_{i=1}^nz_i\bar{w}_i
+    \end{equation*}
+    \begin{itemize}
+        \item This inner product gives a complex number $\inp{v,w}\in\C$ with the following properties.
+        \begin{enumerate}
+            \item $\inp{a_1v_1+a_2v_2,w}=a_1\inp{v_1,w}+a_2\inp{v_2,w}$.
+            \item $\inp{v,b_1w_1+b_2w_2}=\bar{b}_1\inp{v,w_1}+\bar{b}_2\inp{v,w_2}$.
+            \item $\inp{v,v}\geq 0$, and $\inp{v,v}=0$ implies that $v=0$.
+        \end{enumerate}
+        \item Thus, if $v=(z_1,\dots,z_n)$ and $w=(w_1,\dots,w_n)$, then
+        \begin{align*}
+            \inp{v,w} &= \sum z_i\bar{w}_i&
+            \inp{v,v} &= \sum|z_i|^2
+        \end{align*}
+    \end{itemize}
+    \item We now begin tackling today's main theorem: If $V_1,V_2$ are irreps, then
+    \begin{equation*}
+        \inp{\chi_{V_1},\chi_{V_2}} =
+        \begin{cases}
+            0 & V_1\ncong V_2\\
+            1 & V_1\cong V_2
+        \end{cases}
+    \end{equation*}
+    \begin{itemize}
+        \item We will prove this theorem in stages.
+        \item The general outline of our approach is to deduce the equality step by step through the transitive property. Some of the equalities we'll eventually end up needing are easier to discuss on their own first, though, so we begin with some lemmas.
+    \end{itemize}
+    \item First off, recall the \textbf{space of invariants} from PSet 2.
+    \item \textbf{Space of invariants} (of a representation $V$): The vector space defined as follows. \emph{Denoted by} $\bm{V^G}$. \emph{Given by}
+    \begin{equation*}
+        V^G = \{v\in V\mid gv=v\ \forall\ g\in G\}
+    \end{equation*}
+    \item Lemma 1: Let $G$ be a finite group, let $\rho:G\to GL(V)$ be a finite-dimensional representation of it, and let $p$ be defined as above. Then $p\in\Hom_G(V,V)$.
+    \begin{proof}
+        We can view $p$ as an element of $\Hom(V,V)$. This combined with the fact that for every $h\in G$,
+        \begin{equation*}
+            p(hv) = \frac{1}{|G|}\sum_{g\in G}(gh)v
+            = \frac{1}{|G|}\sum_{gh\in G}(gh)v
+            = \frac{1}{|G|}h\sum_{g\in G}gv
+            = h(pv)
+        \end{equation*}
+        implies that $p\in\Hom_G(V,V)$. In more formal notation,
+        \begin{align*}
+            [p\circ\rho_V(h)](v) &= \frac{1}{|G|}\sum_{g\in G}[\rho_V(g)\circ\rho_V(h)](v)\\
+            &= \frac{1}{|G|}\sum_{g\in G}[\rho_V(gh)](v)\\
+            &= \frac{1}{|G|}\sum_{gh\in G}[\rho_V(gh)](v)\\
+            &= \frac{1}{|G|}\sum_{hg\in G}[\rho_V(hg)](v)\\
+            &= \frac{1}{|G|}\sum_{g\in G}[\rho_V(hg)](v)\\
+            &= [\rho_V(h)]\left( \frac{1}{|G|}\sum_{g\in G}[\rho_V(g)](v) \right)\\
+            &= [\rho_V(h)\circ p](v)
+        \end{align*}
+    \end{proof}
+    \item Why do we need this result?? What does it do for the rest of the proof?
+    \item Lemma 2: Let $G$ be a finite group, and let $\rho:G\to GL(V)$ be a finite-dimensional representation of it. Then the map $p$, defined as follows, is a projector from $V\to V^G$.
+    \begin{equation*}
+        p = \frac{1}{|G|}\sum_{g\in G}g = \frac{1}{|G|}\sum_{g\in G}\rho_V(g)
+    \end{equation*}
+    \begin{proof}
+        To prove that $p$ is a projector, it will suffice to show that $p^2=p$. To prove that $p$ projects onto $V^G$, it will suffice to show that $\im(p)=V^G$. Let's begin.\par
+        To show that $p^2=p$, we have
+        \begin{equation*}
+            p^2 = \left( \frac{1}{|G|}\sum_{g\in G}g \right)^2
+            = \frac{1}{|G|^2}\sum_{g_1,g_2\in G}g_1g_2
+            = \frac{|G|}{|G|^2}\sum_{g\in G}g
+            = p
+        \end{equation*}
+        Note that since $G$ is not abelian (i.e., $g_1g_2\neq g_2g_1$ in all cases), the square of $\sum g$ is as above and cannot be reduced to a smaller sum with a 2 coefficient or something like that. Additionally, note that $\sum_{g_1,g_2\in G}g_1g_2=|G|\sum g$ since for each $g_i$, $g_i(g_1+\cdots+g_{|G|})=g_1+\cdots+g_{|G|}$.\par
+        To show that $\im(p)=V^G$, we will use a bidirectional inclusion proof. To confirm that $\im(p)\subset V^G$, we have for any $h\in G$ that
+        \begin{equation*}
+            h\left( \frac{1}{|G|}\sum_{g\in G}gv \right) = \frac{1}{|G|}\sum_{hg\in G}hgv
+            = \frac{1}{|G|}\sum_{g\in G}gv
+        \end{equation*}
+        from which it follows that
+        \begin{equation*}
+            p(v) = \frac{1}{|G|}\sum gv \in V^G
+        \end{equation*}
+        as desired. To confirm that $V^G\subset\im(p)$, let $v\in V^G$. Then $gv=v$. It follows that
+        \begin{equation*}
+            v = \frac{1}{|G|}\sum_{g\in G}v
+            = \frac{1}{|G|}\sum_{g\in G}gv
+            = p(v)
+            \in \im(p)
+        \end{equation*}
+        as desired.
+    \end{proof}
+    \item You differentiated the first and second parts of the above proof by saying, "this is the algebraic way to prove it; we can also prove it nonalgebraically." Does this mean that $p^2=p$ somehow \emph{implies} $\im(p)=V^G$ here, or do we still need to prove that "nonalgebraically," as in \textcite{bib:FultonHarris}??
+    \item Consequence of Lemma 2: There's a very easy way to construct invariant factors.
+    \item We now prove one final lemma using what we have learned about $p$.
+    \item Lemma 3: Let $G$ be a finite group, and let $\rho:G\to GL(V)$ be a finite-dimensional representation of it. Then $\dim V^G=(1/|G|)\sum_{g\in G}\chi_V(g)$.
+    \begin{proof}
+        Define $p$ as above. Then
+        \begin{align*}
+            \dim V^G &= \dim(\im(p))\tag*{Lemma 2}\\
+            &= \tr(p)\tag*{PSet 1, Q5c}\\
+            &= \tr(\frac{1}{|G|}\sum\rho_V(g))\\
+            &= \frac{1}{|G|}\sum_{g\in G}\tr(\rho_V(g))\\
+            &= \frac{1}{|G|}\sum_{g\in G}\chi_V(g)
+        \end{align*}
+        as desired.
+    \end{proof}
+    \item We can now prove the main result.
+    \item Theorem: If $V,W$ are irreps, then
+    \begin{equation*}
+        \inp{\chi_V,\chi_W} =
+        \begin{cases}
+            0 & V\ncong W\\
+            1 & V\cong W
+        \end{cases}
+    \end{equation*}
+    \begin{proof}
+        % \par\smallskip
+        % We could derive this formula, but we'll just state it for now. Let's begin.\par\smallskip
+        % Let $G$ be a finite group and let $V$ be a representation of $G$.
+        % We want to be able to compute something about this representation. Suppose we want to understand the space of invariants from PSet 2. How do we compute the dimension of $V^G$? Close to what we discussed when we proved the complete reducibility theorem.\par
+
+        % \begin{equation*}
+        %     p = \sum_{g\in G}\rho_V(g)
+        %     = \sum_{g\in G}\rho_V(hgh^{-1})
+        %     = \sum_{g\in G}\rho_V(h)\circ\rho_V(g)\circ\rho_V(h^{-1})
+        %     = \rho_V(h)\circ p\circ\rho_V(h^{-1})
+        % \end{equation*}
+        
+        % \par
+        % Let $V,W$ be two representations. Try to understand $\Hom_G(V,W)$. Recall that the dimension is 1 if $V\cong G$ and ?? otherwise. We have that
+        % \begin{equation*}
+        %     \dim(\Hom_G(V,W)) = \dim([\Hom_F(V,W)]^G)
+        % \end{equation*}
+        % This is almost a tautology, but it requires care, regardless.
+        % We have
+        % \begin{align*}
+        %     \dim([\Hom_F(V,W)]^G) &= \dim((V^*\otimes W)^G)\\
+        %     &= \frac{1}{|G|}\sum_{g\in G}\chi_{V^*\otimes W}(g)\\
+        %     &= \frac{1}{|G|}\sum_{g\in G}\chi_{V^*}(g)\cdot\chi_W(g)\\
+        %     &= \frac{1}{|G|}\sum_{g\in G}\overline{\chi_V(g)}\cdot\chi_W(g)\\
+        %     &= \frac{1}{|G|}\sum_{g\in G}\chi_V(g)\cdot\overline{\chi_W(g)}\\
+        %     &= \inp{\chi_V,\chi_W}
+        % \end{align*}
+        % Note that the third-to-last term is an integer, so we can rearrange it to the second-to-last term??\par
+        % This implies immediately the theorem via \hyperref[lem:Schur]{Schur's Lemma}.
+
+
+        We will work towards a formula for the inner product, using various results that we've proven up until now. Let's begin.
+        \begin{align*}
+            \inp{\chi_V,\chi_W} &= \frac{1}{|G|}\sum_{g\in G}\chi_V(g)\cdot\overline{\chi_W(g)}\tag*{Definition}\\
+            &= \frac{1}{|G|}\sum_{g\in G}\chi_V(g)\cdot\chi_{W^*}(g)\tag*{Property 4}\\
+            &= \frac{1}{|G|}\sum_{g\in G}\chi_{V\otimes W^*}(g)\tag*{Property 5}\\
+            &= \dim[(V\otimes W^*)^G]\tag*{Lemma 3}\\
+            &= \dim([\Hom_F(V,W)]^G)\tag*{Lecture 2.1}\\
+            &= \dim[\Hom_G(V,W)]\tag*{PSet 2, Q4b}\\
+            &=
+            \begin{cases}
+                \dim(\spn(I)) & V\cong W\\
+                \dim(\spn(0)) & V\ncong W
+            \end{cases}
+            \tag*{Schur's Lemma}\\
+            &=
+            \begin{cases}
+                0 & V\ncong W\\
+                1 & V\cong W
+            \end{cases}
+        \end{align*}
+    \end{proof}
+    \item In the above proof, Rudenko first surveys the following special case. Why??
+    \begin{itemize}
+        \item Then if $V$ is irreducible and trivial, we have
+        \begin{equation*}
+            \frac{1}{|G|}\sum_{g\in G}\chi_V(g) = 0
+        \end{equation*}
+        which happens iff
+        \begin{equation*}
+            \inp{\chi_V,\chi_\text{triv}} = 0
+        \end{equation*}
+        whereas
+        \begin{equation*}
+            \inp{\chi_\text{triv},\chi_\text{triv}} = 1
+        \end{equation*}
+        This proves the theorem in a special case, but how do we go from here to all representations? We're very close!
+    \end{itemize}
+    \item Corollary: The number of irreps is less than or equal to the number of conjugacy classes.
+    \begin{itemize}
+        \item We'll leave it to next time to prove that equality holds.
+    \end{itemize}
+    \item Whenever we have a sec, we should try to form a mental picture the whole class function thing.
+    \item Consequence of the theorem: We get an orthogonality relation.
+    \begin{itemize}
+        \item If $\chi_1,\chi_2$ are characters if irreps, then
+        \begin{equation*}
+            \sum_{g\in G}\chi_1(g)\overline{\chi_2(g)} =
+            \begin{cases}
+                0 & \chi_1\neq\chi_2\\
+                |G| & \chi_1=\chi_2
+            \end{cases}
+        \end{equation*}
+        \item This is related to the character table and IChem!!! Example:
+        \begin{itemize}
+            \item Recall Table \ref{tab:charTableS3}, the character table for $S_3$.
+            \item Between the trivial and alternating representations, we have
+            \begin{equation*}
+                (1)(1)+(1)(-1)+(1)(-1)+(1)(-1)+(1)(1)+(1)(1) = 0
+            \end{equation*}
+            as expected. Note that we have a term for each element in $S_3$, so some products get repeated multiple times.
+            \item For the standard representation, we have
+            \begin{equation*}
+                (2)(2)+(0)(0)+(0)(0)+(0)(0)+(-1)(-1)+(-1)(-1) = 6 = |S_3|
+            \end{equation*}
+            as expected.
+        \end{itemize}
+    \end{itemize}
+    \item Theorem: Characters are equal iff their representations are isomorphic.
+    \item Next time.
+    \begin{itemize}
+        \item Prove the theorem.
+        \item Consequences.
+        \item Implications for the character table.
     \end{itemize}
 \end{itemize}
 
