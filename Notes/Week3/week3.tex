@@ -573,26 +573,23 @@
             \node [minimum width=1cm] (S1l) at (-2.5,-1.5) {$\oplus$};
             \node [minimum width=1cm] (S2l) at (-2.5,-2)   {$\otimes$};
             \node [minimum width=1cm] (S3l) at (-2.5,-2.5) {$V^*$};
+            \node [minimum width=1cm] (S4l) at (-2.5,-3.2) {$\dim_\C\Hom_G(V_1,V_2)$};
             \node [minimum width=1cm] (S1r) at (2.5,-1.5)  {$+$};
             \node [minimum width=1cm] (S2r) at (2.5,-2)    {$\cdot$};
             \node [minimum width=1cm] (S3r) at (2.5,-2.5)  {$\bar{f}$};
+            \node [minimum width=1cm] (S4r) at (2.5,-3.2)  {$\inp{\chi_{V_1},\chi_{V_2}}$};
             \draw [bly,->] (S1l) -- (S1r);
             \draw [bly,->] (S2l) -- (S2r);
             \draw [bly,->] (S3l) -- (S3r);
+            \node [bly] at ($(S4l)!0.5!(S4r)$) {=};
         \end{tikzpicture}
         \caption{The stories of representation theory.}
         \label{fig:RepTheoryStory}
     \end{figure}
     \begin{itemize}
         \item Let $G$ be a finite group.
-        \item First story: We study finite-dimensional representations of $G$ over $\C$; these are vector spaces, so we can direct sum, tensor multiply, and dualize them.
-        \item Second story: We study class functions $\C_\text{cl}[G]=\{f:G\to\C\mid f(gxg^{-1})=f(x)\}$; these are elements of a ring, so we can add, multiply, and conjugate them.
-        \begin{itemize}
-            \item Last thing: We have the Hermitian product
-            \begin{equation*}
-                \inp{f_1,f_2} = \frac{1}{|G|}\sum_{g\in G}f_1(g)\overline{f_2(g)}
-            \end{equation*}
-        \end{itemize}
+        \item First story: We study finite-dimensional representations of $G$ over $\C$; these are vector spaces, so we can direct sum, tensor multiply, and dualize them. We can also look at the morphisms between them.
+        \item Second story: We study class functions $\C_\text{cl}[G]=\{f:G\to\C\mid f(gxg^{-1})=f(x)\}$; these are elements of a ring, so we can add, multiply, and conjugate them. We can also take the inner product of them.
         \item We can map between these two stories: Representations become characters, $\oplus\mapsto +$, $\otimes\mapsto\cdot$, and $V^*\mapsto\bar{f}$.
     \end{itemize}
     \item Theorem (from last time):
