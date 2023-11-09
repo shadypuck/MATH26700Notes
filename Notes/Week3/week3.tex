@@ -549,5 +549,246 @@
 
 
 
+\section{Character Table Properties}
+\begin{itemize}
+    \item \marginnote{10/13:}Announcement: Midterm on November 10.
+    \begin{itemize}
+        \item Will mostly involve computing character tables; HW will be good prep.
+    \end{itemize}
+    \item Review of the general picture from the first part of the course.
+    \begin{figure}[h!]
+        \centering
+        \begin{tikzpicture}
+            \footnotesize
+            \filldraw [draw=blx,fill=blz,thick] (-1.5,-1) -- ++(-2,0) -- ++(0,2) -- node[black,above]{Representations} ++(2,0) -- cycle;
+            \filldraw [draw=blx,fill=blz,thick] (1.5,-1) -- ++(2,0) -- ++(0,2) -- node[black,above]{Characters} ++(-2,0) -- cycle;
+    
+            \node (V) at (-2.2,-0.1) {$V$};
+            \node (X) at (2.8,-0.1) {$\chi_V^{}$};
+            \draw [blz,line width=4pt] (V) -- (-1.5,-0.1);
+            \draw [white,line width=4pt] (-1.501,-0.1)-- (1.501,-0.1);
+            \draw [blz,line width=4pt] (1.5,-0.1) -- (X);
+            \draw [bly,|->] (V) -- (X);
+    
+            \node [minimum width=1cm] (S1l) at (-2.5,-1.5) {$\oplus$};
+            \node [minimum width=1cm] (S2l) at (-2.5,-2)   {$\otimes$};
+            \node [minimum width=1cm] (S3l) at (-2.5,-2.5) {$V^*$};
+            \node [minimum width=1cm] (S1r) at (2.5,-1.5)  {$+$};
+            \node [minimum width=1cm] (S2r) at (2.5,-2)    {$\cdot$};
+            \node [minimum width=1cm] (S3r) at (2.5,-2.5)  {$\bar{f}$};
+            \draw [bly,->] (S1l) -- (S1r);
+            \draw [bly,->] (S2l) -- (S2r);
+            \draw [bly,->] (S3l) -- (S3r);
+        \end{tikzpicture}
+        \caption{The stories of representation theory.}
+        \label{fig:RepTheoryStory}
+    \end{figure}
+    \begin{itemize}
+        \item Let $G$ be a finite group.
+        \item First story: We study finite-dimensional representations of $G$ over $\C$; these are vector spaces, so we can direct sum, tensor multiply, and dualize them.
+        \item Second story: We study class functions $\C_\text{cl}[G]=\{f:G\to\C\mid f(gxg^{-1})=f(x)\}$; these are elements of a ring, so we can add, multiply, and conjugate them.
+        \begin{itemize}
+            \item Last thing: We have the Hermitian product
+            \begin{equation*}
+                \inp{f_1,f_2} = \frac{1}{|G|}\sum_{g\in G}f_1(g)\overline{f_2(g)}
+            \end{equation*}
+        \end{itemize}
+        \item We can map between these two stories: Representations become characters, $\oplus\mapsto +$, $\otimes\mapsto\cdot$, and $V^*\mapsto\bar{f}$.
+    \end{itemize}
+    \item Theorem (from last time):
+    \begin{equation*}
+        \inp{\chi_{V_1},\chi_{V_2}} = \dim\Hom_G(V_1,V_2)
+    \end{equation*}
+    \item The story in Figure \ref{fig:RepTheoryStory} tells us stuff about representations.
+    \begin{itemize}
+        \item Let $V_1,\dots,V_k$ be irreps. Then the vectors $\chi_{V_1},\dots,\chi_{V_k}$ are orthonormal.
+        \begin{itemize}
+            \item We get this result with the Theorem above and \hyperref[lem:Schur]{Schur's Lemma}.
+        \end{itemize}
+        \item Next time, we'll prove that $\chi_{V_1},\dots,\chi_{V_k}$ spans $\C_\text{cl}[G]$, i.e., the number of irreps is the number of conjugacy classes.
+        \item \emph{Cube thing??}
+        \item This picture is remarkable because it's so simple.
+    \end{itemize}
+    \item We now look at some corollaries to last time's main theorem.
+    \item Corollary 1: If $V,W$ are $G$-reps, then $\chi_V=\chi_W$ iff $V\cong W$.
+    \begin{proof}
+        Invoking complete reducibility, we have that $V=\bigoplus V_i^{n_i}$. Thus, to know $V$, it is enough to know the $n_i$'s. But
+        \begin{equation*}
+            \chi_V = \sum n_i\chi_{V_i}
+        \end{equation*}
+        where
+        \begin{equation*}
+            n_i = n_i\cdot 1 = n_i\inp{\chi_{V_i},\chi_{V_i}} = \inp{\chi_V,\chi_{V_i}}
+        \end{equation*}
+        Therefore, since the $\chi_{V_i}$ are linearly independent, the only way that $\chi_V=\chi_W$ is if the $n_i$'s match which would mean that $V\cong W$, and vice versa the only way that $V\cong W$ is if the $n_i$'s match which would mean that $\chi_V=\chi_W$.
+    \end{proof}
+    \item Corollary 2: Let $V$ be a $G$-rep. Then TFAE:
+    \begin{enumerate}
+        \item $V$ is irreducible.
+        \item $\inp{\chi_V,\chi_V}=1$.
+        \item $\sum_{g\in G}|\chi_V(g)|^2=|G|$.
+    \end{enumerate}
+    \begin{proof}
+        ($1\Rightarrow 2$): We have that
+        \begin{equation*}
+            \inp{\chi_V,\chi_V} = \dim\Hom_G(V,V) = 1
+        \end{equation*}
+        as desired.\par
+        ($2\Rightarrow 1$): Complete reducibility implies that $V\cong V_1^{n_1}\oplus\cdots\oplus V_k^{n_k}$, where the $V_i$'s are irreps. This combined with the hypothesis implies that
+        \begin{equation*}
+            1 = \inp{\chi_V,\chi_V}
+            = \inp{\sum_{i=1}^kn_i\chi_{V_i},\sum_{i=1}^kn_i\chi_{V_i}}
+            = \sum_{i=1}^kn_i^2
+        \end{equation*}
+        But if $\sum n_i^2=1$ where each $n_i\in\Z^+$, then $n_i=1$ for some $i$ and $n_j=0$ for $j\neq i$, from which it follows that $V\cong V_i$.\par
+        We can interconvert between 2 and 3 using the definition of the inner product and the property of complex numbers that $zz^*=|z|^2$.
+    \end{proof}
+    \item We now build up to one final corollary.
+    \item We've discussed all of these properties of irreps, but where do we even find them?
+    \begin{itemize}
+        \item We might be able to find some by inspection, but here's how we find all of them.
+    \end{itemize}
+    \item Review: The regular representation. Here are two different but isomorphic ways to think about it.
+    \begin{itemize}
+        \item Think of it as functions on $G$.
+        \begin{itemize}
+            \item Better for infinite groups.
+        \end{itemize}
+        \item Think of it as the permutational representation associated with the action $G\acts G$.
+        \begin{itemize}
+            \item Better for finite groups.
+        \end{itemize}
+        \item Why did we talk about this here??
+    \end{itemize}
+    \item Corollary 3: Consider the regular representation $V_R$. We have that
+    \begin{equation*}
+        \chi_{V_R}(g) =
+        \begin{cases}
+            0 & g\neq e\\
+            |G| & g=e
+        \end{cases}
+    \end{equation*}
+    \begin{proof}
+        We can compute its character $\chi_{V_R}$ by considering the corresponding permutation matrices. Indeed, the action $\chi_{V_R}(g)$ of this character on $g$ is equal to the number of 1's on the diagonal in the permuttion matrix, which is equal to the number of fixed points of the permutation, i.e., the number of $i$'s such that $gg_i=g_i$. But in a group, $gg_i=g_i$ iff $g=e$, so this number of fixed points is
+        \begin{equation*}
+            \chi_{V_R}(g) = \Fix(g)
+            =
+            \begin{pmatrix}
+                g_1 & \cdots & g_n\\
+                gg_1 & \cdots & gg_n\\
+            \end{pmatrix}
+            =
+            \begin{cases}
+                0 & g\neq e\\
+                |G| & g=e
+            \end{cases}
+        \end{equation*}
+        as desired.
+    \end{proof}
+    \item What is the matrix thing??
+    \item We now apply Corollaries 1-3 to the regular representation $V_R$ to obtain some important results.
+    \begin{itemize}
+        \item Let $V_i$ be an arbitrary irrep.
+        \item By complete reducibility, $V_R=\bigoplus_{i=1}^kV_i^{n_i}$ for some set of $n_i$'s.
+        \item Additionally,
+        \begin{align*}
+            n_i &= \inp{\chi_{V_R},\chi_{V_i}}\tag*{Corollary 1}\\
+            &= \frac{1}{|G|}\sum_{g\in G}\chi_{V_R}(g)\overline{\chi_{V_i}(g)}\\
+            &= \frac{1}{|G|}|G|\underbrace{\overline{\chi_{V_i}(e)}}_{\dim V_i}\tag*{Corollary 3}\\
+            &= \dim V_i
+        \end{align*}
+        \item This implies three remarkable results, all worth remembering.
+        \begin{align*}
+            V_R &= \bigoplus_{i=1}^kV_i^{\dim V_i}&
+            |G| &= \sum_{i=1}^k(\dim V_i)^2&
+            &\text{\# irreps is finite}
+        \end{align*}
+        \begin{itemize}
+            \item The first result follows directly by substituting $n_i=\dim V_i$ into complete reducibility.
+            \item The second result follows because $|G|=\dim(V_R)=\dim(\bigoplus_{i=1}^kV_i^{\dim V_i})=\sum(\dim V_i)^2$.
+            \item The third result follows because if there were infinitely many irreps, each with $\dim V_i\geq 1$, then $|G|=\sum_{i=1}^k(\dim V_i)^2=\infty$, contradicting the hypothesis that $|G|$ is finite.
+        \end{itemize}
+    \end{itemize}
+    % \item Proof that the number of irreps equals the number of conjugacy classes.
+    \item We want to investigate $S_4$, i.e., characterize all irreps of it.
+    \begin{table}[h!]
+        \centering
+        \small
+        \renewcommand{\arraystretch}{1.2}
+        \begin{tabular}{c|c|c|c|c|c|}
+             & 1 & 6 & 8 & 3 & 6\\
+             & $e$ & $(12)$ & $(123)$ & $(12)(34)$ & $(1234)$\\ \hline
+            Trivial & 1 & 1 & 1 & 1 & 1\\ \hline
+            Sign & 1 & $-1$ & 1 & 1 & $-1$\\ \hline
+            $V_\text{std}$ & 3 & 1 & 0 & $-1$ & $-1$\\ \hline
+            $\text{Sign}\otimes V_\text{std}$ & 3 & $-1$ & 0 & $-1$ & 1\\ \hline
+             & 2 & 0 & $-1$ & 2 & 0\\
+        \end{tabular}
+        \caption{Character table for $S_4$.}
+        \label{tab:charTableS4}
+    \end{table}
+    \begin{itemize}
+        \item We do so by constructing the character table, Table \ref{tab:charTableS4}.
+        \item Initially, this seemed like a very hard problem.
+        \begin{itemize}
+            \item However, with all of our theory, it only takes a couple of minutes now!
+        \end{itemize}
+        \item We start by inputting the trivial, sign, and standard representations.
+        \begin{itemize}
+            \item The trivial is obviously $(1,1,1,1,1)$.
+            \item The sign can be calculated to be $(1,-1,1,1,-1)$.
+            \item The standard is found via $V_\text{std}=V_\text{perm}-V_\text{triv}=(4,2,1,0,0)-(1,1,1,1,1)=(3,1,0,-1,-1)$.
+        \end{itemize}
+        \item Note that
+        \begin{gather*}
+            \sum n_i^2 = \inp{\chi_{V_\text{perm}},\chi_{V_\text{perm}}}
+                = \frac{1}{24}(1\cdot 4^2+6\cdot 2^2+8\cdot 1^2+0\cdot 0^2+0\cdot 0^2)
+                = 2\\
+            \inp{\chi_{V_\text{perm}},\chi_{V_\text{sign}}} = \frac{1}{24}(4-12+8)
+                = 0\\
+            \inp{\chi_{V_\text{perm}},\chi_{V_\text{triv}}} = 1
+        \end{gather*}
+        \begin{itemize}
+            \item What is the point of these calculations??
+        \end{itemize}
+        \item Thus, we can derive representations without having any geometric notion of it using characters!
+        \item To see any of these representations geometrically, look at actions on the tetrahedron in $\R^3$!
+        \item All those computations above used the \textbf{first orthogonality relation}; here's the \textbf{second orthogonality relation}:
+        \begin{equation*}
+            \sum_\chi\chi(g_1)\overline{\chi(g_2)} =
+            \begin{cases}
+                0 & g_1\nsim g_2\\
+                \frac{|G|}{|C_G(g)|} & g_1\sim g_2
+            \end{cases}
+        \end{equation*}
+        where $\sim$ denotes conjugacy.
+        \begin{itemize}
+            \item Prove the new one with $AB=1=BA$. This very simple thing leads to a very powerful statement about systems of equations that we will discuss later. How does this proof work??
+            \item We can start doing this stuff in the new homework!
+            \item We constructed the fifth representation using this.
+        \end{itemize}
+        \item Where does the fifth irrep come from?
+        \begin{itemize}
+            \item Going back to a miracle of group theory: Simple groups.
+            \item If $f:S_n\to S_n$, we have lots of injective maps, lots of minor actions $S_n\to S_n$ sending $x\mapsto gxg^{-1}$.
+            \item We have $\sign:S_n\to S_2$, $S_4\twoheadrightarrow S_3$ with kernel equal to $K_4$.
+            \item We have the exotic $S_6\to S_6$.
+            \item We have $S_5\hookrightarrow S_6$ that is also exotic.
+            \item These are called \textbf{exceptional homomorphisms}.
+            \item Since we have $S_4\to S_3$ and $\rho:S_3\to GL_n$, we have $S_4\to GL_n$ with a the same character table. Takeaway: This $(2,0,1)$ thing in the big character table comes from this map, geometrically.
+            \item Takeaway: The geometry of the fifth irrep comes from $S_3$.
+            \item What is going on here??
+        \end{itemize}
+    \end{itemize}
+    \item Final announcements.
+    \begin{itemize}
+        \item Going forward, we'll mostly be following \textcite{bib:FultonHarris}.
+        \item Then we'll get into associative algebra.
+        \item OH next week will be Zoom, but we should still feel free to meet with him in-person by emailing him for an appointment.
+    \end{itemize}
+\end{itemize}
+
+
+
 
 \end{document}
