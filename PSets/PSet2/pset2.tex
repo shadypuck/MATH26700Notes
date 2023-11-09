@@ -14,20 +14,310 @@
     \item \marginnote{10/13:}\textbf{More linear algebra}. Let $V$ be a finite-dimensional vector space.
     \begin{enumerate}
         \item Prove that under the identification of $V\otimes V^*$ with $\Hom_F(V,V)$, \textbf{simple} tensors $v\otimes\varphi$ correspond to linear maps of rank 0 or 1.
+        \begin{proof}
+            % Recall that the identification is created by sending $v\otimes\varphi\mapsto[v'\mapsto\varphi(v')v]$. But then the image of $[]$ is $\spn(v)$, so rank is at most 1. Additionally, if $\varphi=0$, then the map is of rank 0.
+
+            Let $v\otimes\varphi$ be an arbitrary simple tensor im $V\otimes V^*$. Recall from the 10/2 lecture that
+            \begin{equation*}
+                v_1\otimes\alpha \mapsto [v_2\mapsto\alpha(v_2)v_1]
+            \end{equation*}
+            is a good isomorphism from $V\otimes V^*\cong\Hom_F(V,V)$. It follows that the linear map to which $v\otimes\varphi$ corresponds is the map $L:V\to V$ defined by $L(v')=\varphi(v')v$. Since $\im\varphi=\C$, we have that $\im(L)\leq\C v$. Thus, since $\dim(\C v)=1$, we have that $\rank(L)\leq 1$, as desired.
+        \end{proof}
         \item Consider the vector space $W=\Hom_F(V,V)$. Prove that any linear functional in $W^*$ has the form $L\mapsto\tr(LM)$ for some $M\in W$. Prove that the vector space $\Hom_F(V,V)$ is "canonically" self-dual.
+        \begin{proof}
+            Let $\varphi\in W^*$ be arbitrary. Also let $n:=\dim V$ for convenience. Notice that the $n^2$ matrices $E_{ij}$ ($i,j=1,\dots,n$), which have a 1 in the $i^\text{th}$ row and $j^\text{th}$ column and 0s everywhere else, form a basis of $W$. Thus, $\varphi$ is fully characterized by its actions on the $E_{ij}$. Now define
+            \begin{equation*}
+                M := (\varphi(E_{ij}))^T
+            \end{equation*}
+            It follows that if $L=(\ell_{ij})$, then
+            \begin{equation*}
+                \varphi(L) = \sum_{i=1}^n\sum_{j=1}^n\ell_{ij}\varphi(E_{ij}) = \tr(LM)
+            \end{equation*}
+            as desired. This completes the proof, but to help illustrate it, I'll include the $n=3$ case:
+            \begin{multline*}
+                \underbrace{
+                    \begin{bmatrix}
+                        \ell_{11} & \ell_{12} & \ell_{13}\\
+                        \ell_{21} & \ell_{22} & \ell_{23}\\
+                        \ell_{31} & \ell_{32} & \ell_{33}\\
+                    \end{bmatrix}
+                }_{L=(\ell_{ij})}\circ\underbrace{
+                    \begin{bmatrix}
+                        \varphi(E_{11}) & \varphi(E_{12}) & \varphi(E_{13})\\
+                        \varphi(E_{21}) & \varphi(E_{22}) & \varphi(E_{23})\\
+                        \varphi(E_{31}) & \varphi(E_{32}) & \varphi(E_{33})\\
+                    \end{bmatrix}^T
+                }_{M=(\varphi(E_{ij}))^T}\\
+                = \underbrace{
+                    \begin{bmatrix}
+                        \sum_{j=1}^3\ell_{1j}\varphi(E_{1j}) &  & \cdots\\
+                            & \sum_{j=1}^3\ell_{2j}\varphi(E_{2j}) & \\
+                        \cdots &  & \sum_{j=1}^3\ell_{3j}\varphi(E_{3j})\\
+                    \end{bmatrix}
+                }_{LM}
+            \end{multline*}
+            To prove that $\Hom_F(V,V)=W$ is canonically self-dual, it will suffice to construct an isomorphism $W^*\cong W$ that does not depend on a choice of basis. Let $\varphi\in W^*$ be arbitrary. As demonstrated above, there exists a unique corresponding $M\in W$ such that $\varphi(L)=\tr(LM)$ for all $L\in W$. Therefore, the map $f:W^*\to W$ defined by $\varphi\mapsto M$ is a bijection. To show that it is linear, too, we add in a basis and compute as follows.
+            \begin{align*}
+                f(\varphi_1+\varphi_2) &= ([\varphi_1+\varphi_2](E_{ij}))^T&
+                    f(\lambda\varphi) &= ([\lambda\varphi](E_{ij}))^T\\
+                &= (\varphi_1(E_{ij})+\varphi_2(E_{ij}))^T&
+                    &= (\lambda\varphi(E_{ij}))^T\\
+                &= (\varphi_1(E_{ij}))^T+(\varphi_2(E_{ij}))^T&
+                    &= \lambda(\varphi(E_{ij}))^T\\
+                &= f(\varphi_1)+f(\varphi_2)&
+                    &= \lambda f(\varphi)
+            \end{align*}
+        \end{proof}
     \end{enumerate}
+    \pagebreak
     \item \textbf{Characters of abelian groups}. Let $A$ be a finite abelian group.
     \begin{enumerate}
         \item A \textbf{character} of $A$ is a homomorphism $\chi:A\to\C^\times$. Prove that for every $g\in A$, the value $\chi(g)$ is a root of unity. Prove that the product of characters is a character. Prove that characters form an abelian group. This group is called the \textbf{dual} of $A$ and is denoted $\widehat{A}$.
+        \begin{proof}
+            Let $g\in A$ be arbitrary. Since $A$ is finite, $|g|$ is finite. It follows since $\chi$ is a homomorphism that
+            \begin{equation*}
+                1 = \chi(e) = \chi(g^{|g|}) = \chi(g)^{|g|}
+            \end{equation*}
+            Therefore, since the only complex numbers having 1 as a power are the roots of unity, $\chi(g)$ is a root of unity, as desired.\par\smallskip
+            Let $\chi_1,\chi_2$ be two characters of $A$. To prove that their product $\chi_1\chi_2$ is a character, it will suffice to show that $\chi_1\chi_2$ is a group homomorphism. To do so, we must confirm that
+            \begin{align*}
+                \chi_1\chi_2(e) &= 1&
+                \chi_1\chi_2(g_1g_2) &= \chi_1\chi_2(g_1)\cdot\chi_1\chi_2(g_2)&
+                \chi_1\chi_2(g^{-1}) &= \chi_1\chi_2(g)^{-1}
+            \end{align*}
+            We can do this using the analogous statements satisfied by $\chi_1$ and $\chi_2$ separately. Specifically,
+            \begin{align*}
+                \chi_1\chi_2(e) &= \chi_1(e)\cdot\chi_2(e)&
+                    \chi_1\chi_2(g^{-1}) &= \chi_1(g^{-1})\cdot\chi_2(g^{-1})\\
+                &= 1\cdot 1&
+                    &= \chi_1(g)^{-1}\cdot\chi_2(g)^{-1}\\
+                &= 1&
+                    &= (\chi_1(g)\cdot\chi_2(g))^{-1}\\
+                &&
+                    &= \chi_1\chi_2(g)^{-1}
+            \end{align*}
+            \begin{align*}
+                \chi_1\chi_2(g_1g_2) &= \chi_1(g_1g_2)\cdot\chi_2(g_1g_2)\\
+                &= \chi_1(g_1)\cdot\chi_1(g_2)\cdot\chi_2(g_1)\cdot\chi_2(g_2)\\
+                &= \chi_1(g_1)\cdot\chi_2(g_1)\cdot\chi_1(g_2)\cdot\chi_2(g_2)\\
+                &= \chi_1\chi_2(g_1)\cdot\chi_1\chi_2(g_2)
+            \end{align*}\par\smallskip
+            Let $\widehat{A}$ denote the set of all characters of $A$. Also let $\cdot$ denote the operation of function multiplication, which was shown in the above proof to be a binary operation on $\widehat{A}$. To prove that $(\widehat{A},\cdot)$ is an abelian group, it will suffice to show that it has an identity element, inverses, associativity, and commutativity. Let's begin.\par
+            \emph{Identity}: Consider the character $\chi_e$ defined by $g\mapsto 1$ for all $g\in A$. Let $\chi\in\widehat{A}$ be arbitrary. Then since we have the following, letting $g\in A$ be arbitrary, we know that $\chi\chi_e=\chi=\chi_e\chi$, as desired.
+            \begin{equation*}
+                \chi\chi_e(g) = \chi(g)\cdot\chi_e(g)
+                = \chi(g)\cdot 1
+                = \chi(g)
+                = 1\cdot\chi(g)
+                = \chi_e(g)\cdot\chi(g)
+                = \chi_e\chi(g)
+            \end{equation*}
+            \emph{Inverses}: Let $\chi\in\widehat{A}$ be arbitrary. Consider the character $\bar{\chi}$ defined by $g\mapsto\overline{\chi(g)}$ for all $g\in A$, where the overbar denotes taking the complex conjugate. Then since we have the following, letting $g\in A$ be arbitrary, we know that $\chi\bar{\chi}=\bar{\chi}\chi=\chi_e$, as desired. Note that the complex conjugates multiply to 1 because we showed above that all $\chi(g)$ are roots of unity (for any $\chi\in\widehat{A}$).
+            \begin{equation*}
+                \chi\bar{\chi}(g) = \chi(g)\cdot\bar{\chi}(g)
+                = \bar{\chi}(g)\cdot\chi(g)
+                = 1
+                = \chi_e(g)
+            \end{equation*}
+            \emph{Associativity}: Let $\chi_1,\chi_2,\chi_3\in\widehat{A}$ be arbitrary. Then since we have the following, letting $g\in A$ be arbitrary, we know that $\chi_1(\chi_2\chi_3)=(\chi_1\chi_2)\chi_3$, as desired.
+            \begin{equation*}
+                [\chi_1(\chi_2\chi_3)](g) = \chi_1(g)\cdot\chi_2\chi_3(g)
+                = \chi_1(g)\cdot\chi_2(g)\cdot\chi_3(g)
+                = \chi_1\chi_2(g)\cdot\chi_3(g)
+                = [(\chi_1\chi_2)\chi_3](g)
+            \end{equation*}
+            \emph{Commutativity}: Let $\chi_1,\chi_2\in\widehat{A}$ be arbitrary. Then since we have the following, letting $g\in A$ be arbitrary, we know that $\chi_1\chi_2=\chi_2\chi_1$, as desired.
+            \begin{equation*}
+                \chi_1\chi_2(g) = \chi_1(g)\cdot\chi_2(g)
+                = \chi_2(g)\cdot\chi_1(g)
+                = \chi_2\chi_1(g)
+            \end{equation*}
+        \end{proof}
         \item Prove directly that for every nontrivial character $\chi\in\widehat{A}$, the following identity holds.
         \begin{equation*}
             \sum_{g\in A}\chi(g) = 0
         \end{equation*}
+        \begin{proof}
+            % Use the orthogonality relation from class with representations $\chi,\chi_e$.
+
+            Let $\chi\in\widehat{A}$ be a nontrivial character. Since it is nontrivial, there exists $h\in A$ for which $\chi(h)\neq 1$. Additionally, we have by the Sudoku Lemma that
+            \begin{equation*}
+                \sum_{g\in A}\chi(g) = \sum_{g\in A}\chi(hg)
+            \end{equation*}
+            But then since $\chi$ is a homomorphism, we have
+            \begin{align*}
+                \sum_{g\in A}\chi(g) &= \sum_{g\in A}\chi(hg)
+                    = \sum_{g\in A}\chi(h)\chi(g)
+                    = \chi(h)\sum_{g\in A}\chi(g)\\
+                (1-\chi(h))\sum_{g\in A}\chi(g) &= 0
+            \end{align*}
+            Thus, by the zero-product property, either $1-\chi(h)=0$ or $\sum_{g\in A}\chi(g)=0$. Since $\chi(h)\neq 1$ as proven above, $1-\chi(h)\neq 0$ so we must have
+            \begin{equation*}
+                \sum_{g\in A}\chi(g) = 0
+            \end{equation*}
+            as desired.
+        \end{proof}
         \item Prove that characters are the same as the 1-dimensional representations of $A$; product of characters is the same as a tensor product of representations, and the inverse of the character is the same as the dual representation.
+        \begin{proof}
+            Let $\rho_1,\rho_2:A\to GL(\C)=\C^\times$ be two arbitrary 1-dimensional representations of $A$. Notice that $\rho_1,\rho_2$ have the same domain and codomain as characters, and are homomorphisms. Additionally, by the definition of the Kronecker product for $1\times 1$ matrices, we have that
+            \begin{equation*}
+                [\rho_1\otimes\rho_2](g) = \rho_1(g)\cdot\rho_2(g)
+            \end{equation*}
+            for all $g\in A$. Thus, the tensor product of these representations is the same the character product of their values. Lastly, we have that
+            \begin{equation*}
+                \rho_1^*(g) = \rho_1(g^{-1})^T
+                = \rho_1(g^{-1})
+                = \rho_1(g)^{-1}
+                = \overline{\rho_1(g)}
+            \end{equation*}
+            Thus, the dual representation of this representation is computed using the character inverse.
+        \end{proof}
         \item Find all characters for $A=\Z/n\Z$. Compute the dual group $\widehat{A}$. Do the same for $A=(\Z/2\Z)\times(\Z/2\Z)$.
+        \begin{proof}
+            % Alternatively, we could have noted that $\chi\acts\{(0,1),(1,0)\}$ completely characterizes it, and there are four such possible actions.
+
+            We treat each group separately.\par
+            \underline{$\Z/n\Z$}: Let $\chi:\Z/n\Z\to\C^\times$ be a character of $\Z/n\Z$. Since $\chi$ is a homomorphism and hence $\chi(n)=\chi(1)^n$, the value of $\chi(1)$ completely determines the action of $\chi$. Thus, there is a one-to-one mapping between the characters of $\Z/n\Z$ and the possible values of $\chi(1)$, so let's investigate the latter. We know from part (a) that $\chi(1)$ is a root of unity and that $\chi(1)^n=1$. Consequently, $\chi(1)$ is an $n^\text{th}$ root of unity. Any such root of unity will work, so the characters $\chi_0,\dots,\chi_{n-1}$ of $\Z/n\Z$ are defined by
+            \begin{equation*}
+                \boxed{\widehat{\Z/n\Z} = \{\chi_k\mid k=0,\dots,n-1;\ \chi_k(1)=\e[2\pi ik/n]\}}
+            \end{equation*}
+            \underline{$K_4$}: The maximum order of any element in this group is 2, so $\chi:K_4\to\{-1,1\}$. While there are $2^4=16$ such maps, only four are homomorphisms: Those sending $((0,0),(0,1),(1,0),(1,1))$ to\dots
+            \begin{equation*}
+                \boxed{\widehat{K}_4 = \{(1,1,1,1),(1,1,-1,-1),(1,-1,1,-1),(1,-1,-1,1)\}}
+            \end{equation*}
+        \end{proof}
         \item Prove that $\widehat{A_1\times A_2}$ is isomorphic to $\widehat{A}_1\times\widehat{A}_2$. Prove that groups $A$ and $\widehat{A}$ are isomorphic as abstract groups. Deduce that an abelian group of order $n$ has exactly $n$ characters.
+        \begin{proof}
+            % Define $h:\widehat{A}_1\times\widehat{A}_2\to\widehat{A_1\times A_2}$ by
+            % \begin{equation*}
+            %     [h(\chi_1,\chi_2)](a_1,a_2) = \chi_1(a_1)\cdot\chi_2(a_2)
+            % \end{equation*}
+            % To prove that $h$ is an isomorphism of groups, it will suffice to show that it is a bijective homomorphism of groups. The following suffices to show that it is a homomorphism of groups.
+            % \begin{align*}
+            %     h[(\chi_1,\chi_2)\cdot(\chi_3,\chi_4)](a_1,a_2) &= [h(\chi_1\chi_3,\chi_2\chi_4)](a_1,a_2)\\
+            %     &= \chi_1\chi_3(a_1)\cdot\chi_2\chi_4(a_2)\\
+            %     &= \chi_1(a_1)\cdot\chi_2(a_2)\cdot\chi_3(a_1)\cdot\chi_4(a_2)\\
+            %     &= [h(\chi_1,\chi_2)](a_1,a_2)\cdot[h(\chi_3,\chi_4)](a_1,a_2)
+            % \end{align*}
+            % As to bijectivity, we will prove injectivity then surjectivity. For injectivity, suppose $h(\chi_1,\chi_2)=h(\chi_3,\chi_4)$. Then for all $a_1\in A_1$,
+            % \begin{align*}
+            %     [h(\chi_1,\chi_2)](a_1,e) &= [h(\chi_3,\chi_4)](a_1,e)\\
+            %     \chi_1(a_1)\cdot\chi_2(e) &= \chi_3(a_1)\cdot\chi_4(e)\\
+            %     \chi_1(a_1)\cdot 1 &= \chi_3(a_1)\cdot 1\\
+            %     \chi_1(a_1) &= \chi_3(a_1)
+            % \end{align*}
+            % A similar statement holds for $\chi_2,\chi_4$, proving that $(\chi_1,\chi_2)=(\chi_3,\chi_4)$, as desired. For surjectivity, let $\chi\in\widehat{A_1\times A_2}$ be arbitrary. Define $\chi_1$ and $\chi_2$ by
+            % \begin{align*}
+            %     \chi_1(a_1) &= \chi(a_1,e)&
+            %     \chi_2(a_2) &= \chi(e,a_2)
+            % \end{align*}
+            % for all $a_1\in A_1$ and $a_2\in A_2$. That $\chi_1,\chi_2$ are characters under these definitions instead of just functions follows immediately from the character-like properties of $\chi$. With these definitions in hand, we can show that
+            % \begin{equation*}
+            %     [h(\chi_1,\chi_2)](a_1,a_2) = \chi_1(a_1)\cdot\chi_2(a_2)
+            %     = \chi(a_1,e)\cdot\chi(e,a_2)
+            %     = \chi[(a_1,e)\cdot(e,a_2)]
+            %     = \chi(a_1,a_2)
+            % \end{equation*}
+            % as desired.\par\smallskip
+            % By the fundamental theorem of finite abelian groups, $A$ is isomorphic to a direct product of cyclic groups of prime power order. Thus, we may let
+            % \begin{equation*}
+            %     A \cong (\Z/p_1\Z)^{n_1}\times\cdots\times(\Z/p_k\Z)^{n_k}
+            % \end{equation*}
+            % Borrowing the notation from the first task of part (d) above, define $h:(\Z/p_1\Z)^{n_1}\times\cdots\times(\Z/p_k\Z)^{n_k}\to(\widehat{\Z/p_1\Z})^{n_1}\times\cdots\times(\widehat{\Z/p_k\Z})^{n_k}$ by
+            % \begin{equation*}
+            %     h(a_{11},\dots,a_{kn_k}) = \chi_{a_{11}}\otimes\cdots\otimes\chi_{a_{kn_k}}
+            % \end{equation*}
+            % For the same reasons mentioned in part (d), $h$ is an isomorphism. Additionally, by consecutive applications of the first claim in this part,
+            % \begin{equation*}
+            %     (\widehat{\Z/p_1\Z})^{n_1}\times\cdots\times(\widehat{\Z/p_k\Z})^{n_k} \cong \widehat{(\Z/p_1\Z)^{n_1}\times\cdots\times(\Z/p_k\Z)^{n_k}}
+            % \end{equation*}
+            % But since $A\cong(\Z/p_1\Z)^{n_1}\times\cdots\times(\Z/p_k\Z)^{n_k}$, the group on the right above is isomorphic to $\widehat{A}$. Thus, by chaining together isomorphisms, we can get all the way from $A$ to $\widehat{A}$, as desired.\par\smallskip
+            % Since isomorphic groups have the same order, an abelian group of order $n$ has a dual group with order $n$, i.e., has $n$ characters, as desired.
+
+            Define $h:\widehat{A}_1\times\widehat{A}_2\to\widehat{A_1\times A_2}$ by
+            \begin{equation*}
+                h(\chi_1,\chi_2) = \chi_1\otimes\chi_2
+            \end{equation*}
+            where $[\chi_1\otimes\chi_2](a_1,a_2)=\chi_1(a_1)\cdot\chi_2(a_2)$. Note that we are borrowing part (c)'s conclusion that characters can be treated like representations and, in particular, can have tensor products. To prove that $h$ is an isomorphism of groups, it will suffice to show that it is a bijective homomorphism of groups. The following suffices to show that it is a homomorphism of groups.
+            \begin{align*}
+                h[(\chi_1,\chi_2)\cdot(\chi_3,\chi_4)] &= h(\chi_1\chi_3,\chi_2\chi_4)\\
+                &= \chi_1\chi_3\otimes\chi_2\chi_4\\
+                &= \chi_1\otimes\chi_2\cdot\chi_3\otimes\chi_4\\
+                &= h(\chi_1,\chi_2)\cdot h(\chi_3,\chi_4)
+            \end{align*}
+            Note that the transition form the second to the third line above is justified because the equality becomes $\chi_1(a_1)\cdot\chi_3(a_1)\cdot\chi_2(a_2)\cdot\chi_4(a_2)=\chi_1(a_1)\cdot\chi_2(a_2)\cdot\chi_3(a_1)\cdot\chi_4(a_2)$ when applied to $(a_1,a_2)$ and expanded. As to bijectivity, we will prove injectivity then surjectivity. For injectivity, suppose $h(\chi_1,\chi_2)=h(\chi_3,\chi_4)$. Then for all $a_1\in A_1$,
+            \begin{align*}
+                [h(\chi_1,\chi_2)](a_1,e) &= [h(\chi_3,\chi_4)](a_1,e)\\
+                \chi_1(a_1)\cdot\chi_2(e) &= \chi_3(a_1)\cdot\chi_4(e)\\
+                \chi_1(a_1)\cdot 1 &= \chi_3(a_1)\cdot 1\\
+                \chi_1(a_1) &= \chi_3(a_1)
+            \end{align*}
+            A similar statement holds for $\chi_2$ and $\chi_4$, proving that $(\chi_1,\chi_2)=(\chi_3,\chi_4)$, as desired. For surjectivity, let $\chi\in\widehat{A_1\times A_2}$ be arbitrary. Define $\chi_1$ and $\chi_2$ by
+            \begin{align*}
+                \chi_1(a_1) &= \chi(a_1,e)&
+                \chi_2(a_2) &= \chi(e,a_2)
+            \end{align*}
+            for all $a_1\in A_1$ and $a_2\in A_2$. That $\chi_1,\chi_2$ are characters under these definitions instead of just functions follows immediately from the character-like properties of $\chi$: indeed, with these definitions in hand, we can show that
+            \begin{equation*}
+                [h(\chi_1,\chi_2)](a_1,a_2) = \chi_1(a_1)\cdot\chi_2(a_2)
+                = \chi(a_1,e)\cdot\chi(e,a_2)
+                = \chi[(a_1,e)\cdot(e,a_2)]
+                = \chi(a_1,a_2)
+            \end{equation*}
+            as desired.\par\smallskip
+            By the fundamental theorem of finite abelian groups, $A$ is isomorphic to a direct product of cyclic groups of prime power order. Thus, we may let
+            \begin{equation*}
+                A \cong (\Z/p_1\Z)^{n_1}\times\cdots\times(\Z/p_k\Z)^{n_k}
+            \end{equation*}
+            Borrowing the notation from the first task of part (d) above, define $h:(\Z/p_1\Z)^{n_1}\times\cdots\times(\Z/p_k\Z)^{n_k}\to(\widehat{\Z/p_1\Z})^{n_1}\times\cdots\times(\widehat{\Z/p_k\Z})^{n_k}$ by
+            \begin{equation*}
+                h(a_{11},\dots,a_{kn_k}) = \chi_{a_{11}}\otimes\cdots\otimes\chi_{a_{kn_k}}
+            \end{equation*}
+            For the same reasons mentioned in part (d), $h$ is an isomorphism. Additionally, by consecutive applications of the first claim in this part,
+            \begin{equation*}
+                (\widehat{\Z/p_1\Z})^{n_1}\times\cdots\times(\widehat{\Z/p_k\Z})^{n_k} \cong \widehat{(\Z/p_1\Z)^{n_1}\times\cdots\times(\Z/p_k\Z)^{n_k}}
+            \end{equation*}
+            But since $A\cong(\Z/p_1\Z)^{n_1}\times\cdots\times(\Z/p_k\Z)^{n_k}$, the group on the right above is isomorphic to $\widehat{A}$. Thus, by chaining together isomorphisms, we can get all the way from $A$ to $\widehat{A}$, as desired.\par\smallskip
+            Since isomorphic groups have the same order, an abelian group of order $n$ has a dual group with order $n$, i.e., has $n$ characters, as desired.
+        \end{proof}
     \end{enumerate}
     \item Consider the permutational representation of $S_n$. Decompose it into the sum of (two) irreducible representations.
+    \begin{proof}
+        % Trivial + standard; we have to do it a bit more rigorously per Jack.
+        % See OH notes.
+        % Jess: We might be able to do it with characters (via the Hermitian inner product).
+        % Permutational representation has degree $n$. We can still use $(1,\dots,1)$ to get a trivial subrep. Then a generalized standard rep.
+
+        % The permutational representation fixes $(1,\dots,1)$. Thus, by theorem, we get a decomposition into this and its complement the standard representation. But how do we know if the standard is irreducible? Move around one vector to get $n-1$ linearly independent vectors within it.
+
+
+        Let $\rho:S_n\to GL(V)$ be the permutational representation of $S_n$. As discussed in class, $\rho$ fixes the one-dimensional subspace $\spn(1,\dots,1)\leq V$. Thus, this subspace forms a trivial subrepresentation of $V$. It follows by the theorem from class that this subspace has a complement; this complement is the standard representation. Thus,
+        \begin{equation*}
+            V = (3)\oplus(2,1)
+        \end{equation*}
+        As a one-dimensional representation, $(3)$ is clearly irreducible, but it is not immediately evident that $(2,1)$ is. Fortunately, the following proves that it is. Assuming $n\geq 2$ since the 1D case is trivial. If we take the column vector $(1,-1,0,\dots,0)\in(2,1)$, we can generate from it $n-1$ other linearly independent column vectors using consecutive applications of $\sigma=(12\cdots n)$. For example, if $n=4$, we generate
+        \begin{equation*}
+            \begin{bmatrix}
+                1\\
+                -1\\
+                0\\
+                0\\
+            \end{bmatrix},
+            \begin{bmatrix}
+                0\\
+                1\\
+                -1\\
+                0\\
+            \end{bmatrix},
+            \begin{bmatrix}
+                0\\
+                0\\
+                1\\
+                -1\\
+            \end{bmatrix}
+        \end{equation*}
+        Therefore, there is no subspace of $(2,1)$ that we can't get into when we're in $(2,1)$ \emph{except} that which we've already discussed: $(3)$. It follows that $(2,1)$ is irreducible, as well.
+    \end{proof}
     \item Let $G$ be a finite group.
     \begin{enumerate}
         \item Define the \textbf{space of invariants} of a representation $V$ by the formula
@@ -35,13 +325,60 @@
             V^G = \{v\in V\mid gv=v\ \forall\ g\in G\}
         \end{equation*}
         Prove that $V^G$ is a subrepresentation of $V$. Prove that it is isomorphic to a sum of trivial representations.
+        \begin{proof}
+            To prove that $V^G$ is a subrepresentation of $V$, it will suffice to show that it is a subspace of $V$, and $gV^G\subset V^G$ for all $g\in G$. Since we clearly have $g\cdot 0=0$ for all $g\in G$, $g(v_1+v_2)=v_1+v_2$ for all $v_1,v_2$ satisfying $gv_i=v_i$, and $agv=g(av)$, $V^G$ is a subspace of $V$. Now for closure under the $g$'s, let $v\in V^G$ be arbitrary. But by the definition of $V^g$, we have $gv=v\in V^g$ for all $g\in G$, as desired.\par
+            Let $e_1,\dots,e_k$ be a basis of $V^G$. Since $g(\lambda e_i)=\lambda e_i$ for all $\lambda e_i\in\spn(e_i)$, $i=1,\dots,k$, each $\spn(e_i)$ is, itself, fixed by all $g$ and hence a trivial subrepresentation of $V^G$. Therefore,
+            \begin{equation*}
+                V^G \cong \underbrace{(3)\oplus\cdots\oplus(3)}_{k\text{ times}}
+            \end{equation*}
+            as desired.
+        \end{proof}
         \item Prove that $(\Hom_F(V,W))^G$ is isomorphic to $\Hom_G(V,W)$.
+        \begin{proof}
+            % We know that $\Hom_F(V,W)\cong V^*\otimes W$.
+            % $\Hom_G(V,W)$ is the space of all morphisms from $G$-reps $V$ to $G$-rep $W$, that is, all linear maps $f:V\to W$ such that $g\circ f=f\circ g$. Let $f$ be one of these. Let $g$ be arbitrary. We want to prove that $gf=f$. But $g\cdot f=gfg^{-1}=f$, as desired.
+            % Vice versa, suppose $f=gf=gfg^{-1}$ for all $g\in G$. Then this gets us backwards.
+
+            % It is that simple overall!
+
+
+            To prove the claim, it will suffice to prove the stronger condition that $(\Hom_F(V,W))^G=\Hom_G(V,W)$ as sets. We will proceed via a bidirectional inclusion proof. Let's begin.\footnote{Note: Beware rampant abuses of notation throughout this proof. For example, the statement $gf=fg$ stands in for the much more complex $\rho_V(g)\circ f=f\circ\rho_W(g)$.}\par
+            First, let $f\in(\Hom_F(V,W))^G$ be arbitrary. Then by the definition of the space of invariants, $g\cdot f=f$ for all $g\in G$. Additionally, since $G\acts\Hom_F(V,W)$ via $g\cdot f=gfg^{-1}$, we have that $gfg^{-1}=f$, i.e., $gf=fg$ for all $g\in G$. But this implies that $f$ is a morphism of $G$-representations, i.e., $f\in\Hom_G(V,W)$, as desired.\par
+            The proof is symmetric in the reverse direction.
+        \end{proof}
     \end{enumerate}
+    \pagebreak
     \item Let $\rho:G\to GL_n(\C)$ be a representation with character $\chi$.
     \begin{enumerate}
         \item Prove that $\ker(\rho)=\{g\in G\mid\chi(g)=n\}$.
+        \begin{proof}
+            We proceed via a bidirectional inclusion proof.\par
+            Suppose first that $g\in\ker(\rho)$. Then $\rho(g)=I_n$. But since $\tr(I_n)=n$ and $\chi(g)=\tr(\rho(g))$, we have by transitivity that $\chi(g)=n$, as desired.\par
+            Now suppose that $\chi(g)=n$. Recall from class that every eigenvalue $\lambda_i$ of $\rho(g)$ is a root of unity. Additionally, since $\lambda_1+\cdots+\lambda_n=\chi(g)=n$, we must have $\lambda_i=1$ ($i=1,\dots,n$). But this implies that $\rho(g)=I_n\in\ker(\rho)$, as desired.
+        \end{proof}
         \item Prove that for any $g\in G$, we have $|\chi(g)|\leq n$.
+        \begin{proof}
+            % Since every eigenvalue is a root of unity in the complex plane, the magnitude of the sum is maximized when all eigenvalues are "linearly dependent," i.e., $\R$-scalars of each other (or, in the case of roots of unity, simply equal). Thus, the maximum value of 
+
+            As in part (a), recall from class that every eigenvalue $\lambda_i$ of $\rho(g)$ is a root of unity. Then by the triangle inequality,
+            \begin{equation*}
+                |\chi(g)| = |\lambda_1+\cdots+\lambda_n| \leq |\lambda_1|+\cdots+|\lambda_n| = 1+\cdots+1 = n
+            \end{equation*}
+            as desired.
+        \end{proof}
         \item Prove that for a given $g\in G$, $|\chi(g)|=n$ if and only if there exists $\lambda\in\C$ such that $\rho(g)=\lambda I$.
+        \begin{proof}
+            Suppose first that $|\chi(g)|=n$. Then $|\lambda_1+\cdots+\lambda_n|=n$, so since $|\lambda_i|=1$ for $i=1,\dots,n$, we must have $\lambda_1=\cdots=\lambda_n$. Define $\lambda:=\lambda_i$. Recall that a linear operator with $n$ eigenvalues must have a corresponding $n\times n$ matrix in some basis equal to $\diag(\lambda_1,\dots,\lambda_n)$. Therefore, in this case, the corresponding matrix of $\rho(g)$ is $\lambda I$ (and is $\lambda I$ in any basis), as desired.\par
+            Now suppose that $\rho(g)=\lambda I$. Then
+            \begin{equation*}
+                |\chi(g)| = |\tr(\lambda I)|
+                = |n\lambda|
+                = n\cdot|\lambda|
+                = n\cdot 1
+                = n
+            \end{equation*}
+            as desired.
+        \end{proof}
     \end{enumerate}
 \end{enumerate}
 
