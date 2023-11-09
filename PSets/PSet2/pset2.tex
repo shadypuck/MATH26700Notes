@@ -1,0 +1,51 @@
+\documentclass[../psets.tex]{subfiles}
+
+\pagestyle{main}
+\renewcommand{\leftmark}{Problem Set \thesection}
+\stepcounter{section}
+
+\begin{document}
+
+
+
+
+\section{Introduction to Character Theory}
+\begin{enumerate}
+    \item \marginnote{10/13:}\textbf{More linear algebra}. Let $V$ be a finite-dimensional vector space.
+    \begin{enumerate}
+        \item Prove that under the identification of $V\otimes V^*$ with $\Hom_F(V,V)$, \textbf{simple} tensors $v\otimes\varphi$ correspond to linear maps of rank 0 or 1.
+        \item Consider the vector space $W=\Hom_F(V,V)$. Prove that any linear functional in $W^*$ has the form $L\mapsto\tr(LM)$ for some $M\in W$. Prove that the vector space $\Hom_F(V,V)$ is "canonically" self-dual.
+    \end{enumerate}
+    \item \textbf{Characters of abelian groups}. Let $A$ be a finite abelian group.
+    \begin{enumerate}
+        \item A \textbf{character} of $A$ is a homomorphism $\chi:A\to\C^\times$. Prove that for every $g\in A$, the value $\chi(g)$ is a root of unity. Prove that the product of characters is a character. Prove that characters form an abelian group. This group is called the \textbf{dual} of $A$ and is denoted $\widehat{A}$.
+        \item Prove directly that for every nontrivial character $\chi\in\widehat{A}$, the following identity holds.
+        \begin{equation*}
+            \sum_{g\in A}\chi(g) = 0
+        \end{equation*}
+        \item Prove that characters are the same as the 1-dimensional representations of $A$; product of characters is the same as a tensor product of representations, and the inverse of the character is the same as the dual representation.
+        \item Find all characters for $A=\Z/n\Z$. Compute the dual group $\widehat{A}$. Do the same for $A=(\Z/2\Z)\times(\Z/2\Z)$.
+        \item Prove that $\widehat{A_1\times A_2}$ is isomorphic to $\widehat{A}_1\times\widehat{A}_2$. Prove that groups $A$ and $\widehat{A}$ are isomorphic as abstract groups. Deduce that an abelian group of order $n$ has exactly $n$ characters.
+    \end{enumerate}
+    \item Consider the permutational representation of $S_n$. Decompose it into the sum of (two) irreducible representations.
+    \item Let $G$ be a finite group.
+    \begin{enumerate}
+        \item Define the \textbf{space of invariants} of a representation $V$ by the formula
+        \begin{equation*}
+            V^G = \{v\in V\mid gv=v\ \forall\ g\in G\}
+        \end{equation*}
+        Prove that $V^G$ is a subrepresentation of $V$. Prove that it is isomorphic to a sum of trivial representations.
+        \item Prove that $(\Hom_F(V,W))^G$ is isomorphic to $\Hom_G(V,W)$.
+    \end{enumerate}
+    \item Let $\rho:G\to GL_n(\C)$ be a representation with character $\chi$.
+    \begin{enumerate}
+        \item Prove that $\ker(\rho)=\{g\in G\mid\chi(g)=n\}$.
+        \item Prove that for any $g\in G$, we have $|\chi(g)|\leq n$.
+        \item Prove that for a given $g\in G$, $|\chi(g)|=n$ if and only if there exists $\lambda\in\C$ such that $\rho(g)=\lambda I$.
+    \end{enumerate}
+\end{enumerate}
+
+
+
+
+\end{document}
