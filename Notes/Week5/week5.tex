@@ -1,0 +1,210 @@
+\documentclass[../notes.tex]{subfiles}
+
+\pagestyle{main}
+\renewcommand{\chaptermark}[1]{\markboth{\chaptername\ \thechapter\ (#1)}{}}
+\setcounter{chapter}{4}
+
+\begin{document}
+
+
+
+
+\chapter{???}
+\section{Wedderburn-Artin Theory}
+\begin{itemize}
+    \item \marginnote{10/23:}Share notes with Rudenko at the end of the course!
+    \item Today: Wedderburn-Artin theory.
+    \begin{itemize}
+        \item Noncommutative algebra.
+        \item Noncommutative is a big part of math, partially because of its relation to QMech and partially because of its use in math, itself.
+        \item There is a textbook: \textcite{bib:Lang}. It's a hard, grad-level textbook but very cleanly written. Not a bad book to have in our mind as we start to encounter category theory.
+    \end{itemize}
+    \item So here's what were talking about.
+    \begin{itemize}
+        \item Our main object is $A$, an \textbf{associative algebra} over a field $F$.
+    \end{itemize}
+    \item Left vs. right algebras.
+    \begin{itemize}
+        \item When $A$ is not commutative, we have to specify which we are dealing with.
+        \item Let $A$ be an algebra over $F$.
+        \item Recall left-modules and right-modules.
+        \begin{itemize}
+            \item In a left module, you can multiply $A\times M\to M$ where $(ab)m=a(bm)$.
+            \item In a right module, $(ab)m=b(am)$. More simply, $m(ab)=(ma)b$.
+            \item With modules, we get submodules, quotient modules, homomorphisms of modules, etc.
+        \end{itemize}
+        \item Let $I\subset A$ be a left-submodule. Thus, it is a subspace of $A$ such that for all $a\in A$, $aI\subset I$, i.e., a left ideal.
+        \item In a right-submodule $I\subset A$, we have that for all $b\in A$, $Ib\subset I$, i.e., a right ideal.
+        \item In a two-sided ideal $I\subset A$, we have for all $a,b\in I$ that $aI\subset I$ and $Ib\subset I$.
+        \item Example: The matrix algebra is the prototypical noncommutative algebra. Consider $M_{2\times 2}(\C)$.
+        \begin{itemize}
+            \item Pick $v=(1,0)$.
+            \item Look at ideal $I=\{X\in M_{2\times 2}\mid Xv=0\}$. This is called the \textbf{annihilator}, and it is a left ideal. Explicitly, this ideal is the subset of all matrices of the form
+            \begin{equation*}
+                \begin{pmatrix}
+                    0 & a\\
+                    0 & b\\
+                \end{pmatrix}
+            \end{equation*}
+            for $a,b\in\C$.
+            \item An example of a right ideal is all those such that $vX=0$, i.e., all matrices of the form
+            \begin{equation*}
+                \begin{pmatrix}
+                    0 & 0\\
+                    a & b\\
+                \end{pmatrix}
+            \end{equation*}
+            \item There are \emph{no} two-sided ideals herein, save the trivial one.
+        \end{itemize}
+    \end{itemize}
+    \item \textbf{Simple} (algebra): An algebra for which there are no nontrivial two-sided ideals.
+    \item Every time you go more abstract, it's more boring because you have less things to play with, but we can derive more general rules.
+    \begin{itemize}
+        \item We'll only stay so abstract for 2-3 lectures.
+    \end{itemize}
+    \item We want to convert left-algebras to right-algebras.
+    \begin{itemize}
+        \item To do so, we can construct \textbf{opposite algebras}.
+    \end{itemize}
+    \item \textbf{Opposite algebra} (of $A$): The algebra with the same vector space structure as $A$, but with the reversed multiplication such that $a*b$ in this space yields $b*a$ in $A$. \emph{Denoted by} $\bm{A^\textbf{op}}$.
+    \begin{itemize}
+        \item Left ideals of $A$ become right ideals of $A^\text{op}$ and vice versa. Two-sided ideals stay the same. 
+        \item In category theory, left-modules over $A$ are equivalent to right-modules over $A^\text{op}$.
+        \item Opposite algebras are briefly defined on \textcite[308]{bib:FultonHarris} and are not defined anywhere else in any of the other sources.
+    \end{itemize}
+    \item Example: Consider $M_{n\times n}(F)^\text{op}$.
+    \begin{itemize}
+        \item Claim: This algebra equals regular $M_{n\times n}(F)$.
+        \item The map between these spaces is $A\mapsto A^T$.
+        \item There are other maps, such as conjugation and then transpose.
+        \item Being isomorphic to your opposite is a strange and interesting property!
+    \end{itemize}
+    \item Example: $\C[G]^\text{op}\cong\C[G]$.
+    \begin{itemize}
+        \item Left as an exercise to find the map.
+    \end{itemize}
+    \item Let $M,N$ be modules. We now investigate some properties of $\Hom_A(M,N)$, a nice abelian group.
+    \begin{itemize}
+        \item Explicitly, it's
+        \begin{equation*}
+            \Hom_A(M,N) = \{f:M\to N\text{ linear}\mid f(am)=af(m)\ \forall\ a\in A\}
+        \end{equation*}
+        \item We have that
+        \begin{equation*}
+            \Hom_A(M_1\oplus M_2,N) \cong \Hom_A(M_1,N)\oplus\Hom_A(M_2,N)
+        \end{equation*}
+        \begin{itemize}
+            \item Prove by looking at what happens to vectors of the form $(M_1,0)$ and $(0,M_2)$.
+        \end{itemize}
+        \item Similarly,
+        \begin{equation*}
+            \Hom_A(M,N_1\oplus N_2) \cong \Hom_A(M,N_1)\oplus\Hom_A(M,N_2)
+        \end{equation*}
+    \end{itemize}
+    \item What if we have $\Hom(M_1\oplus\cdots\oplus M_n,N_1\oplus\cdots\oplus N_m)$?
+    \begin{itemize}
+        \item Then we have by induction from the previous cases that
+        \begin{equation*}
+            \Hom(M_1\oplus\cdots\oplus M_n,N_1\oplus\cdots\oplus N_m) = \bigoplus_{\substack{i=1,\dots,n\\j=1,\dots,m}}\Hom(M_i,N_j)
+        \end{equation*}
+        \item Let $\varphi_{ij}\in\Hom(M_i,N_j)$.
+        \item At this point, it's very natural to write matrices
+        \begin{equation*}
+            \begin{bNiceMatrix}[first-row,first-col]
+                 & {\color{white}n} & n & {\color{white}n}\\
+                 & \Block{3-3}{\varphi_{ji}} & & \\
+                m & & & \\
+                 & & & \\
+            \end{bNiceMatrix}
+            \begin{pmatrix}
+                m_1\\
+                \vdots\\
+                m_n\\
+            \end{pmatrix}
+            =
+            \begin{pmatrix}
+                \varphi_{11}(m_1)+\cdots+\varphi_{1n}(m_n)\\
+                \vdots\\
+                \\
+            \end{pmatrix}
+            =
+            \begin{pmatrix}
+                (\varphi(m))\\
+                \vdots\\
+                \\
+            \end{pmatrix}
+        \end{equation*}
+        \begin{itemize}
+            \item Is it $\phi_{ji}$ or $\phi_{ij}$?? \textcite[642]{bib:Lang} seems to back the latter.
+        \end{itemize}
+        \item To make this make sense for ourselves, write out the $2\times 2$ case from $M_1\oplus M_2\to M_1\oplus M_2$.
+        \begin{equation*}
+            \begin{pmatrix}
+                \varphi_{11} & \varphi_{21}\\
+                \varphi_{12} & \varphi_{22}\\
+            \end{pmatrix}
+            \begin{pmatrix}
+                m_1\\
+                m_2\\
+            \end{pmatrix}
+            =
+            \begin{pNiceMatrix}
+                \Block{2-2}{} & \\
+                {\color{white}\varphi_{12}} & {\color{white}\varphi_{12}}\\
+            \end{pNiceMatrix}
+        \end{equation*}
+        \item Matrices made out of maps can seem really confusing when you first start, but in time, it will make sense.
+    \end{itemize}
+    \item Recall the result from last time about division algebras.
+    \item The main object we need to understand is a \textbf{semisimple algebra}.
+    \item \textbf{Semisimple} (module): A module that satisfies any of the conditions in the following theorem.
+    \begin{itemize}
+        \item Note that we proved something analogous to condition 3 early on! This was the complements theorem.
+        \item This is equivalent for infinite-dimensional algebras; we need \textbf{Zorn's lemma} regarding maximal ideals/the axiom of choice here, though.
+    \end{itemize}
+    \item Theorem: Let $A$ be an algebra over $F$, and let $M$ be a left-module. Then TFAE.
+    \begin{enumerate}
+        \item $M=\bigoplus_{i\in I}S_i$, where each $S_i$ is a simple module and $I$ is an \textbf{indexing set}, not a simple module/ideal.
+        \item $M=\sum_{i\in I}S_i$, where the sum is \emph{not} direct.
+        \item For all submodules $N\subset M$, there exists $N'$ such that $M=N\oplus N'$.
+    \end{enumerate}
+    \begin{proof}
+        This proof only applies for the case that $M$ is finite dimensional; the theorem is more general than that, but we are not interested in the more general case.\par\smallskip
+        ($1\Rightarrow 2$): Very clear; all direct sums are sums.\par\smallskip
+        ($2\Rightarrow 1$): Consider the maximal subset $J\subset I$ (by inclusion, not by indices) of our indexing set such that
+        \begin{equation*}
+            \sum_{i\in J}S_i = \bigoplus_{i\in J}S_i
+        \end{equation*}
+        In other words, $J$ induces the highest-dimension sum of submodules that is a direct sum. Note that we can still find a singleton $J$ in the direct-sum-of-one-thing case, so we're starting from a good base case.\par
+        Claim: $\bigoplus_{i\in J}S_i=M$. Suppose not. Then there exists $m\in M$ such that $m\notin\bigoplus_{i\in J}S_i$ and $m=s_{i_1}+\cdots+s_{i_k}$ where each $s_{i_j}\in S_{i_j}$. If all $s_{i_1},\dots,s_{i_k}\in\bigoplus_{i\in J}S_i$, then we have arrived at a contradiction and we are done. If not, then there exists some $s_{i_t}$ such that $s_{i_t}\notin\bigoplus_{i\in J}S_i$. Now consider $S_{i_t}\cap(\bigoplus_{i\in J}S_{i})$. This will be a submodule of $S_{i_t}$. But since $S_{i_t}$ is simple by hypothesis, this means that $S_{i_t}\cap(\bigoplus_{i\in J}S_{i})$ either equals $S_{i_t}$ or $0$. However, we know that it can't equal $S_{i_t}$ because above, we found $s_{i_t}\in S_{i_t}$ such that $s_{i_t}\notin\bigoplus_{i\in J}S_i$. Thus, $S_{i_t}\cap(\bigoplus_{i\in J}S_{i})=0$. But this means that $S_{i_t}+\bigoplus_{i\in J}S_i$ is a direct sum, which contradicts the choice of $J$ as maximal.\par\smallskip
+        $(1\Rightarrow 3$): Let's take a submodule $N\subset M$. By 1, $M=\bigoplus_{i\in I}S_i$. Let's look a tall subsets $J$ such that
+        \begin{equation*}
+            N+\sum_{j\in J}S_j = N\oplus\left( \sum S_j \right)
+        \end{equation*}
+        Look at the maximal one by inclusion. Then once again, by the same proof strategy as above,
+        \begin{equation*}
+            N\oplus\underbrace{\left( \sum S_j \right)}_{N'} = M
+        \end{equation*}\par
+        $(3\Rightarrow 1)$: We use what we've learned about representations. Let $M=N_1\oplus N_2$. Then $N_2$, if nonsimple, has subsets $N_2\oplus N_3$. We can continue on and on. Because dimensions finitely decrease, we'll eventually have to arrive at a sum $N_1\oplus\cdots\oplus N_m$ of simples.
+    \end{proof}
+    \item Now, we have 3 definitions of semisimple modules.
+    \item Corollary: If $A$ is an algebra, $M$ is a semisimple module, and $N\subset M$ is a submodule, then\dots
+    \begin{enumerate}
+        \item $N$ is semisimple.
+        \begin{proof}
+            Let $L$ be a submodule of $N$. We need to find a complement of $L$ inside $N$. We can find $L'\subset M$ such that $L\oplus L'=M$. Then $L'\cap N\subset N$ is the complement of $L$ in $N$. Why? Because of the following.\par
+            Claim: $(L'\cap N)\bigoplus L=N$. Not intersecting: $L'\cap N\cap L\subset L'\cap L=0$. Summing to the whole thing: Let $n\in N$ be arbitrary. Then since $n\in M$, there exists $\ell,\ell'\in L,L'$ such that $n=\ell+\ell'$. But since $n,\ell\in N$, we must have $\ell'\in N$ as well. Therefore, $\ell'\in L'\cap N$.
+        \end{proof}
+        \item $M/N$ is semisimple.
+    \end{enumerate}
+    \item Takeaway: Submodules and quotient modules of semisimple modules are semisimple modules.
+    \item \textcite{bib:Lang} has a write-up of the proof from today's class.
+    \begin{itemize}
+        \item Funnily enough, it is the only textbook that does! \textcite{bib:FultonHarris} doesn't have it; not even \textcite{bib:Etingof} has it!
+    \end{itemize}
+\end{itemize}
+
+
+
+
+\end{document}
