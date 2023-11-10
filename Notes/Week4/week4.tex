@@ -250,5 +250,199 @@
 
 
 
+\section{Orthogonality Results}
+\begin{itemize}
+    \item \marginnote{10/18:}Announcements.
+    \begin{itemize}
+        \item Goal: Finish our discussion of the orthogonality of characters, projection functions, etc.
+        \item Friday: Frobenius determinant.
+        \item Next week: Group algebras, associative algebras, etc.; another perspective on representations.
+        \item After next week: A more advanced part of representation theory related to group theory.
+    \end{itemize}
+    \item Describing Figure \ref{fig:RepTheoryStory} from a different perspective.
+    \begin{itemize}
+        \item Let $G$ be a finite group, and let $k$ denote the number of conjugacy classes and the number of irreps. Let $C_1,\dots,C_k$ be the conjugacy classes and $V_1,\dots,V_k$ be the irreps.
+        \item There is no natural/canonical bijection between the two sets. For a simple group, there is often a canonical way, and this is where things get interesting.
+        \begin{itemize}
+            \item Example: Symmetric group induces canonical bijection, as we'll see later.
+        \end{itemize}
+        \item $\C_\text{cl}[G]=\C^k$ is a vector space of class functions and a ring.
+        \item We have the Hermitian inner product
+        \begin{equation*}
+            \inp{f_1,f_2} = \frac{1}{|G|}\sum_{g\in G}f_1(g)\overline{f_2(g)}
+        \end{equation*}
+        \item Recall that $\chi_{V_1},\dots,\chi_{V_k}$ is an orthonormal basis such that
+        \begin{equation*}
+            \inp{\chi_{V_i},\chi_{V_j}} = \delta_{ij}
+        \end{equation*}
+        \item We have another basis $\delta_{C_1},\dots,\delta_{C_k}$ defined by
+        \begin{equation*}
+            \delta_{C_i}(g) =
+            \begin{cases}
+                0 & g\notin C_i\\
+                1 & g\in C_i
+            \end{cases}
+        \end{equation*}
+        that is orthogonal but not orthonormal:
+        \begin{equation*}
+            \inp{\delta_{C_i},\delta_{C_j}} =
+            \begin{cases}
+                0 & C_i\neq C_j\\
+                \frac{|C_i|}{|G|} & C_i=C_j
+            \end{cases}
+        \end{equation*}
+        \item How do we relate the two bases?
+        \item To begin, fix $C_i$. Then
+        \begin{equation*}
+            \delta_{C_j}(g) = \sum_{V_i}\lambda_i\chi_{V_i}(g)
+        \end{equation*}
+        \item $\lambda_i$ can be computed immediately using the inner product since the characters are orthonormal:
+        \begin{equation*}
+            \lambda_i = \inp{\delta_{C_j},\chi_{V_i}}
+            = \frac{1}{|G|}\sum_{g\in G}\delta_{C_j}(g)\overline{\chi_{V_i}(g)}
+            = \frac{|C_j|\bar{\chi}_{V_i}(g)}{|G|}
+        \end{equation*}
+        \begin{itemize}
+            \item You took $\lambda_i = \inp{\delta_{C_j},\bar{\chi}_{V_i}}$; which one is correct??
+        \end{itemize}
+        \item But then
+        \begin{equation*}
+            \delta_{C_j}(g) = \frac{|C_j|}{|G|}\left( \sum_{V_i}\bar{\chi}_{V_i}(C_j)\chi_{V_i}(g) \right)
+        \end{equation*}
+        \item It follows that we have two bases of $\C_\text{cl}[G]$. These are given by
+        \begin{align*}
+            \frac{|G|}{|C_j|}\delta_{C_j}&&
+            \chi_{V_i^*}
+        \end{align*}
+        where $i,j=1,\dots,k$.
+        \item How do we convert between these two very natural bases of our space of functions? The change of basis matrix from left to right is the character table.
+        \item Obviously, we have to do some scaling and take some duals, but it's not that bad and it fits the character table really well.
+        \item This gives us some properties of the character table such as orthogonality.
+        \item For example, \textbf{orthogonal} matrices convert between orthogonal bases; in the complex domain, such a matrix is \textbf{unitary}, i.e., for the character table $U$, $U\bar{U}^T=E$.
+    \end{itemize}
+    \item Orthogonality relations that you can derive.
+    \begin{enumerate}
+        \item We can show that
+        \begin{equation*}
+            \sum_{g\in G}\chi_1(g)\overline{\chi_2(g)} =
+            \begin{cases}
+                0 & \chi_1\neq\chi_2\\
+                |G| & \chi_1=\chi_2
+            \end{cases}
+        \end{equation*}
+        \begin{itemize}
+            \item Use the unitary condition.
+        \end{itemize}
+        \item We can show that
+        \begin{equation*}
+            \sum_{i=1}^k\chi_i(g_1)\overline{\chi_i(g_2)} =
+            \begin{cases}
+                0 & g_1\neq g_2\\
+                \frac{|G|}{|C(g_1)|} & g_1\sim g_2
+            \end{cases}
+        \end{equation*}
+        \begin{itemize}
+            \item We literally just take the identity defining $\delta_{C_j}(g)$.
+        \end{itemize}
+    \end{enumerate}
+    \item \textbf{Isotypical component}: A representation that is equal to the direct sum of isomorphic irreducible representations. \emph{Also known as} \textbf{isotypic component}.
+    \begin{itemize}
+        \item Illustrative example: For $V=V_1^{n_1}\oplus\cdots\oplus V_k^{n_k}$, each $V_i^{n_i}$ is an isotypical component.
+    \end{itemize}
+    \item Examples.
+    \begin{enumerate}
+        \item Let $G\acts\C^2$ by $\rho(g)=E_2$. Thus, we can say that $\C^2=V_1\oplus V_1$, but we can't say this in any unique, canonical way, i.e., we can choose infinitely many $V_1$'s and have the statement still be true, where $V_1$ is the trivial rep.
+        \item We have $V_1^{n_1}=V^G=\{v\in V\mid gv=v\ \forall\ g\in G\}$. Look at what's invariant under the symmetry group, i.e., define
+        \begin{equation*}
+            P = \frac{1}{|G|}\sum g
+        \end{equation*}
+        \begin{itemize}
+            \item All \textbf{invariant functions} come from averaging over the group!
+            \item Then $P^2=P$ and $\im P=V^G$.
+            \item Takeaway: We call each $V_i^{n_i}$ an \textbf{isotypical component}.
+            \item What's going on in this example??
+        \end{itemize}
+        \item The permutational representation for $S_n$ decomposes into the sum of the trivial and standard reps; there is only one decomposition this way. If we look at $V_1\oplus V_\text{stand}^2$, then our decomposition will depend on a choice of a plane.
+    \end{enumerate}
+    \item Reminder.
+    \begin{itemize}
+        \item Last time, we chose an $f\in\C_\text{cl}[G]$, a representation $V$, and then took $\sum f(g)g:V\to V$ so that then $\sum f(g)g\in\Hom_G(V,V)$.
+        \item Moreover, we proved that if $V$ is irreducible, then this endomorphism is equal to a scalar $\lambda$ times the identity matrix via Schur's lemma.
+        \item Computing $\lambda$:
+        \begin{equation*}
+            \lambda = \frac{|G|}{d_V}\inp{f,\chi_V^*}
+        \end{equation*}
+        \begin{itemize}
+            \item Hard to remember but easy to derive.
+        \end{itemize}
+        \item Define $V=V_1^{n_1}\oplus\cdots\oplus V_k^{n_k}$ and $P_i:V\to V_i^{n_i}$.
+        \item In particular, look at
+        \begin{equation*}
+            P_i = \frac{d_V}{|G|}\sum_{g\in G}\chi_{V_i^*}(g)g
+        \end{equation*}
+        \begin{itemize}
+            \item This averaging operator is consistent with what we had before.
+        \end{itemize}
+        \item $P_i$ acts on $V_i$ by
+        \begin{equation*}
+            \frac{d_{V_i}}{|G|}\frac{|G|}{d_{V_i}}\inp{\chi_{V_i^*},\chi_{V_i^*}} = 1
+        \end{equation*}
+        \item $P_i$ acts on $V_j$ by
+        \begin{equation*}
+            \frac{d_{V_i}}{|G|}\frac{|G|}{d_{V_i}}\inp{\chi_{V_i^*},\chi_{V_j^*}} = 0
+        \end{equation*}
+        \item Take $V=V_1^{n_1}\oplus\cdots\oplus V_k^{n_k}$ and apply $P_i$. It follows by the above that it is exactly the projection on $V_i^{n_i}$.
+        \item Thus, $P_1+\cdots+P_k=1$. $P_i^2=P_i$. $P_iP_j=0$. This is called a/the (which one??) \textbf{idempotent decompostion}.
+        \item Example: Let $v\in V$. Then $v=P_1v+\cdots+P_kv$.
+        \item Additionally, we can take a function $f$ that is invariant under the group...??
+    \end{itemize}
+    \item We're done early.
+    \item We will not start the Frobenius determinant today.
+    \item We will start on next week's content then so we can begin thinking about it.
+    \item \textbf{Associative algebra}: A vector space over a field $F$ that is also a (not necessarily commutative) ring, where we have a unit 1 in the ring, addition, and multiplication. Scalar multiplication: $\lambda a=(\lambda\cdot 1)\cdot a$. Associativity condition: $(\lambda a)b=\lambda(ab)$. \emph{Denoted by} $\bm{A}$.
+    \begin{itemize}
+        \item We'll only discuss finite-dimensional algebras in this course.
+    \end{itemize}
+    \item Examples:
+    \begin{enumerate}
+        \item $\R$, $\C$ (an algebra over $\R$).
+        \item $\HH$, a 4d algebra over $\R$. The algebra of quaternions. $\HH=\R+\R i+\R j+\R k$.
+        \begin{itemize}
+            \item Hamilton's remarkable discovery: There is a 4D set of numbers that is not commutative but is still associative and helps describe rotation in 3D or 4D space.
+            \item Multiplication rules:
+            \begin{align*}
+                i^2 &= j^2 = k^2 = -1&
+                ijk &= -1
+            \end{align*}
+            \item We should spend part of our weekend reading a history of quaternions!
+        \end{itemize}
+        \item $M_{n\times n}(F)$, the \textbf{matrix algebra}.
+        \item $A_1\oplus\cdots\oplus A_n$, the \textbf{direct sum} of algebras.
+        \begin{itemize}
+            \item Addition and multiplication are done pairwise.
+        \end{itemize}
+        \item $A_1\otimes A_2$.
+        \begin{itemize}
+            \item We will not talk about this today, though!
+        \end{itemize}
+    \end{enumerate}
+    \item Let's go back; let $G$ be a finite group and consider $\C[G]$, the set of functions on $G$.
+    \begin{itemize}
+        \item This algebra has some basis $\bigoplus\C e_g$.
+        \item To get the algebra structure, we just need a rule for multiplying basis elements. In this case, we use $e_{g_1}e_{g_2}=e_{g_1g_2}$.
+        \item This is the \textbf{algebra over $\pmb{\C}$ of dimension $\bm{G}$}.
+        \item Theorem: $\C[G]\cong M_{d_1\times d_1}(\C)\oplus\cdots\oplus M_{d_k\times d_k}(\C)$.
+        \begin{itemize}
+            \item We can prove this theorem from what we know: Schur's Lemma and complete reducability.
+            \item We'll discuss it for several consecutive times.
+            \item A similar result holds for \emph{many} algebras (e.g., semisimple algebra), not just \emph{group} algebras.
+        \end{itemize}
+    \end{itemize}
+    \item HW1-2 will be graded later this week and handed back on Friday.
+    \item In \textcite{bib:Etingof}, we can find a lot of history of some of this stuff. The comments are interesting and entertaining.
+\end{itemize}
+
+
+
 
 \end{document}
