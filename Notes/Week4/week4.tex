@@ -9,7 +9,7 @@
 
 
 
-\chapter{???}
+\chapter{Properties of Characters}
 \section{Representation Ring; Character Basis}
 \begin{itemize}
     \item \marginnote{10/16:}Announcements.
@@ -440,6 +440,107 @@
     \end{itemize}
     \item HW1-2 will be graded later this week and handed back on Friday.
     \item In \textcite{bib:Etingof}, we can find a lot of history of some of this stuff. The comments are interesting and entertaining.
+\end{itemize}
+
+
+
+\section{Frobenius Determinant; Intro to Associative Algebras}
+\begin{itemize}
+    \item \marginnote{10/20:}Let $G=\{g_1,\dots,g_n\}$.
+    \item \textbf{Frobenius determinant}: The polynomial defined as follows. \emph{Denoted by} $\bm{F(x_{g_1},\ldots,x_{g_n})}$. \emph{Given by}
+    \begin{equation*}
+        F(x_{g_1},\dots,x_{g_n}) = \det|x_{g_ig_j}|
+    \end{equation*}
+    \begin{itemize}
+        \item The Frobenius determinant is a homogeneous polynomial with integer coefficients of degree $n$.
+        \item $F(x_{g_1},\dots,x_{g_n})\in\Z[x_{g_1},\dots,x_{g_n}]$.
+    \end{itemize}
+    \item Theorem: There exist irreducible $P_1,\dots,P_m\in\Z[x_{g_1},\dots,x_{g_n}]$ such that
+    \begin{equation*}
+        F = P_1^{\deg P_1}\cdots P_k^{\deg P_k}
+    \end{equation*}
+    Moreover, $\chi_i(g)\approx\chi_g^{\deg P_i}$, where $\chi_g$ is the coefficient of $P_i$. (Is this last line correct??)
+    \begin{proof}
+        Let $\rho:G\to GL_n$ be the regular representation of $G$, and define $P_\rho=\sum\chi_{g_i}\rho(g_i)$. Then $P_\rho(x_{g_1},\dots,x_{g_n})=\pm I(x_{g_1},\dots,x_{g_n})$.
+
+        We have that $P_\rho(e_{g_j})=\sum x_{g_i}g_ie_{g_j}=\sum x_{g_i}e_{g_ig_j}=\sum x_{g_ig_j^{-1}}e_{g_i}$, so the matrix of $P_\rho$ is $(x_{g_ig_j^{-1}})$ and thus has permuted columns and rows relative to the original matrix of which we took the Frobenius determinant.
+
+        Recall that $\C[G]\cong V_1^{d_1}\oplus\cdots\oplus V_k^{d_k}$. Additionally, the matrix of each $V_i$ is $(\sum\chi_gg_i)$.
+
+        Understanding this??
+    \end{proof}
+    \item \textbf{Group algebra}: The algebra $A$ over a field $F$ with one basis element $e_i$ for each $g_i\in G$ and the multiplication law
+    \begin{equation*}
+        e_i\cdot e_j = \sum_{i=1}^k\lambda_{ij}^ke_k
+    \end{equation*}
+    \begin{itemize}
+        \item $A\cong F^n$.
+    \end{itemize}
+    \item \textbf{Division algebra}: An algebra $A$ such that for all nonzero $x\in A$, there exists a $y\in A$ such that $xy=1$.
+    \item \textbf{Field}: A commutative division algebra.
+    \item Examples.
+    \begin{enumerate}
+        \item $\C$ is a 2-dimensional algebra over $\R$.
+        \item $\HH$ is a 4-dimensional algebra over $\R$.
+        \begin{itemize}
+            \item As discussed last time, the elements are of the form $q=a+bi+cj+dk$ where $i^2=j^2=k^2=-1=ijk$
+            \item Note that it follows that
+            \begin{equation*}
+                \bar{q} = a-bi-cj-dk
+            \end{equation*}
+            \item Hence,
+            \begin{equation*}
+                q\bar{q} = a^2+b^2+c^2+d^2
+            \end{equation*}
+            \item Thus, we can define
+            \begin{equation*}
+                q^{-1} = \frac{q}{a^2+b^2+c^2+d^2}
+            \end{equation*}
+        \end{itemize}
+    \end{enumerate}
+    \item We now prove some results of division algebras.
+    \begin{enumerate}
+        \item If $F=\C$, then every finite-dimensional division algebra is $\C$.
+        \begin{proof}
+            Let $A$ be an arbitrary finite-dimensional division algebra over $\C$. Let $a\in A$, and let $L_a\in GL_n(A)$ send $a\mapsto[L_ax\mapsto ax]$.
+
+            Then $\C\to M_{2\times 2}(\R)$ sends
+            \begin{equation*}
+                a+bi\mapsto L_{a+bi} =
+                \begin{bmatrix}
+                    \alpha & -\beta\\
+                    \beta & \alpha\\
+                \end{bmatrix}
+            \end{equation*}
+            Then $L_aL_b=L_{ab}$ and $L_a+L_b=L_{a^{-1}b}$, so $L_a$ has eigenvalue $\lambda$, so $L_ax=ax=\lambda x$, so $a=\lambda\cdot 1$.
+
+            What is going on here and how does this work??
+        \end{proof}
+    \end{enumerate}
+    \item Example of the above property.
+    \begin{itemize}
+        \item $\HH\to M_{4\times 4}(\R)$ sends $a+bi+cj+dk$ to ?? with determinant $(a^2+b^2+c^2+c^2)^2$.
+        \item In general, the determinant of $A\to GL_n(A)$.
+    \end{itemize}
+    \item Theorem 1: Over $\R$, there are exactly three division algebras: $\R$, $\C$, and $\HH$.
+    \item Theorem 2: Over $\F_q$ finite, every finite-dimensional division algebra is a field $\F_{q^n}$.
+    \item \textbf{Representation} (of $A$): A module $V$ over $A$ equipped with a homomorphism of algebras $\rho:A\to M_{n\times n}(V)$.
+    \item Observation:
+    \begin{itemize}
+        \item If $G$ is a group and $F$ is a field, then the group algebra is $F[G]=\bigoplus_{i=1}^nFe_{g_i}$. Herein, we define $e_{g_i}e_{g_j}=e_{g_ig_j}$.
+        \item Modules over $F[G]$ are equivalent to $G$ reps.
+        \item $F[G]\to M_{n\times n}(F)$ is equivalent to $G\to GL_n(F)$.
+    \end{itemize}
+    \item Schur's Lemma for associative algebras: Let $A$ be a finite-dimensional algebra, and let $M_1,M_2$ be simple $A$-modules.
+    \begin{enumerate}
+        \item Then if $f:M_1\to M_2$ is a nonzero morphism of $A$-modules, $f$ is isomorphic.
+        \item If $M$ is simple, $\Hom_A(M,M)$ is a division algebra.
+    \end{enumerate}
+    \item Note that this version of Schur's Lemma implies that complete reducibility may fail for associative algebras. (why??)
+    \item Theorem (Complete Reducibility): Let $A$ be a finite-dimensional algebra such that $M_1\subset M_2$. Then there exists $N$ such that $M_2=M_1\oplus N$. Moreover, it follows that
+    \begin{equation*}
+        A \cong M_{n_1}(D_1)\oplus\cdots\oplus M_{n_k}(D_k)
+    \end{equation*}
 \end{itemize}
 
 
