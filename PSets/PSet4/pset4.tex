@@ -1,0 +1,51 @@
+\documentclass[../psets.tex]{subfiles}
+
+\pagestyle{main}
+\renewcommand{\leftmark}{Problem Set \thesection}
+\setcounter{section}{3}
+
+\begin{document}
+
+
+
+
+\section{Advanced Character Theory and Introduction to Associative Algebras}
+\begin{enumerate}
+    \setcounter{enumi}{3}
+    \item \marginnote{10/27:}Let $F$ be a field.
+    \begin{enumerate}
+        \item Prove that the matrix algebra $M_{n,n}(F)$ is simple, i.e., has no nontrivial ideals.
+        \begin{proof}
+            To prove that $M_{n,n}(F)$ is simple, it will suffice to show that any nonzero ideal of it contains the identity. Let $I$ be a nonzero ideal of $M_{n,n}(F)$. Then there exists some nonzero $A\in I$. In particular, if $A$ is nonzero, then it contains some entry $a_{ij}\neq 0$. Now, let $E_{ij}\in M_{n,n}(F)$ be the matrix with 1 in the $i,j$ position and 0 everywhere else. Then for each $k=1,\dots,n$,
+            \begin{equation*}
+                \frac{1}{a_{ij}}E_{ki}AE_{jk} = E_{kk}
+            \end{equation*}
+            so $E_{kk}\in I$. Summing all of the $E_{kk}$'s within $I$ yields the $n\times n$ identity matrix, as desired.
+        \end{proof}
+        % \item Prove that there is a unique simple module over the matrix algebra $M_{n,n}(F)$.
+    \end{enumerate}
+    \item Consider the quaternion group $Q_8=\{\pm 1,\pm i,\pm j,\pm k\}\subset\HH$ of order 8.
+    \begin{enumerate}
+        \item Find four 1-dimensional representations of $Q_8$. Find the character of the remaining 2-dimensional representation.
+        \begin{proof}
+            Take the trivial representation.\par
+            Then take the representations sending $i,j$ to $(-1)$, $i,k$ to $(-1)$, and $j,k$ to $(-1)$; everything else gets sent to the identity in each case.\par
+            Working out the character table at this point, we can see that the character for the final representation must be given explicitly by the following.
+            \begin{align*}
+                +1 &\mapsto 2&
+                -1 &\mapsto -2&
+                +i &\mapsto 0&
+                -i &\mapsto 0&
+                +j &\mapsto 0&
+                -j &\mapsto 0&
+                +k &\mapsto 0&
+                -k &\mapsto 0
+            \end{align*}
+        \end{proof}
+    \end{enumerate}
+\end{enumerate}
+
+
+
+
+\end{document}
