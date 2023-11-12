@@ -194,5 +194,261 @@
 
 
 
+\section{Algebraic Numbers and the Frobenius Divisibility Theorem}
+\begin{itemize}
+    \item \marginnote{11/1:}Announcements.
+    \begin{itemize}
+        \item OH on Zoom today as well; both OH next week will be in person.
+    \end{itemize}
+    \item New topic for the next couple of classes (today and Friday at least, possibly Monday as well).
+    \begin{itemize}
+        \item Proving two wonderful theorems.
+    \end{itemize}
+    \item Theorem 1 (Frobenius divisibility theorem\footnote{There is no agreed-upon name for this result, but \textcite{bib:FultonHarris} call it the "Frobenius divisibility theorem."}): Let $G$ be a finite group, and let $V$ be an irreducible representation of $G$ over $\C$. Then the degree of $V$ divides the order of $G$, i.e.,
+    \begin{equation*}
+        d_V \mid |G|
+    \end{equation*}
+    \item Theorem 2 (Burnside): If $G$ is a group and $|G|=p^nq^m$, then $G$ is not simple. In fact, $G$ is \textbf{solvable}.
+    \begin{itemize}
+        \item Seems completely unrelated to Theorem 1, but the methods are similar.
+        \item The first statement in this theorem is hard and interesting. We will briefly talk about the second one, but it follows form the first by an easy induction.
+    \end{itemize}
+    \item Both proofs are based on number theory.
+    \begin{itemize}
+        \item As a warm-up to this branch of mathematics, let's talk about the algebraic integers.
+    \end{itemize}
+    \item \textbf{Algebraic} (number): A number $x\in\C$ for which there exists $a_0,\dots,a_{n-1}\in\Q$ such that
+    \begin{equation*}
+        x^n+a_{n-1}x^{n-1}+\cdots+a_0 = 0
+    \end{equation*}
+    \item $\bm{\bar{\pmb{\Q}}}$: The set of all algebraic numbers.
+    \begin{itemize}
+        \item So $\Q\subset\bar{\Q}\subset\C$, where $\bar{\Q}$ is the set of all algebraic numbers.
+        \item $\pi,\text{e}$ are famous examples of numbers that are \emph{not} algebraic.
+    \end{itemize}
+    \item \textbf{Algebraic} (integer): An algebraic number for which the corresponding $a_0,\dots,a_{n-1}\in\Z$.
+    \item $\bm{\bar{\pmb{\Z}}}$: The set of all algebraic integers.
+    \item Examples.
+    \begin{enumerate}
+        \item $\sqrt{2}\in\bar{\Z}$.
+        \begin{itemize}
+            \item Because $(\sqrt{2})^2-2=0$.
+        \end{itemize}
+        \item $\sqrt{3}\in\bar{\Z}$.
+        \item $\sqrt{2}/2\notin\bar{\Z}$.
+        \begin{itemize}
+            \item Let $x=\sqrt{2}/2$.
+            \item We know that $2x^2-1=0$.
+            \item Suppose $d(x^n+a_{n-1}x^{n-1}+\cdots+a_0)=(2x^2-1)(dx^n+\cdots)$. This is an actual use of Gauss's Lemma from MATH 25800.
+            \item So $d=1\cdot 1$, contradiction.
+            \item How does this proof work??
+        \end{itemize}
+    \end{enumerate}
+    \item To get a handle on the algebraic integers, we'll prove some basic results (Facts 1-2 below).
+    \item Fact 1: For all $x\in\bar{\Q}$, there exists $d\in\N$ such that $dx\in\bar{\Z}$.
+    \begin{proof}
+        Take the polynomial with rational coefficients which is satisfied by $x$, and then multiply the polynomial by $d^n$ where $d=\lcm(\text{denominators of }a_0,\dots,a_{n-1})$ is the greatest common denominator of all coefficients. This yields the polynomial
+        \begin{equation*}
+            (dx)^n+da_{n-1}(dx)^{n-1}+\cdots+d^na_0 = 0
+        \end{equation*}
+        in $dx$ where each coefficient $d^ia_{n-i}$ is, by the definition of $d$, now an integer.
+    \end{proof}
+    \item Fact 2: $\Q\cap\bar{\Z}=\Z$.
+    \begin{proof}
+        We will use a bidirectional inclusion proof.\par
+        \underline{$\Q\cap\bar{\Z}\subset\Z$}: Let $x\in\Q\cap\bar{\Z}$ be arbitrary. Since $x\in\Q$, there exist $a\in\Z$, $b\in\N$ with $(|a|,|b|)=1$ (that is, with $a,b$ coprime) such that $x=a/b$. Since $x\in\bar{\Z}$, there exist $a_0,\dots,a_n\in\Z$ such that
+        \begin{align*}
+            \left( \frac{a}{b} \right)^n+a_{n-1}\left( \frac{a}{b} \right)^{n-1}+a_{n-2}\left( \frac{a}{b} \right)^{n-2}+\cdots+a_0 &= 0\\
+            a^n+a_{n-1}a^{n-1}b+a_{n-2}a^{n-2}b^2+\cdots+a_0b^n &= 0
+        \end{align*}
+        Now suppose for the sake of contradiction that there exists a prime number $p$ dividing $b$. Then $b=px$ for some $x\in\N$. Consequently,
+        \begin{align*}
+            a^n+a_{n-1}a^{n-1}px+a_{n-2}a^{n-2}(px)^2+\cdots+a_0(px)^n &= 0\\
+            a^n+p(a_{n-1}a^{n-1}x+a_{n-2}a^{n-2}px^2+\cdots+a_0p^{n-1}x^n) &= 0\\
+            p\underbrace{(-a_{n-1}a^{n-1}x-a_{n-2}a^{n-2}px^2-\cdots-a_0p^{n-1}x^n)}_y &= a^n
+        \end{align*}
+        Thus, since $a^n=py$ (where $y$ is an integer as the sum of products of integers), we have that $p\mid a^n$. It follows that $p\mid a$, since $p$ is prime and raising $a$ to a power doesn't introduce any new primes into its factorization. Consequently, since $p>1$ as a prime number, there exists a number greater than 1 dividing both $a$ and $b$. Therefore, $(|a|,|b|)>1$, a contradiction. It follows that no prime number divides $b$, and hence, we must have $b=1$ and $x=a\in\Z$, as desired.\par
+        \underline{$\Z\subset\Q\cap\bar{\Z}$}: Let $x\in\Z$ be arbitrary. Then $x=x/1\in\Q$. Additionally, choosing $a_0=-x$, we have $x+a_0=0$. Thus, $x\in\bar{\Z}$. Combining these two results yields $x\in\Q\cap\bar{\Z}$, as desired.
+    \end{proof}
+    \item We now look at the natural problem to which an algebraic integer is always the solution.
+    \item Fact 3: Let $A\in M_{n\times n}(\Z)$. If $\lambda$ is an eigenvalue of $A$, then $\lambda\in\bar{\Z}$. More simply, $Av=\lambda v$ implies that $\lambda\in\bar{\Z}$.
+    \begin{proof}
+        To prove that $\lambda\in\bar{\Z}$, it will suffice to find a monic polynomial $P$ with integer coefficients such that $P(\lambda)=0$. Let $\chi_A$ be the characteristic polynomial of $A$. As a characteristic polynomial, $\chi_A$ is monic. Additionally, since $A$ is a matrix over the integers, the coefficients of $\chi_A$ will all be integers. Lastly, since $Av=\lambda v$, we know that $\chi_A(\lambda)=0$.
+    \end{proof}
+    \item Lemma: The converse of Fact 3 is true. That is, if $\lambda\in\bar{\Z}$, then there exists $A\in M_{n\times n}(\Z)$ and $v\in\C^n$\footnote{Where does $v$ lie?? Is it $\Z^n$ or something, or are there no restrictions as I suspect?} such that $Av=\lambda v$.
+    \begin{itemize}
+        \item $\lambda\in\bar{\Z}$ implies $\lambda^n+a_{n-1}\lambda^{n-1}+\cdots+a_0=0$. This implies that there exists $A\in M_{n\times n}(\Z)$ such that $\chi_A(\lambda)=\text{this polynomial}=0$. Rudenko leaves it as an exercise to find this $A$.
+    \end{itemize}
+    \item We now use the above to give a cryptic proof of an interesting fact.
+    \item Fact 4: $\bar{\Z}$ is a ring. That is, if $x,y\in\bar{\Z}$, then $x+y,xy\in\bar{\Z}$.
+    \begin{proof}
+        Since $x,y\in\bar{\Z}$, the lemma implies that there exist $A,B,v,w$ such that
+        \begin{align*}
+            Av &= xv&
+            Bw &= yw
+        \end{align*}
+        Note that $A$ can be of dimension $n\times n$ and $B$ of dimension $m\times m$, i.e., they need not be the same dimension. Now how do we find a matrix for which the sum $x+y$ and product $xy$ are eigenvalues? We use the tensor/Kronecker product to start! In particular,
+        \begin{equation*}
+            (A\otimes B)(v\otimes w) = xy(v\otimes w)
+        \end{equation*}
+        For sum, we take $A\otimes I_m+I_n\otimes B$ so that
+        \begin{equation*}
+            (A\otimes I_m+I_n\otimes B)(v\otimes w) = xv\otimes w+v\otimes yw
+            = (x+y)v\otimes w
+        \end{equation*}
+        It follows by the two lines above and Fact 3 that $xy,x+y\in\bar{\Z}$, as desired.
+    \end{proof}
+    \item Notes on the above proof.
+    \begin{itemize}
+        \item Types of proofs.
+        \begin{itemize}
+            \item This is a nonstandard proof from \textcite{bib:Etingof}.
+            \item The old proof from the 1800s uses symmetric stuff. It goes something like this:
+            \begin{itemize}
+                \item Let $x=x_1,\dots,x_n$ and $y=y_1,\dots,y_m$, and take $\prod_{i,j=1}^{n,m}(t-x_i-y_j)$. Then we observe symmetric polynomials.
+                \item We'll cover a lot more of this stuff later.
+            \end{itemize}
+            \item There is also one more (more abstract) proof using modules.
+        \end{itemize}
+        \item Like algebraic integers form a ring, algebraic numbers form a field.
+    \end{itemize}
+    \item So, cool\dots but why are algebraic integers relevant to us?
+    \begin{itemize}
+        \item Observe that if $G$ is a group and $\chi_V$ is a character, then for all $g\in G$, we have $\chi_V(g)\in\bar{\Z}$!
+        \item Why would this be the case?
+        \begin{itemize}
+            \item Recall that since $g^n=e$, $\chi(g)=\tr(\rho(g))=\varepsilon_1+\cdots+\varepsilon_n$ where the $\varepsilon_i$ are $n^\text{th}$ roots of unity.
+            \item Each root of unity is an algebraic integer under the polynomial $x^n-1=0$.
+            \item Thus, by inducting on Fact 4, the sum $\varepsilon_1+\cdots+\varepsilon_n\in\bar{\Z}$.
+        \end{itemize}
+    \end{itemize}
+    \item Fact 5: Let $C:=\{g_1,\dots,g_s\}$ be a conjugacy class of $G$, and let $e_C:=g_1+\cdots+g_s\in\Z[G]\subset\C[G]$. Then there exist $a_0,\dots,a_{n-1}\in\Z$ such that
+    \begin{equation*}
+        e_C^n+a_{n-1}e_C^{n-1}+\cdots+a_0 = 0
+    \end{equation*}
+    \begin{proof}
+        Define $L_{e_C}:\Z[G]\to\Z[G]$ by $a\mapsto e_Ca$. Thus, $L_{e_C}$ has eigenvalue $e_C$ and matrix representation
+        \begin{equation*}
+            L_{e_C} =
+            \begin{pNiceMatrix}[first-row,first-col]
+                & g_1 & \cdots & g_n\\
+                g_1\\
+                \vdots\\
+                g_n\\
+            \end{pNiceMatrix}
+            \in M_{n\times n}(\Z)
+        \end{equation*}
+        % So $\chi_{L_{e_C}}(L_{e_C})=0$, which implies that there exists $a_0,\dots,a_{n-1}\in\Z$ such that $L_{e_C}^n+a_{n-1}L_{e_C}^{n-1}+\cdots = 0$.
+        Therefore, by an argument analogous to that used in Fact 3, the desired $a_0,\dots,a_{n-1}\in\Z$ exist.
+    \end{proof}
+    \item Example to illustrate the above argument: Consider $C=\{(12),(13),(23)\}\subset S_3$.
+    \begin{itemize}
+        \item Then $e_C=(12)+(13)+(23)$.
+        \item Label the elements of $S_3$ as follows.
+        \begin{equation*}
+            S_3 = \{\underbrace{\vphantom{(}e}_{g_1},\underbrace{(12)}_{g_2},\underbrace{(13)}_{g_3},\underbrace{(23)}_{g_4},\underbrace{(123)}_{g_5},\underbrace{(132)}_{g_6}\}
+        \end{equation*}
+        \item Then the matrix of $L_{e_C}$ is given by the following.
+        \begin{equation*}
+            L_{e_C} =
+            \begin{pNiceMatrix}[first-row,first-col]
+                      & e & (12) & (13) & (23) & (123) & (132)\\
+                e     & 0 & 1 & 1 & 1 & 0 & 0\\
+                (12)  & 1 & 0 & 0 & 0 & 1 & 1\\
+                (13)  & 1 & 0 & 0 & 0 & 1 & 1\\
+                (23)  & 1 & 0 & 0 & 0 & 1 & 1\\
+                (123) & 0 & 1 & 1 & 1 & 0 & 0\\
+                (132) & 0 & 1 & 1 & 1 & 0 & 0\\
+            \end{pNiceMatrix}
+        \end{equation*}
+        \begin{itemize}
+            \item Notice how, for example, representing $e$ as $(1,0,0,0,0,0)$ yields
+            \begin{equation*}
+                L_{e_C}e = (0,1,1,1,0,0)
+                = (12)+(13)+(23)
+                = e_C
+            \end{equation*}
+            as expected.
+        \end{itemize}
+        \item We can then calculate that the characteristic polynomial $\chi_{L_{e_C}}$ of $L_{e_C}$ is
+        \begin{equation*}
+            \chi_{L_{e_C}}(\lambda) = \det(L_{e_C}-\lambda I)
+            = \lambda^6-9\lambda^4
+        \end{equation*}
+        \item This yields
+        \begin{align*}
+            a_0 &= 0&
+            a_1 &= 0&
+            a_2 &= 0&
+            a_3 &= 0&
+            a_4 &= -9&
+            a_5 &= 0
+        \end{align*}
+        as the desired coefficients.
+        \item Sanity check: We can confirm that
+        \begin{align*}
+            e_C^6-9e_C^4 &= e_C^4(e_C^2-9)\\
+            &= (9[e+(123)+(132)])(3[e+(123)+(132)]-9)\\
+            &= 27[e+(123)+(132)]^2-81[e+(123)+(132)]\\
+            &= 81[e+(123)+(132)]-81[e+(123)+(132)]\\
+            &= 0
+        \end{align*}
+    \end{itemize}
+    \item We will now prove Theorem 1. First, we restate it.
+    \item Theorem 1 (Frobenius divisibility theorem): Let $G$ be a finite group, and let $V$ be an irreducible representation of $G$ over $\C$. Then the degree of $V$ divides the order of $G$, i.e.,
+    \begin{equation*}
+        d_V \mid |G|
+    \end{equation*}
+    \begin{proof}
+        We begin with four definitions: Let $C:=\{g_1,\dots,g_s\}\subset G$ be a conjugacy class of $G$, let $\Z[G]\subset\C[G]$ be a \textbf{group ring}, let $e_C:=g_1+\cdots+g_s\in\Z[G]$, and let $\rho:G\to GL(V)$ be the group homomorphism associated with the irreducible representation $V$.\par
+        With our notation set, let's look at how $\rho(g_1+\cdots+g_s)$ acts on $V$. Since $g_1+\cdots+g_s\in Z(\C[G])$, the proposition from Monday's class implies that
+        \begin{equation*}
+            \rho(g_1+\cdots+g_s) = \lambda I_{d_V}
+        \end{equation*}
+        Taking the trace of both sides of the above equation, we obtain the following. Note that in the below equations, $\chi(C)$ denotes $\chi(g_i)$ for any $g_i\in C$; all $\chi(g_i)$ are equal because $\chi$ is a class function. 
+        \begin{align*}
+            \tr(\rho(g_1+\cdots+g_s)) &= \tr(\lambda I_{d_V})\\
+            \tr(\rho(g_1))+\cdots+\tr(\rho(g_s)) &= \lambda\tr(I_{d_V})\\
+            \sum_{i=1}^s\chi(C) &= \lambda d_V\\
+            |C|\chi(C) &= \lambda d_V
+        \end{align*}
+        It follows by a simple algebraic rearrangement that
+        \begin{equation*}
+            \frac{|C|\chi(C)}{d_V} = \lambda
+        \end{equation*}
+        We can now prove that $\lambda\in\bar{\Z}$ via Fact 4. Let $v\neq 0$. Then
+        \begin{align*}
+            0 &= \rho(0)v\\
+            &= \rho(e_C^n+a_{n-1}e_C^{n-1}+\cdots+a_0)v\\
+            &= [\rho(e_C)^n+a_{n-1}\rho(e_C)^{n-1}+\cdots+a_0]v\\
+            % &= [(\lambda I)^n+a_{n-1}(\lambda I)^{n-1}+\cdots+a_0]v\\
+            % &= (\lambda^n+a_{n-1}\lambda^{n-1}+\cdots+a_0)Iv\\
+            &= \underbrace{(\lambda^n+a_{n-1}\lambda^{n-1}+\cdots+a_0)}_0v
+        \end{align*}
+        Now recall that by the first orthogonality relation, we have that
+        \begin{equation*}
+            \sum_C|C|\chi(C)\overline{\chi(C)} = |G|
+        \end{equation*}
+        % where \emph{?something?} becomes
+        % \begin{equation*}
+        %     \sum_{g\in G}\chi(s)\chi(\bar{s}) = |G|
+        % \end{equation*}
+        It follows by dividing through by $d_V$ that
+        \begin{equation*}
+            \frac{|G|}{d_V} = \sum_C\frac{|C|\chi(C)}{d_V}\cdot\overline{\chi(C)}
+        \end{equation*}
+        But $|C|\chi(C)/d_V=\lambda\in\bar{\Z}$ by the above and $\overline{\chi(C)}\in\bar{\Z}$ by the earlier note about roots of unity, so by Fact 4, the whole sum of products $|G|/d_V\in\bar{\Z}$. Naturally, $|G|/d_V\in\Q$ as well. Consequently, $|G|/d_V\in\bar{\Z}\cap\Q$, so by Fact 2, $|G|/d_V\in\Z$. Therefore, we must have $d_V\mid|G|$.
+    \end{proof}
+    \item Notes on the above proof.
+    \begin{itemize}
+        \item In this course, we will not talk to much about integral elements; those will be the focus of Rudenko's next course, Algebraic Geometry.
+    \end{itemize}
+    \item Definitely take some time to think through this proof before next class! It's short, but quite subtle. Next class's will be much much harder.
+    \item Rudenko will not be here for next Friday's midterm; someone else will be proctoring, though.
+    \item Next week's HW will be a preparational HW.
+\end{itemize}
+
+
+
 
 \end{document}
