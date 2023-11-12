@@ -206,5 +206,185 @@
 
 
 
+\section{Semisimple Algebras}
+\begin{itemize}
+    \item \marginnote{10/25:}More associative algebra today; we'll wrap it up next time.
+    \item Review.
+    \begin{itemize}
+        \item Let $A$ be a finite dimensional associative algebra over a field $F$.
+        \item We want to understand when this algebra is very close to a \emph{group algebra}.
+        \begin{itemize}
+            \item Recall that $A=F[G]=\{a_{g_1}g_1+\cdots+a_{g_n}g_n\mid a_i\in F\}$ is the group algebra of $G$ a finite group.
+        \end{itemize}
+        \item Recall left modules.
+        \begin{itemize}
+            \item These are very similar to representations.
+            \item Indeed, if we have a left module $M$, then we have a multiplication map $\rho:A\times M\to M$ with properties such as associativity, etc.
+        \end{itemize}
+        \item Recall right modules.
+        \begin{itemize}
+            \item In a group representation, left modules over $A$ are essentially the same thing as right modules over $A^\text{op}$.
+            \item Because there is a bijection between left modules over $A$ and right modules over $A^\text{op}$, we sometimes have the case where the thing doesn't change??
+        \end{itemize}
+        \item All of the above motivated the definition of \emph{semisimple}: If $A$ is a finite dimensional algebra and $M$ is a finite-dimensional module, then $M$ is \emph{semisimple} if it satisfies any one of three conditions from last time's theorem.
+        \begin{itemize}
+            \item Note: When we describe a module as "finite-dimensional," we mean this in the sense of a vector space, i.e., literally finite-dimensional as opposed to finitely generated or anything like that.
+            \item Note: "Last time's theorem" refers to the semisimplicity conditions one, which is a part of Wedderburn-Artin theory but is \emph{not} the \textbf{Wedderburn-Artin \emph{theorem}}. We'll get to this theorem eventually, but that's still in the future.
+        \end{itemize}
+    \end{itemize}
+    \item Theorem (Maschke's theorem): Let $G$ be a finite group and let $F$ be a field. Suppose $(|G|,\chr F)=1$, i.e., they are coprime. Then every finite-dimensional left module over $F[G]$ is semisimple.
+    \begin{proof}
+        We've already basically done this proof as part of last time's theorem. Here's a refresher, though.\par
+        Let $M$ be an arbitrary finite-dimensional left module over $F[G]$. Then there exists a map $F[G]\to\End_{F[G]}(M)$, or $G\to GL(M)$. Thus, $M$ is a $G$-representation, which satisfies condition (3) from last time's theorem because of the complements theorem, stated as Theorem \ref{trm:complements} from \textcite{bib:Serre} for instance.
+    \end{proof}
+    \item Takeaway: The proof actually works for any field under this condition.
+    \begin{itemize}
+        \item Rudenko will reprove Maschke's theorem tomorrow a different way.
+    \end{itemize}
+    \item In an algebra, we have a multiplication map $\cdot:A\times A\to A$.
+    \begin{itemize}
+        \item If we take the perspective that this map defines an action of the left $A$ on the right one, we see that $A$ has the structure of a left $A$-module.
+        \item Vice versa for right-modules.
+    \end{itemize}
+    \item \textbf{Semisimple} (algebra): An algebra for which every finite-dimensional $A$-module is semisimple. \emph{Also known as} \textbf{semi-simple}.
+    \item Theorem: Let $A$ be a finite-dimensional associative algebra. Then TFAE.
+    \begin{enumerate}
+        \item $A$ is a semisimple algebra.
+        \item $A$ is semisimple as a left-module over $A$. Equivalently, as an $A$-module, $A\cong S_1^{n_1}\oplus\cdots\oplus S_k^{n_k}$.
+        \item (Wedderburn-Artin theorem) $A\cong M_{n_1}(D_1)\oplus\cdots\oplus M_{n_k}(D_k)$, where the $D_1,\dots,D_k$ are division algebras. Note that the isomorphism is an isomorphism of algebras.
+    \end{enumerate}
+    \item We will prove this theorem in just a moment, but there are a few preliminary comments to be made first.
+    \item Let's look at the algebra $\HH$.
+    \begin{itemize}
+        \item We can create matrices of quaternions, and we can add and multiply these matrices just fine.
+        \item However, the determinant is weirder: Is it $ad-bc$ or $ad-cb$?
+        \begin{itemize}
+            \item There is a theory of determinants of noncommutative fields called \textbf{algebraic $\bm{k}$-theory}, but we will not get into that.
+        \end{itemize}
+    \end{itemize}
+    \item Example: Proving (3) for $\C[G]$.
+    \begin{itemize}
+        \item We have $\C[G]$. There are not many division algebras over complex numbers; only one, in fact: Complex numbers.
+        \item Let $V_1,\dots,V_k$ be the irreps. Then we want to show that
+        \begin{equation*}
+            \C[G] \cong M_{d_1}(\C)\oplus\cdots\oplus M_{d_k}(\C)
+        \end{equation*}
+        where $d_i=\deg V_i$.
+        \item Note: Matrices give us a nice way to compute otherwise complicated elements of $\C[G]$.
+        \item Proof: Define a map $F:\C[G]\to M_{d_1}(\C)\oplus\cdots\oplus M_{d_k}(\C)$ by
+        \begin{equation*}
+            x \mapsto (\rho_{V_1}(x),\dots,\rho_{V_k}(x))
+        \end{equation*}
+        \begin{itemize}
+            \item $F$ is injective: $F(x)=0$ implies that $\rho_{V_i}(x)=0$ ($i=1,\dots,k$), so $xV_i=0$ ($i=1,\dots,k$). In particular, this means that $x=x\cdot 1=0$.
+            \item $F$ is surjective: $F$ is injective and $\dim(\C[G])=\sum d_i^2=\dim[M_{d_1}(\C)\oplus\cdots\oplus M_{d_k}(\C)]$.
+            \item $F$ is a homomorphism of algebras: Left as an exercise.
+        \end{itemize}
+        \item Note: Remember this theorem very well because it allows you to treat group rings very easily.
+        \item Tomorrow, we'll bring characters into this picture.
+    \end{itemize}
+    \item We now state a lemma that will be used to prove $2\Rightarrow 3$.
+    \item Lemma: Let $\End_A(A)$ denote the set of $A$-module endomorphisms of $A$. Then
+    \begin{equation*}
+        \End_A(A) \cong A^\text{op}
+    \end{equation*}
+    as algebras.
+    \begin{proof}
+        To prove the claim, it will suffice to construct an $A$-algebra isomorphism $F:\End_A(A)\to A^\text{op}$. Define $F$ by
+        \begin{equation*}
+            F(f) := f(1)
+        \end{equation*}
+        for all $f\in\End_A(A)$. It should be fairly clear that
+        \begin{align*}
+            F(f+g) &= F(f)+F(g)&
+            F(1) &= 1
+        \end{align*}
+        Proving that $F(f\circ g)=F(f)*F(g)$ is slightly more involved, but can be done as follows.
+        \begin{equation*}
+            F(f\circ g) = [f\circ g](1)
+            = f(g(1))
+            = f(g(1)\cdot 1)
+            = g(1)\cdot f(1)
+            = F(g)\cdot F(f)
+            = F(f)*F(g)
+        \end{equation*}
+        Lastly, by plugging $f=a=aI$ and $g=f$ into the above, we can recover
+        \begin{equation*}
+            F(af) = a*F(f)
+        \end{equation*}
+        Thus, $F$ is an $A$-algebra \emph{homomorphism}. To prove that it is an \emph{isomorphism}, consider the inverse map $G:x\mapsto[a\mapsto ax]$. We can show that $F\circ G=1_{A^\text{op}}$ and $G\circ F=1_{\End_A(A)}$, thus completing the proof.
+    \end{proof}
+    \item We now prove the above theorem, which we restate for simplicity.
+    \item Theorem: Let $A$ be a finite-dimensional associative algebra over $F$. Then TFAE.
+    \begin{enumerate}
+        \item $A$ is a semisimple algebra.
+        \item $A$ is semisimple as a left-module over $A$. Equivalently, as an $A$-module, $A\cong S_1^{n_1}\oplus\cdots\oplus S_k^{n_k}$.
+        \item (Wedderburn-Artin theorem) $A\cong M_{n_1}(D_1)\oplus\cdots\oplus M_{n_k}(D_k)$, where the $D_1,\dots,D_k$ are division algebras. Note that the isomorphism is an isomorphism of algebras.
+    \end{enumerate}
+    \begin{proof}
+        One line; very simple, but a little weird conceptually.\par
+        $(2\Rightarrow 1)$: To prove that $A$ is a semisimple algebra, it will suffice to show that every finite-dimensional $A$-module over $F$ is semisimple. Let $M=Fe_1+\cdots+Fe_n$ be an arbitrary finite-dimensional $A$-module. To show that it's semisimple, it will suffice to demonstrate that it's equal to the direct sum of simple modules. Define a map $A^n\to M$ by
+        \begin{equation*}
+            (a_1,\dots,a_n) \mapsto a_1e_1+\cdots+a_ne_n
+        \end{equation*}
+        This should (fairly clearly) be a surjective homomorphism of left-modules (how do we know that all $a_i\in F$??). Moreover, since $A=S_1\oplus\cdots\oplus S_k$ is semisimple as a left $A$-module by hypothesis, we have that $A^n=S_1^n\oplus\cdots\oplus S_k^n$ (how does this imply that $M$ is equal to the direct sum of simple modules??).\par
+        $(3\Rightarrow 2)$: Work it out in the HW!\par
+        $(2\Rightarrow 3)$: Let's take $A=S_1^{n_1}\oplus\cdots\oplus S_k^{n_k}$ a left $A$-module where each $S_i$ is simple. Then by the lemma,
+        \begin{equation*}
+            A^\text{op} \cong \End_A(A)
+            = \Hom_A(A,A)
+            = \Hom_A(S_1^{n_1}\oplus\cdots\oplus S_k^{n_k},S_1^{n_1}\oplus\cdots\oplus S_k^{n_k})
+            = \bigoplus_{i,j=1}^k\Hom_A(S_i^{n_i},S_j^{n_j})
+        \end{equation*}
+        By Schur's lemma for associative algebras,
+        \begin{equation*}
+            \Hom_A(S_i,S_j) =
+            \begin{cases}
+                0 & i\neq j\\
+                D_i & i=j
+            \end{cases}
+        \end{equation*}
+        where each $D_i$ is a division algebra. Thus, continuing from the above,
+        \begin{equation*}
+            A^\text{op} \cong \bigoplus_{i=1}^k\Hom_A(S_i^{n_i},S_i^{n_i})
+            = \bigoplus_{i=1}^kM_{n_i}(\Hom_A(S_i,S_i))
+            = \bigoplus_{i=1}^kM_{n_i}(D_i)
+        \end{equation*}
+    \end{proof}
+    \item Consequence: It follows because the $D_i$'s are division algebras that
+    \begin{equation*}
+        A \cong \bigoplus_{i=1}^kM_{n_i}(D_i^\text{op})
+    \end{equation*}
+    \begin{itemize}
+        \item What was the point of this??
+    \end{itemize}
+    \item Note from last time that we forgot to discuss: A quotient module of a semisimple module is semisimple. Proving this will be in the next HW.
+    \item \textbf{Radical} (of $A$): The finite dimensional $A$-algebra defined as follows. \emph{Also known as} \textbf{Jacobson ideal}, \textbf{Jacobson radical}. %Added during the 10/27 class.
+    \emph{Denoted by} $\bm{\Rad(A)}$. \emph{Given by}
+    \begin{equation*}
+        \Rad(A) = \{a\in A\mid aS=0\text{ for any simple module }S\} \subset A
+    \end{equation*}
+    \begin{itemize}
+        \item Immediate fact: $\Rad(A)$ is a two-sided ideal.
+        \item This is because\dots
+        \begin{itemize}
+            \item $x\in A$ and $a\in\Rad(A)$ $\Longrightarrow$ $(xa)S=x(aS)=x(0)=0$ $\Longrightarrow$ $xa\in\Rad(A)$;
+            \item $x\in A$ and $a\in\Rad(A)$ $\Longrightarrow$ $(ax)S=a(xS)=0$ $\Longrightarrow$ $ax\in\Rad(A)$.
+        \end{itemize}
+        \item Note that $xS$ is simple in the above line because a scaled simple module is still simple.
+    \end{itemize}
+    \item Theorem: $A$ is semisimple iff $\Rad(A)=0$.
+    \begin{itemize}
+        \item This will be explained next time.
+        \item In other words, if there are problematic elements, the algebra is not semisimple.
+        \item Quotienting algebras by two-sided ideals gives algebras, so if $A$ is not semisimple, we know that $A/\Rad(A)$ \emph{is} semisimple!
+    \end{itemize}
+    \item This week: A brief primer on noncommutative algebra that is probably worth studying for the midterm.
+    \item Next week: Number theoretic stuff, integer elements, groups, etc.
+    \item Most people/books don't treat the finite-dimensional case here (so it's not written up anywhere) because they view it as too restrictive; instead, they prefer to use the \textbf{Artinian} condition.
+\end{itemize}
+
+
+
 
 \end{document}
