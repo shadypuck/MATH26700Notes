@@ -1231,9 +1231,15 @@
 \begin{itemize}
     \item Classifying the irreducible representations of abelian groups.
     \begin{itemize}
-        % \item Let $G$ be an arbitrary finite group (abelian or not), and let $V$ be a representation of it.
-        % \item Notice that an arbitrary map $\rho(g):V\to V$ is \emph{not} a 
-        \item \emph{Return to later??}
+        \item Let $G$ be an arbitrary finite abelian group, and let $V$ be an irreducible representation of it.
+        \item Observe that since $gh=hg$ for all $g,h\in G$, we have
+        \begin{align*}
+            \rho_V(gh) &= \rho_V(hg)\\
+            \rho_V(g)\circ\rho_V(h) &= \rho_V(h)\circ\rho_V(g)
+        \end{align*}
+        \item Thus, each $\rho_V(g)$ is a morphism of $G$-representations.
+        \item It follows by Schur's Lemma that each $\rho_V(g)=\lambda_gI$.
+        \item Consequently, every subspace of $V$ is invariant under $\rho_V(g)$ for all $v\in V$. Therefore, $V$ must be one dimensional, hence isomorphic to $\C$.
     \end{itemize}
     \item Classifying the irreducible representations of $S_3$.
     \begin{itemize}

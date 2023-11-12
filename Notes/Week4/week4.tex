@@ -475,6 +475,7 @@
     \end{equation*}
     \begin{itemize}
         \item $A\cong F^n$.
+        \item Note that the notation here is well chosen; see the discussion of the notation $\C[G]$ from the 10/9 lecture.
     \end{itemize}
     \item \textbf{Division algebra}: An algebra $A$ such that for all nonzero $x\in A$, there exists a $y\in A$ such that $xy=1$.
     \item \textbf{Field}: A commutative division algebra.
@@ -531,10 +532,16 @@
         \item Modules over $F[G]$ are equivalent to $G$ reps.
         \item $F[G]\to M_{n\times n}(F)$ is equivalent to $G\to GL_n(F)$.
     \end{itemize}
-    \item Schur's Lemma for associative algebras: Let $A$ be a finite-dimensional algebra, and let $M_1,M_2$ be simple $A$-modules.
+    \item \textbf{Morphism} (of $A$-modules): A map $f:M\to N$ such that\dots
     \begin{enumerate}
-        \item Then if $f:M_1\to M_2$ is a nonzero morphism of $A$-modules, $f$ is isomorphic.
-        \item If $M$ is simple, $\Hom_A(M,M)$ is a division algebra.
+        \item $f$ is a module homomorphism;
+        \item $f$ respects the structure of the representations; explicitly, for every $g\in G$, $\rho_N(g)\circ f=f\circ\rho_M(g)$.
+    \end{enumerate}
+    \item $\bm{\Hom_A(M,N)}$: The set of all morphisms of $A$-modules from $M$ to $N$.
+    \item Schur's Lemma for associative algebras: Let $A$ be a finite-dimensional algebra over a field $F$, and let $M_1,M_2$ be simple $A$-modules. Then we have the following statements.
+    \begin{enumerate}
+        \item If $f:M_1\to M_2$ is a nonzero morphism of $A$-modules, then $f$ is isomorphic.
+        \item If $M$ is simple, then $\Hom_A(M,M)$ is a division algebra over $F$.
     \end{enumerate}
     \item Note that this version of Schur's Lemma implies that complete reducibility may fail for associative algebras. (why??)
     \item Theorem (Complete Reducibility): Let $A$ be a finite-dimensional algebra such that $M_1\subset M_2$. Then there exists $N$ such that $M_2=M_1\oplus N$. Moreover, it follows that

@@ -1,0 +1,198 @@
+\documentclass[../notes.tex]{subfiles}
+
+\pagestyle{main}
+\renewcommand{\chaptermark}[1]{\markboth{\chaptername\ \thechapter\ (#1)}{}}
+\setcounter{chapter}{5}
+
+\begin{document}
+
+
+
+
+\chapter{Abstract Representation Theory}
+\section{The Center of the Group Algebra}
+\begin{itemize}
+    \item \marginnote{10/30:}Plan for this week.
+    \begin{itemize}
+        \item Today: Briefly discuss a very important concept called the \textbf{center}.
+        \item Wednesday: Do algebraic numbers.
+        \item Friday: Burnside's theorem.
+    \end{itemize}
+    \item \textbf{Center} (of a group): The set of all elements of a group $G$ that commute with every other element in $G$. \emph{Denoted by} $\bm{Z(G)}$. \emph{Given by}
+    \begin{equation*}
+        Z(G) = \{g\in G\mid xgx^{-1}=g\ \forall\ x\in G\}
+    \end{equation*}
+    \begin{itemize}
+        \item Note: $Z(G)$ is a subgroup of $G$.
+    \end{itemize}
+    \item The center is one of the most important concepts in all of representation theory.
+    \begin{itemize}
+        \item Example: Let $A$ be an abelian group, such as $Z(G)$. Then all its irreps are 1D.
+        \begin{itemize}
+            \item See Section 1.3 of \textcite{bib:FultonHarris} for an explanation.
+        \end{itemize}
+        \item Normally, the center of a group is too small to be interesting.
+        \begin{itemize}
+            \item However, $Z(\C[G])$ \emph{is} large enough to be interesting.
+        \end{itemize}
+    \end{itemize}
+    \item \textbf{Center} (of an algebra): The set of all elements of an algebra $A$ that commute with every other element in $A$. \emph{Denoted by} $\bm{Z(A)}$. \emph{Given by}
+    \begin{equation*}
+        Z(A) = \{a\in A\mid xa=ax\ \forall\ x\in A\}
+    \end{equation*}
+    \item Proposition: If $A$ is an algebra over $\C$, $M$ is an irreducible left $A$-module, and $\rho:A\to\End(M)$ is a corresponding representation, then $x\in Z(A)$ implies that $\rho(x)=\lambda I$, i.e., $\rho(x)$ is a \emph{scalar matrix}.
+    \begin{proof}
+        Let $x\in Z(A)$ be arbitrary. Then for all $a\in A$, we know that $\rho(x)\rho(a)=\rho(a)\rho(x)$. Thus, $\rho(x)$ is a morphism of $A$-modules. Consequently, since $M$ is irreducible (also known as \emph{simple}), Schur's Lemma for associative algebras implies that $\Hom_A(M,M)$ is a division algebra over $\C$. But since $\C$ is the only division algebra over $\C$, we have that $\Hom_A(M,M)\cong\C$. From here, it readily follows that $\rho(x)$ is equal to some $\lambda I$.
+    \end{proof}
+    \item Consequence: If $M$ is reducible, we can reduce it into component scalar representations.
+    \item Consequence: If $G$ is an abelian group, then every irrep $V$ is 1-dimensional.
+    \begin{itemize}
+        \item Additionally, $\C[G]$ is commutative and hence $\C[G]=Z(\C[G])$.
+        \item Then if $V$ is an arbitrary representation, $V$ is equal to the direct sum of one dimensional irreducible representations for all $g$. Hence, $\rho_V(g)=\lambda I$. Could the $\lambda$'s not be different for the various irreps??
+    \end{itemize}
+    \item We now try to compute $Z(\C[G])$.
+    \begin{itemize}
+        \item Facts:
+        \begin{align*}
+            Z(A_1\oplus A_2) &= Z(A_1)\oplus Z(A_2)&
+            Z(M_n(\C)) &= \spn(I) \cong \C
+        \end{align*}
+        \item These facts coupled with the fact that $G$ is a finite group (hence $\C[G]\cong M_{n_1}(\C)\oplus\cdots\oplus M_{n_k}(\C)$ where $k$ is the number of conjugacy classes in $G$ by the example from last Wednesday's class) yield
+        \begin{align*}
+            Z(\C[G]) &\cong Z(M_{n_1}(\C)\oplus\cdots\oplus M_{n_k}(\C))\\
+            &\cong \underbrace{\C\oplus\cdots\oplus\C}_{k\text{ times}}\\
+            &= \C^k
+        \end{align*}
+    \end{itemize}
+    \item Let $C_1,\dots,C_k$ be conjugacy classes in $G$. Then we may define
+    \begin{equation*}
+        e_i = \sum_{g\in C_i}g
+    \end{equation*}
+    for each $i=1,\dots,k$.
+    \begin{itemize}
+        \item Example: In $S_3$ the three $e_i$'s are $\{e,(12)+(13)+(23),(123)+(132)\}$.
+    \end{itemize}
+    \item Claim: $Z(G)=\inp{e_1,\dots,e_k}$, that is, the $e_i$ commute with every element of $G$ expressed as $1g\in\C[G]$.
+    \begin{proof}
+        We will use a bidirectional inclusion proof.\par
+        \underline{$\inp{e_1,\dots,e_k}\subset Z(G)$}: Let $e_i$ and $x\in G$ be arbitrary. Then
+        \begin{align*}
+            % xe_i &= \left( \sum_{g\in G}a_gg \right)e_i\\
+            % &= \left( \sum_{g\in G}a_gg \right)\left( \sum_{h\in C_i}h \right)\\
+            % &= \sum_{g\in G}\left[ a_gg\left( \sum_{h\in C_i}h \right) \right]\\
+            % &= \sum_{g\in G}\left[ a_g\left( \sum_{h\in C_i}gh \right) \right]\\
+            % &= \sum_{g\in G}\left[ a_g\left( \sum_{h\in C_i}hg \right) \right]\\
+            % &= \sum_{g\in G}\left[ a_g\left( \sum_{h\in C_i}h \right)g \right]\\
+            % &= \left( \sum_{h\in C_i}h \right)\left( \sum_{g\in G}a_gg \right)\\
+            % &= e_ix
+            xe_ix^{-1} &= \sum_{g\in C_i}xgx^{-1} = \sum_{h\in C_i}h = e_i\\
+            xe_i &= e_ix
+        \end{align*}
+        This naturally extends to any sums and scalar multiples of the $e_i$'s.\par
+        \underline{$Z(G)\subset\inp{e_1,\dots,e_k}$}: Let $a\in Z(G)$ be arbitrary. As an element of $\C[G]$, we know that $a=\sum a_gg$ for some $a_g\in\C$. Additionally, since $a\in Z(G)$, we have that $xax^{-1}=a$ for all $x\in G$ (that is, $1x\in A$). Combining these last two results, we have that
+        \begin{equation*}
+            \sum_{g\in G}a_{x^{-1}gx}g = \sum_{g\in G}a_gxgx^{-1}
+            = xax^{-1}
+            = a
+            = \sum_{g\in G}a_gg
+        \end{equation*}
+        Comparing like terms in the above equality, we can learn that for all $x\in G$, we have $a_{x^{-1}gx}=a_g$. In other words, all of the $a_g$'s for $g$'s in the same conjugacy class are equal. Therefore, $a$ is of the form $a=\sum_{i=1}^ka_{g_i}e_i$ for $g_i\in C_i$.
+    \end{proof}
+    \item Thus we get $a_ee+a_{(12)}(12)+a_{(13)}(13)+\cdots$??
+    \item Computing products of the $e_i$: What if we want to compute $[(12)+(13)+(23)]^2$, for example? We have to multiply \emph{noncommutatively}, so HS formulas are out, but we can still do all nine multiplications and sum them:
+    \begin{equation*}
+        [(12)+(13)+(23)]^2 = 3e+3[(123)+(132)]
+    \end{equation*}
+    \item We now tie this claim back into our discussion of $Z(\C[G])$.
+    % \item Claim: $Z(\C[G])=\inp{e_1\dots,e_k}$.
+    % \begin{proof}
+    %     \underline{$\inp{e_1,\dots,e_k}\subset Z(\C[G])$}: Let $e_i$ and $x=\sum_{g\in G}a_gg\in\C[G]$ be arbitrary. Then
+    %     \begin{equation*}
+    %         xe_i = \sum_{g\in G}a_gge_i
+    %         = \sum_{g\in G}a_ge_ig
+    %         = e_i\sum_{g\in G}a_gg
+    %         = e_ix
+    %     \end{equation*}
+    %     where the second equality holds because of the claim above.\par
+    %     \underline{$Z(\C[G])\subset\inp{e_1,\dots,e_k}$}: Let $a\in Z(G)$ be arbitrary. As an element of $\C[G]$, we know that $a=\sum a_gg$ for some $a_g\in\C$. Additionally, since $a\in Z(\C[G])$, we have that $xa=ax$ for all $x=\sum_{g\in G}a_gg\in\C[G]$...
+    % \end{proof}
+    % \begin{itemize}
+    %     \item In particular, $Z(G)=\inp{e_1,\dots,e_k}$ implies that $Z(\C[G])=\inp{e_1\dots,e_k}$
+    % \end{itemize}
+    % \item Consider $\C[G]$.
+    \begin{itemize}
+        \item $Z(\C[G])$ has basis $e_1,\dots,e_k$\footnote{How did we get from the previous claim to here??}.
+        \item Recall that $Z(\C[G])=\C\oplus\cdots\oplus\C$, with characters $\chi_1,\dots,\chi_k$.
+        \item Then $f_{\chi_i}=(0,\dots,0,1,0,\dots,0)$, where the 1 lies in the $i^\text{th}$ slot.
+        \item Then we get $f_{\chi_1},\dots,f_{\chi_k}$ as a basis.
+        \item It follows that $f_{\chi_i}^2=f_{\chi_i}$ and $f_{\chi_i}f_{\chi_j}=0$ for $i\neq j$; this is exactly what it means for a space to be $\C\oplus\cdots\oplus\C$.
+        \item Both of these spaces (center elements and class functions) have these two interconnected bases, so the spaces are quite similar!
+    \end{itemize}
+    \item The center of a group algebra $Z(\C[G])$ can be identified "$=$" with the space of class functions $\C_\text{cl}(G)$ via
+    \begin{equation*}
+        \sum\varphi(g)g \mapsto [g\to\varphi(g)]
+    \end{equation*}
+    where $\varphi(xgx^{-1})=\varphi(g)$.
+    \begin{itemize}
+        \item This isomorphism is an isomorphism of vector spaces, \emph{not} an isomorphism of algebras!
+        \item However, it still has cool properties.
+        \begin{itemize}
+            \item For instance, consider the $\delta_{C_i}$: The functions sending $g\in C_i$ to 1 and $g\notin C_i$ to 0.
+            \item The isomorphism identifies $e_i\mapsto\delta_{C_i}$.
+        \end{itemize}
+        \item Do we get irreducible characters (our other basis of class functions) when we sum the $\varphi(g)g$'s?
+        \begin{itemize}
+            \item We do! What is this??
+        \end{itemize}
+        \item Let's consider another basis $\chi$ of irreducibles. The basis is $f_\chi=\frac{d_\chi}{|G|}\sum_{g\in G}\chi(g^{-1})g$, and we send it to $\chi_{V^*}$.
+        \item Claim:
+        \begin{equation*}
+            f_{\chi_i}f_{\chi_j} =
+            \begin{cases}
+                f_{\chi_i} & \chi_i=\chi_j\\
+                0 & \chi_i\neq\chi_j
+            \end{cases}
+        \end{equation*}
+        \begin{itemize}
+            \item Things that multiply like this are called the \textbf{central idempotent}.
+        \end{itemize}
+        \item Thus, general multiplication works as follows.
+        \begin{equation*}
+            (a_1f_{\chi_1}+\cdots+a_nf_{\chi_n})(b_1f_{\chi_1}+\cdots+e_nf_{\chi_n}) = a_1b_1f_{\chi_1}+\cdots+a_nb_nf_{\chi_n}
+        \end{equation*}
+        \item So if we want to send $a\in Z(G)$ to $\bigoplus^k\C$, we map
+        \begin{equation*}
+            a=a_1f_{\chi_1}+\cdots+a_kf_{\chi_k} \mapsto (a_1,\dots,a_k)
+        \end{equation*}
+        \item The proof of this claim is really simple because we've already done the computation with the projector on the irrep $V_x$.
+        \begin{itemize}
+            \item So if you want to see $\rho(f_\chi)$, see what it does to the identity: It does $\rho(f_\chi)e=f\chi e=f_\chi$. $\rho$ is regular.
+        \end{itemize}
+    \end{itemize}
+    \item \textbf{Central idempotent}: An element such that $a^2=a$ and $ax=xa$ for all $x\in A$.
+    \item Two approaches to the same thing: Class functions and the center approach.
+    \begin{itemize}
+        \item The great thing about the center: You can understand what it looks like because it is well-defined as a commutative algebra.
+        \item If something is isomorphic to $\C\oplus\cdots\oplus\C$ as an algebra, then there is another space and basis in which your multiplication looks incredibly simple.
+    \end{itemize}
+    \item We might get to \textbf{Hopf algebras} at the end of the course (very interesting).
+    \begin{itemize}
+        \item Let $\C[G]$ be an associative algebra.
+        \item Let $\C[G]^*$ be the functions on the group.
+        \item Then $A\otimes A\to A$ sends $a_1\otimes a_2\mapsto a_1a_2$.
+        \item When we dualize to get $A^*\otimes A^*\to A^*$, everything gets reversed, so we actually get a \textbf{comultiplication} $A\to A\otimes A$ given by $g\mapsto g\otimes g$. These two multiplications together are called a \textbf{Hopf algebra}.
+        \item Knowing that there's something that we can define and understand might help us untangle the knot of all the spaces.
+        \item This is pretty heavy math, though, so we won't go too deep into it if we get at all.
+    \end{itemize}
+    \item Today was the last associative algebra class.
+    \item Going forward: Integral elements, algebraic integers, dimension of the representation divides the order or the group, Burnside's theorem.
+    \item Midterm is heavily computational: Tensor products, character tables, etc. A few simple questions about things.
+    \begin{itemize}
+        \item Comparably less associative algebra stuff (maybe just 1 exercise).
+    \end{itemize}
+\end{itemize}
+
+
+
+
+\end{document}
