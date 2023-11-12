@@ -9,7 +9,7 @@
 
 
 
-\chapter{???}
+\chapter{Associative Algebras}
 \section{Wedderburn-Artin Theory}
 \begin{itemize}
     \item \marginnote{10/23:}Share notes with Rudenko at the end of the course!
@@ -382,6 +382,108 @@
     \item This week: A brief primer on noncommutative algebra that is probably worth studying for the midterm.
     \item Next week: Number theoretic stuff, integer elements, groups, etc.
     \item Most people/books don't treat the finite-dimensional case here (so it's not written up anywhere) because they view it as too restrictive; instead, they prefer to use the \textbf{Artinian} condition.
+\end{itemize}
+
+
+
+\section{The Radical}
+\begin{itemize}
+    \item \marginnote{10/27:}Review.
+    \begin{itemize}
+        \item Let $A$ be an associative algebra over a field $F$. $\dim_FA=\infty$ (??).
+        \item $A$ is semisimple if every left $A$-module is a sum of simple $A$-modules.
+        \item Theorem: $A$ is semisimple iff ${}_AA$ is semisimple iff $A\cong M_{n_1\times n_1}(D_1)\oplus\cdots\oplus M_{n_k\times n_k}(D_k)$, where the $D_i$ are division algebras.
+        \begin{itemize}
+            \item Note: ${}_AA$ denotes $A$ as a left $A$-module.
+        \end{itemize}
+        \item The simplest semisimple algebra is a matrix algebra.
+    \end{itemize}
+    \item Example: A HW problem solution (PSet 4, Q4b).
+    \begin{itemize}
+        \item Let $A=M_{n\times n}(F)$. Then $\dim(A)=n^2$.
+        \item One representation of $A$ that's particularly nice is $S=F^n$, i.e., the set of all column vectors of length $n$ with entries in $F$.
+        \begin{itemize}
+            \item We just map $X\in A$ to $\rho(X)=X$.
+            \item Alternatively, this can be thought of as the map from $A\times S\to S$ sending $(X,v)\mapsto Xv$.
+            \item This is a simple representation! Using permutation matrices, for instance, we can see that no subspace is fixed under \emph{every} $X\in M_{n\times n}(F)$.
+        \end{itemize}
+        \item The HW problem was to show that $F^n$ is the only simple module over the matrix algebra.
+        \item We want to show that ${}_AM_{n\times n}(F)\cong\bigoplus^nS=S^n$.
+        \begin{itemize}
+            \item Define the map $(v_1\mid\cdots\mid v_n)\to v_1\oplus\cdots\oplus v_n$.
+        \end{itemize}
+        \item From here, we can deduce that if $T$ is a simple module, we can construct a homomorphism $A^N=(S^n)^N\twoheadrightarrow T$. It follows that $S\cong T$. What is this??
+    \end{itemize}
+    \item Takeaway: There is a unique simple module over matrix algebra, i.e., the columns of the matrix.
+    \begin{itemize}
+        \item The dimension of every module over a matrix algebra will be a multiple of $n$??
+    \end{itemize}
+    \item We want something more complete about an algebra.
+    \item Recall the radical of $A$.
+    \item Main theorem: $A$ is semisimple iff $\Rad(A)=0$.
+    \item Facts.
+    \begin{enumerate}
+        \item $\Rad(A)$ is a two-sided ideal.
+        \begin{itemize}
+            \item Prove directly by multiplying on both left and right, as at the end of Wednesday's class.
+        \end{itemize}
+        \item $\Rad(A)=\bigcap L$ where $L$ is a maximal left ideal.
+    \end{enumerate}
+    \item \textbf{Maximal} (left ideal of $A$): A left ideal $L$ for which there exists no left ideal $L'$ such that $L\subsetneq L'\subsetneq A$.
+    \begin{itemize}
+        \item Ideals are subspaces. Maximal means biggest by inclusion, but not necessarily equal to the whole thing.
+    \end{itemize}
+    \item We now prove Fact 2.
+    \begin{proof}
+        We first establish some facts. Then we do a bidirectional inclusion proof.\par\smallskip
+        If $L$ is a left ideal, then $A/L$ is a left $A$-module. If we now assert that $L$ is a \emph{maximal} left ideal, then $A/L$ is a \emph{simple} left $A$-module. This is because of the following correspondence theorem, a very general fact that's easy to show: Essentially, if you have some modules $M,N$ such that $N\leq M$, then the modules in between $N\subsetneq M$ are in bijection with $M/N$. This bijection is defined in the forward direction by quotienting modules in between $N\subsetneq M$, and in the reverse direction by taking the preimage of the quotient projection. Thus, maximal left ideals $L$ have nothing in between them and $A$, so $A/L$ is in bijection with nothing! Moreover, \emph{every} simple module is obtained this way.\par
+        If $S$ is an arbitrary simple module containing $v_0\neq 0$, then we may define $f:A\to S$ sending $a\mapsto av_0$. Note that $0\subsetneq\im(f)\subseteq S$. But $f$ is surjective, so $\im(F)=S$. It follows that $S\cong A/L$??\par\smallskip
+        If $x\in\Rad(A)$, where $L$ is a maximal left ideal of $A$, then $x(A/L)=0$. It follows that $xA\subseteq L$. But since $x\in xA$, this means that $x\in L$. It follows that $\Rad(A)\subset\bigcap L$.\par
+        Now, to show the other inclusion, let $x\in\bigcap L$. Let $S$ be an arbitrary simple module over $A$. We know that $S\cong A/L$ for some maximal ideal $L$. But $xA\subset L$. Essentially, we have a map $A\twoheadrightarrow S$ sending $a\mapsto av_0$ ($v_0\neq 0$) with kernel $L$ containing $x$, so then $xv_0=0$. How does this whole reverse inclusion chunk work??
+    \end{proof}
+    \item Thus, the radical has the equivalent descriptions
+    \begin{equation*}
+        \Rad(A) = \{a\in A\mid aS=0\text{ for any simple module }S\}
+        = \bigcap L
+    \end{equation*}
+    \item Theorem: $A$ (finite-dimensional) is semisimple iff $\Rad(A)=0$.
+    \begin{proof}
+        We will prove both directions independently here. Let's begin.\par
+        ($\Rightarrow$): Suppose $A$ is semisimple. Then $A=S_1\oplus\cdots\oplus S_N$. It follows in particular that $1=s_1+\cdots+s_N$ for some $s_i\in S_i$ ($i=1,\dots,n$). Now let $a\in\Rad(A)$ be arbitrary; we hope to show that $a=0$. Fortunately, we can do this as follows via
+        \begin{equation*}
+            a\cdot 1 = as_1+\cdots+as_N
+            = 0+\cdots+0
+            = 0
+        \end{equation*}
+        Just to be super clear, $as_i=0$ because $a\in\Rad(A)$ implies $aS=0$ for all simple modules $S$, including $S_i$ of which $s_i$ is an element and is thus annihilated by $a$.\par
+        ($\Leftarrow$): The fact that $A$ is finite dimensional implies that there exists a collection $L_1,\dots,L_n$ of maximal ideals such that $\bigcap L=\bigcap^nL_i$. It's more efficient to just take finitely many! Since we're finite dimensional, what we can do is drop dimensions from $\dim L_1$ to $\dim L_1\cap L_2$ to $\dim L_1\cap L_2\cap L_3$, so since we're eventually gonna hit zero, we're eventually gonna have to stop. Thus, $\Rad(A)=L_1\cap\cdots\cap L_n$. One line to finish. Take ${}_AA$ as a left $A$-module (denoted with left subscript $A$). We can map ${}_AA$ to $A/L_1\oplus\cdots\oplus A/L_n$. Call this map $f$. Then
+        \begin{equation*}
+            \ker(f) = \bigcap_{i=1}^nL_i = \Rad(A) = (0)
+        \end{equation*}
+        But then $f$ is injective, so ${}_AA$ is a submodule of a semisimple module, so therefore ${}_AA$ is semisimple itself. Help on this whole direction of the argument??
+    \end{proof}
+    \item \textbf{Artinian}: Every decreasing sequence of ideals has to stabilize.
+    \item Let $S_1,S_2$ be simple modules, and let $M$ be some module. We get $\Hom_G(S_2,S_1)$, $\Ext^1(S_2,S_1)$, $\Ext^2(S_2,S_1)$, \dots. This gets very complicated very quickly, and you actually need homological algebra to keep track of everything.
+    \begin{itemize}
+        \item Point??
+    \end{itemize}
+    \item New HW problem: $A=\F_P[G]$ is never semisimple. This is called \textbf{modular representation theory}, it's in our book, and it's hard.
+    \item A very concrete criteria for semisimplicity.
+    \begin{itemize}
+        \item Let $F=\C$ and let $A$ be finite dimensional with $\dim_FA=n$.
+        \item Define a scalar product in $A$ by
+        \begin{equation*}
+            \inp{x,y} = \tr(L_xL_y)
+        \end{equation*}
+        \begin{itemize}
+            \item $L_x:A\to A$ is the map that sends $a\mapsto xa$.
+            \item This is a symmetric map; it's got a lot of nice properties actually.
+            \item Note: $\tr(L_x,L_y)$ is colloquially known as $\tr(xy)$.
+        \end{itemize}
+        \item Theorem: Let $A$ be a finite dimensional algebra over $\C$. Then $A$ is semisimple iff $\tr(x^2)$ is \textbf{nondegenerate}, which means that if $\tr(xa)=0$ for any $x$, then $a=0$. We've probably seen this in the context of vector spaces like $V\otimes V\to\C$ or $V\cong V^*$. What is this??
+        \item Something about $|G|^{|G|}$. What is this??
+    \end{itemize}
+    \item Next week: Number theoretic group theory and then representation theory of symmetric groups.
 \end{itemize}
 
 
