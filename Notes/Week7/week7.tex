@@ -1,0 +1,239 @@
+\documentclass[../notes.tex]{subfiles}
+
+\pagestyle{main}
+\renewcommand{\chaptermark}[1]{\markboth{\chaptername\ \thechapter\ (#1)}{}}
+\setcounter{chapter}{6}
+
+\begin{document}
+
+
+
+
+\chapter{Representations of the Symmetric Group}
+\section{Specht Modules}
+\begin{itemize}
+    \item \marginnote{11/6:}Announcements.
+    \begin{itemize}
+        \item Midterm description is on the Canvas page.
+        \item Review what he says to review, and then look at the PSets. The operator averaging stuff and $S_4$, $S_5$ examples are most important.
+        \item New HW will be due next Friday (not this Friday).
+    \end{itemize}
+    \item New topic: Representations of $S_n$.
+    \begin{itemize}
+        \item We will talk about these almost until the end of the course.
+        \item Very hard.
+        \item Any specialist in rep theory will still say that they know some approaches, but nobody understands this stuff completely.
+        \item We'll explore some phenomena, but if we feel after this course that we still don't understand everything about $S_n$, that's typical; if we think we understand everything, we're probably wrong.
+    \end{itemize}
+    \item Representation theory of $GL_n(\F_{p^k})$ is related but even worse.
+    \begin{itemize}
+        \item Same with $O_n(\F_{p^k})$.
+        \item Recently, all this stuff was understood with something called linquistic (??) theory, but that's far beyond us.
+    \end{itemize}
+    \item $|S_n|=n!$, and the conjugacy classes are in bijection with cyclic structures of a permutation.
+    \begin{itemize}
+        \item Our good understanding of the conjugacy classes of $S_n$ is the only thing that makes this problem the slightest bit tractable.
+        \item Cyclic structures are also in bijection with the \textbf{partitions} of a number; recall that we briefly talked about these in MATH 25700!
+    \end{itemize}
+    \item \textbf{Partition} (of $n\in\N$): An ordered tuple satisfying the following constraints. \emph{Denoted by} $\bm{\lambda}$, $\bm{(\lambda_1,\ldots,\lambda_k)}$. \emph{Constraints}
+    \begin{enumerate}
+        \item $\lambda_i\in\N$ for $i=1,\dots,k$;
+        \item $\lambda_1\geq\cdots\geq\lambda_k$;
+        \item $\lambda_1+\cdots\lambda_k=n$.
+    \end{enumerate}
+    \item Example: The partitions of the number "4" are $(4)$, $(3,1)$, $(2,2)$, $(2,1,1)$, and $(1,1,1,1)$.
+    \begin{itemize}
+        \item This is the same way we've been denoting representations!
+    \end{itemize}
+    \item $\bm{p(n)}$: The number of possible partitions of $n$.
+    \begin{itemize}
+        \item Hardy and Ramanujan helped understand the number $p(n)$ of partitions of $n$, but they're still very hard to understand.
+    \end{itemize}
+    \item One way to understand $p(n)$ is through its encoding in the \textbf{generating function}
+    \begin{equation*}
+        \sum_{n\geq 1}p(n)x^n = 1+x+2x^2+3x^3+5x^4+\cdots
+    \end{equation*}
+    \begin{itemize}
+        \item We can think of the above generating function as an actual function of $x$ if it converges for small $x$; of it doesn't converge, then we just think of it as a "meaningless" \textbf{formal power series}.
+        \item To choose a partition, we need to choose a certain number of 1's, a certain number of 2's, a certain number of 3's, etc. all the way up to $n$.
+        \item So let's look at
+        \begin{equation*}
+            (1+x+x^2+\cdots)(1+x^2+x^4+\cdots)(1+x^3+x^6+\cdots)(1+x^4+x^8+\cdots)\cdots
+        \end{equation*}
+        \begin{itemize}
+            \item Formally, this is
+            \begin{equation*}
+                \prod_{i=1}^\infty\left( \sum_{j=0}^\infty x^{ij} \right)
+            \end{equation*}
+            \item This equals the generating function! It tells us that to compute $p(100)x^{100}$, we need only look at certain terms.
+        \end{itemize}
+        \item Recall that we can write $1+x+x^2+\cdots=1/(1-x)$. Doing similarly for other terms transforms the above product into
+        \begin{equation*}
+            \frac{1}{1-x}\frac{1}{1-x^2}\frac{1}{1-x^3}\cdots
+        \end{equation*}
+    \end{itemize}
+    \item \textbf{Generating function}: An encoding of an infinite sequence of numbers as the coefficients of a formal power series.
+    \item \textbf{Formal power series}: An infinite sum of terms of the form $ax^n$ that is considered independently from any notion of convergence.
+    \item The above discussion of $p(n)$ as a generating function is only for our fun; Rudenko is not going to use this in any way.
+    \begin{itemize}
+        \item It's just a pretty function.
+        \item Takeaway: We can write the generating function as something nice and then use it to prove something.
+    \end{itemize}
+    \item We can visualize these partitions using something called a \textbf{Young diagram}.
+    \begin{figure}[h!]
+        \centering
+        \begin{subfigure}[b]{0.3\linewidth}
+            \centering
+            \ydiagram{5,4,4,3,2,1,1}
+            \caption{$\lambda=(5,4,4,3,2,1,1)$.}
+            \label{fig:youngDiagram20a}
+        \end{subfigure}
+        \begin{subfigure}[b]{0.3\linewidth}
+            \centering
+            \ydiagram{7,5,4,3,1}
+            \caption{$\lambda'=(7,5,4,3,1)$.}
+            \label{fig:youngDiagram20b}
+        \end{subfigure}
+        \caption{Young diagrams for a partition of 20.}
+        \label{fig:youngDiagram20}
+    \end{figure}
+    \begin{itemize}
+        \item Suppose we have the following partition of 20: $(5,4,4,3,2,1,1)$.
+        \item Then we draw 5 cages for 5 little birds, followed by 4 cages for 4 little birds, etc.
+        \item Thus, the $i^\text{th}$ row of boxes has length $\lambda_i$.
+        \item The same way you can denote by $\lambda$ the whole \emph{partition}, you can denote by $\lambda$ the whole \emph{diagram}.
+        \item This is just a way to visualize partitions.
+        \item Recall the three partitions of $S_3$, corresponding to its representations: $(3)$, $(2,1)$, $(1,1,1)$.
+        \item Moreover, these diagrams are actually meaningful!
+    \end{itemize}
+    \item \textbf{Inverse} (of $\lambda$): The partition $(\lambda_1',\dots,\lambda_k')$ defined as follows. \emph{Denoted by} $\bm{\lambda'}$. \emph{Given by}
+    \begin{equation*}
+        \lambda_i' = |\{\lambda_j\mid\lambda_j>i\}|
+    \end{equation*}
+    for all $i=1,\dots,k$.
+    \begin{itemize}
+        \item We can see that $\lambda_1'\geq\cdots\geq\lambda_k'$.
+        \item We can also see that the sum will still be $n$.
+        \item Moreover, if we do this twice, we'll get back to $\lambda$, i.e., $(\lambda')'=\lambda$.
+        \item We can prove $(\lambda')'=\lambda$ combinatorially, too, (that is, without Young diagrams) but that gets pretty complicated.
+    \end{itemize}
+    \item Example: If $\lambda=(5,4,4,3,2,1,1)$ as above, then $\lambda'=(7,5,4,3,1)$.
+    \begin{itemize}
+        \item See Figure \ref{fig:youngDiagram20b}.
+        \item Moreover, the Young diagrams are related by a flip akin to matrix transposition.
+        \item Notice how the definition of inversion \emph{exactly} specifies this flip in the picture: The number of $\lambda_j$'s that have length at least 1 is all the first column of Figure \ref{fig:youngDiagram20a}, the number of length at least 2 is all the second column, etc.
+    \end{itemize}
+    \item Onto the next question, which is the main miracle.
+    \begin{itemize}
+        \item Main miracle: There exists a natural (i.e., canonical) bijection between the conjugacy classes and irreducible representations of $S_n$.
+        \item We've explored a duality for general finite groups $G$, before, but never a bijection.
+        \begin{itemize}
+            \item In $S_n$, there \emph{is} this natural bijection.
+            \item If you understand why intuitively, you will have started to understand the representation theory of $S_n$.
+        \end{itemize}
+    \end{itemize}
+    \item If we define $\lambda\mapsto n$ (??), then there is some irrep $V_\lambda$ corresponding to $\lambda$. We will look at the \textbf{Specht module} construction of $V_\lambda$.
+    \begin{itemize}
+        \item Some of the proofs Rudenko will present, he stole from \textcite{bib:Etingof}, and some of the proofs he invented himself.
+        \item This is \emph{by far} the best construction, even though it's exceedingly rare in the literature.
+    \end{itemize}
+    \item The usual construction.
+    \begin{itemize}
+        \item Take $\C[S_n]$ with coefficients $a_\lambda,b_\lambda$, etc. similar over conjugacy classes and do something with it??
+        \item "Just say NO!" to this construction.
+    \end{itemize}
+    \item Here is the better idea.
+    \begin{itemize}
+        \item Consider an algebra of polynomials with rational coefficients: $\Q[x_1,\dots,x_n]$.
+        \begin{itemize}
+            \item We could also do real or complex, but rational is nice.
+        \end{itemize}
+        \item For symmetric groups, all representations will be integers, etc.??
+        \item One thing to emphasize about this algebra: It is a \textbf{graded} algebra.
+        \begin{itemize}
+            \item If represented by $A$, then it equals $A_0\oplus A_1\oplus A_2\oplus\cdots$ where
+            \begin{equation*}
+                A_m = \left\{ \sum_{k_1+\cdots+k_n=m}a_{k_1\cdots k_n}x_1^{k_1}\cdots x_n^{k_n} \right\}
+            \end{equation*}
+            \begin{itemize}
+                \item I.e., $A_m$ is the sum of all polynomials with degree equal to $m$.
+                \item Example: If we take $1+x_1^2x_2^3+x_1x_2+x_1^{100}+x_1x_2^{99}$, we can then break this polynomial up into polynomials of degree 1, 5, 2, and 100.
+            \end{itemize}
+            \item We also have $A_{m_1}\cdot A_{m_2}\subset A_{m_1+m_2}$.
+            \begin{itemize}
+                \item Exmaple: $x_1x_2^2\cdot(x_1+x_2)=x_1^2x_2^2+x_1x_2^3$.
+            \end{itemize}
+        \end{itemize}
+        \item With this algebra in hand, we may let $S_n\acts\Q[x_1,\dots,x_n]$ via
+        \begin{equation*}
+            \sigma P(x_1,\dots,x_n) = P(x_{\sigma_{-1}(1)},\dots,x_{\sigma^{-1}(n)})
+        \end{equation*}
+        \begin{itemize}
+            \item In other words, $\sigma$ is transposing polynomials.
+            \item Example: $(12)(x_1^2+x_2^3+x_3)=x_2^2+x_1^3+x_3$.
+        \end{itemize}
+        \item Thus, we call as $A_1$ the representation $V_\text{perm}^*$.
+        \begin{itemize}
+            \item This is because $A_1=\spn(x_1+\cdots+x_n)$, and permuting these is much like permuting the basis of a vector space, as the typical permutation representation does.
+            \item It could technically be the isomorphic representation $V_\text{perm}$, but the dual fits better here for reasons??
+        \end{itemize}
+        \item Then $A_2=S^2V^*$.
+        \begin{itemize}
+            \item So if $A_1$ had basis $e^1,\dots,e^m$, $A_2$ has basis $e^ie^j$.
+            \item Why are we choosing these sets??
+        \end{itemize}
+        \item Continuing, $A_3=S^3V^*$.
+        \item It follows that the representation of the overall thing is
+        \begin{equation*}
+            \bigoplus_{m\geq 0}(S^mV_\text{perm}^*)
+        \end{equation*}
+        \begin{itemize}
+            \item This is called the \textbf{symmetric algebra}.
+        \end{itemize}
+    \end{itemize}
+    \item \textbf{Graded} (algebra): An algebra for which the underlying additive group is a direct sum of abelian groups $A_i$ such that $A_iA_j\subset A_{i+j}$.
+    \item So how do we construct representations?
+    \begin{itemize}
+        \item For $S_2$, $x_1-x_2$ changes sign when we apply $S_2$.
+        \item For $S_3$\dots
+        \begin{itemize}
+            \item The trivial's polynomial is 1 and \emph{tableaux}.
+            \item The standard is $(2,1)$. When we apply $S_3$ to $(x_1-x_2)$, we get
+            \begin{equation*}
+                \langle (x_1-x_2),(x_2-x_1),(x_1-x_3),(x_3-x_1),(x_2-x_3),(x_3-x_2) \rangle
+            \end{equation*}
+            \begin{itemize}
+                \item If we let $a=x_1-x_2$, $b=x_2-x_3$, then some elements equal $a+b$. This is another way to think about the action.
+            \end{itemize}
+            \item What about the alternating representation? We have $(x_1-x_2)(x_2-x_3)(x_1-x_3)=\Delta_{123}$, which changes sign when we apply any element with sign $-1$!
+        \end{itemize}
+        \item For $S_4$\dots
+        \begin{itemize}
+            \item $(4)$ is 1.
+            \item $(3,1)$ is $S_4(x_1-x_2)=\Delta_{12}$.
+            \item $(1,1,1,1)$ is $(x_1-x_2)(x_1-x_3)(x_1-x_4)(x_2-x_3)(x_2-x_4)(x_3-x_4)=\Delta_{1234}$.
+            \item $(2,1,1)$ is $(x_1-x_2)(x_1-x_3)(x_2-x_3)$.
+            \begin{itemize}
+                \item We got this polynomial by guessing; the same way $(x_1-x_2)$ worked in multiple cases, maybe this one does too! And it does.
+                \item Something to check is that $\Delta_{123}-\Delta_{124}-\Delta_{134}-\Delta_{234}=0$.
+            \end{itemize}
+            \item $(2,2)$ is $(x_1-x_2)(x_3-x_4)$.
+            \begin{itemize}
+                \item Something related we can prove is that
+                \begin{equation*}
+                    (x_1-x_2)(x_3-x_4)-(x_1-x_3)(x_2-x_4)-(x_1-x_4)(x_2-x_3) = 0
+                \end{equation*}
+                \item This formula appears in \textbf{cross ratios}, which we can discuss in Rudenko's algebraic geometry course next quarter.
+            \end{itemize}
+            \item For $\lambda=(4,3,1)$, we have $\Delta_{123}\Delta_{45}\Delta_{67}$, and we act by $S_8$ upon this! Explicitly, we have $S_8(x_1-x_2)(x_1-x_3)(x_2-x_3)(x-4-x_5)(x_6-x_7)$.
+            \item Takeaway: It all depends on column length!
+        \end{itemize}
+        \item These polynomials are called \textbf{Vandermonde determinants}; those are the little $\Delta$ things with subscripts. We'll talk about these next times.
+    \end{itemize}
+    \item We need to prove reducibility and not pairwise isomorphic to make sure that this construction is valid, but that's easy!
+\end{itemize}
+
+
+
+
+\end{document}
