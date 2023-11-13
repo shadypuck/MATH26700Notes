@@ -450,5 +450,246 @@
 
 
 
+\section{Burnside's Theorem}
+\begin{itemize}
+    \item \marginnote{11/3:}Announcements.
+    \begin{itemize}
+        \item HW2 returned today; HW3 will be returned Monday.
+    \end{itemize}
+    \item Today: We have a masterpiece of a theorem.
+    \begin{itemize}
+        \item Very short, clean, powerful use of character theory.
+        \item It's hard to keep the whole proof in your head.
+    \end{itemize}
+    \item Theorem (Burnside's theorem): If $G$ is a group and $|G|=p^aq^b$ for $p,q$ prime, then $G$ is not simple (equivalently, $G$ has no normal subgroup $N$ such that $\{e\}\trianglelefteq N\trianglelefteq G$). In fact, $G$ is solvable.
+    \item \textbf{Solvable} (group): A group $G$ that has a set of subgroups $G_1,\dots,G_n$ such that\dots
+    \begin{enumerate}
+        \item $\{e\}\trianglelefteq G_1\trianglelefteq G_2\trianglelefteq\cdots\trianglelefteq G_n=G$;
+        \item Each $G_i/G_{i-1}$ is abelian.
+    \end{enumerate}
+    \item Motivation for solvable groups.
+    \begin{itemize}
+        \item Has to do with solving equations in radicals.
+        \item Equivalent to $|G|=p^aq^b$.
+    \end{itemize}
+    \item Before we do the proof, here's a 2-minute Galois theory sprint for a little more context on solvable groups and this theorem as a whole.
+    \begin{itemize}
+        \item Galois theory is something we should all learn for fun at some point; nothing is more pleasurable.
+        \begin{itemize}
+            \item \textcite{bib:Artin} is a very short ($<100$ pages), pleasurable introduction.
+        \end{itemize}
+        \item Let's formulate a result we may not know (very abstract), even if we've taken Galois theory.
+        \begin{itemize}
+            \item Phrasing a big part of it in just a few lines.
+        \end{itemize}
+        \item First, recall the algebraic numbers $\bar{\Q}$, which contain $\Q$, etc.
+        \begin{itemize}
+            \item Using these, we can define the \textbf{Galois group}.
+            \item This group is still very difficult to get a handle on, still an active area of research under the \textbf{Langlands Program} (wherein we let $\sigma(x)=\bar{x}$??).
+        \end{itemize}
+        \item Now we may state the result.
+        \item Theorem: $G_\Q$ acts on $\bar{\Q}$. Imagine orbits.
+        \begin{itemize}
+            \item Then $[\sigma(\sqrt{2})]^2=\sigma(\sqrt{2}^2)=\sigma(2)=2$.
+            \item This theorem acts on orbits and tells you that orbits are in bijection with irreducible polynomials $p(x)=x^n+a_{n-1}x^{n-1}+\cdots+a_0$ over $\bar{\Q}$, i.e., all $a_i\in\Q$.
+            \item Then if $\alpha\in\bar{\Q}$ implies $p_A(\alpha)=0$, $\sigma p(\alpha)=p(\sigma(\alpha))=0$.
+            \item So $\sqrt{2}$ can be sent to $-\sqrt{2}$ and we can do more, too.
+            \item So it's very hard to construct elements because we need to say what happens in every orbit, and we have infinitely many.
+            \item What is going on here??
+        \end{itemize}
+        \item We won't need much of this, but it's good to talk about.
+    \end{itemize}
+    \item \textbf{Galois group}: The group defined as follows. \emph{Denoted by} $\bm{G_{\pmb{\Q}}}$, $\bm{\Gal(\bar{\pmb{\Q}},\pmb{\Q})}$. \emph{Given by}
+    \begin{equation*}
+        G_\Q = \{\sigma:\bar{\Q}\to\bar{\Q}\mid\sigma(x+y)=\sigma(x)+\sigma(y),\ \sigma(xy)=\sigma(x)\sigma(y),\ \sigma(m/n)=m/n\}
+    \end{equation*}
+    \begin{itemize}
+        \item $\sigma$ is often thought of as a permutation.
+    \end{itemize}
+    \item We now start proving Burnside's theorem in steps, each of which is a theorem in its own right.
+    \item Lemma 1\footnote{This is a result of number theory, not one regarding representations. But we are stating and proving it because it is foundational to our argument.}: Suppose $\varepsilon_1,\dots,\varepsilon_n$ are roots of unity such that
+    \begin{equation*}
+        \frac{\varepsilon_1+\cdots+\varepsilon_n}{n} \in \bar{\Z}
+    \end{equation*}
+    Then either $\varepsilon_1=\cdots=\varepsilon_n$ or $\varepsilon_1+\cdots+\varepsilon_n=0$.
+    % \item Before we prove this lemma, we investigate why it should be true intuitively.
+    % \begin{figure}[h!]
+    %     \centering
+    %     \begin{tikzpicture}
+    %         \footnotesize
+    %         \draw [-stealth] (-2.5,0) -- (2.5,0) node[right]{Re};
+    %         \draw [-stealth] (0,-2.5) -- (0,2.5) node[above]{Im};
+    %         \draw circle (2cm);
+    
+    %         \fill (2,0)  circle (1.5pt) node[below right]{1};
+    %         \fill (0,0)  circle (1.5pt) node[below=2pt,fill=white,inner sep=2pt]{0};
+    %         \fill (-2,0) circle (1.5pt) node[below left ]{$-1$};
+    
+    
+    %         \draw [grx,thick,->] (0,0) -- ++(50:{2/3});
+    %         \draw [grx,thick,->] (50:{2/3}) -- ++(170:{2/3});
+    %         \draw [grx,thick,->] (50:{2/3}) ++(170:{2/3}) -- ++(290:{2/3});
+    
+    %         \foreach \x in {0,-0.5,-1,-1.5} {
+    %             \draw [gry,thick,->] (\x,0) -- ++(-0.5,0);
+    %         }
+    
+    %         \draw [rex,thick,->] (0,0) -- ++(-45:1);
+    %         \draw [rex,thick,->] (-45:1) -- ++(45:1);
+    %         \node [rex] at (1.4,1.4) {*};
+    %         \node [rex] at (1.4,-1.47) {*};
+    
+    %         \draw [rey,thick,->] (0,0) -- ++(-145:0.4);
+    %         \draw [rey,thick,->] (-145:0.4) -- ++(-80:0.4);
+    %         \draw [rey,thick,->] (-145:0.4) ++(-80:0.4) -- ++(-110:0.4);
+    %         \draw [rey,thick,->] (-145:0.4) ++(-80:0.4) ++(-110:0.4) -- ++(-170:0.4);
+    %         \draw [rey,thick,->] (-145:0.4) ++(-80:0.4) ++(-110:0.4) ++(-170:0.4) -- ++(95:0.4);
+    %     \end{tikzpicture}
+    %     \caption{Burnside's theorem --- roots of unity lemma.}
+    %     \label{fig:burnsideRootUniLemma}
+    % \end{figure}
+    % \begin{itemize}
+    %     \item Essentially, an analogous statement to the lemma is that the sum of $n$ vectors of magnitude $1/n$ can only produce a vector of magnitude 1 if all of them are pointed in the same direction, and they can only produce a vector of magnitude 0 if they sum to zero.
+    %     \begin{itemize}
+    %         \item Notice how the dark green vectors sum to 0. There are three of them, so they all get scaled by $1/3$. Even though they clearly don't all correspond to third roots of unity, the fact that they reach an integer is sufficient to prove that they sum to zero.
+    %         \item Notice how the light green vectors sup to $-1$. These four get scaled by $1/4$, and they all have to line up in \emph{exactly} the same direction to reach the edge of the circle.
+    %         \item The red vectors, on the other hand, meander around, neither summing to zero or all pointing in the same direction. Thus, they don't hit integers.
+    %     \end{itemize}
+    %     \item Alternatively, we can view the point at which the $n$ vectors wind up as the center of mass thing: Notice how the dark red vectors terminate at the center of mass of the two red stars, which correspond to the full roots of unity that the scaled vectors represent.
+    % \end{itemize}
+    % \item We now prove the lemma.
+    \begin{proof}
+        Assume that it is \emph{not} true that $\varepsilon_1=\cdots=\varepsilon_n$. Then
+        \begin{equation*}
+            \left| \frac{\varepsilon_1+\cdots+\varepsilon_n}{n} \right| < 1
+        \end{equation*}
+        Define $a=a_1:=(\varepsilon_1+\cdots+\varepsilon_n)/n$. Also suppose that $a_1,\dots,a_k$ are roots of the minimal polynomial for $a$, i.e., $p(x)=(x-a_1)\cdots(x-a_k)\in\Z[X]$ is the polynomial of least degree such that $p(a)=0$; such a polynomial exists because $a$ is an algebraic integer, per the discussion of roots of unity on Wednesday.
+        Now what can we say about its conjugates? Take an $a_i$. We claim that $a_i$ is also the sum of roots of unity over $n$, i.e.,
+        \begin{equation*}
+            a_i = \frac{\varepsilon_1^i+\cdots+\varepsilon_n^i}{n}
+        \end{equation*}
+        So if one coefficient is of this form, they all are! There is a proof of this that follows immediately from Galois theory via\footnote{How much do I need to know about this step?? You said there might be something about proving Burnside's theorem on the final??}
+        \begin{equation*}
+            \sigma\left( \frac{\varepsilon_1+\cdots+\varepsilon_n}{n} \right) = \frac{\sigma(\varepsilon_1)+\cdots+\sigma(\varepsilon_n)}{n}
+        \end{equation*}
+        So then since each $a_i$ satisfies $|a_i|\leq 1$ and $|a_1|<1$, we have that
+        \begin{equation*}
+            \left| \prod_{i=1}^na_i \right| < 1
+        \end{equation*}
+        So $\prod_{i=1}^na_i\in\Z$\footnote{How do we know that this is an integer??}, but since it's an integer with absolute value less than 1, it must be zero.\footnote{How doe proving that the product of the $a_i$'s is zero prove that $a_1=0$??}
+    \end{proof}
+    \item Note: This lemma is basically just a center of mass thing, i.e., the expression $(\varepsilon_1+\cdots+\varepsilon_n)/n$ essentially gives the center of mass of the roots of unity:
+    \begin{figure}[h!]
+        \centering
+        \begin{tikzpicture}
+            \footnotesize
+            \draw [-stealth] (-1.5,0) -- (1.5,0) node[right]{Re};
+            \draw [-stealth] (0,-1.5) -- (0,1.5) node[above]{Im};
+            \draw circle (1cm);
+    
+            \draw [blx,thick] ($(30:1)+(-2pt,-2pt)$) -- ++(4pt,4pt);
+            \draw [blx,thick] ($(30:1)+(-2pt,2pt)$) -- ++(4pt,-4pt);
+            \draw [blx,thick] ($(70:1)+(-2pt,-2pt)$) -- ++(4pt,4pt);
+            \draw [blx,thick] ($(70:1)+(-2pt,2pt)$) -- ++(4pt,-4pt);
+            \draw [blx,thick] ($(-20:1)+(-2pt,-2pt)$) -- ++(4pt,4pt);
+            \draw [blx,thick] ($(-20:1)+(-2pt,2pt)$) -- ++(4pt,-4pt);
+            \draw [blx,thick] ($(-40:1)+(-2pt,-2pt)$) -- ++(4pt,4pt);
+            \draw [blx,thick] ($(-40:1)+(-2pt,2pt)$) -- ++(4pt,-4pt);
+            \draw [blx,thick] ($(120:1)+(-2pt,-2pt)$) -- ++(4pt,4pt);
+            \draw [blx,thick] ($(120:1)+(-2pt,2pt)$) -- ++(4pt,-4pt);
+            \draw [blx,thick] ($(-140:1)+(-2pt,-2pt)$) -- ++(4pt,4pt);
+            \draw [blx,thick] ($(-140:1)+(-2pt,2pt)$) -- ++(4pt,-4pt);
+    
+            \fill [blx] (0,0) ++(30:{1/6}) ++(70:{1/6}) ++(-20:{1/6}) ++(-40:{1/6}) ++(120:{1/6}) ++(-140:{1/6}) circle (2pt);
+        \end{tikzpicture}
+        \caption{Burnside's theorem --- roots of unity lemma.}
+        \label{fig:burnsideRootUniLemma}
+    \end{figure}
+    \item Stated simply, the first Theorem (below) posits that under relevant constraints, an either element acts as a scalar \emph{or} its character is zero.
+    \item Theorem 1: Let $G$ be a finite group, let $V$ be an irreducible representation of $G$, and let $C$ be a conjugacy class in $G$. Assume that $(|C|,\dim V)=1$\footnote{Both $|C|$ and $\dim V$ divide the order of the group, so they're usually not coprime, but they can be.}. Then for any $g\in C$, either $\chi_V(g)=0$ or $\rho_V(g)=\lambda I$.
+    \begin{proof}
+        Let $g\in C$ be arbitrary. Recall from our proof of the Frobenius divisibility theorem that
+        \begin{equation*}
+            \frac{|C|\chi_V(g)}{\dim V} \in \bar{\Z}
+        \end{equation*}
+        Recall from number theory that since $(|C|,\dim V)=1$, there exist $a,b\in\Z$ such that
+        \begin{equation*}
+            a|C|+b(\dim V) = 1
+        \end{equation*}
+        Multiplying through by $\chi_V(g)/\dim V$ reveals that
+        \begin{equation*}
+            \frac{\chi_V(g)}{\dim V} = \underbrace{a\vphantom{\frac{|C|\chi_V(g)}{\dim V}}}_{\in\Z\vphantom{\bar{\Z}}}\cdot\underbrace{\frac{|C|\chi_V(g)}{\dim V}}_{\in\bar{\Z}}+\underbrace{b\vphantom{\frac{|C|\chi_V(g)}{\dim V}}}_{\in\Z\vphantom{\bar{\Z}}}\cdot\underbrace{\chi_V(g)\vphantom{\frac{|C|\chi_V(g)}{\dim V}}}_{\in\bar{\Z}} \in \bar{\Z}
+        \end{equation*}
+        Now $\rho_V(g)$ has eigenvalues $\varepsilon_1,\dots,\varepsilon_d$ that are roots of unity. Thus, substituting into the above, we have that
+        \begin{equation*}
+            \frac{\varepsilon_1+\cdots+\varepsilon_d}{d} = \frac{\chi_V(g)}{\dim V}
+            \in \bar{\Z}
+        \end{equation*}
+        Therefore, by Lemma 1, either $\chi_V(g)=\varepsilon_1+\cdots+\varepsilon_d=0$ or $\varepsilon_1=\cdots=\varepsilon_d$ so that $\rho_V(g)=\varepsilon_iI$ for any $i=1,\dots,d$, as desired.
+    \end{proof}
+    \item That was the hard part; it gets easier from here.
+    % \item Lemma 2: Let $G$ be a finite group, let $p$ be a prime number, let $\{V:p\nmid\dim V\}$ be the set of all nontrivial irreducible representation of $G$ with dimension not divisible by $p$, and let $g\in G$ be arbitrary. Then there exists $V\in\{V:p\nmid\dim V\}$ such that $\chi_V(g)\neq 0$.
+    % \begin{proof}
+        
+    % \end{proof}
+    \item Theorem 2: Let $G$ be a finite group and let $C$ be a conjugacy class of $G$. Let $|C|=p^k$ for $k>0$. Then $G$ is not simple.
+    \begin{proof}
+        Since $\rho:G\to GL_d(\C)$ is a group homomorphism, $\ker(\rho)\trianglelefteq G$ is a normal subgroup of $G$. In this proof, we will construct a representation $\rho$ with nontrivial and improper kernel. Let's begin.\par
+        Let $g\in C$ be arbitrary. We know that $g\nsim e$: Since $p$ is a prime number, $|C|=p^k>1$, so $C\neq\{e\}$. It follows by the second orthogonality relation that
+        \begin{equation*}
+            \sum_\text{irreps}\dim(V)\cdot\chi_V(g) = \sum_{V_i}\chi_{V_i}(g)\overline{\chi_{V_i}(e)}
+            = 0
+        \end{equation*}
+        The expression on the left above is equal to
+        \begin{equation*}
+            \underbrace{1}_{V\text{ trivial}}+\sum_{V:p\mid\dim V}\dim(V)\cdot\chi_V(g)+\sum_{V:p\nmid\dim V}\dim(V)\cdot\chi_V(g)
+        \end{equation*}
+        We now take a moment to prove that there exists a $V$ such that $p\nmid\dim V$ and $\chi_V(g)\neq 0$. Suppose for the sake of contradiction that no such $V$ exists. Then by the above,
+        \begin{equation*}
+            1+\sum_{V:p\mid\dim V}\dim(V)\cdot\chi_V(g) = 0
+        \end{equation*}
+        Additionally, since $p\mid\dim(V)$ for all terms in the above sum, we can factor a $p$ out of it to get
+        \begin{equation*}
+            1+p\sum_{V:p\mid\dim V}\frac{1}{p}\dim(V)\cdot\chi_V(g) = 0
+        \end{equation*}
+        But since $(1/p)\dim(V)\cdot\chi_V(g)$ an integer implies $(1/p)\dim(V)\cdot\chi_V(g)$ an algebraic integer implies $\sum_{V:p\mid\dim V}(1/p)\dim(V)\cdot\chi_V(g)$ an algebraic integer, the above equation implies that $-1/p\in\bar{\Z}$. But since $px+1=0$ is not monic, we cannot have $-1/p\in\bar{\Z}$, and we have a contradiction.\par
+        % Then there exists $V$ such that $p\nmid\dim V$, $\chi_V(g)\neq 0$. Otherwise, $0=1+p\sum\frac{\dim V}{p}\chi_V(g)-1/p\in\bar{Z}$. This gives a contradiction. Thus, we got ourselves another little theorem.
+        Let's now use this $V$ such that $p\nmid\dim V$ and $\chi_V(g)\neq 0$. Since $p\nmid\dim V$, $|C|=p^k\nmid\dim V$. Thus, $(|C|,\dim V)=1$. Having proven this fact and $\chi_V(g)\neq 0$ for an \emph{arbitrary} $g\in C$, it follows by Theorem 1 that for all $a\in C$, $\rho_V(a)=\varepsilon\diag(1,\dots,1)=\varepsilon I$\footnote{How do we know it's true for all $a\in G$; couldn't they have different $\varepsilon$ or couldn't we get different $V$'s??}. Thus, if $a_1\neq a_2\in C$, $\rho_V(a_1a_2^{-1})=I$, so $a_1a_2^{-1}\in\ker(\rho_V)$, so the kernel is a normal nontrivial subgroup. The kernel is also not equal to $G$ because elements of it act trivially on $V$, a nontrivial representation, implying the existence of additional $\rho(g)$'s that act nontrivially.
+    \end{proof}
+    \item Takeaway: If you come up with Theorem 1, you're already almost there.
+    \item We're now ready for Burnside's theorem, which we should be able to prove on our own at this point if we remember the following common trick from group theory.
+    \item Theorem (Burnside's theorem): If $G$ is a group and $|G|=p^aq^b$ for $p,q$ prime, then $G$ is not simple (equivalently, $G$ has no normal subgroup $N$ such that $\{e\}\trianglelefteq N\trianglelefteq G$). In fact, $G$ is solvable.
+    \begin{proof}
+        Let $G$ have $|G|=p^aq^b$. Suppose for the sake of contradiction that $G$ is simple. We know that $\sum|C|=|G|$. Naturally, we may split the sum as follows.
+        \begin{equation*}
+            \sum_{|C|=1}|C|+\sum_{|C|>1}|C| = |G|
+        \end{equation*}
+        All elements in their own conjugacy class are those in the center! Thus,
+        \begin{equation*}
+            |Z(G)|+\sum_{|C|>1}|C| = |G|
+        \end{equation*}
+        But if $G$ is simple, then $Z(G)=\{e\}$. So we get
+        \begin{equation*}
+            1+\sum_{|C|>1}|C| = |G| = p^aq^b
+        \end{equation*}
+        % But since $a,b\geq 1$, dividing both sides of the above by $pq$ is not possible, so we get a contradiction.
+        Additionally, recall that as a corollary to the Orbit-Stabilizer theorem, we know that $|C|\mid|G|$. Thus, in this case, $|C|=p^cq^d$ for $c\leq a$ and $d\leq b$. Moreover, by Theorem 2, $c,d\geq 1$. (If one equalled zero and the other did not, $|C|$ would be ov prime power order and $G$ could not be simple, a contradiction.) Thus, the order of any conjugacy class in $G$ either equals 1 or is divisible by $pq$.\par
+        It follows that the sum in the above equation is divisible by $pq$. Thus,
+        \begin{equation*}
+            \frac{1}{pq} = \Bigg( \underbrace{p^{a-1}q^{b-1}\vphantom{\sum_{|C|>1}}}_{\in\Z}-\underbrace{\frac{1}{pq}\sum_{|C|>1}|C|}_{\in\Z} \Bigg)
+        \end{equation*}
+        That is to say, $1/pq$ (which is clearly not an integer) is equal to an integer, a contradiction.
+    \end{proof}
+    \item We will have to prove some parts of Burnside's theorem on the final. This is important because it's so complicated with so much stuff going on that you really have to learn everything by heart before you can understand it.
+    \item Midterm.
+    \begin{itemize}
+        \item Computation of character tables, find a character tables, compute wedge pwoers, tensor powers, symmetric powers, etc. Compute all this elementary stuff and then a few more complicated problems. We'll get an explicit list of topics. Construct character table for symmetries of a square, etc. Make sure you can construct the character table for $S_4$, etc. Can you sit and from scratch make a character table for $S_5$? If you can, you'll have no problem on the midterm.
+    \end{itemize}
+    \item Next HW is not for submission; it's just a few practice problems.
+    \item Next week: Old works by Spacht, which nobody thinks is useful but Rudenko. He thinks it's beautiful, though. Very 19th century feel. Then induction/restriction, and another approach using symmetric polynomials, etc.
+\end{itemize}
+
+
+
 
 \end{document}
