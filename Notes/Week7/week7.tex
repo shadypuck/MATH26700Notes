@@ -235,5 +235,213 @@
 
 
 
+\section{Vandermonde Determinants}
+\begin{itemize}
+    \item \marginnote{11/8:}Announcements.
+    \begin{itemize}
+        \item OH tonight at 6:00 PM.
+    \end{itemize}
+    \item Consider $S_n$.
+    \begin{itemize}
+        \item Recall the symmetric algebra $R=\Q[x_1,\dots,x_n]$, which is a graded ring $\bigoplus_{d>0}R_d$ where $R_d=S^dV_\text{perm}^*$.
+        \item The action of $S_n\acts\Q[x_1,\dots,x_n]$ is $\sigma P(x_1,\dots,x_n)=P(x_{\sigma^{-1}(1)},\dots,x_{\sigma^{-1}(n)})$.
+    \end{itemize}
+    \item With the definitions of last class behind us, we can now look at the \textbf{space of invariants} $R^{S_n}$, isotypical components of which $\sigma$ acts on trivially.
+    \begin{equation*}
+        R^{S_n} := \{P(x_1,\dots,x_n)\mid\forall\ \sigma\in S_n,\ P(x_{\sigma(1)},\dots,x_{\sigma(n)})=P(x_1,\dots,x_n)\}
+    \end{equation*}
+    \begin{itemize}
+        \item This is the ring of symmetric polynomials.
+        \item Example: If $n=3$, then $x_1^3+x_2^3+x_3^3-3x_1x_2x_3\in\Z^{S_3}$.
+    \end{itemize}
+    \item We now define some stuff to help us prove a major result: The $n$ elementary symmetric polynomials.
+    \begin{itemize}
+        \item $\sigma_1=x_1+\cdots+x_n=\sum_{1\leq i\leq n}x_i$.
+        \item $\sigma_2=x_1x_2+\cdots+x_1x_n+x_2x_3+\cdots=\sum_{1\leq i<j\leq n}x_ix_j$.
+        \item $\sigma_k=\sum_{1\leq i_1<\cdots<i_k\leq n}x_{i_1}\cdots x_{i_k}$.
+        \item $\sigma_n=x_1\cdots x_n$.
+    \end{itemize}
+    \item With these definitions, we can say that
+    \begin{equation*}
+        x^n+a_{n-1}x^{n-1}+\cdots+a_0 = (x-x_1)\cdots(x-x_n)
+    \end{equation*}
+    where
+    \begin{align*}
+        a_{n-1} &= -\sigma_1&
+        a_{n-2} &= \sigma_2&
+        &\dots&
+        a_0 &= (-1)^n\sigma_n
+    \end{align*}
+    \item Fundamental theorem.
+    \begin{itemize}
+        \item Basic statement: Every polynomial is a polynomial in these polynomials.
+        \item A more precise statement follows.
+    \end{itemize}
+    \item Theorem (Fundamental theorem of symmetric polynomials): We have that
+    \begin{equation*}
+        \Q[x_1,\dots,x_n]^{S_n} = \Q[\sigma_1,\dots,\sigma_n]
+    \end{equation*}
+    \item Before we prove the fundamental theorem, there are a few points we need to discuss.
+    \item Example:
+    \begin{itemize}
+        \item Take $x^2+px+q=0$.
+        \item If it has two roots $x_1,x_2$, then $\sigma_1=x_1+x_2=-p$ and $\sigma_2=x_1x_2=q$.
+        \item Then $x_1^2+x_2^2=\sigma_1^2-2\sigma_2^2=p^2-2q$.
+        \item Thus, if we take $(x_1-x_2)^2=(x_1+x_2)^2-4x_1x_2=\sigma_1^2-4\sigma_2=p^2-4q$, which is the discriminant.
+        \item In general, $x_1^n+x_2^n$ has an expression as a polynomial in $\sigma_1,\sigma_2$. This will be a homework problem.
+        \item What is going on here?? Is $x^2+px+q$ even in $\Q[x]^{S_n}$? If so, why do we factor it into $\sigma_1,\sigma_2$ instead of just $\sigma$? What are the other examples about?
+    \end{itemize}
+    \item \textbf{Lexicographic order} (on monomials): An ordering of monomials based on the following rule. \emph{Denoted by} $\bm{\succ}$. \emph{Given by}\par
+    $x_1^{a_1}\cdots x_n^{a_n}\succ x_1^{b_1}\cdots x_n^{b_n}$\dots
+    \begin{enumerate}
+        \item If $a_1>b_1$ OR\dots
+        \item If $a_1=b_1$ and $a_2>b_2$ OR\dots
+        \item $a_1=b_1$ and $a_2=b_2$ and $a_3>b_3$ OR\dots
+        \item So on and so forth.
+    \end{enumerate}
+    \item Notes on the lexicographic ordering.
+    \begin{itemize}
+        \item Don't think of this order like an ordering on integers.
+        \item This allows us to define the key notion for a number of proofs we'll see in the coming days.
+        \item Although it may seem counterintuitive, the lexicographic ordering is still determined for polynomials such as $\sigma_1$. For example, we may look at
+        \begin{equation*}
+            \sigma_1 = x_1+\cdots+x_n
+        \end{equation*}
+        and think, "Wait a second --- all these terms have the same order: They all have the same exponent of 1." However, we would be discounting the fact that the lexicographic ordering views $\sigma_1$ as
+        \begin{equation*}
+            \sigma_1 = x_1^1x_2^0\cdots x_n^0+\cdots+x_1^0\cdots x_{n-1}^0x_n^1
+        \end{equation*}
+        From here, we can see that $LM(\sigma_1)=x_1^1x_2^0\cdots x_n^0=x_1$.
+    \end{itemize}
+    \item \textbf{Largest monomial} (of $P\neq 0$); The monomial in $P(x_1,\dots,x_n)\neq 0$ that is the largest lexicographically. \emph{Denoted by} $\bm{LM(P)}$.
+    \item $\bm{C_{LM}(P)}$: The coefficient of $LM(P)$.
+    \item Example: Consider the polynomial $P=x_1^2+x_1^3x_2x_3-7x_1^3x_2x_3^{100}$.
+    \begin{itemize}
+        \item Then $LM(P)=x_1^3x_2x_3^{100}$ and $C_{LM}(P)=-7$.
+    \end{itemize}
+    \item Properties.
+    \begin{enumerate}
+        \item $P,Q\neq 0$ implies that $LM(PQ)=LM(P)LM(Q)$.
+        \begin{itemize}
+            \item Using inductive reasoning, try multiplying the example above by $Q=x_1^2+x_2^2+x_3^2$!
+            \item Rudenko will not give rigorous proofs of any of these properties; they will just confuse us. It's better to do everything intuitively here.
+        \end{itemize}
+    \end{enumerate}
+    \item Lemma: If $P\in\Q[x_1,\dots,x_n]^{S_n}$ and $LM(P)=x_1^{a_1}\cdots x_n^{a_n}$, then $a_1\geq\cdots\geq a_n$.
+    \begin{proof}
+        Let $i<j$. Suppose for the sake of contradiction that $a_j>a_i$. Let $\sigma=(ij)\in S_n$. Since $P$ is symmetric, $\sigma P=P$. But then in particular, the monomial $\sigma LM(P)$ in $P$ is lexicographically larger than $LM(P)$. Thus, $LM(P)$ is not the lexicographically largest monomial in $P$, a contradiction.\par
+        Here's a simple example to illustrate the idea behind this proof: Let $P=x^2y+xy^2\in\Q[x,y]^{S_n}$. Suppose we pick $LM(P)=xy^2$ (obviously this is the wrong choice, but that's the contradiction we'll see). We observe that $2=a_2>a_1=1$ in this case. Let $\sigma=(12)$. Then $\sigma LM(P)=yx^2=x^2y\succ xy^2=LM(P)$. So $\sigma LM(P)\succ LM(P)$. Thus, $LM(P)$ is not the lexicographically largest monomial in $P$, and we have \emph{formally} proven that our initial choice of $LM(P)$ was incorrect.
+    \end{proof}
+    \item We now have everything we need to prove the fundamental theorem. As such, we will restate and prove it.
+    \item Theorem (Fundamental theorem of symmetric polynomials): We have that
+    \begin{equation*}
+        \Q[x_1,\dots,x_n]^{S_n} = \Q[\sigma_1,\dots,\sigma_n]
+    \end{equation*}
+    \begin{proof}
+        % Claim: Any symmetric polynomial can be expressed via $\sigma_1,\dots,\sigma_n$.
+        % Suppose not. Take a counterexample of the smallest degree and among them, the choice with the smallest $LM$. The set of degrees is a set of numbers, which must have a smallest element.
+        % Example: Let $P(x_1,\dots,x_n)=C_{LM}(P)LM(P)+\text{smaller monomials}$. We know that $P$ is symmetric. Thus, we claim that $a_1\geq\cdots\geq a_n$ (Imagine they don't; then we can exchange something and get a lexicographically larger monomial).
+        % We want to show that $LM(\sigma_1)=x_1$, $LM(\sigma_2)=x_1x_2$, \dots, $LM(\sigma_n)=x_1\cdots x_n$. Consider $\sigma_n^{a_n}$. This clearly divides $LM(P)$ since $a_n$ is minimal. Now multiply by $\sigma_{n-1}^{a_{n-1}-a_n}$. Continuing on, we get
+        % \begin{equation*}
+        %     \sigma_n^{a_n}\sigma_{n-1}^{a_{n-1}-a_n}\sigma_{n-2}^{a_{n-2}-a_{n-1}}\cdots\sigma_1^{a_1-a_2} =: Q
+        % \end{equation*}
+        % Thus, $LM(P)=LM(Q)$.
+
+        % Consider $P-C_{LM}(P)\cdot Q$. We have
+        % \begin{equation*}
+        %     LM(P-C_{LM}(P)\cdot Q) \prec LM(P)
+        % \end{equation*}
+        % and $P-C_{LM}(P)\cdot Q\in R^{S_n}$. By our assumption, this can be expressed through elementary symmetric polynomials, i.e., $P-C_{LM}(P)\cdot Q\in\Q[\sigma_1,\dots,\sigma_n]$. Thus, $P\in\Q[\sigma_1,\dots,\sigma_n]$.
+
+
+        We will prove this theorem using the well-ordering principle (every set of natural numbers has a smallest element), which is equivalent to induction. Let's begin.\par
+        Suppose for the sake of contradiction that there exists a symmetric polynomial that cannot be expressed via $\sigma_1,\dots,\sigma_n$. Given this counterexample, factor out as many terms as we want (successively reducing the degree) until it ceases to be a counterexample, thus yielding the counterexample of smallest degree. Similarly, get to the counterexample with smallest $LM$. Call this counterexample $P(x_1,\dots,x_n)$. Let
+        \begin{equation*}
+            P(x_1,\dots,x_n) = C_{LM}(P)\underbrace{x_1^{a_1}\cdots x_n^{a_n}}_{LM(P)}+\text{smaller monomials}
+        \end{equation*}
+        Since $P$ is symmetric and the term above is the lexicographically largest monomial, the Lemma implies that $a_1\geq\cdots\geq a_n$. We now construct a polynomial $Q$ out of the $\sigma_i$ such that $LM(P)=LM(Q)$. To begin, note that
+        \begin{align*}
+            LM(\sigma_1) &= x_1&
+            LM(\sigma_2) &= x_1x_2&
+            &\cdots&
+            LM(\sigma_n) &= x_1\cdots x_n
+        \end{align*}
+        Now consider $\sigma_n^{a_n}$. This clearly divides $LM(P)$ since $a_n$ is minimal. Now multiply by $\sigma_{n-1}^{a_{n-1}-a_n}$. Continuing on, we get
+        \begin{equation*}
+            Q = \sigma_n^{a_n}\sigma_{n-1}^{a_{n-1}-a_n}\sigma_{n-2}^{a_{n-2}-a_{n-1}}\cdots\sigma_1^{a_1-a_2}
+        \end{equation*}
+        Now it follows that
+        \begin{equation*}
+            LM(P-C_{LM}(P)\cdot Q) \prec LM(P)
+        \end{equation*}
+        Since $C_{LM}(P)\in\Q$ and $Q\in\Q[x_1,\dots,x_n]^{S_n}$, it also follows that $P-C_{LM}(P)\cdot Q\in\Q[x_1,\dots,x_n]^{S_n}$. But then by the assumption that $P$ was the counterexample with smallest $LM$, we know that $P-C_{LM}(P)\cdot Q\in\Q[\sigma_1,\dots,\sigma_n]$. It follows that $P\in\Q[\sigma_1,\dots,\sigma_n]$, a contradiction.
+    \end{proof}
+    \item Note: This is an effective proof; we can write an algorithm to do this for us, and it's actually pretty fast and efficient.
+    \item ?? (\emph{word in blackboard picture}) to show: $\sigma_1,\dots,\sigma_n$ are algebraically independent $P(\sigma_1,\dots,\sigma_n)=0$ implies that $P=0$.
+    \begin{itemize}
+        \item This will be a homework problem; hint, it's pretty easy.
+    \end{itemize}
+    \item Back to representation theory.
+    \item \textbf{Antisymmetric} (polynomial): A polynomial $P(x_1,\dots,x_n)$ such that
+    \begin{equation*}
+        \sigma P=(-1)^\sigma P
+    \end{equation*}
+    \item Example.
+    \begin{itemize}
+        \item $n=2$: $x_1-x_2$.
+        \item $n=3$: $(x_1-x_2)(x_1-x_3)(x_2-x_3)$.
+    \end{itemize}
+    \item These main examples are the \textbf{Vandermode determinant} from last time!
+    \item \textbf{Vandermonde determinant}:
+    \begin{equation*}
+        \Delta(x_1,\dots,x_n)=\prod_{1\leq i<j\leq n}(x_j-x_i)
+    \end{equation*}
+    \item Exercise: $\Delta(x_1,\dots,x_n)$ is antisymmetric.
+    \item One of the nicest definitions of sign comes from these determinants!
+    \begin{equation*}
+        (-1)^\sigma = \frac{\prod_{i<j}(x_{\sigma(i)}-x_{\sigma(j)})}{\prod_{i<j}(x_i-x_j)}
+    \end{equation*}
+    \item Theorem: If $P\in\Q[x_1,\dots,x_n]^\text{alt}$ (i.e., $P\in\Q[x_1,\dots,x_n]$ and $P$ is antisymmetric), then $P=P'\Delta(x_1,\dots,x_n)$ where $P'$ is symmetric (i.e., $P'\in\Q[x_1,\dots,x_n]^{S_n}$).
+    \item Corollary: If $P$ is antisymmetric and $\deg(P)<n(n-1)/2$, then $P=0$.
+    \begin{itemize}
+        \item We'll use this many times, this fact that "antisymmetric polynomials have a smallest possible degree."
+    \end{itemize}
+    \item We now prove the Theorem.
+    \begin{proof}
+        Let $P$ be antisymmetric. Then $(12)P=-P$. It follows that $\eval{P(x_1,\dots,x_n)}_{x_1=x_2}=0$. Now, rewrite $P$ as a polynomial in one variable where all of the coefficients are polynomials in other variables. In particular, let
+        \begin{equation*}
+            P = P_d(x_1-x_2)^d+P_{d-1}(x_1-x_2)^{d-1}+\cdots+P_0
+        \end{equation*}
+        where each $P_i\in\Q[x_1,\dots,x_d]$. What is $d$?? (Less than $n$, I'm assuming, but any other constraints?) Plugging in $x_1=x_2$ once again, we get $0=P=P_0$. But this implies that $P_0=0$. Thus, $P$ is divisible by $x_1-x_2$. Similarly, for all $i<j$, $(x_i-x_j)\mid P$. But since the $x_i-x_j$ are irreducible polynomials, we have that $\prod_{i<j}(x_j-x_i)\mid P$. This is justified because we are in a unique factorization domain (how is this relevant??). Thus, we have that $P=P'\cdot\Delta(x_1,\dots,x_n)$. Lastly, it follows that $P'\in\Q[x_1,\dots,x_n]^{S_n}$ because under any sign $-1$ permutation, $\Delta(x_1,\dots,x_n)$ will flip signs and $P$ will still be equal, so $P'$ had better just stay itself under this permutation (i.e., be symmetric).
+    \end{proof}
+    \item Remark: Where does the name Vandermonde \emph{determinant} come from?
+    \begin{itemize}
+        \item We have that
+        \begin{equation*}
+            \Delta(x_1,\dots,x_n) =
+            \begin{vmatrix}
+                1 &  &  & 1\\
+                x_1 &  &  & x_n\\
+                \vdots &  &  & \vdots\\
+                x_1^{n-1} &  &  & x_n^{n-1}\\
+            \end{vmatrix}
+        \end{equation*}
+    \end{itemize}
+    \item Final reminder before the final.
+    \begin{itemize}
+        \item Don't forget our awesome central construction!
+        \item If $\lambda=(\lambda_1,\dots,\lambda_k)$ is a partition with $\lambda_1\geq\cdots\geq\lambda_k$, then we can draw a Young Diagram and construct an associated representation $V_\lambda\in\C[x_1,\dots,x_n]$.
+        \item But what we do is $V_\lambda=\C[S_n]\Delta_\lambda$, where
+        \begin{equation*}
+            \Delta_{\lambda'} = \Delta(x_1,\dots,x_{\lambda_1'})\Delta(x_{\lambda_1'+1},\dots,x_{\lambda_1'+\lambda_2'})\cdots
+        \end{equation*}
+        \item Example: For $\lambda=(2,2,1)$, we have $V_{(2,2,1)}=\C[S_n](x_1-x_2)(x_1-x_3)(x_2-x_3)(x_4-x_5)$.
+        \item Next time, we'll prove that $V_{(2,2,1)}$ is irreducible.
+    \end{itemize}
+    \item This Specht construction is in a tiny footnote of \textcite{bib:FultonHarris}, but that's about it!
+\end{itemize}
+
+
+
 
 \end{document}
