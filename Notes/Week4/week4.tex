@@ -552,5 +552,138 @@
 
 
 
+\section{S Chapter 2: Character Theory}
+\emph{From \textcite{bib:Serre}.}
+\subsection*{Section 2.5: Number of Irreducible Representations}
+\begin{itemize}
+    \item \marginnote{11/9:}We now build up to a proof that the number of irreducible representations is \emph{equal} to the number of conjugacy classes.
+    \item Matching the Lemma and additional comment from Monday's class.
+    \setcounter{proposition}{5}
+    \begin{proposition}
+        Let $f$ be a class function on $G$, and let $\rho:G\to GL(V)$ be a linear representation of $G$. Let $\rho_f$ be the linear mapping of $V$ into itself defined by
+        \begin{equation*}
+            \rho_f = \sum_{t\in G}f(t)\rho_t
+        \end{equation*}
+        If $V$ is irreducible of degree $n$ and character $\chi$, then $\rho_f$ is a homothety of ratio $\lambda$ given by
+        \begin{equation*}
+            \lambda = \frac{1}{n}\sum_{t\in G}f(t)\chi(t)
+            = \frac{g}{n}(f\mid\chi^*)
+        \end{equation*}
+        \begin{proof}
+            See class.
+        \end{proof}
+    \end{proposition}
+    \item Denote by $H$ the space of class functions on $G$.
+    \begin{itemize}
+        \item Thus, for example, $\chi_1,\dots,\chi_h\in H$.
+        \item Does this differ somehow from $\C_\text{cl}[G]$, which is also used in \textcite{bib:Serre}??
+    \end{itemize}
+    \item Matching the Theorem from Monday's class.
+    \setcounter{theorem}{5}
+    \begin{theorem}
+        The characters $\chi_1,\dots,\chi_h$ form an orthonormal basis of $H$.
+        \begin{proof}
+            See class.
+        \end{proof}
+    \end{theorem}
+    \item \textbf{Class}: A subset of $G$ consisting of the elements $sts^{-1}$ for some $g\in G$ and all $s\in G$. \emph{Also known as} \textbf{conjugacy class}.
+    \item Matching the final result of the Theorem from Monday's class.
+    \begin{theorem}
+        The number of irreducible representations of $G$ (up to isomorphism) is equal to the number of classes of $G$.
+        \begin{proof}
+            Essentially, \textcite{bib:Serre} is just separating out the notion that class functions \emph{are constant on conjugacy classes}.
+        \end{proof}
+    \end{theorem}
+    \item Matching the second orthogonality relation from the class of the Friday of Week 3, and with similarities to the consequence of the Theorem from Monday's class.
+    \begin{proposition}
+        Let $s\in G$, and let $c(s)$ be the number of elements in the conjugacy class of $s$.
+        \begin{enumerate}[label={\textup{(\roman*)}}]
+            \item We have
+            \begin{equation*}
+                \sum_{i=1}^h\chi_i(s)^*\chi_i(s) = \frac{g}{c(s)}
+            \end{equation*}
+            \item For $t\in G$ not conjugate to $s$, we have
+            \begin{equation*}
+                \sum_{i=1}^h\chi_i(s)^*\chi_i(t) = 0
+            \end{equation*}
+            \item For $s=1$, we recover Corollary \ref{cly:columnOrtho} to Proposition \ref{prp:regRepChar} as a special case of parts (i)-(ii).
+        \end{enumerate}
+        \begin{proof}
+            For each $s\in G$, define
+            \begin{equation*}
+                f_s(t) =
+                \begin{cases}
+                    1 & t\sim s\\
+                    0 & t\nsim s
+                \end{cases}
+            \end{equation*}
+            Notice that as defined, $f_s$ is a class function. Thus, since the characters form a basis of $H$,
+            \begin{equation*}
+                f_s = \sum_{i=1}^h(f_s\mid\chi_i)\chi_i
+            \end{equation*}
+            where
+            \begin{equation*}
+                (f_s\mid\chi_i) = \frac{1}{g}\sum_{t\in G}f_s(t)\chi_i(t)^*
+                = \frac{c(s)}{g}\chi_i(s)^*
+            \end{equation*}
+            Combining these two results, we obtain the following equivalent formulation of $f_s$.
+            \begin{equation*}
+                f_s(t) = \frac{c(s)}{g}\sum_{i=1}^h\chi_i(s)^*\chi_i(t)
+            \end{equation*}
+            If we set $t=s$ in the above equation, we recover (ii). If we set $t\nsim s$ in the above equation, we recover (ii).
+        \end{proof}
+    \end{proposition}
+    \item \textcite{bib:Serre} constructs Table \ref{tab:charTableS3}.
+    \begin{itemize}
+        \item Postulates trivial and alternating representations.
+        \item An interesting way to recover the standard $\theta$: From Corollary 1 to Proposition \ref{prp:regRepChar}, we have that $\chi_1+\chi_2+2\theta=\chi_\text{reg}=(6,0,0)$.
+        \item \textcite{bib:Serre} discusses the geometric foundations of the standard representation.
+    \end{itemize}
+\end{itemize}
+
+
+
+\section{FH Chapter 2: Characters}
+\setcounter{FHchapter}{2}
+\emph{From \textcite{bib:FultonHarris}.}
+\subsection*{Section 2.4: More Projection Formulas; More Consequences}
+\begin{itemize}
+    \item Again, \textcite{bib:FultonHarris} take an unconventional tack: Instead of looking for an average of endomorphisms this time around, what linear combinations of endomorphisms are $G$-linear?
+    \item Here's an answer to the question, in a form with which we're quite familiar at this point.
+    \setcounter{FHlemma}{27}
+    \begin{FHproposition}
+        Let $\alpha:G\to\C$ be any function on the group $G$, and for any representation $V$ of $G$, set
+        \begin{equation*}
+            \varphi_{\alpha,V} = \sum\alpha(g)\cdot g:V\to V
+        \end{equation*}
+        Then $\varphi_{\alpha,V}$ is a homomorphism of $G$-modules for all $V$ if and only if $\alpha$ is a class function.
+        \begin{proof}
+            See class.
+        \end{proof}
+    \end{FHproposition}
+    \item Matching the Lemma, additional comment, and Theorem from Monday's class.
+    \stepcounter{FHlemma}
+    \begin{FHproposition}\label{prp:irrepEqConjClass}
+        The number of irreducible representations of $G$ is equal to the number of conjugacy classes of $G$. Equivalently, their characters $\{\chi_V\}$ form an orthonormal basis for $\C_\text{cl}(G)$.
+        \begin{proof}
+            See class.
+        \end{proof}
+    \end{FHproposition}
+    \item At this point, we know all there is to know about the characters of a finite group.
+    \item Alternate way to express Proposition \ref{prp:irrepEqConjClass} (and a lot of other things we've learned about representations of a finite group $G$): Use the \textbf{representation ring} of $G$!
+    \item Definition of \textbf{representation ring} and \textbf{virtual representation}.
+    \item The character induces a map $\chi:R(G)\to\C_\text{cl}[G]$.
+    \begin{itemize}
+        \item Analogy of Proposition 2.1: $\chi$ is a ring homomorphism.
+        \item A representation is determined by its characters: $\chi$ is injective.
+        \item Proposition \ref{prp:irrepEqConjClass}: $\chi$ induces an isomorphism $\chi_\C:R(G)\otimes\C\to\C_\text{cl}[G]$.
+    \end{itemize}
+    \item \textbf{Virtual character}: An element of $\im(\chi)$.
+    \item Goes over Figure \ref{fig:classFuncSpace}.
+    \item A few more comments.
+\end{itemize}
+
+
+
 
 \end{document}
