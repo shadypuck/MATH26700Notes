@@ -443,5 +443,193 @@
 
 
 
+\section{Midterm Review Sheet}
+\begin{itemize}
+    \item \marginnote{11/10:}The following definitions and results will be useful in solving the midterm problems.
+    \item \textbf{Group representation}: A group homomorphism $\rho:G\to GL(V)$ for $G$ a finite group, $V$ a finite-dimensional vector space over some field $\F$ with basis $\{e_1,\dots,e_n\}$, and $GL(V)$ the set of isomorphic linear maps $L:V\to V$.
+    \item \textbf{Morphism} (of $G$-representations): A map $f:V\to W$ such that\dots
+    \begin{enumerate}
+        \item $f$ is linear;
+        \item For every $g\in G$, $\rho_W(g)\circ f=f\circ\rho_V(g)$.
+        \begin{itemize}
+            \item To remember this rule, draw out the commutative diagram!
+        \end{itemize}
+    \end{enumerate}
+    \item Theorem (complete reducibility): Any finite-dimensional representation can be decomposed into a direct sum of irreducible representations via
+    \begin{equation*}
+        V = V_1^{n_1}\oplus\cdots\oplus V_k^{n_k}
+    \end{equation*}
+    \item Lemma (Schur's Lemma): Let $G$ be a finite group, let $V,W$ be irreducible representations over $\C$, and let $f\in\Hom_G(V,W)$. Then\dots
+    \begin{enumerate}
+        \item If $V\ncong W$, then $f=0$. If $V\cong W$, then $f$ is an isomorphism of $G$-representations.
+        \item If $f:V\to V$, then $f(v)=\lambda v$.
+    \end{enumerate}
+    \item \textbf{Algebraic integer}: A number $x\in\C$ for which there exist $a_0,\dots,a_{n-1}\in\Z$ such that
+    \begin{equation*}
+        x^n+a_{n-1}x^{n-1}+\cdots+a_0 = 0
+    \end{equation*}
+    \item \textbf{Character} (of $\rho$): The function $\chi_\rho:G\to\C$ defined by
+    \begin{equation*}
+        \chi_\rho(g) = \tr(\rho(g))
+    \end{equation*}
+    \item \textbf{First orthogonality relation}: If $\chi_1,\chi_2$ are the characters of irreducible representations, then
+    \begin{equation*}
+        \sum_{g\in G}\chi_1(g)\overline{\chi_2(g)} =
+        \begin{cases}
+            0 & \chi_1\neq\chi_2\\
+            |G| & \chi_1=\chi_2
+        \end{cases}
+    \end{equation*}
+    \begin{itemize}
+        \item Follows from the fact that the characters form an orthonormal set within the space of class functions, and the definition of the inner product on this space.
+    \end{itemize}
+    \item \textbf{Second orthogonality relation}: If $C_G(g)$ is the number of elements in the conjugacy class of $g$, then
+    \begin{equation*}
+        \sum_\chi\chi(g_1)\overline{\chi(g_2)} =
+        \begin{cases}
+            0 & g_1\nsim g_2\\
+            \frac{|G|}{|C_G(g_1)|} & g_1\sim g_2
+        \end{cases}
+    \end{equation*}
+    \item \textbf{Permutational representation}: The representation $\rho:S_n\to\C^n(=V_\text{perm})$ defined by
+    \begin{equation*}
+        \rho(\sigma):(x_1,\dots,x_n)\mapsto(x_{\sigma(1)},\dots,x_{\sigma(n)})
+    \end{equation*}
+    \begin{itemize}
+        \item Character: Compute $\Fix(\sigma)$ for each type of $\sigma$.
+    \end{itemize}
+    \item \textbf{Class function}: A function that is constant on the conjugacy classes of $G$. Explicitly, for all $s,t\in G$,
+    \begin{equation*}
+        f(tst^{-1}) = f(s)
+    \end{equation*}
+    \item \textbf{Group algebra}: The complex vector space with basis $\{e_g\}$ corresponding to the elements of group $G$, plus the definition $e_g\cdot e_h=e_{gh}$.
+    \item \textbf{Semisimple module}: A module $M$ that satisfies any of the following three conditions.
+    \begin{enumerate}
+        \item $M=\bigoplus_{i\in I}S_i$, where each $S_i$ is a simple module and $I$ is an indexing set.
+        \item $M=\sum_{i\in I}S_i$.
+        \item For all submodules $N\subset M$, there exists $N'$ such that $M=N\oplus N'$.
+    \end{enumerate}
+    \item Additional notes on semisimple modules.
+    \begin{itemize}
+        \item Simple module: A module that is nonzero and has no nonzero proper submodules.
+    \end{itemize}
+    \item \textbf{Division algebra}: An algebra $D$ such that for all nonzero $x\in D$, there exists a $y\in D$ such that $xy=1$.
+    \item \textbf{Semisimple algebra}: An algebra for which every finite-dimensional $A$-module is semisimple.
+    \item \textbf{Wedderburn-Artin theorem}: If $A$ is a finite-dimensional semisimple associative algebra, then
+    \begin{equation*}
+        A \cong M_{n_1}(D_1)\oplus\cdots\oplus M_{n_k}(D_k)
+    \end{equation*}
+    \item \textbf{Schur's Lemma} (over an arbitrary field): Let $A$ be a finite-dimensional algebra, and let $M_1,M_2$ be simple $A$-modules. Then\dots
+    \begin{enumerate}
+        \item If $f:M_1\to M_2$ is a nonzero morphism of $A$-modules, $f$ is isomorphic;
+        \item If $M$ is simple, $\Hom_A(M,M)$ is a division algebra.
+    \end{enumerate}
+    \item \textbf{Center} (of $A$): The following set.
+    \begin{equation*}
+        Z(A) = \{a\in A\mid xa=ax\ \forall\ x\in A\}
+    \end{equation*}
+    \item \textbf{Jacobson radical}: The finite-dimensional $A$-algebra defined as follows.
+    \begin{equation*}
+        \Rad(A) = \{a\in A\mid aS=0\text{ for any simple module }S\}
+    \end{equation*}
+    \item Here's an outline of what to remember for the problems.
+    \item Strategies for computing the following things from the character table of a group.
+    \begin{enumerate}
+        \item Tensor products.
+        \begin{itemize}
+            \item Multiply corresponding characters.
+        \end{itemize}
+        \item Wedge/symmetric squares.
+        \begin{itemize}
+            \item If $\chi$ is the character of a representation $\rho:G\to GL(V)$, then the characters $\chi_\sigma^2$ of the symmetric square $S^2V$ of $V$ and $\chi_\alpha^2$ of the alternating square $\Lambda^2V$ of $V$ are given by the following for each $s\in G$.
+            \begin{align*}
+                \chi_\sigma^2(s) &= \frac{1}{2}\left( \chi(s)^2+\chi(s^2) \right)&
+                \chi_\alpha^2(s) &= \frac{1}{2}\left( \chi(s)^2-\chi(s^2) \right)
+            \end{align*}
+            \item Note that just like $V^{\otimes 2}=S^2V+\oplus\Lambda^2V$, we have $\chi^2=\chi_\sigma^2+\chi_\alpha^2$.
+        \end{itemize}
+        \item Decomposing permutational representations into irreducibles.
+        \begin{itemize}
+            \item If the representation of interest is $\chi_V$, we find the coefficients $n_i$ of its decomposition
+            \begin{equation*}
+                \chi_V = \sum n_i\chi_{V_i}
+            \end{equation*}
+            via the inner product
+            \begin{equation*}
+                n_i = \inp{\chi_V,\chi_{V_i}} = \frac{1}{|G|}\sum_{g\in G}\chi_V(g)\overline{\chi_{V_i}(g)}
+            \end{equation*}
+        \end{itemize}
+        \item More.
+    \end{enumerate}
+    \item Strategies for computing the following things given a small group (e.g., the quaternion group).
+    \begin{enumerate}
+        \item Conjugacy classes.
+        \begin{itemize}
+            \item Take an element, conjugate it by everything, round up the products. Then move onto another elements.
+        \end{itemize}
+        \item Character table.
+        \begin{itemize}
+            \item Find the conjugacy classes and put them at the top of the table. This also tells us how many irreps we need to get to.
+            \item Start with the trivial, alternating, and standard representations.
+            \item Tensor products of representations with 1D representations (e.g., the alternating) are often linearly independent.
+            \item We can recover the standard as the difference of the permutation and trivial.
+            \item We can solve for representations as components of the regular representation via
+            \begin{equation*}
+                V_R = \bigoplus_{i=1}^kV_i^{\dim V_i}
+            \end{equation*}
+            \item We can calculate the degrees of remaining representations via the sums of the squares of the dimensionalities.
+            \item We can fill in final representations with the orthogonality relations, \emph{especially} the second one.
+        \end{itemize}
+        \item Decomposing representations into a sum of isotypical components.
+        \begin{itemize}
+            \item Use the inner product/decomposition formula from above.
+        \end{itemize}
+        \item Diagonalizing an endomorphism.
+        \begin{itemize}
+            \item Start with its matrix $A$.
+            \item Find the characteristic polynomial by computing $\det(A-\lambda I)$.
+            \item Solve for the eigenvalues.
+            \item Find, by inspection or by solving systems of equations, elements of the null space of $A-\lambda I$ for each $\lambda$. Beware eigenvalues with multiplicity greater than one!
+        \end{itemize}
+        \item More.
+    \end{enumerate}
+    \item Strategies for solving an abstract problem about characters.
+    \begin{itemize}
+        \item \emph{reread notes}
+    \end{itemize}
+    \item Strategies for solving an abstract problem about representations.
+    \begin{itemize}
+        \item \emph{reread notes}
+    \end{itemize}
+    \item Other misc. concepts that are probably good to remember (my own ideas).
+    \item \textbf{Left $\bm{A}$-module}: A pair $(M,\rho)$ where $(M,+)$ is an abelian group and $\rho:A\to\End(M)$ is the ring homomorphism defined as follows, where $A$ is a ring: For all $a\in A$, $\rho(a):M\to M$ is given by $\rho(a)v=av$ for all $v\in M$ and satisfies the following constraints.
+    \begin{enumerate}
+        \item $\rho(a):M\to M$ is a group homomorphism on $(M,+)$.
+        \item $\rho$ is a ring homomorphism.
+        \begin{itemize}
+            \item That is to say, $\rho(a+b)=\rho(a)+\rho(b)$, $\rho(ab)=\rho(a)\rho(b)$, and $\rho(1_A)=1_{\End(M)}$.
+        \end{itemize}
+    \end{enumerate}
+    \item Lemma (Gauss's Lemma): If $f,g\in R[X]$ are both nonzero polynomials with coefficients in the ring $R$, then $c(fg)=c(f)c(g)$.
+    \begin{itemize}
+        \item Note that $c(f)$ denotes the \textbf{content} of $f$, which is the gcd of its coefficients.
+        \item Use: If $p$ is reducible in a fraction field, then it's reducible in the native UFD.
+    \end{itemize}
+    \item $A$ is semisimple iff $\Rad(A)=0$.
+    \item Formulas for the decomposition of the regular representation/misc. formulas from IChem.
+    \begin{itemize}
+        \item Sum of the squares of the dimensionalities (from the second orthogonality relation):
+        \begin{equation*}
+            |G| = \sum_{i=1}^k(\dim V_i)^2
+        \end{equation*}
+        \item Sum of the squares of an irrep's characters (from the first orthogonality relation):
+        \begin{equation*}
+            |G| = \sum_{g\in G}\chi(g)^2
+        \end{equation*}
+    \end{itemize}
+\end{itemize}
+
+
+
 
 \end{document}

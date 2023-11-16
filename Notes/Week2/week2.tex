@@ -71,7 +71,7 @@
     \item Special case of the above construction: \textbf{Dual representation}.
     \begin{itemize}
         \item Consider $\Hom_F(V,F)$. This the \textbf{dual vector space}.
-        \item Basic fact 1: Let $e_1,\dots,e_n$ be a basis of $V$. Then $V^*$ also has a corresponding basis $e^1,\dots,e^n$, known as its \textbf{dual basis}.
+        \item Basic fact 1: Let $e_1,\dots,e_n$ be a basis of $V$. Then $V^*$ has a corresponding basis $e^1,\dots,e^n$ known as its \textbf{dual basis}.
         \begin{itemize}
             \item Computing coordinates already depends on a basis, and having bases is super nice.
             \item Corollary: $\dim V=\dim V^*$.
@@ -81,6 +81,9 @@
         \item Basic fact 2: If $V$ is finite-dimensional, then $(V^*)^*\cong V$. The formula for this isomorphism is canonical, because it does not depend on a choice of basis. In particular, choose the map $V\to(V^*)^*$ sending $v$ to the map sending $\varphi\in V^*$ to $\varphi(v)$.
         \item If $V$ is infinite dimensional, none of this is true and you are in the realm of functional analysis.
         \item Ok, so all of this was good information about the dual \emph{space}, but what is the dual \emph{representation}?? Does it matter, and do we need to know for now?
+        \begin{itemize}
+            \item Defined below in the notes on the reading from \textcite{bib:FultonHarris}.
+        \end{itemize}
     \end{itemize}
     \item \textbf{Dual vector space} (of $V$): The vector space defined as follows, given that $V$ is a vector space over $F$. \emph{Denoted by} $\bm{V^*}$. \emph{Given by}
     \begin{equation*}
@@ -121,19 +124,91 @@
     \item We now look at a much more elementary definition of the tensor product.
     \item Explicit definition of the tensor product.
     \begin{itemize}
-        \item $V\otimes W$ is equal to a huge vector space with basis consisting of pairs of elements $(v,w)$. Even if $V,W$ are one dimensional, this is like all pairs of real numbers; it's huge. Then, we quotient it by the space of all elements satisfying $\lambda(v,w)=(\lambda v,w)=(v,\lambda w)$, $(v_1+v_2,w)=(v_1,w)+(v_2,w)$, and the like. This forces these relationships to be true.
+        \item Start off with the hug, easy-to-work-with vector space with basis consisting of pairs of elements $(v,w)\in V\times W$. For example, even if $V,W$ are one dimensional, this is like all pairs of real numbers $(1,0)$, $(2,0)$, $(\pi,e)$, etc. \emph{as basis vectors}; it's huge.
         \begin{itemize}
-            \item Clarify this methodology??
-            \item Essentially, this allows us to treat tensor multiplication much like real multiplication, endowing the operation with distributivity, etc.
+            \item Then, we quotient it by the space of all elements satisfying the relations $\lambda(v,w)=(\lambda v,w)=(v,\lambda w)$, $(v_1+v_2,w)=(v_1,w)+(v_2,w)$, and the like. These elements will be linear combinations of basis vectors of the following form: $\lambda(v,w)-(\lambda v,w)$, $\lambda(v,w)-(v,\lambda w)$, and $(v_1+v_2,w)-(v_1,w)-(v_2,w)$.
+            \item This forces these relationships to be true. For example, in the final quotient space, we can still construct the element $\lambda(v,w)-(\lambda v,w)$. But its inclusion in the quotiented-out subspace will imply that in the quotient space, $\lambda(v,w)-(\lambda v,w)=0$. It follows from here that $\lambda(v,w)=(\lambda v,w)$, as desired.
+        \end{itemize}
+        \item What do these relations do?
+        \begin{itemize}
+            \item Essentially, they allows us to treat tensor multiplication much like real multiplication, endowing the operation with distributivity, etc.
             \item For example, the rule $(v_1+v_2,w)=(v_1,w)+(v_2,w)$ becomes, in tensor product notation, $(v_1+v_2)\otimes w=v_1\otimes w+v_2\otimes w$.
         \end{itemize}
-        \item Example: Suppose $V=\C e_1+\C e_2$. We want to look at $V\otimes V$.
+        \item Here's an example of this construction.
         \begin{itemize}
-            \item A priori\footnote{I.e., it follows from some logic. In particular, it follows from the logic that any element $v\in V$ is of the form $v=ae_1+be_2$, so of course all $v\otimes v$ must be of the given form for choices of $a,b,c,d$.}, it's spanned by $(ae_1+be_2)\otimes(ce_1+de_2)=ace_1\otimes e_1+ade_1\otimes e_2+bce_2\otimes e_1+cde_2\otimes e_2$.
-            \item Thus, $V_1\otimes V_2$ has 4-element basis $e_1\otimes e_1,e_1\otimes e_2,e_2\otimes e_1,e_2\otimes e_2$.
+            \item Let $V=W$ be the one-dimensional vector space over the finite field $F_2=\Z/2\Z$.
+            \item Thus, the elements of $V$ are $\{0,1\}$ (which is, literally, all linear combinations $a0+b1$ where $a,b\in F_2$ as well; this hearkens back to $V$'s definition as an $F_2$-module).
+            \item Then the easy-to-work-with vector space we're talking about is the 4-dimensional \textbf{free} vector space $U=\spn(0\otimes 0,0\otimes 1,1\otimes 0,1\otimes 1)$.
+            \item Note that in this space, for example, $(0+1)\otimes 0\neq 0\otimes 0+1\otimes 0$; representing the basis as column vectors, this is equivalent the obvious observation that
+            \begin{equation*}
+                \begin{bmatrix}
+                    0\\
+                    0\\
+                    1\\
+                    0\\
+                \end{bmatrix}
+                \neq
+                \begin{bmatrix}
+                    1\\
+                    0\\
+                    0\\
+                    0\\
+                \end{bmatrix}
+                +
+                \begin{bmatrix}
+                    0\\
+                    0\\
+                    1\\
+                    0\\
+                \end{bmatrix}
+            \end{equation*}
+            \item But we want such relationships to hold true in our conceptual "tensor product space." Thus, we quotient it by the subspace spanning all elements of the form $(a+b)\otimes c-a\otimes c-b\otimes c$.
+            \item By direct computation, this subspace is $\spn(0\otimes 0,0\otimes 1)$:
+            \begin{align*}
+                (0+0)\otimes 0-0\otimes 0-0\otimes 0 &= -0\otimes 0&
+                    (0+0)\otimes 1-0\otimes 1-0\otimes 1 &= -0\otimes 1\\
+                (0+1)\otimes 0-0\otimes 0-1\otimes 0 &= -0\otimes 0&
+                    (0+1)\otimes 1-0\otimes 1-1\otimes 1 &= -0\otimes 1\\
+                (1+1)\otimes 0-1\otimes 0-1\otimes 0 &= 0\otimes 0&
+                    (1+1)\otimes 1-1\otimes 1-1\otimes 1 &= 0\otimes 1
+            \end{align*}
+            \begin{itemize}
+                \item Note that once we've considered $(a+b)\otimes c$, we don't need to consider $(b+a)\otimes c$ because of the commutativity of addition in $V$. That is, it is axiomatic that $a+b=b+a$ for all $a,b\in V$.
+                \item Additionally, in the last line above, we are using the facts that $1+1=2=0$ in $F_2$ and $a\otimes b+a\otimes b=2a\otimes b=0$ in any $F_2$-module to simplify the expressions.
+                \item Furthermore, note that since $-1=1\in F_2$, $-0\otimes 0=1(0\otimes 0)=0\otimes 0\in V\otimes V$.
+            \end{itemize}
+            \item Similarly, the subspace corresponding to $a\otimes(b+c)-a\otimes b-a\otimes c$ is $\spn(0\otimes 0,1\otimes 0)$. Thus, altogether, we quotient out the subspace $X=\spn(0\otimes 0,0\otimes 1,1\otimes 0)$. This leaves us with a 1-dimensional $V\otimes V$, as expected for the tensor product of two one-dimensional vector spaces. It is interesting to note that the one vector we didn't quotient out ($1\otimes 1$) is analogous to $e_1\otimes e_1$ since $e_1\in V$ might as well be defined $e_1:=1$.
+            \item Now let's see how well this quotienting worked. First off, a bit of notation: let $\pi:U\to V\otimes V$ be the projection $\pi:v\mapsto v+X$, and denote elements $\pi(v_1\otimes v_2)\in V\otimes V$ by $v_1\otimes_\pi v_2$ for now to differentiate them from elements of $U$.
+            \item Let $(0+1)\otimes_\pi 0=(0+1)\otimes 0+X$ be an element of the quotient space $V\otimes V$. Certainly, the elements $0\otimes_\pi 0$ and $1\otimes_\pi 0$ are also elements of this quotient space. Moreover, there is no reason we can't form the linear combination $(0+1)\otimes_\pi 0-0\otimes_\pi 0-1\otimes_\pi 0$. Indeed, when we do, we notice that this element lies in the quotiented-out subspace $X$. Thus,
+            \begin{equation*}
+                (0+1)\otimes_\pi 0-0\otimes_\pi 0-1\otimes_\pi 0 = [(0+1)\otimes 0-0\otimes 0-1\otimes 0]+X
+                = 0+X
+                = 0
+            \end{equation*}
+            \item But
+            \begin{equation*}
+                (0+1)\otimes_\pi 0-0\otimes_\pi 0-1\otimes_\pi 0 = 0
+                \quad\Longrightarrow\quad
+                (0+1)\otimes_\pi 0 = 0\otimes_\pi 0+1\otimes_\pi 0
+            \end{equation*}
+            as desired.
+            \item Note that this construction also gives us nice things like $0\otimes_\pi 0=0$, $0\otimes_\pi 1=0$, etc. which were not true in $U$!
+            \item It should not be concluded, though, that all we need to quotient out of $U$ for any $V$ is $\spn(0\otimes 0,0\otimes v,v\otimes 0)$ for every $v\in V$; indeed, $V=\R$, for example, will require us to quotient out elements such as $4\otimes 7-2\otimes 7-2\otimes 7$, which can't even be expressed as a single simple tensor.
         \end{itemize}
     \end{itemize}
+    \item \textbf{Free} (vector space): A vector space that has a basis consisting of linearly independent elements.
+    \begin{itemize}
+        \item Example: Think of $V=\C e_1\oplus\C e_2$ as a $\C$-module. A free version $F(V)$ of $V$ is infinite dimensional with every $v\in V$ a linearly independent basis vector. Elements of $F(V)$ are of the form $a_1v_1+\cdots+a_kv_k$ for $a_1,\dots,a_k\in\C$ and $v_1,\dots,v_k\in V$. If $u=v+w$ where $u,v,w\in V$ are all nonzero, then $u\neq v+w$ in $F(V)$ because they are all linearly independent basis vectors.
+        \item Example: What we formally start with in the example above is the free $F_2$-module $V\times V$, \emph{not} the Cartesian product vector space $V\times V$.
+        \item A terrific explanation of free vector spaces is available \href{https://math.stackexchange.com/questions/18315/free-vector-space-and-vector-space}{here}.
+    \end{itemize}
     \item These two definitions constitute a first approximation to what the tensor product is.
+    \item Example tensor product space.
+    \begin{itemize}
+        \item Suppose $V=\C e_1+\C e_2$. We want to look at $V\otimes V$.
+        \item A priori\footnote{I.e., it follows from some logic. In particular, it follows from the logic that any element $v\in V$ is of the form $v=ae_1+be_2$, so of course all $v\otimes v$ must be of the given form for choices of $a,b,c,d$.}, it's spanned by $(ae_1+be_2)\otimes(ce_1+de_2)=ace_1\otimes e_1+ade_1\otimes e_2+bce_2\otimes e_1+cde_2\otimes e_2$.
+        \item Thus, $V_1\otimes V_2$ has 4-element basis $e_1\otimes e_1,e_1\otimes e_2,e_2\otimes e_1,e_2\otimes e_2$.
+    \end{itemize}
     \item Takeaway: What is true in general is that if $V$ has basis $e_1,\dots,e_n$ and $W$ has basis $f_1,\dots,f_m$, then $V\otimes W$ has basis $e_i\otimes f_j$ ($i=1,\dots,n$ and $j=1,\dots,m$).
     \item Having discussed the tensor product of vector spaces, let's think about the tensor product of \emph{representations}.
     \begin{itemize}
@@ -208,7 +283,7 @@
         \label{fig:UPtensorProd}
     \end{figure}
     \begin{proof}
-        See the solid explanation \href{https://math.stackexchange.com/a/4248460/340652}{linked here}. Alternatively, here's my write up.\par\smallskip
+        See the solid explanation \href{https://math.stackexchange.com/a/4248460/340652}{here}. Alternatively, here's my write up.\par\smallskip
         Let $V=\C e_1\oplus\cdots\oplus\C e_n$, $W=\C f_1\oplus\cdots\oplus\C f_m$, $Z$, and $h:V\times W\to Z$ be arbitrary. Define $\tilde{h}:V\otimes W\to Z$ by
         \begin{equation*}
             \tilde{h}(e_i\otimes f_j) := h(e_i,f_j)
@@ -253,10 +328,12 @@
     \end{itemize}
     \item Vector spaces of the same dimension are all alike, but vector space representations are very interesting. By the end of this course, we'll understand what's going on.
     \item How we understand tensor stuff: Look at the abstract definition, look at the concrete definition, look at 5 examples, and then go in a circle. Repeat again and again until it makes sense.
-    \item He's just trying to tell us all relevant words so that they will fit together later.
+    \begin{itemize}
+        \item Rudenko is just trying to tell us all relevant words so that they will fit together later.
+    \end{itemize}
     \item Fact: If $V,W$ finite-dimensional, $\Hom_F(V,W)\cong V\otimes W^*$.
     \begin{itemize}
-        \item Tensor products are very nice to construct maps from.
+        \item Tensor products are very nice spaces from which to construct maps.
         \item Let's construct a reverse map, then.
         \item Take $\alpha\otimes w\in V^*\otimes W$, where $\alpha:V\to F$ by definition. Send $\alpha\otimes w$ to the map $v\mapsto\alpha(v)w$. This is a \emph{canonical} map!! We can show that they span everything.
         \begin{itemize}
@@ -265,9 +342,15 @@
             \item Note that this also allows us to define a (noncanonical) inverse map.
         \end{itemize}
         \item This inverse map from $\Hom_F(V,W)\to V^*\otimes W$ is clearly a bit harder to work out.
-        \item Hidden in this story is why trace is invariant under conjugation (see below discussion).
+        \item Hidden in this story is why trace is invariant under matrix conjugation, e.g., why $\tr(SAS^{-1})=\tr(A)$.
+        \begin{itemize}
+            \item If we take $\Hom_F(V,V)$, then this is isomorphic to $V^*\otimes V$.
+            \item There is a very natural map from these isomorphic spaces to $F$.
+            \item This map is defined by the trace (which sends $\Hom_F(V,V)\to F$), and $\alpha\otimes v\mapsto\alpha(v)$ (which sends $V^*\otimes V\to F$). We can prove this.
+            \item Moreover, this map is canonical, as well.
+            \item This is why the main property of the trace is that it's invariant under conjugation, i.e., because $SAS^{-1}$ and $A$ both map to the same element of $V^*\otimes V$. This fact is hidden in the story very nicely.
+        \end{itemize}
     \end{itemize}
-    \item If we now take $\Hom_F(V,V)$, then this is isomorphic to $V^*\otimes V$. There is a very natural map from these isomorphic spaces to $F$ defined by the trace, and/or $\alpha\otimes v\mapsto\alpha(v)$. We can prove this. And this is canonical, as well. This is why the main property of the trace is that it's invariant under conjugation. This fact is hidden in the story very nicely.
     \item Tensor products are hard, it will be a pain, we will understand them very well, but it will not be nice for now.
     \item Symmetric products and wedge powers will be discussed briefly next time.
     \begin{itemize}
@@ -372,62 +455,6 @@
             \item Start with the following easy-to-work-with vector space: The (probably infinite-dimensional) vector space where each $v\otimes w$ is a basis vector for all $v\in V$ and $w\in W$.
             \item Then quotient it by relations to force them to hold in the final space.
         \end{itemize}
-        \item Here's an example of this construction.
-        \begin{itemize}
-            \item Let $V=W$ be the one-dimensional vector space over the finite field $F_2=\Z/2\Z$.
-            \item Thus, the elements of $V$ are $\{0,1\}$ (which is, literally, all linear combinations $a0+b1$ where $a,b\in F_2$ as well; this hearkens back to $V$'s definition as an $F_2$-module).
-            \item Then the easy-to-work-with vector space we're talking about is the 4-dimensional \textbf{free} vector space $U=\spn(0\otimes 0,0\otimes 1,1\otimes 0,1\otimes 1)$.
-            \item Note that in this space, for example, $(0+1)\otimes 0\neq 0\otimes 0+1\otimes 0$; representing the basis as column vectors, this is equivalent the obvious observation that
-            \begin{equation*}
-                \begin{bmatrix}
-                    0\\
-                    0\\
-                    1\\
-                    0\\
-                \end{bmatrix}
-                \neq
-                \begin{bmatrix}
-                    1\\
-                    0\\
-                    0\\
-                    0\\
-                \end{bmatrix}
-                +
-                \begin{bmatrix}
-                    0\\
-                    0\\
-                    1\\
-                    0\\
-                \end{bmatrix}
-            \end{equation*}
-            \item But we want such relationships to hold true in our conceptual "tensor product space." Thus, we quotient it by the subspace spanning all elements of the form $(a+b)\otimes c-a\otimes c-b\otimes c$.
-            \item By direct computation, this subspace is $\spn(0\otimes 0,0\otimes 1)$:
-            \begin{align*}
-                (0+0)\otimes 0-0\otimes 0-0\otimes 0 &= -0\otimes 0&
-                    (0+0)\otimes 1-0\otimes 1-0\otimes 1 &= -0\otimes 1\\
-                (0+1)\otimes 0-0\otimes 0-1\otimes 0 &= -0\otimes 0&
-                    (0+1)\otimes 1-0\otimes 1-1\otimes 1 &= -0\otimes 1\\
-                (1+1)\otimes 0-1\otimes 0-1\otimes 0 &= 0\otimes 0&
-                    (1+1)\otimes 1-1\otimes 1-1\otimes 1 &= 0\otimes 1
-            \end{align*}
-            Note that once we've considered $(a+b)\otimes c$, we don't need to consider $(b+a)\otimes c$ because of the commutativity of addition in $V$. That is, it is axiomatic that $a+b=b+a$ for all $a,b\in V$. Additionally, in the last line above, we are using the facts that $1+1=2=0$ in $F_2$ and $a\otimes b+a\otimes b=2a\otimes b=0$ in any $F_2$-module to simplify the expressions.
-            \item Similarly, the subspace corresponding to $a\otimes(b+c)-a\otimes b-a\otimes c$ is $\spn(0\otimes 0,1\otimes 0)$. Thus, altogether, we quotient out the subspace $X=\spn(0\otimes 0,0\otimes 1,1\otimes 0)$. This leaves us with a 1-dimensional $V\otimes V$, as expected for the tensor product of two one-dimensional vector spaces. It is interesting to note that the one vector we didn't quotient out ($1\otimes 1$) is analogous to $e_1\otimes e_1$ since $e_1\in V$ might as well be defined $e_1:=1$.
-            \item Now let's see how well this quotienting worked. First off, a bit of notation: let $\pi:U\to V\otimes V$ be the projection $\pi:v\mapsto v+X$, and denote elements $\pi(v_1\otimes v_2)\in V\otimes V$ by $v_1\otimes_\pi v_2$ for now to differentiate them from elements of $U$.
-            \item Let $(0+1)\otimes_\pi 0=(0+1)\otimes 0+X$ be an element of the quotient space $V\otimes V$. Certainly, the elements $0\otimes_\pi 0$ and $1\otimes_\pi 0$ are also elements of this quotient space. Moreover, we can fairly form the linear combination $(0+1)\otimes_\pi 0-0\otimes_\pi 0-1\otimes_\pi 0$. However, this element lies in the quotiented-out subspace $X$. Thus,
-            \begin{equation*}
-                (0+1)\otimes_\pi 0-0\otimes_\pi 0-1\otimes_\pi 0 = [(0+1)\otimes 0-0\otimes 0-1\otimes 0]+X
-                = 0+X
-                = 0
-            \end{equation*}
-            \item But
-            \begin{equation*}
-                (0+1)\otimes_\pi 0-0\otimes_\pi 0-1\otimes_\pi 0 = 0
-                \quad\Longrightarrow\quad
-                (0+1)\otimes_\pi 0 = 0\otimes_\pi 0+1\otimes_\pi 0
-            \end{equation*}
-            as desired.
-            \item Note that this construction also gives us nice things like $0\otimes_\pi 0=0$, $0\otimes_\pi 1=0$, etc. which were not true in $U$! It should not be concluded, though, that all we need to quotient out of $U$ for any $V$ is $\spn(0\otimes 0,0\otimes v,v\otimes 0)$ for every $v\in V$; indeed, $V=\R$, for example, will contain 
-        \end{itemize}
         \item If $V$ has basis $e_1,\dots,e_n$ and $W$ has basis $f_1,\dots,f_m$, then $e_i\otimes f_j$ is a basis of $V\otimes W$.
         \item Interesting fact 1: If $V,W$ are finite dimensional, $V^*\otimes W\cong\Hom(V,W)$.
         \item If we want to work with the tensor product in practice in \emph{rep theory}, the only thing we need to know is the basis of the tensor product space, which can tell us how any map $\rho(g)$ acts on both sides of a $v\otimes w\in V\otimes W$. From here, we recover the Kronecker product of matrices.
@@ -437,12 +464,6 @@
             \item It does come from the math concept.
             \item We'll get a huge basis because we have a massive product like $V\otimes\cdots\otimes V\otimes V^*\otimes\cdots\otimes V^*$.
         \end{itemize}
-    \end{itemize}
-    \item \textbf{Free} (vector space): A vector space that has a basis consisting of linearly independent elements.
-    \begin{itemize}
-        \item Example: Think of $V=\C e_1\oplus\C e_2$ as a $\C$-module. A free version $F(V)$ of $V$ is infinite dimensional with every $v\in V$ a linearly independent basis vector. Elements of $F(V)$ are of the form $a_1v_1+\cdots+a_kv_k$ for $a_1,\dots,a_k\in\C$ and $v_1,\dots,v_k\in V$. If $u=v+w$ where $u,v,w\in V$ are all nonzero, then $u\neq v+w$ in $F(V)$ because they are all linearly independent basis vectors.
-        \item Example: What we formally start with in the example above is $V\times V$, the free $F_2$-module not the Cartesian product vector space $V^2$.
-        \item A terrific explanation of free vector spaces is available \href{https://math.stackexchange.com/questions/18315/free-vector-space-and-vector-space}{here}.
     \end{itemize}
     \item Last 2 useful notions: Wedge powers and symmetric powers.
     \begin{itemize}
@@ -494,7 +515,7 @@
             \item But what about $g(e_1,e_1,e_2)$? We could apply $(23)$ and get $g(e_1,e_2,e_1)$, right? So it appears that we would just be shrinking two options into one. Technically, this is true, but what's more important is that applying $(12)$ again yields the same thing, meaning that $g(e_1,e_1,e_2)=g(e_1,e_2,e_1)=0$.
             \item And thus, since $V$ has dimension 2 but $g$ takes three vectors, any argument submitted to $g$ will always be linearly dependent. Thus, $g=0$ and, in fact, the space of antisymmetric maps on $V^3$ has dimension 0.
         \end{itemize}
-        \item Note: It's not always a rule that $V^{\otimes m}\cong S^mV\oplus\Lambda^mV$.
+        \item Takeaway: It's not always a rule that $V^{\otimes m}\cong S^mV\oplus\Lambda^mV$.
     \end{itemize}
     \item Mathematically, there's a more natural object to work with than symmetric and antisymmetric maps.
     \begin{itemize}
@@ -510,13 +531,13 @@
             \item Take as basis elements for $\Lambda^2V$ those that flip sign when you change the coordinates.
             \item In this case, the basis of $V^{\otimes 2}$ is $e_1\otimes e_1,e_1\otimes e_2,e_2\otimes e_1,e_2\otimes e_2$. The basis of $S^2V$ will be $e_1\otimes e_1,e_1\otimes e_2+e_2\otimes e_1,e_2\otimes e_2$. The basis of $\Lambda^2V$ will be $e_1\otimes e_2-e_2\otimes e_1$. Notice that these bases are identical (up to scaling) with those in \textcite{bib:Serre} and those produced by applying the \href{https://en.wikipedia.org/wiki/Symmetrization}{\textbf{symmetrization}} and \href{https://en.wikipedia.org/wiki/Exterior_algebra#Alternating_tensor_algebra}{\textbf{alternation}} operators to the basis of $V^{\otimes 2}$.
         \end{itemize}
-        \item $S^2V$ and $\Lambda^2V$ direct sum because the dimensions match and they don't intersect, so we're good to go!
+        \item $S^2V$ and $\Lambda^2V$ can form a \emph{direct} sum because the dimensions match and they don't intersect.
         \item Everything we're doing is representations, so $g(v_1\otimes\cdots\otimes v_n)=gv_1\otimes\cdots\otimes gv_n$.
     \end{itemize}
-    \item Relating this to something we've seen, but that's a little confusing.
+    \item Relating this to something that we've seen but that is a little confusing.
     \begin{itemize}
         \item The product notation is suggestive for symmetric vectors; you can commute $e_1\cdot e_2\in S^2V$, for instance.
-        \item This allows us to, for example, shrink $e_1\otimes e_1$ to $2e_1^2$\footnote{Why the 2 coefficient??}, but $e_1\otimes e_2+e_2\otimes e_1$ only to $e_1\cdot e_2$.
+        \item This allows us to, for example, shrink $e_1\otimes e_1$ to $2e_1^2$\footnote{Why the 2 coefficient? Because technically, the symmetrization operator takes $e_1\otimes e_1\mapsto e_1\otimes e_1+e_1\otimes e_1=2e_1\cdot e_1=2e_1^2$.}, but $e_1\otimes e_2+e_2\otimes e_1$ only to $e_1\cdot e_2$.
         \item Note that $e_1\wedge e_2=e_1\otimes e_2-e_2\otimes e_1$ by definition.
         \item Fact/exercise: Let $V$ be a vector space of dimension $n$. $V^*$ is the dual space, but it is also a function space. If $V=\R^k$, its a space of \emph{functions from the blackboard}.
         \begin{itemize}
@@ -567,7 +588,7 @@
     \begin{itemize}
         \item Let $V=\C e_1\oplus\cdots\oplus\C e_n$.
         \item Let $G\acts V$ via the homomorphism $G\to GL(V)\cong GL_n(\C)$.
-        \item Focusing more on the \emph{matrix} aspect this time, note that under this homomorphism, $g\mapsto A_g$ subject to the homomorphism constraints.
+        \item Focusing more on the \emph{matrix} aspect this time, note that under this homomorphism, $g\mapsto A_g$ subject to the homomorphism constraints $A_e=E_n$, etc.
         \item Consider the set $\{A_{g_1},\dots,A_{g_k}\}$ of all matrices in the image of the homomorphism. If we transpose all of them, will they still obey the homomorphism constraints?
         \begin{itemize}
             \item Nope!
@@ -695,7 +716,7 @@
         \item Dual representation: Defined analogously to the $\Hom_F(V,W)$ representation. We also need an inverse.
     \end{itemize}
     \item Psets will likely get easier; right now, we have to relearn a lot of old stuff and we are being challenged with harder problems. As the questions become more based on course content and thus will get easier.
-    \item He'll do hard PSets, easy exams, and everythign is curved; he agrees that this is a hard pset, and probably harder than necessary.
+    \item He'll do hard PSets, easy exams, and everything is curved; he agrees that this is a hard pset, and probably harder than necessary.
 \end{itemize}
 
 
@@ -769,7 +790,11 @@
     \end{itemize}
     \item So to prove the lemma, we need a projector $P:V\to V$ with image $W$ and certain properties.
     \begin{itemize}
-        \item More specifically, the goal is to find a projector $P$ (1) with image $W$ and (2) that is a morphism of $G$-reps.
+        \item More specifically, the goal is to find a projector $P$\dots
+        \begin{enumerate}
+            \item With image $W$;
+            \item That is a morphism of $G$-reps.
+        \end{enumerate}
         \item On the second condition, that is, we want $P(gv)=gP(v)$. In this case, $\ker(P)$ will be a shuffle??
     \end{itemize}
     \item Strategy.
@@ -788,7 +813,7 @@
     \begin{itemize}
         \item Only when we get into \textbf{modular representation theory} is where we get into trouble; this theorem actually kills \textbf{extensions}, which are very interesting but are not in finite group rep theory.
     \end{itemize}
-    \item Hermitian inner product isn't common here, but it shows up in physics. Point of this??
+    \item Hermitian inner product isn't common here, but it shows up in physics. We will talk a bit more about inner products later, though.
     \item Now for the other part of the original proof: Uniqueness.
     \item Schur's Lemma: Let $G$ be a finite group, let the field $F=\C$, and let $V,W$ be irreps over $F$. Let $f\in\Hom_G(V,W)$, which we may recall is the space of morphisms between $G$-reps $V$ and $W$, that is, all $h:V\to W$ satisfying $h(gv)=gh(v)$. Then\dots
     \begin{enumerate}
@@ -804,7 +829,7 @@
         \end{cases}
     \end{equation*}
     \begin{itemize}
-        \item The statement "$\Hom_G(V,W)=\C$" does not literally mean that the left space is the complex numbers; rather, it is the space of all scalar isomorphisms $\lambda I$ for scalars in $\C$, which happens to be isomorphic to $\C$.
+        \item The statement "$\Hom_G(V,W)\cong\C$" reflects the fact that the left space is the space of all scalar isomorphisms $\lambda I$ for scalars $\lambda\in\C$, which happens to be isomorphic to $\C$.
         \item Gist: If you want a certain kind of matrix between certain spaces, in some cases, you'll just fail.
     \end{itemize}
     \item Proof.
@@ -936,7 +961,7 @@
     \begin{itemize}
         \item This construction is \textbf{functorial}, implying that linear maps from $f:V\to V'$ and $g:W\to W'$ determine a linear map $f\otimes g:V\otimes W\to V'\otimes W'$, namely that defined by $f\otimes g:v\otimes w\to fv\otimes gw$.
     \end{itemize}
-    \item Definition of the \textbf{$n$-fold tensor product}.
+    \item Definition of the \textbf{$\bm{n}$-fold tensor product}.
     \item \textbf{Multilinear} (map): A map from a Cartesian product $V_1\times\cdots\times V_n$ of vector spaces to a vector space $U$ such that when all but one of the factors $V_i$ are fixed, the resulting map from $V_i\to U$ is linear.
     \item Properties of the tensor product.
     \begin{enumerate}
@@ -1162,13 +1187,22 @@
     \item $\Hom(V,W)$ is a representation.
     \begin{itemize}
         \item Definition via the commutative diagram (from class): $g(L)v=[g\circ L\circ g^{-1}]v$.
-        \item Definition analogously to $V^*\otimes W$: $g(v^*\otimes w)=gv^*\otimes gw=(g^{-1})^Tv^*\otimes gw=[(g^{-1})^Tv^*](gw)=[(g^{-1})^Tv^*]^Tgw=(v^*)^Tg^{-1}gw=v^*(v)$??
+        \item Definition via the isomorphic space $V^*\otimes W$ and the dual representation:
+        \begin{align*}
+            g(v^*\otimes w) &= gv^*\otimes gw\\
+            &= (g^{-1})^Tv^*\otimes gw\\
+            &= [(g^{-1})^Tv^*](gw)\\
+            &= [(g^{-1})^Tv^*]^Tgw\\
+            &= (v^*)^Tg^{-1}gw\\
+            &= (v^*)^Tw\\
+            &= v^*(w)
+        \end{align*}
     \end{itemize}
     \item The rules for normal vector spaces hold for representations as well, e.g.,
     \begin{align*}
         V\otimes(U\oplus W) &= (V\otimes U)\oplus(V\otimes W)&
         \Lambda^k(V\oplus W) &= \bigoplus_{a+b=k}\Lambda^aV\oplus\Lambda^bW&
-        \Lambda^k(V^*) &= \lambda^k(V)^*
+        \Lambda^k(V^*) &= \Lambda^k(V)^*
     \end{align*}
     \item Definition of \textbf{permutation representation} and \textbf{regular representation}.
 \end{itemize}
@@ -1195,7 +1229,7 @@
             \item If $V=W$, then $\varphi=\lambda I$ for some $\lambda\in\C$, $I$ being the identity.
         \end{enumerate}
         \begin{proof}
-            Suppose for the sake of contradiction that $\varphi$ is neither an isomorphism nor zero. Then it has a nontrivial kernel and image, both of which are necessarily invariant under the representation. Therefore, neither $V$ nor $W$ are irreducible representations of $G$, a contradiction.\par
+            Suppose for the sake of contradiction that $\varphi$ is neither an isomorphism nor zero. Then it has a nontrivial kernel and image, both of which are necessarily invariant under the representation\footnote{See the proof of Schur's Lemma in \textcite{bib:Serre} for an explanation of this fact.}. Therefore, neither $V$ nor $W$ are irreducible representations of $G$, a contradiction.\par
             Since $\C$ is algebraically closed, $\varphi$ must have an eigenvalue $\lambda$. Equivalently, for some $\lambda\in\C$, $\varphi-\lambda I$ has nonzero kernel. But then by part (1), we must have $\varphi-\lambda I=0$, implying that $\varphi=\lambda I$, as desired.
         \end{proof}
     \end{FHlemma}
@@ -1243,7 +1277,7 @@
     \end{itemize}
     \item Classifying the irreducible representations of $S_3$.
     \begin{itemize}
-        \item There exist two one-dimensional representations of $S_3$ (and of ever other nontrivial symmetric group).
+        \item There exist two one-dimensional representations of $S_3$ (and of every other nontrivial symmetric group).
         \begin{itemize}
             \item \textbf{Trivial representation} (irreducible).
             \item \textbf{Alternating representation} (irreducible).
