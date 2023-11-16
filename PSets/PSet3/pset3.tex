@@ -1,0 +1,44 @@
+\documentclass[../psets.tex]{subfiles}
+
+\pagestyle{main}
+\renewcommand{\leftmark}{Problem Set \thesection}
+\setcounter{section}{2}
+
+\begin{document}
+
+
+
+
+\section{Representation Structure and Characters}
+\begin{enumerate}
+    \item \marginnote{10/20:}\textbf{Permutational representation}. Let $X$ be a finite set on which the group $G$ acts. Let $\rho$ be the corresponding permutational representation with character $\chi$.
+    \begin{enumerate}
+        \item Consider an orbit $Gx$ of an element $x\in X$; let $c$ be the number of orbits. Prove that $c$ equals the number of times $\rho$ contains the trivial representation. Deduce that $(\chi,1)=c$. In particular, if the action is transitive, $\rho=1\oplus\theta$ for some representation $\theta$.
+        \item Consider a diagonal action of $G$ on $X\times X$. Prove that the character of the corresponding permutational representation is $\chi^2$.
+        \item Suppose that $G$ acts transitively on $X$ and $|X|\geq 2$. We call this action \textbf{doubly transitive} if every pair of distinct elements of $X$ can be sent to any other pair by some element of $G$. Prove that the following are equivalent.
+        \begin{enumerate}
+            \item The action is doubly transitive.
+            \item The diagonal action on $X\times X$ has exactly two orbits.
+            \item $(\chi^2,1)=2$.
+            \item The representation $\theta$ is irreducible.
+        \end{enumerate}
+    \end{enumerate}
+    \item Find the character table of the group $A_4$.
+    \item Consider the space of functions $V$ from the set of faces of a cube to $\C$. This is a representation of $S_4$.
+    \begin{enumerate}
+        \item Compute the character of $V$.
+        \item Describe explicitly the decomposition of $V$ into isotypical components.
+        \item Consider a map $A:V\to V$ acting by substituting the value of a function on a face with an average of its values on the adjacent four faces. Prove that $A$ is an automorphism of the corresponding representation. Find its eigenvalues.
+    \end{enumerate}
+    \item Consider a finite representation $V$ of a group $G$ with character $\chi$.
+    \begin{enumerate}
+        \item Express the characters of $\Lambda^2V$ and $S^2V$ in terms of $\chi$.
+        \item Express the characters of $\Lambda^3V$ and $S^3V$ in terms of $\chi$.
+        \item Let $(3,1)$ be the standard representation of $S_4$. Decompose $\Lambda^2(3,1)$, $\Lambda^3(3,1)$, $S^2(3,1)$, and $S^3(3,1)$ into irreducibles.
+    \end{enumerate}
+\end{enumerate}
+
+
+
+
+\end{document}
