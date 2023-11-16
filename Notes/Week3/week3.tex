@@ -32,7 +32,7 @@
     \end{itemize}
     \item Motivating question: What doesn't change when we change the basis of $V$?
     \begin{itemize}
-        \item To isolate the "essence" of the $A_g$, we want to construct a function $f:GL_n(\C)\to\C$ such that $f(XAX^{-1})=f(A)$.
+        \item To isolate the "essence" of the $A_g$, we want to construct a function $f:GL_n(\C)\to\C$ such that $f(XAX^{-1})=f(A)$, where $X\in GL_n(\C)$.
     \end{itemize}
     \item Ideas.
     \begin{enumerate}
@@ -46,22 +46,17 @@
     \item In fact, we could also take any coefficient of the characteristic polynomial, but others would get complicated.
     \begin{itemize}
         \item Any characteristic polynomial coefficient can be expressed in terms of traces; this will be an exercise in PSet 3; it's not hard.
+        \item For example, the second characteristic polynomial coefficient (sum of products of eigenvalues) can be written as follows.
+        \begin{equation*}
+            \sum\lambda_i\lambda_j = \frac{\tr(A)^2-\tr(A^2)}{2}
+        \end{equation*}
     \end{itemize}
     \item So what do we have at this point?
     \begin{itemize}
         \item We can associate to $\rho$ a function $\chi_\rho:G\to\C$ defined by $\chi_\rho(g)=\tr(A_g)=\tr(\rho(g))$.
         \item This function is invariant under isomorphism.
         \item If we know $\tr(A)$, we know $\tr(A^2)$ since $A_g^2=A_{g^2}$. Thus, if we know all traces, we know all power traces.
-        \begin{itemize}
-            \item Something about the following??
-            \begin{equation*}
-                \sum\lambda_i\lambda_j = \frac{\tr(A)^2-\tr(A^2)}{2}
-            \end{equation*}
-        \end{itemize}
-        \item We form a ring of polynomials??
-        \begin{itemize}
-            \item Equivalently, $\chi_\rho$ has a representation as a polynomial with coefficients in $\C$??
-        \end{itemize}
+        \item We form a ring of polynomials?? Equivalently, $\chi_\rho$ has a representation as a polynomial with coefficients in $\C$?
     \end{itemize}
     \item If $V$ is a $G$-rep, $\chi_V:G\to\C$ will be our notation for its character.
     \item Properties.
@@ -121,7 +116,7 @@
     \begin{itemize}
         \item He will explain two ways to prove it; we can also just prove it on our own.
     \end{itemize}
-    \item Fact: $A$ a matrix such that $A^n=1$. Then $A$ is diagonalizable or "semi-simple."
+    \item Fact: If $A$ is a matrix such that $A^n=1$, then $A$ is diagonalizable or "semi-simple."
     \begin{itemize}
         \item We can prove this with Jordan normal form.
         \item It's a slightly surprising statement.
@@ -146,10 +141,10 @@
             \end{itemize}
             \item Proof: Recall that $\rho_{V^*}(g)=(\rho_V(g)^{-1})^T$.
             \begin{itemize}
-                \item If we know that $\rho_V(G)\sim\diag(\lambda_1,\dots,\lambda_n)$, then we know that $\rho_V^{-1}(g)^T\sim\diag(\lambda_1^{-1},\dots,\lambda_n^{-1})$.
+                \item If we know that $\rho_V(g)\sim\diag(\lambda_1,\dots,\lambda_n)$, then we know that $\rho_V^{-1}(g)^T\sim\diag(\lambda_1^{-1},\dots,\lambda_n^{-1})$.
                 \item Thus, $\chi_{V^*}(g)=\lambda_1^{-1}+\cdots+\lambda_n^{-1}$.
                 \item But since we're in the complex plane, $|\lambda_i|=1$ (equiv. $\lambda_i\bar{\lambda}_i=1$), so $\lambda_i^{-1}=1/\lambda_i=\bar{\lambda}_i$.
-                \item This means that $\chi_{V^*}(g)=\bar{\lambda}_1+\cdots+\bar{\lambda}_n=\overline{\lambda_1+\cdots+\lambda_n}$.
+                \item This means that $\chi_{V^*}(g)=\bar{\lambda}_1+\cdots+\bar{\lambda}_n=\overline{\lambda_1+\cdots+\lambda_n}=\bar{\chi}_V(g)$.
             \end{itemize}
             \item Note: Every representation we have is \textbf{unitary} in certain bases, but unitary representations are not covered in this course.
         \end{itemize}
@@ -172,7 +167,8 @@
             \item Alternate approach.
             \begin{itemize}
                 \item If we don't want to think of eigenvalues, think of tensor product of matrices, the Kronecker product.
-                \item We get trace is the product of traces once again! \emph{Write this out.}
+                \item Essentially, if we adopt a basis such that our matrices are diagonal, then the block diagonal of the Kronecker product will be $\lambda_1\rho_{V_2}(g)+\cdots+\lambda_n\rho_{V_2}(g)$, the trace of which will be $\lambda_1(\mu_1+\cdots+\mu_m)+\cdots+\lambda_n(\mu_1+\cdots+\mu_m)$.
+                \item We get trace is the product of traces once again!
             \end{itemize}
         \end{itemize}
     \end{enumerate}
@@ -193,7 +189,7 @@
             \small
             \renewcommand{\arraystretch}{1.4}
             \begin{tabular}{c|c|c|c|}
-                 & $e$ & \renewcommand{\arraystretch}{1}\begin{tabular}{c}$(12)$\\$(13)$\\$(23)$\end{tabular} & \renewcommand{\arraystretch}{1}\begin{tabular}{c}$(123)$\\$(132)$\end{tabular}\\
+                 & $e$ & \renewcommand{\arraystretch}{1}\begin{tabular}{@{}c@{}}$(12)$\\$(13)$\\$(23)$\end{tabular} & \renewcommand{\arraystretch}{1}\begin{tabular}{@{}c@{}}$(123)$\\$(132)$\end{tabular}\\
                 \hline
                 Trivial & 1 & 1 & 1\\ \hline
                 Alternating & 1 & $-1$ & 1\\ \hline
@@ -784,7 +780,7 @@
                 \frac{|G|}{|C_G(g)|} & g_1\sim g_2
             \end{cases}
         \end{equation*}
-        where $\sim$ denotes conjugacy.
+        where $\sim$ denotes conjugacy and $C_G(g)$ is the number of elements in the conjugacy class of $g$ (where we borrow centralizer notation).
         \begin{itemize}
             \item Prove the new one with $AB=1=BA$. This very simple thing leads to a very powerful statement about systems of equations that we will discuss later. How does this proof work??
             \item We can start doing this stuff in the new homework!
@@ -809,6 +805,484 @@
         \item Then we'll get into associative algebra.
         \item OH next week will be Zoom, but we should still feel free to meet with him in-person by emailing him for an appointment.
     \end{itemize}
+\end{itemize}
+
+
+
+\section{S Chapter 2: Character Theory}
+\emph{From \textcite{bib:Serre}.}
+\subsection*{Section 2.1: The Character of a Representation}
+\begin{itemize}
+    \item \marginnote{11/2:}Definition of \textbf{trace}.
+    \item \textbf{Character} (of $\rho$): The complex-valued function on $G$ defined as follows. \emph{Denoted by} $\bm{\chi_\rho}$. \emph{Given by}
+    \begin{equation*}
+        \chi_\rho(s) = \tr(\rho_s)
+    \end{equation*}
+    \item Notation: \textcite{bib:Serre} uses both $z^*$ and $\bar{z}$ to denote the complex conjugate of a $z\in\C$.
+    \item Properties of the character as a function.
+    \begin{proposition}\label{prp:charPropsFun}
+        If $\chi$ is the character of a representation $\rho$ of degree $n$, then\dots
+        \begin{enumerate}[label={\textup{(\roman*)}}]
+            \item $\chi(1)=n$;
+            \item $\chi(s^{-1})=\chi(s)^*$ for all $s\in G$;
+            \item $\chi(tst^{-1})=\chi(s)$ for all $s\in G$.
+        \end{enumerate}
+        \begin{proof}
+            \underline{(i)}:
+            \begin{equation*}
+                \chi(1) = \tr(\rho_1)
+                = \tr(1)
+                = n
+            \end{equation*}
+            \underline{(ii)}: Recall that there exists a basis with respect to which $\rho_s$ is unitary. Thus, its (not necessarily unique) eigenvalues $\lambda_1,\dots,\lambda_n$ are roots of unity. Consequently, $\lambda_i^{-1}=\lambda_i^*$ ($i=1,\dots,n$). Therefore,
+            \begin{equation*}
+                \chi(s^{-1}) = \tr(\rho_{s^{-1}})
+                = \tr(\rho_s^{-1})
+                = \sum\lambda_i^{-1}
+                = \sum\lambda_i^*
+                = \tr(\rho_s)^*
+                = \chi(s)^*
+            \end{equation*}
+            \underline{(iii)}: This follows directly from the fact that the trace is invariant under choice of basis. Alternatively (and more explicitly), we may put $u=\rho_t\rho_s$ and $v=\rho_{t^{-1}}$ and use the formula $\tr(ab)=\tr(ba)$\footnote{See Theorem 10.4 of \textcite{bib:Axler}.} as follows.
+            \begin{equation*}
+                \chi(tst^{-1}) = \tr(\rho_{tst^{-1}})
+                = \tr(\rho_t\rho_s\rho_{t^{-1}})
+                = \tr(uv)
+                = \tr(vu)
+                = \tr(\rho_{t^{-1}}\rho_t\rho_s)
+                % = \tr(\rho_{t^{-1}t}\rho_s)
+                % = \tr(\rho_e\rho_s)
+                % = \tr(I\rho_s)
+                = \tr(\rho_s)
+                = \chi(s)
+            \end{equation*}
+        \end{proof}
+    \end{proposition}
+    \item \textbf{Class function}: A function $f$ on $G$ satisfying identity (iii) in Proposition \ref{prp:charPropsFun}.
+    \item Properties of the character with respect to representations.
+    \begin{proposition}\label{prp:charPropsSumProd}
+        Let $\rho^1:G\to GL(V_1)$ and $\rho^2:G\to GL(V_2)$ be two linear representations of $G$, and let $\chi_1,\chi_2$ be their characters. Then\dots
+        \begin{enumerate}[label={\textup{(\roman*)}}]
+            \item The character $\chi$ of the direct sum representation $V_1\oplus V_2$ is equal to $\chi_1+\chi_2$;
+            \item The character $\psi$ of the tensor product representation $V_1\otimes V_2$ is equal to $\chi_1\cdot\chi_2$.
+        \end{enumerate}
+        \begin{proof}
+            As in class.
+        \end{proof}
+    \end{proposition}
+    \item \textcite{bib:Serre} defines the characters of the symmetric square and alternating square representations.
+    \stepcounter{proposition}
+\end{itemize}
+
+
+\subsection*{Section 2.2: Schur's Lemma; Basic Applications}
+\begin{itemize}
+    \item \textcite{bib:Serre} states and proves Schur's Lemma.
+    \begin{proposition}[Schur's Lemma]
+        Let $\rho^1:G\to GL(V_1)$ and $\rho^2:G\to GL(V_2)$ be two irreducible representations of $G$, and let $f$ be a linear mapping of $V_1$ into $V_2$ such that $\rho_s^2\circ f=f\circ\rho_s^1$ for all $s\in G$. Then\dots
+        \begin{enumerate}[label={\textup{(\roman*)}}]
+            \item If $\rho^1$ and $\rho^2$ are not isomorphic, then $f=0$;
+            \item If $V_1=V_2$ and $\rho^1=\rho^2$, then $f$ is a \textbf{homothety}.
+        \end{enumerate}
+        \begin{proof}
+            This proof is identical to the one given in \textcite{bib:FultonHarris}. However, I am including it again here because it includes a few key details that \textcite{bib:FultonHarris} leave out. Let's begin.\par\smallskip
+            \underline{(i)}:
+            % We divide into two cases ($f=0$ and $f\neq 0$). The case $f=0$ is trivial. Now suppose $f\neq 0$.
+            To prove the claim, it will suffice to prove the contrapositive. Suppose $f\neq 0$. To prove that $\rho^1\cong\rho^2$, it will suffice to show that $f$ is an isomorphism of $G$-representations. Since $f$ is a morphism of $G$-representations by hypothesis, all that is left is to show that it is an isomorphism of vector spaces. To do so, we will demonstrate that $\ker(f)=0$ and $\im(f)=V_2$, one claim at a time. Let's begin.\par
+            Let $W_1=\ker(f)$. Then for any $s\in G$ and $x\in W_1$,
+            \begin{equation*}
+                f(\rho_s^1(x)) = [f\circ\rho_s^1](x)
+                = [\rho_s^2\circ f](x)
+                = \rho_s^2(f(x))
+                = \rho_s^2(0)
+                = 0
+            \end{equation*}
+            so $\rho_s^1(x)\in W_1$. It follows that $W_1$ is stable under $G$. But since $V_1$ is irreducible, this means that $W_1=V_1,0$. This combined with the fact that $f\neq 0$ (hence $W_1=\ker(f)\neq V_1$) implies that $W_1=0$.\par
+            Let $W_2=\im(f)$. Then for any $s\in G$ and $f(x)\in W_2$,
+            \begin{equation*}
+                \rho_s^2(f(x)) = [\rho_s^2\circ f](x)
+                = [f\circ\rho_s^1](x)
+                = f(\rho_s^1(x))
+            \end{equation*}
+            so $\rho_s^2(fx)\in W_2$. It follows that $W_2$ is stable under $G$. But since $V_2$ is irreducible, this means that $W_2=V_2,0$. This combined with the fact that $f\neq 0$ (hence $W_2=\im(f)\neq 0$) implies that $W_2=V_2$.\par\smallskip
+            \underline{(ii)}: Since $f$ is an operator on a finite-dimensional, nonzero, complex vector space, it has\footnote{See Theorem 5.5 of \textcite{bib:Axler}.} an eigenvalue $\lambda$. To prove that $f$ is a homothety, it will suffice to show that $f=\lambda I$, which we will do by demonstrating that $f-\lambda I=0$ using part (i). Indeed, to use part (i) in this manner, we need only show that $f-\lambda I$ \emph{does} satisfy $\rho_s^2\circ(f-\lambda I)=(f-\lambda I)\circ\rho_s^1$ but \emph{is not} an isomorphism of vector spaces. For the first claim, we have since $\rho^1=\rho^2$ and $V_1=V_2$ that
+            \begin{equation*}
+                \rho_s^2\circ(f-\lambda I) = \rho_s^2\circ f-\rho_s^2\circ\lambda I
+                = f\circ\rho_s^1-\lambda I\circ\rho_s^2
+                = f\circ\rho_s^1-\lambda I\circ\rho_s^1
+                = (f-\lambda I)\circ\rho_s^1
+            \end{equation*}
+            For the second claim, we know that the eigenvector corresponding to $\lambda$ is in $\ker(f-\lambda I)$, so $f-\lambda I$ has a nontrivial kernel and thus cannot be an isomorphism.
+        \end{proof}
+    \end{proposition}
+    \item \textbf{Homothety}: A scalar multiple of the identity operator. \emph{Given by}
+    \begin{equation*}
+        \lambda I
+    \end{equation*}
+    for some $\lambda\in\C$.
+    \item \marginnote{11/8:}Another condition for telling if two representations are isomorphic.
+    \begin{corollary}
+        Let $h$ be a linear mapping of $V_1$ into $V_2$ and put
+        \begin{equation*}
+            h^0 = \frac{1}{g}\sum_{t\in G}(\rho_t^2)^{-1}h\rho_t^1
+        \end{equation*}
+        with $g=|G|$. Then\dots
+        \begin{enumerate}[label={\textup{(\roman*)}}]
+            \item If $\rho^1$ and $\rho^2$ are not isomorphic, we have $h^0=0$;
+            \item If $V_1=V_2$ and $\rho^1=\rho^2$, $h^0$ is a homothety of ratio $(1/n)\tr(h)$ with $n=\dim(V_1)$.
+        \end{enumerate}
+        \begin{proof}
+            Given.
+        \end{proof}
+    \end{corollary}
+    \item The above corollary in matrix form:
+    \begin{corollary}\label{cly:repIsoMat1}
+        Let $(r_{i_1j_1}(t)):=\rho_t^1$, $(r_{i_2j_2}(t)):=\rho_t^2$, $(x_{i_2i_1}):=h$, and
+        \begin{equation*}
+            x_{i_2i_1}^0 := h^0
+            = \frac{1}{g}\sum_{t,j_1,j_2}r_{i_2j_2}(t^{-1})x_{j_2j_1}r_{j_1i_1}(t)
+        \end{equation*}
+        Then if $(r_{i_1j_1}(t))$ and $(r_{i_2j_2}(t))$ are not isomorphic, we have
+        \begin{equation*}
+            \frac{1}{g}\sum_{t,j_1,j_2}r_{i_2j_2}(t^{-1})r_{j_1i_1}(t) = 0
+        \end{equation*}
+        for arbitrary $i_1,i_2,j_1,j_2$.
+        \begin{proof}
+            Described.
+        \end{proof}
+    \end{corollary}
+    \begin{corollary}\label{cly:repIsoMat2}
+        Under the same definitions as before, if $(r_{i_1j_1}(t))$ and $(r_{i_2j_2}(t))$ are isomorphic, we have
+        \begin{equation*}
+            \frac{1}{g}\sum_{t\in G}r_{i_2j_2}(t^{-1})r_{j_1i_1}(t) = \frac{1}{n}\delta_{i_2i_1}\delta_{j_2j_1}
+        \end{equation*}
+        \begin{proof}
+            Described.
+        \end{proof}
+    \end{corollary}
+    \item Note that under the notation
+    \begin{equation*}
+        \inp{\phi,\psi} = \frac{1}{g}\sum_{t\in G}\phi(t^{-1})\psi(t)
+        = \frac{1}{g}\sum_{t\in G}\phi(t)\psi(t^{-1})
+    \end{equation*}
+    we have\dots
+    \begin{itemize}
+        \item $\inp{\phi,\psi}=\inp{\psi,\phi}$;
+        \item $\inp{\phi,\psi}$ is linear in $\phi$ and $\psi$;
+        \item Corollary \ref{cly:repIsoMat1} becomes $\inp{r_{i_2j_2},r_{j_1i_1}}=0$;
+        \item Corollary \ref{cly:repIsoMat2} becomes $\inp{r_{i_2j_2},r_{j_1i_1}}=(1/n)\delta_{i_2i_1}\delta_{j_2j_1}$.
+    \end{itemize}
+    \item Furthermore, note that if we choose the $(r_{ij}(t))$ to be unitary, then $r_{ij}(t^{-1})=r_{ji}(t)^*$ and Corollaries \ref{cly:repIsoMat1}, \ref{cly:repIsoMat2} are \textbf{orthogonality relations} for the scalar product $(\phi,\psi)$ defined below.
+\end{itemize}
+
+
+\subsection*{Section 2.3: Orthogonality Relations for Characters}
+\begin{itemize}
+    \item \textbf{Scalar product}: A binary operation $(x\mid y)$, where $x,y$ are elements of some vector space $V$, that is linear in $x$, semilinear in $y$, and satisfies $(x\mid x)>0$ for all $x\neq 0$.
+    \item Define a scalar product on the space of complex valued functions on $G$ by
+    \begin{equation*}
+        (\phi\mid\psi) = \frac{1}{g}\sum_{t\in G}\phi(t)\psi(t)^*
+    \end{equation*}
+    \item Defining $\tilde{\psi}(t):=\psi(t^{-1})^*$, we have that
+    \begin{equation*}
+        (\phi\mid\psi) = \frac{1}{g}\sum_{t\in G}\phi(t)\tilde{\psi}(t^{-1})
+        = \inp{\phi,\tilde{\psi}}
+    \end{equation*}
+    \begin{itemize}
+        \item Special case: By Proposition \ref{prp:charPropsFun}, $\tilde{\chi}=\chi$, so
+        \begin{equation*}
+            (\phi\mid\chi) = \inp{\phi,\chi}
+        \end{equation*}
+    \end{itemize}
+    \item We now prove a theorem analogous to the main theorem from Wednesday's lecture.
+    \setcounter{theorem}{2}
+    \begin{theorem}\label{trm:charOrthonormal}
+        \leavevmode
+        \begin{enumerate}[label={\textup{(\roman*)}}]
+            \item If $\chi$ is the character of an irreducible representation, we have $(\chi\mid\chi)=1$ (i.e., $\chi$ is "of norm 1").
+            \item If $\chi$ and $\chi'$ are the characters of two nonisomorphic irreducible representations, we have $(\chi\mid\chi')=0$ (i.e., $\chi,\chi'$ are orthogonal).
+        \end{enumerate}
+        \begin{proof}
+            Extremely clean argument using Corollaries \ref{cly:repIsoMat1}-\ref{cly:repIsoMat2}.
+        \end{proof}
+    \end{theorem}
+    \item \textbf{Irreducible character}: A character of an irreducible representation.
+    \item With this definition in hand, we can see that the irreducible characters form an orthonormal system.
+    \item With the previous result in hand, we can use characters to count how many times an irreducible representation occurs within the direct sum decomposition of a representation.
+    \begin{theorem}
+        Let $V$ be a linear representation of $G$, with character $\phi$, and suppose $V$ decomposes into a sum of irreducible representations via
+        \begin{equation*}
+            V = W_1\oplus\cdots\oplus W_k
+        \end{equation*}
+        Then if $W$ is an irreducible representation with character $\chi$, the number of $W_i$ isomorphic to $W$ is equal to the scalar product $(\phi\mid\chi)=\inp{\phi,\chi}$.
+        \begin{proof}
+            Let $\chi_i$ be the character of $W_i$. Then by Proposition \ref{prp:charPropsSumProd}, we have
+            \begin{equation*}
+                \phi = \chi_1+\cdots+\chi_k
+            \end{equation*}
+            Now recall from Theorem \ref{trm:charOrthonormal} that $(\chi_i\mid\chi)$ is 1 or 0 depending on whether $W_i$ is or is not isomorphic to $W$, respectively. Thus, in the sum
+            \begin{equation*}
+                (\phi\mid\chi) = (\chi_1\mid\chi)+\cdots+(\chi_k\mid\chi)
+            \end{equation*}
+            all terms for which $\chi_i\neq\chi$ go to zero and all terms for which $\chi_i=\chi$ go to 1, leaving a sum that adds 1 for every occurrence of $W$, as desired.
+        \end{proof}
+    \end{theorem}
+    \item We now explore some results that immediately follow from this result.
+    \item There is a uniqueness in the decomposition of a representation into irreducible representations.
+    \setcounter{corollary}{0}
+    \begin{corollary}
+        The number of $W_i$ isomorphic to $W$ does not depend on the chosen decomposition.
+    \end{corollary}
+    \item Matching Corollary 1 from Friday's class.
+    \begin{corollary}
+        Two representations with the same character are isomorphic.
+    \end{corollary}
+    \item Note on this result.
+    \begin{itemize}
+        \item This is what reduces the study of representations to the study of characters.
+    \end{itemize}
+    \item \textcite{bib:Serre} reiterates the formula
+    \begin{equation*}
+        (\phi\mid\phi) = \sum_{i=1}^hm_i^2
+    \end{equation*}
+    where $\phi$ is the character of $V=W_1^{m_1}\oplus\cdots\oplus W_h^{m_h}$.
+    \item An \textbf{irreducibility criterion} based on Corollary 2 from Friday's class.
+    \begin{theorem}
+        If $\phi$ is the character of a representation $V$, $(\phi\mid\phi)$ is a positive integer and we have $(\phi\mid\phi)=1$ if and only if $V$ is irreducible.
+        \begin{proof}
+            See class.
+        \end{proof}
+    \end{theorem}
+\end{itemize}
+
+
+\subsection*{Section 2.4: Decomposition of the Regular Representation}
+\begin{itemize}
+    \item Notation.
+    \begin{itemize}
+        \item $\chi_1,\dots,\chi_h$: The irreducible characters of $G$.
+        \item $n_1,\dots,n_k$: The degrees of $\chi_1,\dots,\chi_h$; $n_i=\chi_i(1)$.
+        \item $\rho:G\to GL(R)$: The regular representation of $G$.
+    \end{itemize}
+    \item Matching Corollary 3 from Friday's class: Calculating $\rho_s$ for all $s\in G$.
+    \begin{proposition}\label{prp:regRepChar}
+        The character $r_G$ of the regular representation is given by the formulas
+        \begin{align*}
+            r_G(1) &= g&
+            r_G(s) &= 0
+        \end{align*}
+        where we assume $s\neq 1$ in the right equation above.
+        \begin{proof}
+            If $s\neq e$, then $st\neq t$ for all $t\in G$. Thus, the diagonal terms of $\rho_s$ are all 0 in this case, so $\tr(\rho_s)=0$.\par
+            If $s=e$, then $st=t$ for all $t\in G$. Thus, the diagonal terms of $\rho_s$ are all 1 in this case, so $\tr(\rho_s)=\tr(1)=\dim(R)=g$.
+        \end{proof}
+    \end{proposition}
+    \item Matching the leftmost consequence of Corollary 3 from Friday's class.
+    \setcounter{corollary}{0}
+    \begin{corollary}\label{cly:regularDsum}
+        Every irreducible representation $W_i$ is contained in the regular representation with multiplicity equal to its degree $n_i$
+    \end{corollary}
+    \item Matching the middle consequence of Corollary 3 from Friday's class (i) and the orthogonality of the first column in a character table with every other column, a special case of the second orthogonality criterion (ii).
+    \begin{corollary}\label{cly:columnOrtho}
+        \leavevmode
+        \begin{enumerate}[label={\textup{(\roman*)}},ref={\thecorollary\roman*}]
+            \item \label{cly:columnOrthoi}The degrees $n_i$ satisfy the relation
+            \begin{equation*}
+                \sum_{i=1}^hn_i^2 = g
+            \end{equation*}
+            \item \label{cly:columnOrthoii}If $s\in G$ is different from 1, we have
+            \begin{equation*}
+                \sum_{i=1}^hn_i\chi_i(s) = 0
+            \end{equation*}
+        \end{enumerate}
+        \begin{proof}
+            Corollary \ref{cly:regularDsum} says that $r_G(s)=\sum n_i\chi_i(s)$ for all $s\in G$. Taking $s=1$ gives (i) and $s\neq 1$ gives (ii).
+        \end{proof}
+    \end{corollary}
+\end{itemize}
+
+
+
+\section{FH Chapter 2: Characters}
+\setcounter{FHchapter}{2}
+\emph{From \textcite{bib:FultonHarris}.}
+\subsection*{Section 2.1: Characters}
+\begin{itemize}
+    \item The example from last time suggests that "knowing all the eigenvalues of each element of $G$ [that is, each $\rho(g)$] should suffice to describe the representation" \parencite[12]{bib:FultonHarris}.
+    \begin{itemize}
+        \item We formalize this notion via \textbf{character theory}.
+        \item In particular, note that we do not actually need to specify all eigenvalues of all elements of $G$; rather, we can opt to specify their sums, since knowing the $\sum\lambda_i^k$ is equivalent to knowing the $\{\lambda_i\}$ of $g$. This motivates the definition of the character as the trace!
+    \end{itemize}
+    \item Definition of a \textbf{character} and \textbf{class function}.
+    \item Proposition 2.1: Properties of the character as discussed in class.
+    \item Example 2.5: References the character of the permutation representation and $\Fix(g)$.
+    \item An alternate way of deriving the characters of the standard representation.
+    \begin{itemize}
+        \item Calculate for the permutation representation $(3,1,0)$, which is easy.
+        \item Note that $V_\text{perm}=V_{(2,1)}\oplus V_{(3)}$, so $(3,1,0)=(x,y,z)+(1,1,1)$, meaning that the character of the standard representation is $(2,0,-1)$, as desired.
+    \end{itemize}
+    \item Using characters to decompose arbitrary representations $W$ of $S_3$.
+    \begin{itemize}
+        \item We take it for granted that $W=V_{(3)}^a\oplus V_{(2,1)}^b\oplus V_{(1,1,1)}^c$.
+        \item But then $\chi_W=a\chi_{V_{(3)}}+b\chi_{V_{(2,1)}}+c\chi_{V_{(1,1,1)}}$. Moreover, since the three characters are linearly independent, we can solve the system of equations for $a,b,c$.
+        \item Takeaway: "$W$ is determined up to isomorphism by its character $\chi_W$" \parencite[14]{bib:FultonHarris}.
+    \end{itemize}
+    \item There are some great exercises throughout this section that I could come back to later for more practice!
+\end{itemize}
+
+
+\subsection*{Section 2.2: The First Projection Formula and its Consequences}
+\begin{itemize}
+    \item \textcite{bib:FultonHarris} identify a different goal than either Rudenko or \textcite{bib:Serre} when proving the orthonormality of the irreducible characters, but an interesting one nonetheless! Let's begin.
+    \item We wish to construct an \emph{explicit} formula for a certain projection operator. The operator of interest is the one that projects the vectors in a representation $V$ onto the subspace $V_\text{triv}^m\leq V$ consisting of the direct sum of the trivial representations in the decomposition.
+    \item Observe that the subspace $V_\text{triv}^m\leq V$ consists of all vectors $v\in V$ such that $gv=v$ for all $g\in G$. We call this subspace "$V^G$."
+    \item Call our desired projection operator $\varphi$. What properties should $\varphi$ have?
+    \begin{itemize}
+        \item If it is to map between representations $V$ and $V^G$, it should be a morphism of $G$-representations.
+        \begin{itemize}
+            \item How is this related to Lemma 1??
+        \end{itemize}
+        \item It should satisfy $\varphi^2=\varphi$ and $\range\varphi=V^G$.
+    \end{itemize}
+    \item Now suppose we want to find $m$, the number of copies of the trivial representation appearing in the decomposition of $V$.
+    \begin{itemize}
+        \item Consider the matrix of $\varphi$ in a basis of $V$ such that the first $m$ vectors lie in $V^G$ and the rest of the vectors lie in the complement of $V^G$.
+        \item This block diagonal matrix will be the $m\times m$ identity in the upper left and the zero matrix in the bottom right.
+        \item Thus, $m=\tr(\varphi)$.
+        \item Expanding, we actually have
+        \begin{equation*}
+            m = \tr(\varphi)
+            = \frac{1}{|G|}\sum_{g\in G}\tr(g)
+            = \frac{1}{|G|}\sum_{g\in G}\chi_V(g)
+        \end{equation*}
+        \item Note that both $V_\text{triv}$ and $V=V_\text{triv}^n\oplus\cdots$ make the equality true; it's just that if we want the following consequence, we \emph{need} $V$ in there.
+    \end{itemize}
+    \item Important consequence of the above: For an irreducible representation $V$ other than the trivial one, $\sum_{g\in G}\chi_V(g)=0$.
+    \begin{itemize}
+        \item Example: In Table \ref{tab:charTableS3}, notice how $1(1)+3(-1)+2(1)=0$ and $1(2)+3(0)+2(-1)=0$.
+    \end{itemize}
+    \item "If $V$ is irreducible, then by Schur's Lemma, $\dim[\Hom(V,W)^G]$ is the multiplicity of $V$ in $W$; similarly, if $W$ is irreducible, $\dim[\Hom(V,W)^G]$ is the multiplicity of $W$ in $V$, and in the case where both $V$ and $W$ are irreducible, we have
+    \begin{equation*}
+        \dim\Hom_G(V,W) =
+        \begin{cases}
+            1 & V\cong W\\
+            0 & V\ncong W
+        \end{cases}
+    \end{equation*}
+    " \textcite[16]{bib:FultonHarris}.
+    \item \textcite{bib:FultonHarris} finally arrives at the theorem from Wednesday's lecture.
+    \setcounter{FHlemma}{12}
+    \item This theorem gives us a lower bound on the number of conjugacy classes of $G$.
+    \begin{FHcorollary}\label{cly:lowerBoundConjCl}
+        The number of irreducible representations of $G$ is less than or equal to the number of conjugacy classes.
+        \begin{proof}
+            We have that
+            \begin{align*}
+                \spn(\chi_1,\dots,\chi_k) &\leq \C_\text{cl}[G]\\
+                \dim[\spn(\chi_1,\dots,\chi_k)] &\leq \dim(\C_\text{cl}[G])\\
+                \text{\# irreducible representations} &\leq \text{\# conjugacy classes}
+            \end{align*}
+            as desired.
+        \end{proof}
+    \end{FHcorollary}
+    \item Corollary 1 from Friday's class.
+    \begin{FHcorollary}
+        Any representation is determined by its character.
+    \end{FHcorollary}
+    \item Corollary 2 from Friday's class.
+    \begin{FHcorollary}
+        A representation $V$ is irreducible iff $(\chi_V,\chi_V)=1$.
+    \end{FHcorollary}
+    \item A result from the proof of Corollary 1 from Friday's class.
+    \begin{FHcorollary}
+        The multiplicity $a_i$ of $V_i$ in $V$ is the inner product of $\chi_V$ with $\chi_{V_i}$, i.e.,
+        \begin{equation*}
+            a_i = (\chi_V,\chi_{V_i})
+        \end{equation*}
+    \end{FHcorollary}
+    \item With respect to the regular representation, \textcite{bib:FultonHarris} states that
+    \begin{equation*}
+        \chi_R(g) =
+        \begin{cases}
+            0 & g\neq e\\
+            |G| & g=e
+        \end{cases}
+    \end{equation*}
+    \item Matching the leftmost consequence of Corollary 3 from Friday's class.
+    \begin{FHcorollary}
+        Any irreducible representation $V$ of $G$ appears in the regular representation $\dim V$ times.
+    \end{FHcorollary}
+    \item Discusses the middle and rightmost consequences of Corollary 3 from Friday's class.
+    \item Discusses Corollary \ref{cly:columnOrthoii} from Section 2.4 of \textcite{bib:Serre}.
+    \item Note: These two formulas, copied below for convenience, amount to the \textbf{Fourier inversion formula} for finite groups.
+    \begin{align*}
+        |G| &= \sum_i\dim(V_i)^2&
+        0 &= \sum_i(\dim V_i)\cdot\chi_{V_i}(g\neq e)
+    \end{align*}
+    \begin{itemize}
+        \item Note: If all but one of the characters is known, they given a formula for the unknown character.
+    \end{itemize}
+    \item Matching the second orthogonality relation from Friday's class.
+\end{itemize}
+
+
+\subsection*{Section 2.3: Examples --- \texorpdfstring{$\bm{S_4}$}{TEXT} and \texorpdfstring{$\bm{A_4}$}{TEXT}}
+\begin{itemize}
+    \item Construction of Table \ref{tab:charTableS4}.
+    \begin{enumerate}
+        \item List the conjugacy classes in $S_4$ and the number of elements in each across the top of the table.
+        \begin{itemize}
+            \item Since this is a symmetric group $S_d$, the conjugacy classes correspond to the \textbf{partitions} of $d$ via cycle lengths.
+            \item Thus, our conjugacy classes are\dots
+            \begin{itemize}
+                \item $\{e\}$: $4=1+1+1+1$. Number of elements: 1.
+                \item $\{(xx)\}$: $4=2+1+1$. Number of elements: 6.
+                \item $\{(xxx)\}$: $4=3+1$. Number of elements: 8.
+                \item $\{(xx)(xx)\}$: $4=2+2$. Number of elements: 3.
+                \item $\{(xxxx)\}$: $4=4$. Number of elements: 6.
+            \end{itemize}
+        \end{itemize}
+        \item Start by listing the trivial, alternating, and standard representations.
+        \begin{itemize}
+            \item The character of the trivial is
+            \begin{equation*}
+                (1,1,1,1,1)
+            \end{equation*}
+            by default.
+            \item The character of the alternating is
+            \begin{equation*}
+                ((-1)^e,(-1)^{(xx)},(-1)^{(xxx)},(-1)^{(xx)(xx)},(-1)^{(xxxx)}) = (1,-1,1,1,-1)
+            \end{equation*}
+            by the definition of the representation.
+            \item The character of the standard representation is
+            \begin{equation*}
+                \chi_{\C^4}-\chi_{(5)} = (4,2,1,0,0)-(1,1,1,1,1)
+                = (3,1,0,-1,-1)
+            \end{equation*}
+            by the fact that the regular representation always decomposes into the sum of the trivial and standard.
+            \begin{itemize}
+                \item We can double check that this representation is irreducible via the irreducibility criterion $|\chi_V|=\sqrt{(\chi_V,\chi_V)}=1$.
+            \end{itemize}
+        \end{itemize}
+        \item Figure out how many more representations irreducible representations there are. In this case there are two more.
+        \begin{itemize}
+            \item We can figure this out by combining two previously used facts.
+            \item First, we know that the sum of the squares of the dimensions must equal $|S_4|=24$ (middle consequence of Corollary 3 from Friday's class). Since we're only at $1+1+9=11$ so far, we still have $24-11=13$ to go. But how is this 13 allocated? To answer this question, we need the second fact.
+            \item Second, by Corollary \ref{cly:lowerBoundConjCl}, the number of irreps is less than or equal to the number of conjugacy classes, so we have at most two irreps to go. In fact, since 13 is not the square of any natural number but $13=2^2+3^2$, we must have \emph{exactly} two irreps to go, of dimensions 2 and 3.
+        \end{itemize}
+        \item The tensor product of an irrep and a one-dimensional representation is irreducible, so $\text{Sign}\otimes V_\text{std}=(3,-1,0,-1,1)$ is one of them.
+        \begin{itemize}
+            \item Additional check: $|\text{Sign}\otimes V_\text{std}|=1$.
+            \item Additional check: It is not a scalar multiple \emph{or} linear combination of any of the first three.
+        \end{itemize}
+        \item Use the second orthogonality relation to solve for each $\chi(g)$ for the final irrep.
+    \end{enumerate}
+    \item \textbf{Partition} (of $d$): An expression of $d$ as a sum of positive integers $a_1,\dots,a_k$.
+    \item What is an "involution of trace 2" and how is it related to the quotient group \parencite[19]{bib:FultonHarris}??
+    \begin{itemize}
+        \item This is related to the closing comments of Friday's class.
+    \end{itemize}
+    \item Description of $A_4$.
 \end{itemize}
 
 
