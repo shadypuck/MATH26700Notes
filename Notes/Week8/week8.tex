@@ -1,0 +1,156 @@
+\documentclass[../notes.tex]{subfiles}
+
+\pagestyle{main}
+\renewcommand{\chaptermark}[1]{\markboth{\chaptername\ \thechapter\ (#1)}{}}
+\setcounter{chapter}{7}
+
+\begin{document}
+
+
+
+
+\chapter{???}
+\section{Specht Modules are Irreducible and Well-Defined}
+\begin{itemize}
+    \item \marginnote{11/13:}Announcements.
+    \begin{itemize}
+        \item This week's homework is the next to last one.
+    \end{itemize}
+    \item Review.
+    \begin{itemize}
+        \item Miracuously, we can understand all representations of $S_n$.
+        \item We start with partitions $\lambda$ that are defined a certain way. We visualize them with Young diagrams.
+        \item The number of partitions of $n$ is equal to the number of conjugacy classes in $S_n$ is equal to the number of irreps in $S_n$.
+        \begin{itemize}
+            \item It is a special feature of $S_n$ that this is true.
+        \end{itemize}
+        \item How do we construct the irreducible representation $V_\lambda$ due to $\lambda$?
+        \begin{itemize}
+            \item Consider $(4,2,1)'=(3,2,1,1)$ as an example (recall the definition of an inverse partition).
+            \item Take Vandermonde determinants (recall the explicit definition of these, too).
+            \item Then we define $V_\lambda=\C[S_n]$, take Vandermonde determinant of variables corresponding to the first column, so that $\Delta(x_1,\dots,x_{\lambda_1'})\Delta(x_{\lambda_1'+1},\dots,x_{\lambda_2'})\cdots\Delta(x_{\lambda_{k-1}'+1},\dots,\lambda_k')$.
+            \item Thus, we let $\C[S_n]$ act on $(x_1-x_2)(x_1-x_3)(x_2-x_3)(x_4-x_5)$.
+        \end{itemize}
+    \end{itemize}
+    \item One more example.
+    \begin{itemize}
+        \item $\lambda=(2,2)$.
+        \item Let $\C[S_4]$ act on $(x_1-x_2)(x_3-x_4)$.
+        \item Then
+        \begin{equation*}
+            V_\lambda = \inp{(x_1-x_2)(x_3-x_4),(x_1-x_3)(x_2-x_4),(x_1-x_4)(x_2-x_3)}
+        \end{equation*}
+        \item But we're expecting a 2D representation. Indeed, we get one because if we define the first term above to be $a$ and the second to be $b$, then the third is $b-a$. Thus, there are only two linearly independent polynomials herein.
+        \item Now we calculate entries in the character table as follows: See how representatives of conjugacy classes like $(12)$ and $(123)$ acts on $a,b$ via matrices, and then calculate traces of these matrices.
+        \begin{itemize}
+            \item For example, using the definitions of $a,b$ from above, we can see that
+            \begin{align*}
+                (12)\cdot a &= (12)\cdot(x_1-x_2)(x_3-x_4)
+                    = (x_2-x_2)(x_3-x_4)
+                    = -(x_1-x_2)(x_3-x_4)
+                    = -a\\
+                (12)\cdot b &= (12)\cdot(x_1-x_3)(x_2-x_4)
+                    = (x_2-x_3)(x_1-x_4)
+                    = (x_1-x_4)(x_2-x_3)
+                    = b-a
+            \end{align*}
+            \item In matrix form, the above equations become
+            \begin{equation*}
+                \begin{bmatrix}
+                    -a\\
+                    b-a\\
+                \end{bmatrix}
+                = \underbrace{
+                    \begin{bmatrix}
+                        -1 & 0\\
+                        -1 & 1\\
+                    \end{bmatrix}
+                }_{\rho(12)}
+                \begin{bmatrix}
+                    a\\
+                    b\\
+                \end{bmatrix}
+            \end{equation*}
+            \item Thus, $\chi(12)=\tr(\rho(12))=0$.
+            \item Similarly, we can calculate that
+            \begin{equation*}
+                \begin{bmatrix}
+                    b-a\\
+                    -a\\
+                \end{bmatrix}
+                = \underbrace{
+                    \begin{bmatrix}
+                        -1 & 1\\
+                        -1 & 0\\
+                    \end{bmatrix}
+                }_{\rho(123)}
+                \begin{bmatrix}
+                    a\\
+                    b\\
+                \end{bmatrix}
+            \end{equation*}
+            so $\chi(123)=-1$.
+        \end{itemize}
+        \item One of the HW problems is to do exactly this for $S_4$ just for practice.
+    \end{itemize}
+    \item Today: A theorem that does...??
+    \item Note that $V_\lambda$ is called a \textbf{Specht module} and one of these polynomials on the above blackboard is a \textbf{Specht polynomial}.
+    \item Theorem 1: $V_\lambda$ is irreducible.
+    \begin{proof}
+        $d(\lambda)$ is the degree of a Specht polynomial and is given by
+        \begin{equation*}
+            \sum_{i=1}^{k'}\frac{\lambda_i'(\lambda_i'-1)}{2}
+        \end{equation*}
+        Let $R_d\subset\C[x_1,\dots,x_n]$, where $R_d$ are just polynomials of degree $d$.
+        Clearly, by definition, $V_\lambda\subset R_d$. Note that as a definition, $R_d=S^d(V_\text{perm}^*)$.
+        We now claim that $\Hom_{S_n}(V_\lambda,R_d)\cong\C$.
+
+        This claim implies the theorem because if we assume that $V_\lambda=\bigoplus W_i^{n_i}$ and $R_d=\bigoplus W_i^{m_i}$ where the $W_i$ are all irreps. Then we have a nice way to compute this $\Hom$ from previous classes, explicitly, that the only homomorphisms $W_i\to W_i$. Thus, $\dim\Hom=\sum n_im_i$. What this claim implies is that $\dim\Hom=1$. Additionally, we are in a subrepresentation, so $n_i\leq m_i$ for all $i$. Thus, we must have $n_i=1,m_i=1$ for some $i$ and that $n_j,m_j=0$ for all other $j$.
+        Restated, WLOG let $1\leq n_i$. Then since $n_i\leq m_i$ and $n_im_i=1$, we have $m_i=1$ and all other $n_j,m_j=0$. Thus, $V_\lambda=W_i$ is irreducible!
+
+        Now we actually have to prove the claim. Let $f\in\Hom_{S_n}(V_\lambda,R_d)$ be arbitrary. Consider
+        \begin{equation*}
+            f(\Delta(x_1,\dots,x_{\lambda_1'})\Delta(x_{\lambda_1'+1},\dots,x_{\lambda_2'})\dots)
+        \end{equation*}
+        where the argument is the general Specht polynomial from above. $f(x)$ is a polynomial of degree $d$; call $f(x)$ by $P(x_1,\dots,x_n)$. It is antisymmetric in $x_1,\dots,x_{\lambda_1'}$. It's also antisymmetric in $x_{\lambda_1'+1},\dots,x_{\lambda_2'}$. In fact, it's antisymmetric in all such sets all the way up to $x_{\lambda_{k'-1}'+1},\dots,x_{\lambda_{k'}'}$. It follows that $P(x_1,\dots,x_n)$ is divisible by $\Delta(x_1,\dots,x_{\lambda_i'})$, etc., i.e., all Vandermonde determinants. Thus, $P(x_1,\dots,x_n)$ is divisible by the product, which is the Specht polynomials. It follows that $P(x_1,\dots,x_n)=u\cdot\text{Specht polynomial}$, from which it follows that $f=uI$. This implies the claim via the isomorphism $f\mapsto u$!
+    \end{proof}
+    \item Corollary: If $d'<d$, then $\Hom(V_\lambda,R_d')=0$.
+    \item Theorem 2: Let $\lambda_1,\lambda_2$ be partitions of $n$. Then $V_{\lambda_1}\cong V_{\lambda_2}$ iff $\lambda_1=\lambda_2$.
+    \begin{proof}
+        Suppose that $V_{\lambda_1}\cong V_{\lambda_2}$.
+        
+        Then $d(\lambda_1)=d(\lambda_2)$ (take the columns and compute the degree of the Specht polynomial). (If not, WLOG let $d(\lambda_1)>d(\lambda_2)$. Then $V_{\lambda_1}\cong V_{\lambda_2}\hookrightarrow R_{d(\lambda_2)}$. But then by the above corollary, this overall injective embedding is the zero map, a contradiction.) % This is implication 1; I should rewrite this as a formal contradiction argument.
+
+        Let $d:=d(\lambda_1)=d(\lambda_2)$. At this point, we have $V_{\lambda_1}\hookrightarrow R_d$ and $V_{\lambda_2}\hookrightarrow R_d$. It follows that $V_{\lambda_1}=V_{\lambda_2}$ as a subspace of $R_d$. Essentially, since we have the isomorphism $V_{\lambda_1}\cong V_{\lambda_2}$, we can construct the second embedding by factoring through the first; but then this second embedding should just give the same image.
+
+        Claim: Polynomials in $V_{\lambda_1},V_{\lambda_2}$ (which we can think of as subspaces/explicit polynomials) have no monomials in common.
+        For this, it's enough to understand monomials in one $V_{\lambda_1}$. Which monomials appear in $V_\lambda$? Here's an example. We will do a representative example instead of a formal group.
+        Consider $\lambda=(5,4,2,2)$ and $S_{13}$. $\lambda'=(4,4,2,2,1)$. Our Specht polynomial is
+        \begin{equation*}
+            \Delta(x_1,x_2,x_3,x_4)\Delta(x_5,x_6,x_7,x_8)\Delta(x_9,x_{10})\Delta(x_{11},x_{12})
+        \end{equation*}
+        since $\Delta(x_{13})=1$.
+        We have that
+        \begin{equation*}
+            \Delta(x_1,x_2,x_3,x_4) =
+            \begin{vmatrix}
+                1 & 1 & 1 & 1\\
+                x_1 & x_2 & x_3 & x_4\\
+                x_1^2 & x_2^2 & x_3^2 & x_4^2\\
+                x_1^3 & x_2^3 & x_3^3 & x_4^3\\
+            \end{vmatrix}
+            = \sum_{\sigma\in S_4}(-1)^\sigma x_{\sigma(1)}x_{\sigma(2)}^0x_{\sigma(3)}^2x_{\sigma(4)}^3
+        \end{equation*}
+        Then we will have for each column, a number of variables in power each of $0,\dots,3$; on and on.
+        Now we count the number of variables in power $0,\dots,3$ to get 5,4,2,2. Thus, every monomial will have 5 variables in power 0, 4 variables in power 1, 2 variables in power 2, and 2 variables in power 3. Thus, from every monomial, we immediately reconstruct $\lambda$. It means that we can reconstruct from any monomial this representation, so this implies that we must have $\lambda_1=\lambda_2$.
+    \end{proof}
+    \item Corollary: $V_\lambda$'s are all irreps of $S_n$
+    \begin{proof}
+        They are pairwise isomorphic and their number equals $n$.
+    \end{proof}
+\end{itemize}
+
+
+
+
+\end{document}
