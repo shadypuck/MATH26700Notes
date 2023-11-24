@@ -1,0 +1,61 @@
+\documentclass[../psets.tex]{subfiles}
+
+\pagestyle{main}
+\renewcommand{\leftmark}{Problem Set \thesection}
+\setcounter{section}{5}
+
+\begin{document}
+
+
+
+
+\section{The Symmetric Group and Polynomials}
+\begin{enumerate}
+    \item \marginnote{11/17:}Let $G$ be a group of symmetries of a cube.
+    \begin{enumerate}
+        \item Prove that $|G|=48$ and that $G$ has a normal subgroup isomorphic to $S_4$.
+        \item Prove that $G$ is isomorphic to a group of signed permutations, i.e., linear maps
+        \begin{equation*}
+            (x_1,x_2,x_3) \mapsto (\pm x_{\sigma(1)},\pm x_{\sigma(2)},\pm x_{\sigma(3)})
+        \end{equation*}
+        for $\sigma\in S_3$.
+        \item Find the character table of $G$.
+    \end{enumerate}
+    \item For a partition $\lambda=(\lambda_1,\dots,\lambda_k)$ of $n$, define the conjugate partition $\lambda'=(\lambda_1',\dots,\lambda_{k'}')$ by formula $\lambda_i'=\{\#j\mid\lambda_j\geq i\}$. Prove that $\lambda'$ is also a partition of $n$ and $(\lambda')'=\lambda$ \emph{without} using the geometric picture.
+    \item Let $G$ be a finite group, $Z(G)$ its center, and $V$ an irreducible representation of it. We proved in class that $\dim(V)$ divides the order of $G$. Prove the stronger statement that $\dim(V)$ divides the index $(G:Z(G))$.
+    \item Prove the uniqueness part of the fundamental theorem about symmetric polynomials.
+    \item Let $G$ be a finite non-abelian simple group. Every 1-dimensional representation of $G$ is trivial (why?).
+    Prove that any 2-dimensional representation of $G$ is trivial as follows. Suppose that $\rho:G\to GL_2(\C)$ is nontrivial.
+    \begin{enumerate}
+        \item Prove that $G$ has an element $x$ of order 2.
+        \item Prove that $\rho(x)=-\id$.
+        \item Prove that $\rho([g,x])=\id$ for any $g$ and deduce the theorem.
+    \end{enumerate}
+    \item Consider the ring of symmetric polynomials $R=\Q[x_1,\dots,x_n]^{S_n}$.
+    \begin{enumerate}
+        \item Define the \textbf{power-sum symmetric polynomials} as follows.
+        \begin{equation*}
+            p_k(x_1,\dots,x_n) := x_1^k+\cdots+x_n^k
+        \end{equation*}
+        Prove the Newton formulas
+        \begin{equation*}
+            me_m(x_1,\dots,x_n) = \sum_{i=1}^m(-1)^{i-1}e_{m-i}(x_1,\dots,x_n)p_i(x_1,\dots,x_n)
+        \end{equation*}
+        Prove that $R=\Q[p_1,\dots,p_n]$.
+        \item Define the \textbf{complete symmetric polynomials} $h_k(x_1,\dots,x_n)$ as a sum of all \emph{distinct} monomials of degree $k$. For instance,
+        \begin{equation*}
+            h_3(x_1,x_2) = x_1^3+x_2^3+x_1^2x_2+x_1x_2^2+x_1x_2x_3
+        \end{equation*}
+        Prove that
+        \begin{equation*}
+            \sum_{i=0}^m(-1)^ie_i(x_1,\dots,x_n)h_{m-i}(x_1,\dots,x_n) = 0
+        \end{equation*}
+        Prove that $R=\Q[h_1,\dots,h_n]$.
+    \end{enumerate}
+    \item Compute explicitly the characters of all representations $V_\lambda$ of $S_4$ using the construction with Specht polynomials. Check that you get the same results as we have obtained before.
+\end{enumerate}
+
+
+
+
+\end{document}
