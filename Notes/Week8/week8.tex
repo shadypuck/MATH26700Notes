@@ -9,7 +9,7 @@
 
 
 
-\chapter{???}
+\chapter{Specht Modules}
 \section{Specht Modules are Irreducible and Well-Defined}
 \begin{itemize}
     \item \marginnote{11/13:}Announcements.
@@ -375,6 +375,188 @@
     \item This correspondence is a deep way to understand permutations/sequences of numbers. This is a big tool in CS.
     \item Next time: Induction restriction.
 \end{itemize}
+
+
+
+\section{Induction and Restriction}
+\begin{itemize}
+    \item \marginnote{11/17:}Review: Representations of $S_n$.
+    \begin{itemize}
+        \item $\lambda$ is a partition.
+        \item $V_\lambda$ is the span of $\Sp_\lambda(x_1,\dots,x_n)$.
+        \item $\dim V_\lambda=\#\SYT_\lambda$, i.e., equals the number of standard Young tableaux of shape $\lambda$.
+    \end{itemize}
+    \item Naturally, it is desirable to find a better way of counting $\SYT_\lambda$. We will do this with the \textbf{hook length formula}.
+    \item \textbf{Hook length formula}: The formula given as follows, where $n$ is the number being partitioned. \emph{Given by}
+    \begin{equation*}
+        \frac{n!}{\prod\text{length of all hooks}}
+    \end{equation*}
+    \begin{itemize}
+        \item We should feel free to use this formula, but know that it's quite difficult to prove, so Rudenko will forego such a proof.
+    \end{itemize}
+    \item \textbf{Hook} (of a cell): The set of all cells in a Young diagram directly to the right of or directly beneath the cell in question, including the cell in question.
+    \item \textbf{Length} (of a hook): The cardinality of the hook in question.
+    \item Example.
+    \begin{figure}[h!]
+        \centering
+        \begin{ytableau}
+            7 & 4 & 3 & 1\\
+            5 & 2 & 1\\
+            2\\
+            1\\
+        \end{ytableau}
+        \caption{Hook length formula.}
+        \label{fig:hookLengthForm}
+    \end{figure}
+    \begin{itemize}
+        \item The Young diagram in Figure \ref{fig:hookLengthForm} corresponds to the partition $9=(4,3,1,1)$.
+        \item In each cell of the diagram is the length of the hook corresponding to that cell.
+        \item Thus, using the hook length formula, the number of standard Young tableaux of shape $(4,3,1,1)$ is
+        \begin{equation*}
+            \frac{9!}{7\cdot 4\cdot 3\cdot 1\cdot 5\cdot 2\cdot 1\cdot 2\cdot 1} = 9\cdot 8\cdot 3
+            = 216
+        \end{equation*}
+    \end{itemize}
+    \item We're headed toward \textbf{branching}.
+    \item We'll cover \textbf{induction} and \textbf{restriction} first.
+    \begin{itemize}
+        \item Pretty natural things related to group and subgroup $H\leq G$.
+        \item We have $G$-reps and $H$-reps.
+        \item Induction allows you to go from $H$-reps up to $G$-reps, and vice versa for restrictions.
+        \item In category theory, we call these maps \textbf{functors}.
+    \end{itemize}
+    \item The maps down are $\res_H^G$, and the maps up are $\ind_H^G$.
+    \item Let $V$ be a $G$-rep. We construct $\res_H^G(V)$ as follows: Let $\res_H^G(V)$ be the vector space $V$ viewed as an $H$-rep.
+    \begin{itemize}
+        \item Example: Consider $S_2<S_3$.
+        \item We want to find $\res_{S_2}^{S_3}(2,1)$.
+        \item Recall that $(2,1)=\inp{x_1-x_2,x_1-x_3}$.
+        \item We want to decompose this space into a sum of two spaces.
+        \item So, looking at polynomials fixed and flipped under $S_2$, we obtain
+        \begin{equation*}
+            \res_{S_2}^{S_3}(2,1) = \inp{x_1-x_2}\oplus\inp{x_1-x_3+x_2-x_3}
+        \end{equation*}
+        \begin{itemize}
+            \item The left polynomial flips under $S_2$.
+            \item The right polynomial stays the same under $S_2$.
+            \item Note also that adding the right and left polynomials yields $2(x_1-x_3)\in\spn(2,1)$, as expected.
+        \end{itemize}
+    \end{itemize}
+    \item Induction is highly nontrivial. It is one of those things in math that is just very tricky. All definitions of it are slightly uncomfortable.
+    \begin{itemize}
+        \item Let $H\acts W$ as an $H$-rep.
+        \item We want to create a $G$-rep $\ind_H^GW$.
+        \item To start, let's decompose $G$ into left cosets via
+        \begin{equation*}
+            G = g_1H\sqcup g_2H\sqcup\cdots\sqcup g_kH
+        \end{equation*}
+        \begin{itemize}
+            \item Suppose $g_1\in H$ so that $g_1H=H$.
+        \end{itemize}
+        \item $\ind_H^GW$ is defined as the vector space $g_1W\oplus\cdots\oplus g_kW$ where directly, each $g_iW=W$, but there's more.
+        \begin{itemize}
+            \item How does $g$ act on $g_iw$?
+            \item Via
+            \begin{equation*}
+                g\cdot(g_iw) = g_{\sigma(i)}h_iw
+                = g_{\sigma(i)}(h_iw)
+            \end{equation*}
+            such that $gg_i=g_{\sigma(i)}h_i$, for $h_i\in H$. Note that in the last part of the equality, $h_iw$ is the action of $h_i$ on $w$ via the $H$-rep.
+            \item Each element of $G$ acts in a big block-triangular matrix. Inside each block, you will see how $g$ acts via this transformation.
+        \end{itemize}
+        \item Let $W$ be the trivial representation of $H$. Then $\ind_H^G(\id)$ is the permutational representation of $G$ acting on left cosets.
+        \begin{itemize}
+            \item There is a correspondence between $H/\Stab(x)$ and $G$.
+            \item This is the master construction of representations when you have a subgroup.
+        \end{itemize}
+        \item Example: $\ind_{\{e\}}^G(\id)=\C[G]$.
+        \item $\dim\ind_H^GW=(\dim W)(G:H)$.
+    \end{itemize}
+    \item A slightly fancier way to think about this stuff, if you're unsatisfied at this point.
+    \begin{itemize}
+        \item Take $H<G$, and $H$-rep $W$.
+        \item Let's look at functions on $G$ with values in $W$, i.e., functions $f:G\to W$. This would be $\Hom_\C(\C[G],W)$, once we've linearized $G$ so that we can consider linear maps. This is the exact same thing, because the basis of $\C[G]$ is $G$!
+        \item $\dim=(|G|)(\dim W)$.
+        \item Under this construction, we get to say that
+        \begin{equation*}
+            \ind_H^GW = \Hom_H(\C[G],W)=\{f:G\to W\mid f(x\cdot h)=f(xh^{-1})=hf(x)\}
+        \end{equation*}
+        \item We can easily see that this space has the right dimension; such a function is uniquely defined by its values on $g_1,\dots,g_k$.
+        \begin{itemize}
+            \item $f(g_1),\dots,f(g_k)$ and $f(g_1h)=h^{-1}f(g_1)$.
+        \end{itemize}
+        \item What is $g$ acting on this function? So $[g(f)](x)=f(gx)$.
+        \item In this case, it's very easy to see that this is a construction with no choices of $g_i$'s, of cosets, etc. Thus fancier.
+    \end{itemize}
+    \item Once again, there is no easy way to understand this; we just have to work with it.
+    \item Even fancier construction!
+    \begin{itemize}
+        \item $W$ is an $H$-representation, i.e., a module over $\C[H]$.
+        \item Take $W\otimes_{\C[H]}\C[G]$.
+        \begin{itemize}
+            \item Essentially, this means that if $w\otimes g$, then $hw\otimes g=w\otimes g$.
+        \end{itemize}
+        \item This has something to do with the second representation.
+        \item This is the most abstractly nice construction, because it's much more general.
+        \begin{itemize}
+            \item We don't need to use it on groups; we can use it on algebras and modules over them.
+            \item Indeed, this works in complete generality and has all the same properties.
+            \item Takeaway: This induced representation is something very, very general, but thinking of it more generally does not help you understand it to start.
+        \end{itemize}
+    \end{itemize}
+    \item We will do a bunch of computations of such \textbf{induced representations} on the homework.
+    \item Theorem (Frobenius): Let $H<G$, and let $W$ be an $H$-rep. Then
+    \begin{equation*}
+        \chi_{\ind_H^GW}(g) = \frac{1}{|H|}\sum_{x\in G}\chi_W(xgx^{-1})
+    \end{equation*}
+    \item Discussion.
+    \begin{itemize}
+        \item Look at the picture.
+        \item Characters are class functions; they don't change under conjugation.
+        \item $\chi_W$ is a class function in $H$. We want to extend it to a class function in $G$.
+        \item We could extend it to $\chi_W:G\to\C$ via
+        \begin{equation*}
+            \chi_W =
+            \begin{cases}
+                0 & g\notin H\\
+                \chi_W(g) & g\in H
+            \end{cases}
+        \end{equation*}
+        \item Alternatively, take
+        \begin{equation*}
+            \chi_{\ind_H^GW} = \frac{1}{|H|}\sum_{x\in G}\chi_W(xgx^{-1})
+        \end{equation*}
+        \item So we're basically just averaging again.
+    \end{itemize}
+    \item Proof.
+    \begin{proof}
+        We basically just need to understand the cosets construction from above.
+        
+        Let $G=g_1H\oplus\cdots\oplus g_kH$. There is a bigger block matrix that has $(\dim W)\times(\dim W)$ blocks. Then
+        \begin{equation*}
+            \chi_{\ind}(g) = \sum_{\substack{gg_i=g_ih\\g_i^{-1}gg_i\in H}}\chi_W(g_i^{-1}gg_i)
+        \end{equation*}
+        This gets us back to the above somehow.
+    \end{proof}
+    \item Next week:
+    \begin{itemize}
+        \item If we want to do $\res_{S_{n-1}}^{S_n}$, then we'll take all diagrams inside the Young diagram but one box less (\emph{transcribe picture}).
+        \item This is the branching rules.
+        \item New HW will appear soon and be due Friday of Week 9.
+        \begin{itemize}
+            \item Will be a bit harder (some hands-on, some fancy); if you can't do everything there, don't worry.
+        \end{itemize}
+        \item Midterms will be returned early after Thanksgiving.
+        \item Final will include some stuff from the last HW, but it will be easier.
+    \end{itemize}
+\end{itemize}
+
+
+
+% \section{Rudenko Meeting}
+% \begin{itemize}
+%     \item \marginnote{11/??:}
+% \end{itemize}
 
 
 
