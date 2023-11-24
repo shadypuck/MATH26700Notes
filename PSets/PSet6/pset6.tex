@@ -14,22 +14,231 @@
     \item \marginnote{11/17:}Let $G$ be a group of symmetries of a cube.
     \begin{enumerate}
         \item Prove that $|G|=48$ and that $G$ has a normal subgroup isomorphic to $S_4$.
+        \begin{proof}
+            A \textbf{symmetry} of a 3D body is a map of the body to itself that sends adjacent vertices to adjacent vertices, and likewise for edges and faces. The cube has 8 vertices. Thus, when mapping it to itself, the first vertex you map can go to any of the 8 vertices, the second vertex you map can go to any of the 3 adjacent vertices, and the third vertex you map can go to one of the remaining two adjacent vertices (to fix the orientation). At this point, the position of all remaining vertices is completely specified by the first three and the constraints on the map. Thus, we have
+            \begin{align*}
+                |G| &= 8\cdot 3\cdot 2\\
+                \Aboxed{|G| &= 48}
+            \end{align*}
+            as desired.\par
+            Now consider the group homomorphism $\phi:G\to\{-1,1\}\cong\Z/2\Z$ that sends an element of $G$ to 1 if the transformation satisfies the following condition: After fixing the first two vertices, the third vertex is sent to the adjacent vertex clockwise from the second looking down the axis connecting the first vertex and the center of the cube. Send the element of $G$ to $-1$ if the third vertex is "mapped counterclockwise." It can be seen that $\phi$ is a group homomorphism by working through the four possibilities of $g\circ h$ where $g\mapsto 1$, $h\mapsto 1$; $g\mapsto 1$, $h\mapsto -1$; and so on and so forth. The kernel of $\phi$ will be a normal subgroup of order 24; moreover, we can see that this normal subgroup is isomorphic to $S_4$ by looking at its action on the four diagonals of the cube.
+        \end{proof}
         \item Prove that $G$ is isomorphic to a group of signed permutations, i.e., linear maps
         \begin{equation*}
             (x_1,x_2,x_3) \mapsto (\pm x_{\sigma(1)},\pm x_{\sigma(2)},\pm x_{\sigma(3)})
         \end{equation*}
         for $\sigma\in S_3$.
+        \begin{proof}
+            Let $x_1,x_2,x_3$ represent vectors pointing to three faces of the cube that surround one vertex. $x_1\mapsto\pm x_{\sigma(1)}$ sends $x_1$ to any of the six faces of the cube. Once that is set, $x_2\mapsto\pm x_{\sigma(2)}$ sends $x_2$ to any of the four faces \emph{not in the span of} $x_{\sigma(1)}$ since $\sigma$ is a bijection and thus cannot map 2 to the same place it maps 1. Note that the four faces available to the image of $x_2$ are all adjacent to $\spn(\im(x_1))$! Finally, $x_3\mapsto\pm x_{\sigma(3)}$ sends $x_3$ to any of the two faces not in $\spn(\im(x_1,x_2))$; these are likewise adjacent to the faces of 1 and 2. Altogether, we get $6\cdot 4\cdot 2=48$ possible maps, once again, so every map is accounted for and there are no duplicates.
+        \end{proof}
         \item Find the character table of $G$.
+        \begin{proof}
+            The conjugacy classes of $G$ are all of the maps which are "the same" in a different basis. Categorizing these and calculating characters, we get
+            \begin{center}
+                \renewcommand{\arraystretch}{1.2}
+                \begin{tabular}{cccccccccc}
+                    $1$ & $1$  & $1$  & $1$  & $1$  & $1$  & $1$  & $1$  & $1$  & $1$\\
+                    $1$ & $1$  & $-1$ & $-1$ & $1$  & $1$  & $-1$ & $1$  & $1$  & $-1$\\
+                    $2$ & $-1$ & $0$  & $0$  & $2$  & $2$  & $0$  & $-1$ & $2$  & $0$\\
+                    $3$ & $0$  & $-1$ & $1$  & $-1$ & $3$  & $1$  & $0$  & $-1$ & $-1$\\
+                    $3$ & $0$  & $1$  & $-1$ & $-1$ & $3$  & $-1$ & $0$  & $-1$ & $1$\\
+                    $1$ & $1$  & $1$  & $1$  & $1$  & $-1$ & $-1$ & $-1$ & $-1$ & $-1$\\
+                    $1$ & $1$  & $-1$ & $-1$ & $1$  & $-1$ & $1$  & $-1$ & $-1$ & $1$\\
+                    $2$ & $-1$ & $0$  & $0$  & $2$  & $-2$ & $0$  & $1$  & $-2$ & $0$\\
+                    $3$ & $0$  & $-1$ & $1$  & $-1$ & $-3$ & $-1$ & $0$  & $1$  & $1$\\
+                    $3$ & $0$  & $1$  & $-1$ & $-1$ & $-3$ & $1$  & $0$  & $1$  & $-1$\\
+                \end{tabular}
+            \end{center}
+        \end{proof}
     \end{enumerate}
     \item For a partition $\lambda=(\lambda_1,\dots,\lambda_k)$ of $n$, define the conjugate partition $\lambda'=(\lambda_1',\dots,\lambda_{k'}')$ by formula $\lambda_i'=\{\#j\mid\lambda_j\geq i\}$. Prove that $\lambda'$ is also a partition of $n$ and $(\lambda')'=\lambda$ \emph{without} using the geometric picture.
+    \begin{proof}
+        % Induction argument?? True for the base case $\lambda=1$, obviously. Suppose true for $\lambda=n$. Any partition of $n+1$ is a partition of $n$
+
+        % Given a partition, consider the critical values $\{\lambda_i\mid\lambda_i>\lambda_{i+1}\}\cup\{\lambda_k\}$. Then it's $5+4*(3-1)+3*(4-3)+2*(5-4)+1*(7-5)$. That's $\lambda_1'+\lambda_3'*(\lambda_4-\lambda_5)+\lambda_4'(\lambda_3-\lambda_4)+$. Take $\lambda_1'+\lambda_2'+\lambda_3'+\lambda_4'+\lambda_5'=$
+
+        % $\sum_\text{crit vals}$
+
+        % The number of times we count each number is equal to the number, itself!!! A 1 will be counted by $\lambda_1'$. A 2 will be counted by $\lambda_1'$ and $\lambda_2'$. An $i$ will be counted by $\lambda_1',\dots,\lambda_i'$.
+        % So $5+4+4+3+2+1+1=(1_1+1_2+1_3+1_4+1_5)+(1_1+1_2+1_3+1_4)+(1_1+1_2+1_3+1_4)+(1_1+1_2+1_3)+(1_1+1_2)+(1_1)+(1_1)=(1_1+1_1+1_1+1_1+1_1+1_1+1_1)+(1_2+1_2+1_2+1_2+1_2)+(1_3+1_3+1_3+1_3)+(1_4+1_4+1_4)+(1_5)=7+5+4+3+1$.
+        % Need proof that $k'=\lambda_1$.
+
+        % \begin{equation*}
+        %     n = \sum_{j=1}^{k'}\lambda_j'
+        %     = \sum_{j=1}^{k'}\sum_{i=1}^{\lambda_j'}1_i
+        %     = \sum_{i=1}^{\lambda_1'}\sum_{j=1}^{(\lambda_i')'}1_i
+        %     = \sum_{i=1}^{k''}(\lambda_i')'
+        % \end{equation*}
+
+
+        To prove that $\lambda'$ is a partition of $n$, it will suffice to show that (1) each $\lambda_i'\in\N$, (2) $\lambda_1'\geq\cdots\geq\lambda_{k'}'$, and (3) $\lambda_1'+\cdots+\lambda_{k'}'=n$. We'll tackle each claim individually.\par
+        \underline{(1)}: As defined, $\lambda_i'$ is a positive integer. Moreover, it is only equal to zero when $i>\lambda_1\geq 1$, so we can just truncate the partition at this point and not define such $\lambda_i'$.\par
+        \underline{(2)}: Let $1\leq i_1<i_2\leq k'$. If no such $i_1,i_2$ exist, then the claim is vacuously true. Otherwise, we have that
+        \begin{align*}
+            \lambda_{i_1}' &= \{\#j\mid\lambda_j\geq i_1\}&
+            \lambda_{i_2}' &= \{\#j\mid\lambda_j\geq i_2\}
+        \end{align*}
+        Since $\lambda_1\geq\cdots\geq\lambda_k$, the number of $j$ such that $\lambda_j\geq i_1$ will be equal to $|\{\lambda_1,\dots,\lambda_j\}|$. Moreover, since $i_2>i_1$, the set of $\lambda_i$ that are greater than $i_2$ will be a subset of $\{\lambda_1,\dots,\lambda_j\}$, with corresponding cardinality less than or equal to that of this set, as desired.\par
+        \underline{(3)}: To see that $\lambda_1'+\cdots+\lambda_{k'}'=n$, consider the sum $\lambda_1+\cdots+\lambda_k=n$. Observe that $\lambda_1'=k$ counts each number in the partition $\lambda$ once. $\lambda_2'$ counts each number (greater than two) in the partition $\lambda$ once. Together, $\lambda_1'$ and $\lambda_2'$ count all of the ones in $\lambda$ once and all of the twos in $\lambda$ twice. Continuing on, we see that each $\lambda_i$ is counted by $\lambda_1',\dots,\lambda_{\lambda_i}'$. This allows us to split and rearrange the sum $\lambda_1+\cdots+\lambda_k$ in terms of $\lambda_1'+\cdots+\lambda_{k'}'$. For example, if $\lambda=(4,3,1,1)$, then
+        \begin{align*}
+            9 &= 4+3+1+1\\
+            &= (1_1+1_2+1_3+1_4)+(1_1+1_2+1_3)+(1_1)+(1_1)\\
+            &= (1_1+1_1+1_1+1_1)+(1_2+1_2)+(1_3+1_3)+(1_4)\\
+            &= 4+2+2+1
+        \end{align*}
+        where we can calculate that $\lambda'=(4,2,2,1)$ and the subscripts are simply an indexing method. Generalizing this, we obtain
+        \begin{equation*}
+            n = \sum_{i=1}^k\lambda_i
+            = \sum_{i=1}^k\sum_{j=1}^{\lambda_i}1_j
+            = \sum_{j=1}^{\lambda_1}\sum_{i=1}^{\lambda_j'}1_j
+            = \sum_{j=1}^{k'}\lambda_j'
+        \end{equation*}
+        as desired.\par\smallskip
+        We now prove that $(\lambda')'=\lambda$. To do this, we can use an indexing/reindexing method similar to that used in the proof of claim (3) above. Essentially, as before, we split the sum down to a sum of 1's indexed by how many times we count each number. Additionally, however, this time we will also index the 1's by the left to right order in which we count each $1_i$. For example,
+        \begin{align*}
+            9 &= (1_1+1_2+1_3+1_4)+(1_1+1_2+1_3)+(1_1)+(1_1)\\
+            &= (1_1^1+1_2+1_3+1_4)+(1_1^2+1_2+1_3)+(1_1^3)+(1_1^4)\\
+            &= (1_1^1+1_2^1+1_3+1_4)+(1_1^2+1_2^2+1_3)+(1_1^3)+(1_1^4)\\
+            &= (1_1^1+1_2^1+1_3^1+1_4)+(1_1^2+1_2^2+1_3^2)+(1_1^3)+(1_1^4)\\
+            &= (1_1^1+1_2^1+1_3^1+1_4^1)+(1_1^2+1_2^2+1_3^2)+(1_1^3)+(1_1^4)
+        \end{align*}
+        What this allows us to see is that rearranging the above sum, as we have done previously, to the following effectively "switches" the top and bottom indices.
+        \begin{equation*}
+            (1_1^1+1_1^2+1_1^3+1_1^4)+(1_2^1+1_2^2)+(1_3^1+1_3^2)+(1_4^1)
+        \end{equation*}
+        Naturally, then, a further inversion will be an exercise in "switching back" to the original.
+    \end{proof}
     \item Let $G$ be a finite group, $Z(G)$ its center, and $V$ an irreducible representation of it. We proved in class that $\dim(V)$ divides the order of $G$. Prove the stronger statement that $\dim(V)$ divides the index $(G:Z(G))$.
+    \begin{proof}
+        % WTS: $\frac{|G|}{d_V|Z(G)|}\in\bar{\Z}$. $(d_V,|Z(G)|)=1$.
+
+        % Let $N$ be arbitrary. Let $\rho$ be the homomorphism $G\mapsto GL(V)$ corresponding to $V$. Define $\rho^N:G^N\to GL(V^{\otimes N})$ by
+        % \begin{equation*}
+        %     (g_1,\dots,g_n) \mapsto \rho(g_1)\otimes\cdots\otimes\rho(g_n)
+        % \end{equation*}
+
+        % By partitioning the sum over all $(g_1,\dots,g_n)\in G$ into $|H|$ iterations of the sum over a representative of each coset times an element of $H$
+        % \begin{align*}
+        %     \sum_{(g_1,\dots,g_n)H\in G^n/H}\chi_{V^{\otimes n}}((g_1,\dots,g_n)H)^2
+        % \end{align*}
+
+
+        Let $n\in\N$ be arbitrary, and let $\rho$ be the homomorphism $G\mapsto GL(V)$ corresponding to $V$. Let $G^n$ be the $n^\text{th}$ direct product of $G$ with itself. Then $\rho^n:G^n\to GL(V^{\otimes n})$ defined by
+        \begin{equation*}
+            (g_1,\dots,g_n) \mapsto \rho(g_1)\otimes\cdots\otimes\rho(g_n)
+        \end{equation*}
+        makes $V^{\otimes n}$ into a representation of $G^n$. Moreover, $V^{\otimes n}$ is an \emph{irreducible} representation of $G^n$: Since
+        \begin{align*}
+            \chi_{V^{\otimes n}}(g_1,\dots,g_n) &= \tr[\rho^n(g_1,\dots,g_n)]\\
+            &= \tr[\rho(g_1)\otimes\cdots\otimes\rho(g_n)]\\
+            &= \tr[\rho(g_1)]\times\cdots\times\tr[\rho(g_n)]\\
+            &= \chi_V(g_1)\times\cdots\times\chi_V(g_n)
+        \end{align*}
+        we can use the irreducibility criterion to confirm that
+        \begin{align*}
+            \sum_{(g_1,\dots,g_n)\in G^n}\chi_{V^{\otimes n}}(g_1,\dots,g_n)^2 &= \sum_{(g_1,\dots,g_n)\in G^n}\chi_V(g_1)^2\cdots\chi_V(g_n)^2\\
+            &= \prod_{i=1}^n\sum_{g_i\in G}\chi_V(g_i)^2\\
+            &= \prod_{i=1}^n|G|\\
+            &= |G|^n\\
+            &= |G^n|
+        \end{align*}
+        Now consider the subgroup $H$ of $G^n$ defined as follows.
+        \begin{equation*}
+            H := \{(g_1,\dots,g_n)\in Z(G)^n\mid g_1\cdots g_n=e\}
+        \end{equation*}
+        To begin, $H$ is normal: If $(h_1,\dots,h_n)\in H$ and $(g_1,\dots,g_n)\in G^n$, then
+        \begin{align*}
+            (g_1,\dots,g_n)(h_1,\dots,h_n)(g_1,\dots,g_n)^{-1} &= (g_1h_1g_1^{-1},\dots,g_nh_ng_n^{-1})\\
+            &= (h_1g_1g_1^{-1},\dots,h_ng_ng_n^{-1})\\
+            &= (h_1,\dots,h_n)
+        \end{align*}
+        Additionally, by the proposition from the 10/30 lecture, $\rho(g)=\lambda I$ for all $g\in Z(G)$. It follows that elements of $H$ act trivially on $V^{\otimes n}$:
+        \begin{align*}
+            \rho^n(h_1,\dots,h_n)V^{\otimes n} &= [\rho(h_1)\otimes\cdots\otimes\rho(h_n)](V\otimes\cdots\otimes V)\\
+            &= \rho(h_1)V\otimes\cdots\otimes\rho(h_n)V\\
+            &= \lambda_1V\otimes\cdots\otimes\lambda_nV\\
+            &= (\lambda_1\cdots\lambda_nV)\otimes V^{\otimes(n-1)}\\
+            &= (\rho(h_1)\cdots\rho(h_n)V)\otimes V^{\otimes(n-1)}\\
+            &= (\rho(h_1\cdots h_n)V)\otimes V^{\otimes(n-1)}\\
+            &= (\rho(e)V)\otimes V^{\otimes(n-1)}\\
+            &= V^{\otimes n}
+        \end{align*}
+        Thus, since $H$ is normal and $H\leq\ker\rho$, there exists a group homomorphism $\tilde{\rho}:G^n/H\to GL(V^{\otimes n})$ defined by
+        \begin{equation*}
+            \tilde{\rho}((g_1,\dots,g_n)H) := \rho^n(g_1,\dots,g_n)
+        \end{equation*}
+        Moreover, not only does $\tilde{\rho}$ define a representation, but once again, we can confirm that it defines an irreducible representation. To see this, first note that since $\rho^n$ is constant on the cosets of $H$ partitioning $G^n$. Thus, we can partition the sum of $\chi_{V^{\otimes n}}(g_1,\dots,g_n)$ over all $(g_1,\dots,g_n)\in G^n$ into $|H|$ identical iterations, one for each corresponding member of each coset. For example, if we have group and subgroup $S_3$ and $\{e,(12)\}$ (with cosets $\{e,(12)\}$, $\{(13),(123)\}$, and $\{(23),(132)\}$), then we know that $\chi(e)=\chi(12)$, $\chi(13)=\chi(123)$, and $\chi(23)=\chi(132)$; thus,
+        \begin{align*}
+            \sum_{g\in S_3}\chi(g) &= \chi(e)+\chi(12)+\chi(13)+\chi(123)+\chi(23)+\chi(132)\\
+            &= (\chi(e)+\chi(13)+\chi(23))+(\chi(12)+\chi(123)+\chi(132))\\
+            &= 2(\chi(e)+\chi(13)+\chi(23))\\
+            &= |\{e,(12)\}|\cdot(\chi[e\{e,(12)\}]+\chi[(13)\{e,(12)\}]+\chi[(23)\{e,(12)\}])\\
+            \frac{1}{|\{e,(12)\}|}\sum_{g\in S_3}\chi(g) &= \sum_{g\{e,(12)\}\in S_3/\{e,(12)\}}\chi(g\{e,(12)\})
+        \end{align*}
+        Consequently, generalizing back to our original quotient group, we have that
+        \begin{align*}
+            \sum_{(g_1,\dots,g_n)H\in G^n/H}\chi_{V^{\otimes n}}[(g_1,\dots,g_n)H]^2 &= \frac{1}{|H|}\sum_{(g_1,\dots,g_n)\in G^n}\chi_{V^{\otimes n}}(g_1,\dots,g_n)^2\\
+            &= \frac{|G^n|}{|H|}\\
+            &= |G^n/H|
+        \end{align*}
+        Thus, since $V^{\otimes n}$ is an irreducible representation of $G^n/H$, we have by the Frobenius divisibility theorem that $\dim(V^{\otimes n})\mid|G^n/H|$. Additionally, the order of $H$ is $|Z(G)|^{n-1}$, since we can pick $g_1,\dots,g_{n-1}$ freely from among $|Z(G)|$ choices, but $g_n$ then must equal $g_{n-1}^{-1}\cdots g_1^{-1}$ to satisfy the constraint. Consequently,
+        \begin{equation*}
+            \dim(V)^n = \dim(V^{\otimes n}) \mid |G^n/H| = \frac{|G|^n}{|Z(G)|^{n-1}}
+        \end{equation*}
+        Now let $|G|=|Z(G)|\cdot x$. Then
+        \begin{equation*}
+            \dim(V)^n \mid x^n|Z(G)|
+        \end{equation*}
+        for all $n\in\N$. In particular, it follows that $\dim(V)\mid x$; we can see this by letting $p_1^{e_1}\cdots p_m^{e_m}$ be the prime factorization of $\dim(V)$ for $e_1,\dots,e_m\geq 1$, $p_1^{f_1}\cdots p_m^{f_m}\cdot c_1$ be the prime factorization of $x$ for $f_1,\dots,f_m\geq 0$ and $(c_1,p_i)=1$ ($i=1,\dots,m$), and $p_1^{g_1}\cdots p_m^{g_m}\cdot c_2$ be the prime factorization of $|Z(G)|$ for $g_1,\dots,g_m\geq 0$ and $(c_2,p_i)=1$ ($i=1,\dots,m$) so that
+        \begin{equation*}
+            \dim(V)^n \mid x^n|Z(G)|
+            \quad\Longrightarrow\quad
+            p_1^{e_1n}\cdots p_m^{e_mn} \mid p_1^{f_1n+g_1}\cdots p_m^{f_mn+g_m}\cdot c_1^nc_2
+        \end{equation*}
+        and hence $e_in\leq f_in+g_i$ ($i=1,\dots,m$); it follows that we always have $-g_i/n\leq f_i-e_i$, so as $n\to\infty$, we obtain $0\leq f_i-e_i$, or $f_i\geq e_i$, which gives the desired divisibility. Since $\dim(V)\mid x$ and $x=|G|/|Z(G)|$, we have that
+        \begin{equation*}
+            \dim(V) \mid |G|/|Z(G)| = (G:Z(G))
+        \end{equation*}
+        as desired.
+    \end{proof}
     \item Prove the uniqueness part of the fundamental theorem about symmetric polynomials.
+    \begin{proof}
+        Suppose $P=Q(\sigma_1,\dots,\sigma_n)=T(\sigma_1,\dots,\sigma_n)$.
+    \end{proof}
     \item Let $G$ be a finite non-abelian simple group. Every 1-dimensional representation of $G$ is trivial (why?).
+    \begin{proof}
+        Let $\rho:G\to\C^*$ be a one-dimensional representation of $G$. Since $\rho$ is a group homomorphism, $\ker\rho\triangleleft G$. Thus, since $G$ is simple, $\ker\rho=\{e\}$ or $\ker\rho=G$. Suppose for the sake of contradiction that $\ker\rho=\{e\}$. Let $g,h\in G$ be arbitrary. Since the product of two roots of unity (such as $\rho(g)$ and $\rho(h)$) commutes, we have that
+        \begin{align*}
+            \rho(g)\cdot\rho(h) &= \rho(h)\cdot\rho(g)\\
+            \rho(gh) &= \rho(hg)
+        \end{align*}
+        Thus, since $\rho$ is faithful, $gh=hg$. But then $G$ is abelian, a contradiction. Therefore, we must have $\ker\rho=G$, i.e., $\rho$ is trivial.
+    \end{proof}
     Prove that any 2-dimensional representation of $G$ is trivial as follows. Suppose that $\rho:G\to GL_2(\C)$ is nontrivial.
     \begin{enumerate}
         \item Prove that $G$ has an element $x$ of order 2.
+        \begin{proof}
+            Only normal subgroups of $G$ are $G$, $\{e\}$. Let $x\in G$. Suppose no such $x$ exists. Then it's abelian (or not simple). $xgx^{-1}=xg=x^{-1}g$.
+
+            We have to deduce this from the supposition??
+        \end{proof}
         \item Prove that $\rho(x)=-\id$.
+        \begin{proof}
+            We know that $\rho(x)^2=\id$. We also know that $\rho(x)$ is diagonalizable with roots of unity for eigenvalues. Since $\rho$ is faithful, $\rho(x)\neq\id$. What if only one of the diagonal values in the matrix was $-1$??
+        \end{proof}
         \item Prove that $\rho([g,x])=\id$ for any $g$ and deduce the theorem.
+        \begin{proof}
+            Let $g\in G$ be arbitrary. Then
+            \begin{align*}
+                \rho([g,x]) &= \rho(g^{-1}x^{-1}gx)\\
+                &= \rho(g^{-1})\circ\rho(x^{-1})\circ\rho(g)\circ\rho(x)\\
+                &= \rho(g)^{-1}\circ\rho(x)\circ\rho(g)\circ\rho(x)\\
+                &= \rho(g)^{-1}\circ(-\id)\circ\rho(g)\circ(-\id)\\
+                &= \rho(g)^{-1}\circ\rho(g)\circ(-\id)\circ(-\id)\\
+                &= \id
+            \end{align*}
+            Thus, $\rho([g,x])=\rho(e)$. So since $\rho$ is faithful once again, $[g,x]=e$. Since $Z(G)\triangleleft G$ and $G$ is nonabelian, $Z(G)=\{e\}$. However, we have just shown that $x(\neq e)\in Z(G)$, a contradiction.
+        \end{proof}
     \end{enumerate}
     \item Consider the ring of symmetric polynomials $R=\Q[x_1,\dots,x_n]^{S_n}$.
     \begin{enumerate}
@@ -42,6 +251,12 @@
             me_m(x_1,\dots,x_n) = \sum_{i=1}^m(-1)^{i-1}e_{m-i}(x_1,\dots,x_n)p_i(x_1,\dots,x_n)
         \end{equation*}
         Prove that $R=\Q[p_1,\dots,p_n]$.
+        \begin{proof}
+            Consider a polynomial of degree $m$ with roots $x_1,\dots,x_m$. Then --- much like in the characteristic polynomial --- we have that
+            \begin{equation*}
+                \prod_{i=1}^m(x-x_i) = \sum_{i=0}^me_i(x_1,\dots,x_n)
+            \end{equation*}
+        \end{proof}
         \item Define the \textbf{complete symmetric polynomials} $h_k(x_1,\dots,x_n)$ as a sum of all \emph{distinct} monomials of degree $k$. For instance,
         \begin{equation*}
             h_3(x_1,x_2) = x_1^3+x_2^3+x_1^2x_2+x_1x_2^2+x_1x_2x_3
@@ -53,6 +268,126 @@
         Prove that $R=\Q[h_1,\dots,h_n]$.
     \end{enumerate}
     \item Compute explicitly the characters of all representations $V_\lambda$ of $S_4$ using the construction with Specht polynomials. Check that you get the same results as we have obtained before.
+    \begin{proof}
+        We have
+        \begin{align*}
+            V_{(4)} &= \langle 1 \rangle\\
+            V_{(3,1)} &= \langle \underbrace{(x_1-x_2)}_a,\underbrace{(x_1-x_3)}_b,\underbrace{(x_1-x_4)}_c \rangle\\
+            V_{(2,2)} &= \langle \underbrace{(x_1-x_2)(x_3-x_4)}_a,\underbrace{(x_1-x_3)(x_2-x_4)}_b \rangle\\
+            V_{(2,1,1)} &= \langle \underbrace{(x_1-x_2)(x_1-x_3)(x_2-x_3)}_a,\underbrace{(x_1-x_2)(x_1-x_4)(x_2-x_4)}_b,\underbrace{(x_1-x_3)(x_1-x_4)(x_3-x_4)}_c \rangle\\
+            V_{(1,1,1,1)} &= \inp{(x_1-x_2)(x_1-x_3)(x_1-x_4)(x_2-x_3)(x_2-x_4)(x_3-x_4)}
+        \end{align*}
+        \underline{$V_{(4)}$}: There is nothing to permute, so the characters are
+        \begin{equation*}
+            (1,1,1,1,1)
+        \end{equation*}
+        \underline{$V_{(3,1)}$}: $e$ will send each element to itself, so $\chi(e)=3$. The other four, we will bash out. $(12)$ will send $a\mapsto -a$, $b\mapsto b-a$, and $c\mapsto c-a$. $(123)$ will send $a\mapsto b-a$, $b\mapsto -a$, and $c\mapsto c-a$. $(1234)$ will send $a\mapsto b-a$, $b\mapsto c-a$, and $c\mapsto -a$. $(12)(34)$ will send $a\mapsto -a$, $b\mapsto c-a$, and $c\mapsto b-a$. Thus, the matrices of these latter four elements are
+        \begin{align*}
+            \underbrace{
+                \begin{bmatrix}
+                    -1 & -1 & -1\\
+                    0 & 1 & 0\\
+                    0 & 0 & 1\\
+                \end{bmatrix}
+            }_{(12)}&&
+            \underbrace{
+                \begin{bmatrix}
+                    -1 & -1 & -1\\
+                    1 & 0 & 0\\
+                    0 & 0 & 1\\
+                \end{bmatrix}
+            }_{(123)}&&
+            \underbrace{
+                \begin{bmatrix}
+                    -1 & -1 & -1\\
+                    1 & 0 & 0\\
+                    0 & 1 & 0\\
+                \end{bmatrix}
+            }_{(1234)}&&
+            \underbrace{
+                \begin{bmatrix}
+                    -1 & -1 & -1\\
+                    0 & 0 & 1\\
+                    0 & 1 & 0\\
+                \end{bmatrix}
+            }_{(12)(34)}
+        \end{align*}
+        Thus, the characters are
+        \begin{equation*}
+            (3,1,0,-1,-1)
+        \end{equation*}
+        \underline{$V_{(2,2)}$}: $e$ will send each element to itself, so $\chi(e)=2$. The other four, we will bash out. $(12)$ will send $a\mapsto -a$ and $b\mapsto b-a$. $(123)$ will send $a\mapsto b-a$ and $b\mapsto -a$. $(1234)$ will send $a\mapsto a-b$ and $b\mapsto -b$. $(12)(34)$ will send $a\mapsto a$ and $b\mapsto b$. Thus, the matrices of these latter four elements are
+        \begin{align*}
+            \underbrace{
+                \begin{bmatrix}
+                    -1 & -1\\
+                    0 & 1\\
+                \end{bmatrix}
+            }_{(12)}&&
+            \underbrace{
+                \begin{bmatrix}
+                    -1 & -1\\
+                    1 & 0\\
+                \end{bmatrix}
+            }_{(123)}&&
+            \underbrace{
+                \begin{bmatrix}
+                    1 & 0\\
+                    -1 & -1\\
+                \end{bmatrix}
+            }_{(1234)}&&
+            \underbrace{
+                \begin{bmatrix}
+                    1 & 0\\
+                    0 & 1\\
+                \end{bmatrix}
+            }_{(12)(34)}
+        \end{align*}
+        Thus, the characters are
+        \begin{equation*}
+            (2,0,-1,0,2)
+        \end{equation*}
+        \underline{$V_{(2,1,1)}$}: $e$ will send each element to itself, so $\chi(e)=2$. The other four, we will bash out. $(12)$ will send $a\mapsto -a$, $b\mapsto -b$, and $c\mapsto c-a$. $(123)$ will send $a\mapsto b-a$, $b\mapsto -a$, and $c\mapsto c-a$. $(1234)$ will send $a\mapsto b-a$, $b\mapsto c-a$, and $c\mapsto -a$. $(12)(34)$ will send $a\mapsto -a$, $b\mapsto c-a$, and $c\mapsto b-a$. Thus, the matrices of these latter four elements are
+        \begin{align*}
+            \underbrace{
+                \begin{bmatrix}
+                    -1 & -1 & -1\\
+                    0 & 1 & 0\\
+                    0 & 0 & 1\\
+                \end{bmatrix}
+            }_{(12)}&&
+            \underbrace{
+                \begin{bmatrix}
+                    -1 & -1 & -1\\
+                    1 & 0 & 0\\
+                    0 & 0 & 1\\
+                \end{bmatrix}
+            }_{(123)}&&
+            \underbrace{
+                \begin{bmatrix}
+                    -1 & -1 & -1\\
+                    1 & 0 & 0\\
+                    0 & 1 & 0\\
+                \end{bmatrix}
+            }_{(1234)}&&
+            \underbrace{
+                \begin{bmatrix}
+                    -1 & -1 & -1\\
+                    0 & 0 & 1\\
+                    0 & 1 & 0\\
+                \end{bmatrix}
+            }_{(12)(34)}
+        \end{align*}
+        Thus, the characters are
+        \begin{equation*}
+            (3,-1,0,1,-1)
+        \end{equation*}
+        \underline{$V_{(1,1,1,1)}$}: This is a single antisymmetric polynomial, so any $\sigma\in S_4$ will just map it to $(-1)^\sigma$ times itself. Thus, the characters are
+        \begin{equation*}
+            (1,-1,1,-1,1)
+        \end{equation*}
+        Therefore, all characters match previous results!
+    \end{proof}
 \end{enumerate}
 
 
