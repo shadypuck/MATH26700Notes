@@ -1,0 +1,44 @@
+\documentclass[../psets.tex]{subfiles}
+
+\pagestyle{main}
+\renewcommand{\leftmark}{Problem Set \thesection}
+\setcounter{section}{6}
+
+\begin{document}
+
+
+
+
+\section{Classifying Representations of the Symmetric Group}
+\begin{enumerate}
+    \item \marginnote{12/1:}Prove that the representation $(n-k,1,\dots,1)$ is isomorphic to a wedge power of the standard representation of $S_n$.
+    \item Deduce from the hook length formula that if $V$ is an irreducible representation of $S_n$ for $n\geq 5$ and $\dim(V)<n$, then $\dim(V)=1$ or $\dim(V)=n-1$.
+    \item Find the pairs of Young tableaux corresponding to the following permutations.
+    \begin{align*}
+        \begin{pmatrix}
+            1 & 2 & 3 & 4 & 5 & 6 & 7\\
+            2 & 1 & 4 & 3 & 5 & 7 & 6\\
+        \end{pmatrix}&&
+        \begin{pmatrix}
+            1 & 2 & 3 & 4 & 5\\
+            2 & 3 & 4 & 5 & 1\\
+        \end{pmatrix}&&
+        \begin{pmatrix}
+            1 & 2 & 3 & 4 & 5 & 6\\
+            1 & 2 & 4 & 5 & 3 & 6\\
+        \end{pmatrix}
+    \end{align*}
+    \item Prove that the character table of $S_n$ is filled with rational numbers.
+    \item Let $X_i:S_n\to\C$ send each $\sigma\in S_n$ to the number of $i$-cycles in $\sigma$. Clearly $X_i$ is a class function. Moreover, any polynomial $P(X_1,\dots,X_n)$ is a class function called a \textbf{character polynomial}.
+    \begin{enumerate}
+        \item Find a basis of class functions consisting of character polynomials for $S_2$, $S_3$, and $S_4$.
+        \item Do the same for $S_5$.
+        \item Find a character polynomial which equals the character of $(n-1,1)$.
+    \end{enumerate}
+    \item Consider a subgroup $H=\{e,(12)(34),(13)(24),(14)(23)\}$ in $S_4$. Decompose $\ind_H^G\chi$ into irreducibles for all irreducible characters $\chi$ of $H$.
+\end{enumerate}
+
+
+
+
+\end{document}
