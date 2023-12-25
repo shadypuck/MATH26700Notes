@@ -1,0 +1,178 @@
+\documentclass[../notes.tex]{subfiles}
+
+\pagestyle{main}
+\renewcommand{\chaptermark}[1]{\markboth{\chaptername\ \thechapter\ (#1)}{}}
+\setcounter{chapter}{8}
+
+\begin{document}
+
+
+
+
+\chapter{???}
+\section{???}
+\begin{itemize}
+    \item \marginnote{11/27:}Announcements.
+    \begin{itemize}
+        \item OH on Wednesday at 5:30 PM this week; not Tuesday.
+        \item There will be extra OH next week pre-exam.
+        \begin{itemize}
+            \item Roughly like Monday/Wednesday next week.
+        \end{itemize}
+        \item Midterm will be returned on Wednesday; we can pick them up in-person in his office starting then.
+        \item There are some grade boundaries: Pass/Fail we can do til Friday, withdrawal we can do til 5:00 PM today.
+    \end{itemize}
+    \item Let's finish the conversation about induction/restriction and prove the \textbf{branching theorem}.
+    \item Reminder to start.
+    \begin{itemize}
+        \item We have two mathematical categories, $G$-reps and $H$-reps where $H\leq G$.
+        \item These catagories are related by functors.
+        \item $\res_H^G:G\text{-reps}\to H\text{-reps}$ and vice versa for $\ind_H^G$.
+        \item Restrictions are stupidly simple.
+        \item Inductions, most hands-on, we take copies of $W$ times cosets. Formulaically,
+        \begin{equation*}
+            \ind_H^GW = g_1W\oplus\cdots\oplus g_kW
+        \end{equation*}
+        where $k=(G:H)$ and $G=\bigsqcup_{i=1}^kg_iH$.
+        \begin{itemize}
+            \item In more detail, the action of $g$ on $g_iw$ is that of $g_{\sigma(i)}h_iw$.
+            \item This is a genuinely hard construction.
+            \item A matrix of this thing will be a permutation matrix via
+            \begin{equation*}
+                copy from board
+            \end{equation*}
+            \item Note that
+            \begin{equation*}
+                g_1W\oplus\cdots\oplus g_kW \cong \Hom_H(\C[G],W)
+            \end{equation*}
+            \begin{itemize}
+                \item Recall that elements of the set on the right above are functions $f:G\to W$ such that $f(h(g))=hf(g)$.
+                \item We map between the two via $f(g)\mapsto f(gx')$.
+            \end{itemize}
+            \item What is nice about induced representations is that $\dim[\ind_H^GW]=(\dim W)[G:H]$.
+        \end{itemize}
+        \item Moreover, there is a very easy statement, the \textbf{Frobenius formula}.
+        \begin{itemize}
+            \item Recall that
+            \begin{equation*}
+                \tilde{\chi}_W(g) =
+                \begin{cases}
+                    0 & g\notin H\\
+                    \chi_W(g) & g\in H
+                \end{cases}
+            \end{equation*}
+            \item With this, we average.
+            \begin{equation*}
+                \chi_{\ind_H^GW}(g) = \sum_{x\in G}\tilde{\chi}_W(xgx^{-1})
+            \end{equation*}
+            \item Essentially, we're taking a whole bunch of conjugates, summing them up, and dividing to get rid of overcounting.
+        \end{itemize}
+    \end{itemize}
+    \item We now move onto \textbf{Frobenius reciprocity}, which is a relation between the functors/relations $\ind_H^G$ and $\res_H^G$.
+    \begin{itemize}
+        \item The first point where category theory gets interesting is the notion of \textbf{adjoint functors}, which we are about to touch on. It is a very subtle notion.
+        \item Here's version 1 of the statement of Frobenius reciprocity.
+        \begin{itemize}
+            \item Recall that we have a scalar product on the space of class function, given by
+            \begin{equation*}
+                (\chi_1,\chi_2) = \frac{1}{|G|}\sum_{g\in G}\chi_1(g)\chi_2(g^{-1})
+            \end{equation*}
+            where $\chi_1,\chi_2$ are class functions on $G$.
+            \item Recall that if $\chi_1=\chi_V$ and $\chi_2=\chi_W$, then
+            \begin{equation*}
+                (\chi_1,\chi_2) = \dim\Hom_G(V,W)
+                = \dim\Hom_G\left( \bigoplus_{i=1}^kV_i^{n_i},\bigoplus_{i=1}^kV_i^{m_i} \right)
+                = \sum_{i=1}^kn_im_i
+            \end{equation*}
+            \item Then the statement is as follows. If $V$ is a $G$-rep and $W$ is an $H$-rep, then
+            \begin{equation*}
+                (V,\ind_H^GW)_G = (\res_H^GV,W)_H
+            \end{equation*}
+            \begin{itemize}
+                \item Denoting scalar product in $G$ and scalar product in $W$ of the characters of each representation.
+            \end{itemize}
+            \item This is similar to the relation between adjoint maps $V\to W$ and $W^*\to V^*$.
+        \end{itemize}
+        \item Version 2.
+        \begin{itemize}
+            \item We have that
+            \begin{equation*}
+                \Hom_G(V,\ind_H^GW) \cong \Hom_H(\res_H^GV,W)
+            \end{equation*}
+            where the isomorphism is canonical.
+            \item We will not check this last definition; we can tediously do it with definitions, and there's nothing complicated. Rudenko leaves this as an exercise to us.
+        \end{itemize}
+        \item Constructing...something: Take $v\in V$, $g\in G$, $\varphi:V\to W$. We send $g\mapsto\varphi(gv)$.
+    \end{itemize}
+    \item We now prove Version 1.
+    \begin{proof}
+        We have
+        \begin{align*}
+            (\chi_V,\chi_{\ind_H^GW})_G &= \frac{1}{|G|}\sum_{g_1\in G}\chi_V(g_1)\left( \frac{1}{|H|}\sum_{g_2\in G}\tilde{\chi}_W(g_2g_1^{-1}g_2^{-1}) \right)\\
+            &= \frac{1}{|H|\cdot|G|}\sum_{g_1,g_2\in G}\chi_V(g)\tilde{\chi}_W(g_2g_1^{-1}g_2^{-1})\\
+            &= \frac{1}{|H|\cdot|G|}\sum_{g_1,g_2\in G}\chi_V(\underbrace{g_2g_1g_2^{-1}}_h)\tilde{\chi}_W(\underbrace{g_2g_1^{-1}g_2^{-1}}_{h^{-1}})\\
+            &= \frac{1}{|H|}\frac{1}{|G|}\sum_{h\in G}|G|\chi_V(h)\tilde{\chi}_W(h^{-1})\\
+            &= (\chi_V|_H,\chi_W)_H\\
+            &= (\res_H^GV,\chi_W)_H
+        \end{align*}
+        From line 3 to line 4: Fix $h$; then $g_2g_1g_2^{-1}=h$ iff $g_1=g_2^{-1}hg_2$, so we have overcounted by $|G|$ times.
+    \end{proof}
+    \item We now come to the branching theorem at long last.
+    \item Example first.
+    \begin{itemize}
+        \item Consider $S_n>S_{n-1}$, where $S_{n-1}$ is the subgroup of permutations fixing $n$. I.e., $S_3>S_2=\{e,(12)\}$.
+        \item Let $\lambda$ be a partition of $n$; \emph{there's notation for this}!
+        \item Let $\mu\leq\lambda$ be a Young diagram of a partition of $n-1$.
+        \item Then
+        \begin{enumerate}
+            \item We have
+            \begin{equation*}
+                \res_{S_{n-1}}^{S_n}V_\lambda = \bigoplus_{\mu\leq\lambda}V_\mu
+            \end{equation*}
+            \begin{itemize}
+                \item Example: \emph{Draw out pictures}
+            \end{itemize}
+            \item We have
+            \begin{equation*}
+                \ind_{S_{n-1}}^{S_n}V_\mu = \bigoplus_{\mu\leq\lambda}V_\lambda
+            \end{equation*}
+            \begin{itemize}
+                \item Example: \emph{Draw out pictures}
+            \end{itemize}
+        \end{enumerate}
+    \end{itemize}
+    \item The reason that this theorem is called the branching theorem originates from the following diagram, which (when continued) encapsulates the main idea of the theorem.
+    \emph{picture}
+    \begin{itemize}
+        \item This graph helps you understand induction and restriction.
+        \item Dimensions are the number of paths from the left to a a final Young diagram.
+        \begin{itemize}
+            \item For example, the dimension of $(3,1)$ is 3 because there are 3 paths to it (\emph{list them}).
+        \end{itemize}
+        \item Number of paths formula is equivalent to standard Young tableaux!
+    \end{itemize}
+    \item Theorem (Branching): The following two statements are true.
+    \begin{align}
+        \res_{S_{n-1}}^{S_n}V_\lambda &= \bigoplus_{\mu\leq\lambda}V_\mu\\
+        \ind_{S_{n-1}}^{S_n}V_\mu &= \bigoplus_{\mu\leq\lambda}V_\lambda
+    \end{align}
+    \begin{proof}
+        We'll talk about the general idea of the proof now, and maybe do the details next time.
+
+        \underline{$(1)\Longleftrightarrow(2)$}: We have that \emph{stuff at bottom of board}
+
+        \underline{(1)}: Let's look at an example. Here's a YD of $S_8$. We want to restrict it down to $S_7$.
+        Recall that $V_\lambda=\spn(S_8:\Delta(x_1,x_2,x_3)(x_4-x_5)(x_6-x_7))$.
+        Now in $S_7$, we fix $x_8$. Consider subrepresentations of $V_\lambda$ filtered by degree as follows.
+        \begin{equation*}
+            copy from board
+        \end{equation*}
+        The proof comes from the fact that if we now take quotients of these subrepresentations, then since $x_8$ can only appear in three boxes, ...
+    \end{proof}
+    \item Practice with the above example and think it through.
+\end{itemize}
+
+
+
+
+\end{document}
