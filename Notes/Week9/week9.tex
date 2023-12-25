@@ -494,5 +494,79 @@
 
 
 
+\section{???}
+\begin{itemize}
+    \item \marginnote{12/1:}Proving the theorem.
+    \item The statement is that there exists a function
+    \begin{equation*}
+        \ch:\underbrace{\bigoplus_{n\geq 0}\Q_\text{cl}(S_n)}_{\{f:S_n\to\Q:f(\sigma=\sigma^{-1})=f(i)\}}\to\bigoplus_{n\geq 0}\Lambda_n
+    \end{equation*}
+    where $\Lambda_n=\Q[\sigma_1,\sigma_2,\sigma_3,\dots]_{\deg=n}=[\Q[x_1,\dots,x_n]^{S_n}]_{\deg=n}$. Note that by convention, $\Lambda_0=\Q$. This function is given by
+    \begin{equation*}
+        \ch(\chi) = \frac{1}{n!}\sum_{\sigma\in S_n}\chi(\sigma)\cdot p_1^{\lambda_1(\sigma)}\cdot p_n^{\lambda_n(\sigma)}
+    \end{equation*}
+    where $p_k=x_1^k+x_2^k+\cdots$ and $\lambda_i(\sigma)$ is the number of cycles in $\sigma$ of length $i$. Moreover, $\ch$ is an isomorphism of $\Q$-algebras. To create a product of $V$ a $S_n$-rep and $W$ an $S_m$-rep, we map
+    \begin{equation*}
+        V\boxtimes W = \ind_{S_n\times S_m}^{S_{n+m}}(V\otimes W)
+    \end{equation*}
+    \begin{proof}
+        To prove that $\ch$ is a ring isomorphism, we need\dots
+        \begin{enumerate}
+            \item $\boxtimes$ is associative;
+            \item $\ch(\chi_1\boxtimes\chi_2)=\ch(\chi_1)\cdot\ch(\chi_2)$;
+            \item $\ch((n))=h_n$.
+        \end{enumerate}
+        1,2,3 imply the theorem because 2,3 imply that $\ch$ is surjective, $\Lambda_n$ has a $\Q$-basis $h_{\lambda_1}\cdots h_{\lambda_n}$ for $\lambda_1\leq\cdots\leq\lambda_n$ and $\lambda_1+\lambda_2+\cdots+\lambda_n=n$. For example, for $\Lambda_5$, we have $h_1^5,h_1^3h_2,h_1,h_2^2,h_2h_3,h_1^2h_3,h_1h_4,h_5$. This surjectivity combined with the fact that $\dim\Q_\text{cl}[S_n]=\dim\Lambda_n$ implies that $\ch$ is an isomorphism of rings.
+
+        Last thing: $\ch[(n)]=\frac{1}{n!}\sum p_1^{c_1(\sigma)}\cdots p_n^{c_n(\sigma)}$ where $c_i(\sigma)$ denotes the number of cycles of length $i$ and hence $\sum ic_i=n$. Denote $p_1^{c_1(\sigma)}\cdots p_n^{c_n(\sigma)}$ by $p^{c(\sigma)}$.
+        \begin{proof}
+            Let
+            \begin{align*}
+                \sum h_n t^n &= \sum(\sum_{i_1\leq\cdots\leq i_n}x_{i_1}\cdots x_{i_n}t^n)\\
+                &= \frac{1}{1-x_1t}\cdot\frac{1}{1-x_2t}\cdots\frac{1}{1-x_nt}\\
+                &= \exp(\log(\prod_{i=1}^n\frac{1}{1-x_it}))\\
+                &= \exp(\sum_{i=1}^n-\log(1-x_it))\\
+                &= \exp(x_1+\frac{x_1^2t^2}{2}+\frac{x_1^3t^3}{3}+\cdots+x_2+\frac{x_2^2t^2}{2}+\cdots)\\
+                &= \exp(p_1+\frac{p_2t^2}{2}+\frac{p_3t^3}{3}+\cdots)\\
+                &= \prod_{m\geq 1}\exp(\frac{p_mt^m}{m})\\
+                &= *
+            \end{align*}
+            We get the second equality because each $1/(1-x_it)=1+x_i+x_i^2t^2+\cdots$.
+            We need the power series $-\log(1-t)=t+t^2/2+\cdots$ and $\exp(t)=1+t+t^2/2!+\cdots$. Thus, $\exp(\log(1-t))=1-t$.
+            Now note that
+            \begin{align*}
+                \sum_{n\geq 0}\ch[(n)]\cdot t^n &= \sum_{n\geq 0}\frac{t^n}{n!}\sum_{\sigma\in S_n}p_1^{c_1(\sigma)}\cdots p_n^{c_n(\sigma)}\\
+                &= \sum_{n\geq 0}\frac{t^n}{n!}\left( \sum_{a_1+2a_2+\cdots+na_n=n}p_1^{a_1}\cdots p_n^{a_n} \right)\cdot\frac{n!}{1^{a_1}a_1!2^{a_2}a_2!\cdots n^{a_n}a_n!}\\
+                &= \sum_{\substack{n\geq 0\\a_1,\dots,a_n:a_1+2a_2+\cdots+na_n=n}}\frac{1}{a_1!}\left( \frac{p_1}{1} \right)^{a_1}t^{a_1}\frac{1}{a_2!}\left( \frac{p_2}{2} \right)^{a_2}t^{a_2}\cdots\frac{1}{a_n!}\left( \frac{p_n}{n} \right)^{a_n}t^{a_n}\\
+                &= \prod_{k=1}^n\left( \sum_{a_k=1}^\infty\frac{(p_k)^{a_k}t^{a_kk}}{a_k!ka_k} \right)\\
+                &= \prod_{k\geq 1}\exp(\frac{p_kt^k}{k})\\
+                &= *
+            \end{align*}
+            We're overcounting because we can cyclically permute cycles (i.e., $(12)=(21)$), hence the correction factor in the second line above.
+
+            Note: This exponent/logarithm trick is a common computational trick in combinatorics, varieties, etc.
+        \end{proof}
+        Now we prove the part 3, i.e., that $\boxtimes$ is associative. We do this by direct computation.
+        \begin{equation*}
+            \underbrace{\ind_{S_{n+m}\times S_\ell}^{S_{n+m+\ell}}\left[ \ind_{S_n\times S_m}^{S_{n+m}}(\chi_1\otimes\chi_2) \right]\otimes\chi_3}_{(\chi_1\boxtimes\chi_2)\boxtimes\chi_3} = \ind_{s_n\times S_m\times S_\ell}^{S_{n+m+\ell}}(\chi_1\otimes\chi_2\otimes\chi_3)
+        \end{equation*}
+        ...
+        
+        Then proving 2 (homomorphism bit) is the hardest. We have
+        \begin{align*}
+            \ch(\ind_{S_n\times S_m}^{S_{n+m}}(\chi_1\otimes\chi_2)) &= \frac{1}{n!}\sum_{\sigma\in S_n}(\ind_{S_n\times S_m}^{S_{n+m}}\chi_1\otimes\chi_2)(\sigma)\underbrace{p_1^{c_1(\sigma)}\cdots p_{n+m}^{c_{n+m}(\sigma)}}_\psi\\
+            &= \inp{\ind_{S_n\times S_m}^{S_{n+m}}(\chi_1\otimes\chi_2),\psi}_{S_{n+m}}\\
+            &= \inp{\chi_1\otimes\chi_2,\res_{S_n\times S_m}^{S_{n+m}}\psi}\\
+            &= \sum_{\substack{\sigma_1\in S_n\\\sigma_2\in S_m}}\chi_1(\sigma_1)\chi_2(\sigma_2)p_1^{c_1(\sigma_1)}\cdots p_n^{c_n(\sigma_1)}p_1^{c_1(\sigma_2)}\cdots p_m^{c_m(\sigma_2)}\\
+            &= \ch(\chi_1)\ch(\chi_2)
+        \end{align*}
+        We use Frobenius reciprocity somewhere in here. We also have $\psi:S_n\to\Lambda_n$ and $\psi(\tau\sigma\tau^{-1})=\psi(\sigma)$.
+    \end{proof}
+    \item After another 10 years of trying to understand the representations of the symmetric group, we'll be here.
+    \item At this point, we can study compact Lie groups.
+\end{itemize}
+
+
+
 
 \end{document}
