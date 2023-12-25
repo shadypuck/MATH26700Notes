@@ -174,5 +174,155 @@
 
 
 
+\section{???}
+\begin{itemize}
+    \item \marginnote{11/29:}Announcements.
+    \begin{itemize}
+        \item OH today at 5:30.
+        \item Our midterms are graded; we can look at them in his office whenever (I can do this during OH!).
+    \end{itemize}
+    \item Today, we'll formulate the main result he wants to prove next time.
+    \item Goal is still to understand representations of $S_n$.
+    \begin{itemize}
+        \item We've constructed all of them using Specht modules, but what else do we want?
+        \item We have dimension, we want characters, etc.
+    \end{itemize}
+    \item The main idea is to look at symmetric polynomials once again.
+    \begin{itemize}
+        \item Consider $\Q[x_1,\dots,x_n]^{S_n}$.
+        \item We have proven the fundamental theorem that $\Q[x_1,\dots,x_n]^{S_n}=\Q[\sigma_1,\dots,\sigma_n]$ where $\sigma_k=\sum_{1\leq i_1\leq\cdots\leq i_k\leq n}x_{i_1}\cdots x_{i_k}$.
+        \item We also proved in the homework that these rings are equal to $\Q[p_1,\dots,p_k]$ and $\Q[h_1,\dots,h_k]$ where
+        \begin{align*}
+            p_k &= \sum x_i^k&
+            h_k &= \sum_{i_1\leq\cdots\leq i_k}x_1\cdots x_k
+        \end{align*}
+        \item Example: If $n=3$, then
+        \begin{equation*}
+            h_2 = x_1^2+x_2^2+x_3^2+x_1x_2+x_1x_3+x_2x_3
+        \end{equation*}
+        \item Table of bases for $n$, $k$.
+        \begin{table}[h!]
+            \centering
+            \begin{tabular}{c|c|c|c|c}
+                kn & 1 & 2 & 3 & 4\\
+                0 & 1 & 1 & 1 & 1\\
+                1 & $x_1$ & $x_1+x_2$ & $x_1+x_2+x_3$ & $\cdots$\\
+                2 & $x_1^2$ & $x_1^2+x_2^2$, $x_1x_2$ & $\sigma_1^2$, $\sigma_2^2$ & $\sigma_1^2$, $\sigma_2^2$\\
+                3 & $x_1^3$ & ...
+            \end{tabular}
+            \caption{...}
+            \label{...}
+        \end{table}
+        \item Now take
+        \begin{equation*}
+            \Lambda_k = [\C[x_1,\dots,x_k]]_{\deg=k-1}
+            \cong [\C[x_1,\dots,x_{k+1}]]_{\deg=k-1}
+            \cong \cdots
+        \end{equation*}
+        \begin{itemize}
+            \item Alternatively, we can think of this thing as
+            \begin{equation*}
+                \Lambda_k = (\C[x_1,\dots])_k
+            \end{equation*}
+            with $\sigma_1^k,\sigma_2\sigma_1^{k-1},\dots$.
+        \end{itemize}
+        \item We call $\Lambda$ the ring of symmetric functions and define it to be equal to
+        \begin{equation*}
+            \Lambda = \Q[\sigma_1,\sigma_2,\sigma_3,\dots]
+        \end{equation*}
+        \item In every complete component, only finitely many of the $\sigma$ will participate, so we get finite things.
+        \item This is a graded ring! We have
+        \begin{equation*}
+            \Lambda = \bigoplus_{k\geq 0}\Lambda_k
+        \end{equation*}
+        and $\Lambda_k\otimes\Lambda_\ell=\Lambda_{k+\ell}$
+        \item This construction is called the \textbf{projective limit}, and we may have encountered it in commutative algebra under the definition
+        \begin{equation*}
+            \Lambda = \lim_{\rightarrow}\C[x_1,\dots,x_n]^{S_n}
+        \end{equation*}
+        \item We have identifies such as $p_2=\sigma_1^2-2\sigma_2$. This means that
+        \begin{equation*}
+            (x_1+\cdots+x_n)^2-2(x_1x_2+x_1x_3+\cdots) = x_1^2+x_2^2+\cdots
+        \end{equation*}
+        \item Observation: $\dim_\Q\Lambda_n$.
+    \end{itemize}
+    \item Now, we need to take a vector space on ring representations; we've done this already with the representation ring.
+    \item Let $R_n$ be the $\Q$-vector space of functions $\chi:S_n\to\Q$ such that $\chi(x\sigma x^{-1})=\chi(\sigma)$. This is our favorite space of class functions.
+    \item Theorem (Frobenius characteristic map): There is an isomorphism of vector spaces and of rings called the Frobenius characteristic: $\ch:\bigoplus_{n\geq 0}R_n\to\Lambda$.
+    \begin{proof}
+        Take $\chi_V\in R_k$, and $\chi_W\in R_\ell$. Let $V$ an $S_k$-rep, and $W$ an $S_\ell$-rep. We know that
+        \begin{equation*}
+            S_k\times S_\ell = S_{k+\ell}
+        \end{equation*}
+        So what we can do is induction $\ind_{S_k\times S_\ell}^{S_{k+\ell}}(V\otimes W)$. Call this operation $\chi_V\boxtimes\chi_W$.
+
+        Now we write down the formula:
+        \begin{equation*}
+            \ch(\chi) = \frac{1}{n!}\sum_{\sigma\in S_n}\chi(\sigma)p_1^{\lambda_1(\sigma)}\cdots p_k^{\lambda_k(\sigma)}
+        \end{equation*}
+        where $\lambda_1(\sigma),\lambda_2(\sigma),\dots$ represent the cycle structure of $\sigma$; each $\lambda_i$ is a number of cycles of length $1,2,\dots$.
+    \end{proof}
+    \item Examples.
+    \begin{enumerate}
+        \item $S_1$.
+        \begin{itemize}
+            \item Sends the YD $(1)$ to $p_1=x_1+x_2+x_3+\cdots$.
+        \end{itemize}
+        \item $S_2$.
+        \begin{itemize}
+            \item Sends $(2)$ to $\frac{1}{2!}(p_1^2+p_2)=\frac{1}{2}((x_1+x_2)^2+x_1^2+x_2^2)=x_1^2+x_2^2+x_1x_2=h_2$.
+            \item It also sends $(1,1)$ to $\frac{1}{2!}(p_1^2-p_2)=\frac{1}{2}((x_1+x_2)^2-x_1^2-x_2^2)=x_1x_2=\sigma_2$.
+            \item Let's check our formula. What is $\ind_{S_1\times S_1}^{S_2}(1)\otimes(1)$? Since the induction of the trivial representation is the regular representation, which we can decompose, we know that this induction equals $(1,1)\oplus(2)$. It follows that $p_1^2=x_1^2+x_2^2+x_1x_2+x_1x_2=(x_1+x_2)^2$.
+        \end{itemize}
+        \item $S_3$.
+        \begin{itemize}
+            \item Sends $(3)$ to
+            \begin{align*}
+                \frac{1}{3!}(p_1^3+3p_1p_2+2p_3) &= \frac{1}{6}[(x_1+x_2+x_3)^3+3(x_1+x_2+x_3)(x_1^2+x_2^2+x_3^2)+2(x_1^3+x_2^3+x_3^3)]\\
+                &= \frac{1}{6}[6(x_1^3+x_2^3+x_3^3)+6(x_1^2x_2+x_1x_2^2+x_1x_3^2+x_1^2x_3+\cdots)+6x_1x_2x_3]\\
+                &= h_3
+            \end{align*}
+            \item Sends $(1,1,1)$ to
+            \begin{align*}
+                \frac{1}{3!}(p_1^3-3p_1p_2+2p_3) &= \frac{1}{6}[(x_1+x_2+x_3)^3-3(x_1+x_2+x_3)(x_1^2+x_2^2+x_3^2)+2(x_1^3+x_2^3+x_3^3)]\\
+                &= x_1x_2x_3\\
+                &= \sigma_3
+            \end{align*}
+            \item Sends $(2,1)$ to
+            \begin{align*}
+                \frac{1}{3!}(2p_1^3-p_3) &= \frac{1}{6}[2(x_1^3+x_2^3+x_3^3)+6(x_1^2x_2+\cdots)+12x_1x_2x_3]\\
+                &= (x_1^2+\cdots)+2x_1x_2x_3
+            \end{align*}
+            \item Again, we can check that
+            \begin{align*}
+                \ind_{S_2\times S_1}^{S_3}[(1,1)\otimes(1)] &= \sigma_1\sigma_2
+            \end{align*}
+            \begin{itemize}
+                \item We compute $\ind_{S_2}^{S_3}(1,1)=(1,1,1)\oplus(2,1)$ via the branching formula: There are only two ways to add a box!
+                \item We have $\sigma_1\sigma_2-\sigma_3=(x_1+x_2+x_3)(x_1x_2+x_1x_3+x_2x_3)-x_1x_2x_3$.
+            \end{itemize}
+        \end{itemize}
+    \end{enumerate}
+    \item Do we need to be fluent in the techniques by which you expanded all of the polynomials above??
+    \item Thus, we have two conjectures:
+    \begin{align*}
+        \ch[(n)] &= h_n&
+        \ch[\underbrace{(1,\dots,1)}_{n\text{ times}}] &= \sigma_n
+    \end{align*}
+    \item The theorem is cool because it sends all of representation theory to some symmetric polynomial game!
+    \item How do we compute $\ch(V_\lambda)$?
+    \begin{itemize}
+        \item We say it equals $S_\lambda$, where $S_\lambda$ is a Schur polynomial.
+        \item Take the YT of $\lambda$. Recall standard YTs.
+        \item \textbf{Semistandard} (YT): Things strictly increase in columns, but only monotonically increase in rows. \emph{draw picture!}
+        \item The six semistandard ones give us the Schur polynomial.
+        \item Relation to RSK correspondence.
+    \end{itemize}
+    \item Proving why this stuff is true is not hard.
+    \item To understand \emph{why} this is true, Google the \textbf{Schur-Weyl duality}.
+\end{itemize}
+
+
+
 
 \end{document}
