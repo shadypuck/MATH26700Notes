@@ -9,39 +9,133 @@
 
 
 
-\section{Advanced Character Theory and Introduction to Associative Algebras}
+\section{More Characters and Intro to Associative Algebras}
 \begin{enumerate}
-    \setcounter{enumi}{3}
-    \item \marginnote{10/27:}Let $F$ be a field.
+    \item \marginnote{10/27:}\textbf{Representations of $\bm{S_5}$}.
+    \begin{enumerate}
+        \item Prove that there exist only two one-dimensional representations of $S_5$: The trivial representation $(5)$ and the alternating representation $(1,1,1,1,1)$.
+        \item Compute the character of the standard representation $(4,1)$ by decomposing the permutational representation into irreducibles.
+        \item Prove that the representations $(3,1,1)=\Lambda^2(4,1)$ and $(2,1,1,1)=\Lambda^3(4,1)$ are irreducible. Compute their characters. Prove that $(2,1,1,1)=(1,1,1,1,1)\otimes(4,1)$.
+        \item Find the two remaining irreducible representations of $S_5$; denote them $(3,2)$ and $(2,2,1)$. Complete the character table.
+        \item Consider an exceptional homomorphism $S_5\to S_6$. Decompose the corresponding permutational representation into irreducibles.
+        \item The \textbf{Petersen graph} is a graph with vertices being 2-element subsets of $\{1,2,3,4,5\}$; two vertices are connected by an edge if the corresponding sets do not intersect (see \href{https://en.wikipedia.org/wiki/Petersen_graph}{wiki} for a picture).
+        \begin{center}
+            \includegraphics[width=0.3\linewidth]{PetersenGraph.png}
+        \end{center}
+        Consider a natural action of $S_5$ on the set of complex-valued functions on the set of vertices of the Peterson graph. Find the character of the corresponding representation $V$ and decompose it into irreducibles.
+        \item Decompose $V$ into isotypical components.
+        \item Consider an endomorphism $A:V\to V$ sending a function to the average of its values on the adjacent vertices. Prove that it is an endomorphism of the corresponding representation. Find the spectrum of $A$.
+    \end{enumerate}
+    \item The character table is a square matrix. Determine the absolute value of its determinant.
+    \item Prove that for any irreducible character $\chi$ of a group $G$, we have
+    \begin{equation*}
+        \chi(g)\chi(h) = \frac{d_\chi}{|G|}\sum_{x\in G}\chi(gxhx^{-1})
+    \end{equation*}
+    \item Let $F$ be a field.
     \begin{enumerate}
         \item Prove that the matrix algebra $M_{n,n}(F)$ is simple, i.e., has no nontrivial ideals.
-        \begin{proof}
-            To prove that $M_{n,n}(F)$ is simple, it will suffice to show that any nonzero ideal of it contains the identity. Let $I$ be a nonzero ideal of $M_{n,n}(F)$. Then there exists some nonzero $A\in I$. In particular, if $A$ is nonzero, then it contains some entry $a_{ij}\neq 0$. Now, let $E_{ij}\in M_{n,n}(F)$ be the matrix with 1 in the $i,j$ position and 0 everywhere else. Then for each $k=1,\dots,n$,
-            \begin{equation*}
-                \frac{1}{a_{ij}}E_{ki}AE_{jk} = E_{kk}
-            \end{equation*}
-            so $E_{kk}\in I$. Summing all of the $E_{kk}$'s within $I$ yields the $n\times n$ identity matrix, as desired.
-        \end{proof}
-        % \item Prove that there is a unique simple module over the matrix algebra $M_{n,n}(F)$.
+        % \begin{proof}
+        %     To prove that $M_{n,n}(F)$ is simple, it will suffice to show that any nonzero ideal of it contains the identity. Let $I$ be a nonzero ideal of $M_{n,n}(F)$. Then there exists some nonzero $A\in I$. In particular, if $A$ is nonzero, then it contains some entry $a_{ij}\neq 0$. Now, let $E_{ij}\in M_{n,n}(F)$ be the matrix with 1 in the $i,j$ position and 0 everywhere else. Then for each $k=1,\dots,n$,
+        %     \begin{equation*}
+        %         a_{ij}^{-1}E_{ki}AE_{jk} = E_{kk}
+        %     \end{equation*}
+        %     so $E_{kk}\in I$. Summing all of the $E_{kk}$'s within $I$ yields the $n\times n$ identity matrix, as desired.
+        % \end{proof}
+        \item Prove that there is a unique simple module over the matrix algebra $M_{n,n}(F)$.
+        % \begin{proof}
+        %     % \begin{itemize}
+        %     %     \item $M_{n,n}(F)$ is a semisimple algebra.
+        %     %     \begin{itemize}
+        %     %         \item WTS: $M_{n,n}(F)\cong(F^n)^n$ as modules.
+        %     %         \item Define $T:M_{n,n}(F)\to(F^n)^n$ by $(v_1\mid\cdots\mid v_n)\mapsto v_1\oplus\cdots\oplus v_n$.
+        %     %         \item WTS: $T$ is a $F$-module homomorphism (i.e., a linear map).
+        %     %         \item It is fairly obvious that $T(f_1A_1+f_2A_2)=f_1T(A_1)+f_2T(A_2)$ (i.e., $T$ is a homomorphism of abelian groups and commutes with scalar multiplication), so we're all good to go.
+        %     %     \end{itemize}
+        %     %     \item Let $S$ be a simple $M_{n,n}(F)$-module.
+        %     %     \item $M_{n,n}(F)$ is a semisimple algebra: $S$ is semisimple module.
+        %     %     \item Monday's theorem: $S=\bigoplus_{i\in I}S_i=(F^n)^N\oplus S_1^{n_1}\oplus\cdots$.
+        %     %     \item Wikipedia: $S=M_{n,n}(F)s$ for any $s\in S$.
+        %     %     \item $F^n=M_{n,n}(F)e_1$.
+        %     %     \item Define $f:S\to F^n$ by $As\mapsto Ae_1$.
+        %     %     \item $f$ is a module homomorphism.
+        %     %     \begin{itemize}
+        %     %         \item $f$ is a homomorphism of abelian groups.
+        %     %         \begin{equation*}
+        %     %             f(As+Bs) = f[(A+B)s]
+        %     %             = (A+B)e_1
+        %     %             = Ae_1+Be_1
+        %     %             = f(As)+f(Bs)
+        %     %         \end{equation*}
+        %     %         \item $f$ commutes with scalar multiplication.
+        %     %         \begin{equation*}
+        %     %             f(B(As)) = f[(BA)s]
+        %     %             = (BA)e_1
+        %     %             = B(Ae_1)
+        %     %             = Bf(As)
+        %     %         \end{equation*}
+        %     %     \end{itemize}
+        %     %     \item $f$ is injective.
+        %     %     \begin{itemize}
+        %     %         \item $\ker(f)$ is a submodule of $S$.
+        %     %         \item $S$ is simple: $\ker(f)=0$.
+        %     %     \end{itemize}
+        %     %     \item $f$ is surjective.
+        %     %     \begin{itemize}
+        %     %         \item $\im(f)$ is a submodule of $F^n$.
+        %     %         \item $F^n$ is simple: $\im(f)=F^n$.
+        %     %     \end{itemize}
+        %     %     \item $f$ is an injective, surjective, module homomorphism: $f$ is a module isomorphism.
+        %     %     \item Thus, $S\cong F^n$.
+        %     % \end{itemize}
+
+        %     We will prove that $F^n$ is a simple module over $M_{n,n}(F)$, and then that every simple module over $M_{n,n}(F)$ is isomorphic to $F^n$. Note that the action of $M_{n,n}(F)$ on $F^n$ is defined to be left matrix multiplication. Let's begin.\par\smallskip
+        %     To prove that $F^n$ is a simple module, it will suffice to show that any nonzero submodule of $F^n$ equals $F^n$. Let $N$ be an arbitrary nonzero submodule of $F^n$. To show that $N=F^n$, we will use a bidirectional inclusion proof. As a submodule of $F^n$, we immediately have $N\subset F^n$. In the other direction, let $y=(y_1,\dots,y_n)\in F^n$ be arbitrary. Since $N$ is nonzero, it contains some nonzero element $x=(x_1,\dots,x_n)$. Suppose $x_j\neq 0_F$. Let $A\in M_{n,n}(F)$ be zero everywhere except in column $j$, where we choose $a_{ij}=y_ix_j^{-1}$ ($i=1,\dots,n$). Thus, $y=Ax$, so $y\in N$, as desired.\par\smallskip
+        %     Now let $S$ be an arbitrary simple module over $M_{n,n}(F)$. Let $s\in S$ nonzero be arbitrary. To prove that $S\cong F^n$ as a module, we will show that $S=M_{n,n}(F)s$, use this definition of $S$ to construct a map $f:S\to F^n$, and verify that this map is a module isomorphism. Let's begin.\par
+        %     Consider the set
+        %     \begin{equation*}
+        %         M_{n,n}(F)s = \{As\mid A\in M_{n,n}(F)\}
+        %     \end{equation*}
+        %     Since $0\neq s\in M_{n,n}(F)s$, $As+Bs=(A+B)s\in M_{n,n}(F)s$, and $(-A)s\in M_{n,n}(F)s$ for all $As\in M_{n,n}(F)s$, we know that $M_{n,n}(F)s\leq S$. Since, additionally, $B(As)=(BA)s\in M_{n,n}(F)s$ for all $B\in M_{n,n}(F)$ and $As\in M_{n,n}(F)s$, we know that $M_{n,n}(F)s$ is a (nonzero) submodule of $S$. Consequently, since $S$ is simple, $M_{n,n}(F)s=S$. As a special case, note that $F^n$ being a simple $M_{n,n}(F)$-module implies that $F^n=M_{n,n}(F)e_1$, for instance.\par
+        %     Define $f:S\to F^n$ by
+        %     \begin{equation*}
+        %         As \mapsto Ae_1
+        %     \end{equation*}
+        %     We have that $f$ is a homomorphism of abelian groups because
+        %     \begin{equation*}
+        %         f(As+Bs) = f[(A+B)s]
+        %         = (A+B)e_1
+        %         = Ae_1+Be_1
+        %         = f(As)+f(Bs)
+        %     \end{equation*}
+        %     We have that $f$ commutes with scalar multiplication because
+        %     \begin{equation*}
+        %         f(B(As)) = f[(BA)s]
+        %         = (BA)e_1
+        %         = B(Ae_1)
+        %         = Bf(As)
+        %     \end{equation*}
+        %     Thus, $f$ is a module homomorphism. Additionally, since $\ker(f)$ is a submodule of $S$, $S$ is simple, and $f$ is nontrivial, we have that $\ker(f)=0$ and hence $f$ is injective. Similarly, since $\im(f)$ is a submodule of $F^n$, $F^n$ is simple, and $f$ is nontrivial, we have that $\im(f)=F^n$ and hence $f$ is surjective. Thus, as an injective, surjective module homomorphism, $f$ is a module \emph{isomorphism} as well. Therefore, $S\cong F^n$, as desired.
+        % \end{proof}
     \end{enumerate}
     \item Consider the quaternion group $Q_8=\{\pm 1,\pm i,\pm j,\pm k\}\subset\HH$ of order 8.
     \begin{enumerate}
         \item Find four 1-dimensional representations of $Q_8$. Find the character of the remaining 2-dimensional representation.
-        \begin{proof}
-            Take the trivial representation.\par
-            Then take the representations sending $i,j$ to $(-1)$, $i,k$ to $(-1)$, and $j,k$ to $(-1)$; everything else gets sent to the identity in each case.\par
-            Working out the character table at this point, we can see that the character for the final representation must be given explicitly by the following.
-            \begin{align*}
-                +1 &\mapsto 2&
-                -1 &\mapsto -2&
-                +i &\mapsto 0&
-                -i &\mapsto 0&
-                +j &\mapsto 0&
-                -j &\mapsto 0&
-                +k &\mapsto 0&
-                -k &\mapsto 0
-            \end{align*}
-        \end{proof}
+        % \begin{proof}
+        %     Take the trivial representation.\par
+        %     Then take the representations sending $i,j$ to $(-1)$, $i,k$ to $(-1)$, and $j,k$ to $(-1)$; everything else gets sent to the identity in each case.\par
+        %     Working out the character table at this point, we can see that the character for the final representation must be given explicitly by the following.
+        %     \begin{align*}
+        %         +1 &\mapsto 2&
+        %         -1 &\mapsto -2&
+        %         +i &\mapsto 0&
+        %         -i &\mapsto 0&
+        %         +j &\mapsto 0&
+        %         -j &\mapsto 0&
+        %         +k &\mapsto 0&
+        %         -k &\mapsto 0
+        %     \end{align*}
+        % \end{proof}
+        \item Prove that $\R[Q_8]\cong\R\oplus\R\oplus\R\oplus\R\oplus\HH$ as an algebra.
     \end{enumerate}
 \end{enumerate}
 
