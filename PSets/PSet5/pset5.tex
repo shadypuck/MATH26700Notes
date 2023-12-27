@@ -1,0 +1,58 @@
+\documentclass[../psets.tex]{subfiles}
+
+\pagestyle{main}
+\renewcommand{\leftmark}{Problem Set \thesection}
+\setcounter{section}{4}
+
+\begin{document}
+
+
+
+
+\section{Abstract Representation Theory}
+\begin{enumerate}
+    \item \marginnote{11/3:}Assume that a finite-dimensional left module $M$ over an associative algebra $A$ is semisimple. Prove that any quotient of $M$ is semisimple.
+    \item Let $F$ be a field.
+    \begin{enumerate}
+        \item Let $D$ be a finite-dimensional division algebra over $F$. Prove that $D^n$ is an irreducible module over the matrix algebra $M_n(D)$. Deduce that $M_n(D)$ is semisimple.
+        \item Let $D_1,\dots,D_k$ be finite-dimensional division algebras over $F$. Prove that an algebra $M_{n_1}(D_1)\oplus\cdots\oplus M_{n_k}(D_k)$ is semisimple. Prove that it has exactly $k$ irreducible representations.
+    \end{enumerate}
+    \item Let $A$ be a finite-dimensional associative algebra over $F$. Prove that $\Rad(A)$ consists of elements $a\in A$ such that $1+xa$ has a left inverse for any $x\in A$.
+    \item Let $G$ be a finite group. Assume that a prime $p$ divides the order of $G$. Prove that the set $\{\sum a_gg\mid\sum a_g=0\}$ is an ideal in $\F_p[G]$. Show that it is not a direct summand of $\F_p[G]$. Deduce that $\F_p[G]$ is not semisimple.
+    \item Prove that under the identification of the group algebra $\C[G]$ with the space of complex-valued functions on $G$, the product in the group algebra corresponds to the convolution $*$ of functions
+    \begin{equation*}
+        (f_1*f_2)(g) = \sum_{x\in G}f_1(x)f_2(x^{-1}g)
+    \end{equation*}
+    Deduce that the convolution is associative, and then prove the associativity directly. Which function plays the role of the unit?
+    \item \textbf{Fourier transform}. Let $\rho:G\to GL(V_\rho)$ be a finite-dimensional complex representation of a finite group $G$. A \textbf{Fourier transform} of a function $f:G\to\C$ is an element $\hat{f}(\rho)\in\End_\C(V_\rho)$ defined by the formula
+    \begin{equation*}
+        \hat{f} = \sum_{g\in G}f(g)\rho(g)
+    \end{equation*}
+    \begin{enumerate}
+        \item Prove that $\widehat{f_1*f_2}=\widehat{f_1}\widehat{f_2}$.
+        \item Prove the \textbf{Fourier inversion formula}, given by
+        \begin{equation*}
+            f(g) = \frac{1}{|G|}\sum_\rho\dim(V_\rho)\tr[\rho(g^{-1})\hat{f}(\rho)]
+        \end{equation*}
+        where the sum goes over all irreducible representations of $G$.
+        \item Prove that \textbf{Plancherel formula} for functions $f_1,f_2:G\to\C$, given by
+        \begin{equation*}
+            \sum_{g\in G}f_1(g^{-1})f_2(g) = \frac{1}{|G|}\sum_\rho\dim(V_\rho)\tr[\widehat{f_1}(\rho)\widehat{f_2}(\rho)]
+        \end{equation*}
+    \end{enumerate}
+    \item Consider the \textbf{Heisenberg group} $H(\F_3)$ consisting of matrices
+    \begin{equation*}
+        \begin{bmatrix}
+            1 & a & b\\
+            0 & 1 & c\\
+            0 & 0 & 1\\
+        \end{bmatrix}
+    \end{equation*}
+    for $a,b,c\in\F_3$. Find the character table of this group.
+    \item The character table is a square matrix. Compute the determinant of the character table.
+\end{enumerate}
+
+
+
+
+\end{document}
