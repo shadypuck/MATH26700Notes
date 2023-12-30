@@ -9,8 +9,8 @@
 
 
 
-\chapter{???}
-\section{???}
+\chapter{Symmetric Group Representation Characteristics}
+\section{Frobenius Reciprocity; The Branching Theorem}
 \begin{itemize}
     \item \marginnote{11/27:}Announcements.
     \begin{itemize}
@@ -20,14 +20,17 @@
             \item Roughly like Monday/Wednesday next week.
         \end{itemize}
         \item Midterm will be returned on Wednesday; we can pick them up in-person in his office starting then.
-        \item There are some grade boundaries: Pass/Fail we can do til Friday, withdrawal we can do til 5:00 PM today.
+        \item There are some grade boundaries: Pass/Fail we can do until Friday, withdrawal we can do until 5:00 PM today.
     \end{itemize}
     \item Let's finish the conversation about induction/restriction and prove the \textbf{branching theorem}.
     \item Reminder to start.
     \begin{itemize}
         \item We have two mathematical categories, $G$-reps and $H$-reps where $H\leq G$.
         \item These catagories are related by functors.
-        \item $\res_H^G:G\text{-reps}\to H\text{-reps}$ and vice versa for $\ind_H^G$.
+        \begin{itemize}
+            \item $\res_H^G:G\text{-reps}\to H\text{-reps}$ and vice versa for $\ind_H^G$.
+            \item See Figure \ref{fig:induceFunctor}.
+        \end{itemize}
         \item Restrictions are stupidly simple.
         \item Inductions, most hands-on, we take copies of $W$ times cosets. Formulaically,
         \begin{equation*}
@@ -37,21 +40,32 @@
         \begin{itemize}
             \item In more detail, the action of $g$ on $g_iw$ is that of $g_{\sigma(i)}h_iw$.
             \item This is a genuinely hard construction.
-            \item A matrix of this thing will be a permutation matrix via
+            \item A matrix of this thing will be a block-permutation matrix like
+            \def\hashfill{\tikz{
+                \clip (0,0) rectangle (0.7,0.2);
+                \foreach \x in {-0.1,0,...,0.7} {
+                    \draw (\x,0) -- ++(0.3,0.3);
+                }
+            }}
             \begin{equation*}
-                copy from board
+                \begin{bNiceArray}[first-row,first-col,margin]{c|w{c}{8mm}|c}
+                        & g_1W & & g_kW\\
+                    g_1W & \hashfill & 0 & 0\\ \hline
+                        & 0 & 0 & \hashfill\\ \hline
+                    g_kW & 0 & \hashfill & 0\\
+                \end{bNiceArray}
             \end{equation*}
-            \item Note that
-            \begin{equation*}
-                g_1W\oplus\cdots\oplus g_kW \cong \Hom_H(\C[G],W)
-            \end{equation*}
-            \begin{itemize}
-                \item Recall that elements of the set on the right above are functions $f:G\to W$ such that $f(h(g))=hf(g)$.
-                \item We map between the two via $f(g)\mapsto f(gx')$.
-            \end{itemize}
-            \item What is nice about induced representations is that $\dim[\ind_H^GW]=(\dim W)[G:H]$.
         \end{itemize}
-        \item Moreover, there is a very easy statement, the \textbf{Frobenius formula}.
+        \item As an alternate construction, we have that
+        \begin{equation*}
+            g_1W\oplus\cdots\oplus g_kW \cong \Hom_H(\C[G],W)
+        \end{equation*}
+        \begin{itemize}
+            \item Recall that elements of the set on the right above are functions $f:G\to W$ such that $f(h(g))=hf(g)$.
+            \item We map between the two via $f(g)\mapsto f(gx')$.
+        \end{itemize}
+        \item What is nice about induced representations is that $\dim[\ind_H^GW]=(\dim W)[G:H]$.
+        \item There is a very easy statement of the character of an induced representation, the \textbf{Frobenius formula}.
         \begin{itemize}
             \item Recall that
             \begin{equation*}
@@ -61,9 +75,9 @@
                     \chi_W(g) & g\in H
                 \end{cases}
             \end{equation*}
-            \item With this, we average.
+            \item With this, we average:
             \begin{equation*}
-                \chi_{\ind_H^GW}(g) = \sum_{x\in G}\tilde{\chi}_W(xgx^{-1})
+                \chi_{\ind_H^GW}(g) = \frac{1}{|H|}\sum_{x\in G}\tilde{\chi}_W(xgx^{-1})
             \end{equation*}
             \item Essentially, we're taking a whole bunch of conjugates, summing them up, and dividing to get rid of overcounting.
         \end{itemize}
@@ -89,7 +103,7 @@
                 (V,\ind_H^GW)_G = (\res_H^GV,W)_H
             \end{equation*}
             \begin{itemize}
-                \item Denoting scalar product in $G$ and scalar product in $W$ of the characters of each representation.
+                \item This notation denotes a scalar product in $G$ and scalar product in $H$ of the characters of each representation.
             \end{itemize}
             \item This is similar to the relation between adjoint maps $V\to W$ and $W^*\to V^*$.
         \end{itemize}
@@ -101,80 +115,174 @@
             \end{equation*}
             where the isomorphism is canonical.
             \item We will not check this last definition; we can tediously do it with definitions, and there's nothing complicated. Rudenko leaves this as an exercise to us.
+            \item The canonical isomorphism sends a map $v\mapsto[g\mapsto\varphi(gv)]$ to the map $\phi:V\to W$.
         \end{itemize}
-        \item Constructing...something: Take $v\in V$, $g\in G$, $\varphi:V\to W$. We send $g\mapsto\varphi(gv)$.
     \end{itemize}
     \item We now prove Version 1.
     \begin{proof}
         We have
         \begin{align*}
-            (\chi_V,\chi_{\ind_H^GW})_G &= \frac{1}{|G|}\sum_{g_1\in G}\chi_V(g_1)\left( \frac{1}{|H|}\sum_{g_2\in G}\tilde{\chi}_W(g_2g_1^{-1}g_2^{-1}) \right)\\
-            &= \frac{1}{|H|\cdot|G|}\sum_{g_1,g_2\in G}\chi_V(g)\tilde{\chi}_W(g_2g_1^{-1}g_2^{-1})\\
+            (\chi_V,\chi_{\ind_H^GW})_G &= \frac{1}{|G|}\sum_{g_1\in G}\chi_V(g_1)\chi_{\ind_H^GW}(g_1^{-1})\\
+            &= \frac{1}{|G|}\sum_{g_1\in G}\chi_V(g_1)\left( \frac{1}{|H|}\sum_{g_2\in G}\tilde{\chi}_W(g_2g_1^{-1}g_2^{-1}) \right)\\
+            &= \frac{1}{|H|\cdot|G|}\sum_{g_1,g_2\in G}\chi_V(g_1)\tilde{\chi}_W(g_2g_1^{-1}g_2^{-1})\\
             &= \frac{1}{|H|\cdot|G|}\sum_{g_1,g_2\in G}\chi_V(\underbrace{g_2g_1g_2^{-1}}_h)\tilde{\chi}_W(\underbrace{g_2g_1^{-1}g_2^{-1}}_{h^{-1}})\\
             &= \frac{1}{|H|}\frac{1}{|G|}\sum_{h\in G}|G|\chi_V(h)\tilde{\chi}_W(h^{-1})\\
             &= (\chi_V|_H,\chi_W)_H\\
             &= (\res_H^GV,\chi_W)_H
         \end{align*}
-        From line 3 to line 4: Fix $h$; then $g_2g_1g_2^{-1}=h$ iff $g_1=g_2^{-1}hg_2$, so we have overcounted by $|G|$ times.
+        From line 4 to line 5: Fix $h$; then $g_2g_1g_2^{-1}=h$ iff $g_1=g_2^{-1}hg_2$, so we have overcounted by $|G|$ times. From line 5 to line 6: $\tilde{\chi}_W$ is zero whenever $h^{-1}\notin H$, so this ostensible sum over all $h\in G$ is \emph{de facto} only a sum over all $h\in H$; this is what allows us to consider $\chi_V$ as "restricted to $H$" in line 6.
     \end{proof}
     \item We now come to the branching theorem at long last.
     \item Example first.
     \begin{itemize}
-        \item Consider $S_n>S_{n-1}$, where $S_{n-1}$ is the subgroup of permutations fixing $n$. I.e., $S_3>S_2=\{e,(12)\}$.
-        \item Let $\lambda$ be a partition of $n$; \emph{there's notation for this}!
+        \item Consider $S_n>S_{n-1}$, where $S_{n-1}$ is the subgroup that fixes $n$. I.e., $S_3>S_2=\{e,(12)\}$, and we explicitly omit $(13),(23),(123),(132)$ because they all move 3.
+        \item Let $\lambda\vdash n$.
         \item Let $\mu\leq\lambda$ be a Young diagram of a partition of $n-1$.
         \item Then
         \begin{enumerate}
             \item We have
             \begin{equation*}
-                \res_{S_{n-1}}^{S_n}V_\lambda = \bigoplus_{\mu\leq\lambda}V_\mu
+                \res_{S_{n-1}}^{S_n}V_\lambda = \bigoplus_{\substack{\mu\leq\lambda\\|\mu|=n-1}}V_\mu
             \end{equation*}
             \begin{itemize}
-                \item Example: \emph{Draw out pictures}
+                \item Example:
+                \begin{equation*}
+                    \res_{S_4}^{S_5}\tikz[baseline={(0,-0.1)}]{\node{\ydiagram{3,2}};}
+                    = \tikz[baseline={(0,-0.1)}]{\node{\ydiagram{2,2}};}
+                    \oplus\tikz[baseline={(0,-0.1)}]{\node{\ydiagram{3,1}};}
+                \end{equation*}
             \end{itemize}
             \item We have
             \begin{equation*}
-                \ind_{S_{n-1}}^{S_n}V_\mu = \bigoplus_{\mu\leq\lambda}V_\lambda
+                \ind_{S_{n-1}}^{S_n}V_\mu = \bigoplus_{\substack{\mu\leq\lambda\\|\lambda|=n}}V_\lambda
             \end{equation*}
             \begin{itemize}
-                \item Example: \emph{Draw out pictures}
+                \item Example:
+                \begin{equation*}
+                    \ind_{S_5}^{S_6}\tikz[baseline={(0,-0.1)}]{\node{\ydiagram{3,2}};}
+                    = \tikz[baseline={(0,0.05)}]{\node{\ydiagram{3,2,1}};}
+                    \oplus\tikz[baseline={(0,-0.1)}]{\node{\ydiagram{3,3}};}
+                    \oplus\tikz[baseline={(0,-0.1)}]{\node{\ydiagram{4,2}};}
+                \end{equation*}
             \end{itemize}
         \end{enumerate}
     \end{itemize}
-    \item The reason that this theorem is called the branching theorem originates from the following diagram, which (when continued) encapsulates the main idea of the theorem.
-    \emph{picture}
+    \item The reason that this theorem is called the branching theorem originates from the diagram in Figure \ref{fig:branchingTrm}, which (when continued) encapsulates the main idea of the theorem.
+    \begin{figure}[h!]
+        \centering
+        \begin{tikzpicture}[grow=up,level 1/.style={sibling distance=2.25cm},level 3/.style={sibling distance=1.5cm}]
+            \footnotesize
+            \node (1) {\ydiagram{1}}
+                child {node(2){\ydiagram{1,1}}
+                    child {node(3){\ydiagram{1,1,1}}
+                        child {node(4){\ydiagram{1,1,1,1}}}
+                        child {node[white]{\ydiagram{2,1,1}}}
+                    }
+                    child {node[white]{\ydiagram{2,1}}}
+                }
+                child {node{\ydiagram{2}}
+                    child {node{\ydiagram{2,1}}
+                        child {node{\ydiagram{2,1,1}}}
+                        child {node{\ydiagram{2,2}}}
+                        child {node[white]{\ydiagram{3,1}}}
+                    }
+                    child {node{\ydiagram{3}}
+                        child {node{\ydiagram{3,1}}}
+                        child {node{\ydiagram{4}}}
+                    }
+                }
+            ;
+    
+            \node at (1 -| 4,0) {$S_1$};
+            \node at (2 -| 4,0) {$S_2$};
+            \node at (3 -| 4,0) {$S_3$};
+            \node at (4 -| 4,0) {$S_4$};
+    
+            \color{white}
+            \node at (1 -| -4,0) {$S_1$};
+            \node at (2 -| -4,0) {$S_2$};
+            \node at (3 -| -4,0) {$S_3$};
+            \node at (4 -| -4,0) {$S_4$};
+        \end{tikzpicture}
+        \caption{The branching theorem.}
+        \label{fig:branchingTrm}
+    \end{figure}
     \begin{itemize}
         \item This graph helps you understand induction and restriction.
-        \item Dimensions are the number of paths from the left to a a final Young diagram.
+        \item Dimensions are the number of paths from the bottom to a final Young diagram.
         \begin{itemize}
-            \item For example, the dimension of $(3,1)$ is 3 because there are 3 paths to it (\emph{list them}).
+            \item For example, the dimension of $(3,1)$ is 3 because there are 3 paths to it, listed as follows.
+            \begin{enumerate}
+                \item $(1)\to(2)\to(3)\to(3,1)$.
+                \item $(1)\to(2)\to(2,1)\to(3,1)$.
+                \item $(1)\to(1,1)\to(2,1)\to(3,1)$.
+            \end{enumerate}
         \end{itemize}
-        \item Number of paths formula is equivalent to standard Young tableaux!
+        \item Number of paths is equivalent to number of standard Young tableaux!
     \end{itemize}
     \item Theorem (Branching): The following two statements are true.
     \begin{align}
-        \res_{S_{n-1}}^{S_n}V_\lambda &= \bigoplus_{\mu\leq\lambda}V_\mu\\
-        \ind_{S_{n-1}}^{S_n}V_\mu &= \bigoplus_{\mu\leq\lambda}V_\lambda
+        \res_{S_{n-1}}^{S_n}V_\lambda &= \bigoplus_{\substack{\mu\leq\lambda\\|\mu|=n-1}}V_\mu\\
+        \ind_{S_{n-1}}^{S_n}V_\mu &= \bigoplus_{\substack{\mu\leq\lambda\\|\lambda|=n}}V_\lambda
     \end{align}
     \begin{proof}
-        We'll talk about the general idea of the proof now, and maybe do the details next time.
-
-        \underline{$(1)\Longleftrightarrow(2)$}: We have that \emph{stuff at bottom of board}
-
-        \underline{(1)}: Let's look at an example. Here's a YD of $S_8$. We want to restrict it down to $S_7$.
+        We'll talk about the general idea of the proof now, and maybe do the details next time.\par
+        \underline{$(9.1)\Longleftrightarrow(9.2)$}: Suppose first that the left statement above holds true. Then we have that
+        \begin{equation*}
+            (\res_{S_{n-1}}^{S_n}V_\lambda,V_\mu) =
+            \begin{cases}
+                0\\
+                1 & \lambda\geq\mu
+            \end{cases}
+        \end{equation*}
+        Thus, by Frobenius reciprocity,
+        \begin{equation*}
+            (V_\lambda,\ind_{S_{n-1}}^{S_n}V_\mu) = (\res_{S_{n-1}}^{S_n}V_\lambda,V_\mu) =
+            \begin{cases}
+                0\\
+                1 & \lambda\geq\mu
+            \end{cases}
+        \end{equation*}
+        Therefore, the second statement holds true. The proof is symmetric in the opposite direction.\par
+        \underline{(9.1)}: Let's look at an example. Consider the Young diagram of $S_8$ shown in Figure \ref{fig:YDbranchingPf}.
+        \begin{figure}[H]
+            \centering
+            \ydiagram{4,3,1}
+            \caption{Proving the branching theorem.}
+            \label{fig:YDbranchingPf}
+        \end{figure}
+        We want to restrict it down to $S_7$.
         Recall that $V_\lambda=\spn(S_8:\Delta(x_1,x_2,x_3)(x_4-x_5)(x_6-x_7))$.
         Now in $S_7$, we fix $x_8$. Consider subrepresentations of $V_\lambda$ filtered by degree as follows.
         \begin{equation*}
-            copy from board
+            \underbrace{
+                \begin{bmatrix}
+                    \\
+                \end{bmatrix}
+            }_{\deg_{x_3}\leq 0} \leq \underbrace{
+                \begin{bmatrix}
+                    \\
+                    \\
+                \end{bmatrix}
+            }_{\deg_{x_5}\leq 1} \leq \underbrace{
+                \begin{bmatrix}
+                     & \\
+                     & \\
+                \end{bmatrix}
+            }_{\deg_{x_8}\leq 2} \leq V_\lambda
         \end{equation*}
-        The proof comes from the fact that if we now take quotients of these subrepresentations, then since $x_8$ can only appear in three boxes, ...
+        The proof comes from the fact that if we now take quotients of these subrepresentations, e.g., via
+        \begin{equation*}
+            \deg=0, \deg\leq 1/\deg\leq 0, \deg\leq 2/\deg\leq 1, \dots
+        \end{equation*}
+        then since $x_8$ can only appear in three boxes, ...
     \end{proof}
     \item Practice with the above example and think it through.
 \end{itemize}
 
 
 
-\section{???}
+\section{The Character of a Symmetric Group Representation}
 \begin{itemize}
     \item \marginnote{11/29:}Announcements.
     \begin{itemize}
@@ -191,27 +299,32 @@
     \begin{itemize}
         \item Consider $\Q[x_1,\dots,x_n]^{S_n}$.
         \item We have proven the fundamental theorem that $\Q[x_1,\dots,x_n]^{S_n}=\Q[\sigma_1,\dots,\sigma_n]$ where $\sigma_k=\sum_{1\leq i_1\leq\cdots\leq i_k\leq n}x_{i_1}\cdots x_{i_k}$.
-        \item We also proved in the homework that these rings are equal to $\Q[p_1,\dots,p_k]$ and $\Q[h_1,\dots,h_k]$ where
+        \item We also proved in PSet 6, Q6 that these rings are equal to $\Q[p_1,\dots,p_k]$ and $\Q[h_1,\dots,h_k]$ where
         \begin{align*}
-            p_k &= \sum x_i^k&
-            h_k &= \sum_{i_1\leq\cdots\leq i_k}x_1\cdots x_k
+            p_k &= \sum_{i=1}^nx_i^k&
+            h_k &= \sum_{1\leq i_1\leq\cdots\leq i_k\leq n}x_1\cdots x_k
         \end{align*}
-        \item Example: If $n=3$, then
-        \begin{equation*}
-            h_2 = x_1^2+x_2^2+x_3^2+x_1x_2+x_1x_3+x_2x_3
-        \end{equation*}
+        \begin{itemize}
+            \item Example: If $n=3$ and $k=2$, then
+            \begin{equation*}
+                h_2 = x_1^2+x_2^2+x_3^2+x_1x_2+x_1x_3+x_2x_3
+            \end{equation*}
+        \end{itemize}
         \item Table of bases for $n$, $k$.
         \begin{table}[h!]
             \centering
-            \begin{tabular}{c|c|c|c|c}
-                kn & 1 & 2 & 3 & 4\\
+            \small
+            \renewcommand{\arraystretch}{1.2}
+            \begin{tabular}{c|cccc}
+                $k\,\backslash\,n$ & 1 & 2 & 3 & 4\\
+                \hline
                 0 & 1 & 1 & 1 & 1\\
                 1 & $x_1$ & $x_1+x_2$ & $x_1+x_2+x_3$ & $\cdots$\\
                 2 & $x_1^2$ & $x_1^2+x_2^2$, $x_1x_2$ & $\sigma_1^2$, $\sigma_2^2$ & $\sigma_1^2$, $\sigma_2^2$\\
                 3 & $x_1^3$ & ...
             \end{tabular}
-            \caption{...}
-            \label{...}
+            \caption{Polynomial bases.}
+            \label{tab:polynomialBases}
         \end{table}
         \item Now take
         \begin{equation*}
@@ -467,6 +580,7 @@
         \begin{itemize}
             \item In particular, this tells us that $x_1\cdots x_n$ is equal to the last coefficient in the minimal polynomial which, by definition, is an integer.
         \end{itemize}
+        \item Don't worry too much about all this, though: Burnside's theorem will no longer be on the final because Rudenko changed his mind.
     \end{itemize}
     \item *Week 7, Lecture 2: Symmetric polynomials and roots of symmetric polynomials. See p. 101.
     \item *Week 7, Lecture 2: Word in blackboard picture? See p. 102.
@@ -494,7 +608,7 @@
 
 
 
-\section{???}
+\section{The Frobenius Characteristic Map}
 \begin{itemize}
     \item \marginnote{12/1:}Proving the theorem.
     \item The statement is that there exists a function

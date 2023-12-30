@@ -20,7 +20,7 @@
     \end{itemize}
     \item \textbf{Center} (of a group): The set of all elements of a group $G$ that commute with every other element in $G$. \emph{Denoted by} $\bm{Z(G)}$. \emph{Given by}
     \begin{equation*}
-        Z(G) = \{g\in G\mid xgx^{-1}=g\ \forall\ x\in G\}
+        Z(G) = \{g\in G\mid xg=gx\ \forall\ x\in G\}
     \end{equation*}
     \begin{itemize}
         \item Note: $Z(G)$ is a subgroup of $G$.
@@ -32,9 +32,7 @@
             \item See Section 1.3 of \textcite{bib:FultonHarris} for an explanation.
         \end{itemize}
         \item Normally, the center of a group is too small to be interesting.
-        \begin{itemize}
-            \item However, $Z(\C[G])$ \emph{is} large enough to be interesting.
-        \end{itemize}
+        \item However, $Z(\C[G])$ is large enough to be interesting.
     \end{itemize}
     \item \textbf{Center} (of an algebra): The set of all elements of an algebra $A$ that commute with every other element in $A$. \emph{Denoted by} $\bm{Z(A)}$. \emph{Given by}
     \begin{equation*}
@@ -48,7 +46,10 @@
     \item Consequence: If $G$ is an abelian group, then every irrep $V$ is 1-dimensional.
     \begin{itemize}
         \item Additionally, $\C[G]$ is commutative and hence $\C[G]=Z(\C[G])$.
-        \item Then if $V$ is an arbitrary representation, $V$ is equal to the direct sum of one dimensional irreducible representations for all $g$. Hence, $\rho_V(g)=\lambda I$. Could the $\lambda$'s not be different for the various irreps??
+        \item Then if $V$ is an arbitrary representation of $\C[G]$ (i.e., there exists $\rho_V:\C[G]\to\End(V)$), then $V$ is equal to the direct sum of one dimensional irreducible representations. Hence, for all $g$, we have $\rho_V(g)=\lambda I$.
+        \begin{itemize}
+            \item Could we not have different $\lambda$'s for each irrep, i.e., $\rho_V(g)=\diag(\lambda_1,\dots,\lambda_n)$ instead of only $\rho_V(g)=\diag(\lambda,\dots,\lambda)$??
+        \end{itemize}
     \end{itemize}
     \item We now try to compute $Z(\C[G])$.
     \begin{itemize}
@@ -72,10 +73,15 @@
     \begin{itemize}
         \item Example: In $S_3$ the three $e_i$'s are $\{e,(12)+(13)+(23),(123)+(132)\}$.
     \end{itemize}
-    \item Claim: $Z(G)=\inp{e_1,\dots,e_k}$, that is, the $e_i$ commute with every element of $G$ expressed as $1g\in\C[G]$.
+    \item We will use "$Z(G)$" to denote $Z(\C[G])$ oftentimes going forward.
+    \begin{itemize}
+        \item Let $x\in\C[G]$ be arbitrary. Note that $xg=gx$ for all $g\in G$ if and only if $xy=yx$ for all $y\in\C[G]$.
+    \end{itemize}
+    \item Claim: $Z(G)=\inp{e_1,\dots,e_k}$.
+    % , that is, the $e_i$ commute with every element of $G$ expressed as $1g\in\C[G]$\footnote{In this argument, what exactly is everything?? Is $Z(G)$ the center of $G$ (as the notation would suggest) or is it $Z(\C[G])$ (as it seems to contain the elements $e_i$ of $\C[G]$)?}.
     \begin{proof}
         We will use a bidirectional inclusion proof.\par
-        \underline{$\inp{e_1,\dots,e_k}\subset Z(G)$}: Let $e_i$ and $x\in G$ be arbitrary. Then
+        \underline{$\inp{e_1,\dots,e_k}\subset Z(G)$}: Let $e_i\in\C[G]$ and $x\in G$ be arbitrary. As noted above, proving that $e_ix=xe_i$ for any $x\in G$ will suffice to show that $e_ix=xe_i$ for any $x\in\C[G]$. Indeed, we do find that
         \begin{align*}
             % xe_i &= \left( \sum_{g\in G}a_gg \right)e_i\\
             % &= \left( \sum_{g\in G}a_gg \right)\left( \sum_{h\in C_i}h \right)\\
@@ -89,7 +95,7 @@
             xe_i &= e_ix
         \end{align*}
         This naturally extends to any sums and scalar multiples of the $e_i$'s.\par
-        \underline{$Z(G)\subset\inp{e_1,\dots,e_k}$}: Let $a\in Z(G)$ be arbitrary. As an element of $\C[G]$, we know that $a=\sum a_gg$ for some $a_g\in\C$. Additionally, since $a\in Z(G)$, we have that $xax^{-1}=a$ for all $x\in G$ (that is, $1x\in A$). Combining these last two results, we have that
+        \underline{$Z(G)\subset\inp{e_1,\dots,e_k}$}: Let $a\in Z(G)$ be arbitrary. As an element of $\C[G]$, we know that $a=\sum a_gg$ for some $a_g\in\C$. Additionally, since $a\in Z(G)$, we have that $xax^{-1}=a$ for all $x\in G$. Combining these last two results, we have that
         \begin{equation*}
             \sum_{g\in G}a_{x^{-1}gx}g = \sum_{g\in G}a_gxgx^{-1}
             = xax^{-1}
@@ -121,7 +127,7 @@
     % \end{itemize}
     % \item Consider $\C[G]$.
     \begin{itemize}
-        \item $Z(\C[G])$ has basis $e_1,\dots,e_k$\footnote{How did we get from the previous claim to here??}.
+        \item As we just claimed and proved, $Z(\C[G])$ has basis $e_1,\dots,e_k$.
         \item Recall that $Z(\C[G])=\C\oplus\cdots\oplus\C$, with characters $\chi_1,\dots,\chi_k$.
         \item Then $f_{\chi_i}=(0,\dots,0,1,0,\dots,0)$, where the 1 lies in the $i^\text{th}$ slot.
         \item Then we get $f_{\chi_1},\dots,f_{\chi_k}$ as a basis.
@@ -134,7 +140,10 @@
     \end{equation*}
     where $\varphi(xgx^{-1})=\varphi(g)$.
     \begin{itemize}
-        \item This isomorphism is an isomorphism of vector spaces, \emph{not} an isomorphism of algebras!
+        \item This isomorphism is an isomorphism of vector spaces, \emph{not} an isomorphism of algebras.
+        \begin{itemize}
+            \item This is exactly the map briefly described in Lecture 3.1, down to the fact that it maps coefficients to functional outputs but allows for different kinds of multiplication!!!
+        \end{itemize}
         \item However, it still has cool properties.
         \begin{itemize}
             \item For instance, consider the $\delta_{C_i}$: The functions sending $g\in C_i$ to 1 and $g\notin C_i$ to 0.
@@ -170,7 +179,7 @@
         \end{itemize}
     \end{itemize}
     \item \textbf{Central idempotent}: An element such that $a^2=a$ and $ax=xa$ for all $x\in A$.
-    \item Two approaches to the same thing: Class functions and the center approach.
+    \item Takeaway: Class functions and the center are two approaches to the same thing.
     \begin{itemize}
         \item The great thing about the center: You can understand what it looks like because it is well-defined as a commutative algebra.
         \item If something is isomorphic to $\C\oplus\cdots\oplus\C$ as an algebra, then there is another space and basis in which your multiplication looks incredibly simple.
@@ -276,9 +285,20 @@
         To prove that $\lambda\in\bar{\Z}$, it will suffice to find a monic polynomial $P$ with integer coefficients such that $P(\lambda)=0$. Let $\chi_A$ be the characteristic polynomial of $A$. As a characteristic polynomial, $\chi_A$ is monic. Additionally, since $A$ is a matrix over the integers, the coefficients of $\chi_A$ will all be integers. Lastly, since $Av=\lambda v$, we know that $\chi_A(\lambda)=0$.
     \end{proof}
     \item Lemma: The converse of Fact 3 is true. That is, if $\lambda\in\bar{\Z}$, then there exists $A\in M_{n\times n}(\Z)$ and $v\in\C^n$\footnote{Where does $v$ lie?? Is it $\Z^n$ or something, or are there no restrictions as I suspect?} such that $Av=\lambda v$.
-    \begin{itemize}
-        \item $\lambda\in\bar{\Z}$ implies $\lambda^n+a_{n-1}\lambda^{n-1}+\cdots+a_0=0$. This implies that there exists $A\in M_{n\times n}(\Z)$ such that $\chi_A(\lambda)=\text{this polynomial}=0$. Rudenko leaves it as an exercise to find this $A$.
-    \end{itemize}
+    \begin{proof}
+        $\lambda\in\bar{\Z}$ implies $\lambda^n+a_{n-1}\lambda^{n-1}+\cdots+a_0=0$. This implies that there exists $A\in M_{n\times n}(\Z)$ such that $\chi_A(\lambda)=\text{this polynomial}=0$.\par
+        Rudenko leaves it as an exercise to find this $A$. The solution is just the Frobenius matrix from MATH 27300, i.e., if we take
+        \begin{equation*}
+            A =
+            \begin{bmatrix}
+                0 & 1 &  & \\
+                 & \ddots & \ddots & \\
+                 &  & 0 & 1\\
+                -a_0 & -a_1 & \cdots & -a_{n-1}\\
+            \end{bmatrix}
+        \end{equation*}
+        then $\chi_A(\lambda)=\lambda^n+a_{n-1}\lambda^{n-1}+\cdots+a_0=0$.
+    \end{proof}
     \item We now use the above to give a cryptic proof of an interesting fact.
     \item Fact 4: $\bar{\Z}$ is a ring. That is, if $x,y\in\bar{\Z}$, then $x+y,xy\in\bar{\Z}$.
     \begin{proof}
@@ -576,7 +596,7 @@
         \begin{equation*}
             \left| \prod_{i=1}^na_i \right| < 1
         \end{equation*}
-        So $\prod_{i=1}^na_i\in\Z$\footnote{How do we know that this is an integer??}, but since it's an integer with absolute value less than 1, it must be zero.\footnote{How doe proving that the product of the $a_i$'s is zero prove that $a_1=0$??}
+        So $\prod_{i=1}^na_i\in\Z$\footnote{How do we know that this is an integer??}, but since it's an integer with absolute value less than 1, it must be zero.\footnote{How does proving that the product of the $a_i$'s is zero prove that $a_1=0$??}
     \end{proof}
     \item Note: This lemma is basically just a center of mass thing, i.e., the expression $(\varepsilon_1+\cdots+\varepsilon_n)/n$ essentially gives the center of mass of the roots of unity:
     \begin{figure}[h!]
@@ -605,7 +625,7 @@
         \caption{Burnside's theorem --- roots of unity lemma.}
         \label{fig:burnsideRootUniLemma}
     \end{figure}
-    \item Stated simply, the first Theorem (below) posits that under relevant constraints, an either element acts as a scalar \emph{or} its character is zero.
+    \item Stated simply, the first Theorem (below) posits that under relevant constraints, either an element acts as a scalar \emph{or} its character is zero.
     \item Theorem 1: Let $G$ be a finite group, let $V$ be an irreducible representation of $G$, and let $C$ be a conjugacy class in $G$. Assume that $(|C|,\dim V)=1$\footnote{Both $|C|$ and $\dim V$ divide the order of the group, so they're usually not coprime, but they can be.}. Then for any $g\in C$, either $\chi_V(g)=0$ or $\rho_V(g)=\lambda I$.
     \begin{proof}
         Let $g\in C$ be arbitrary. Recall from our proof of the Frobenius divisibility theorem that
@@ -673,7 +693,7 @@
             1+\sum_{|C|>1}|C| = |G| = p^aq^b
         \end{equation*}
         % But since $a,b\geq 1$, dividing both sides of the above by $pq$ is not possible, so we get a contradiction.
-        Additionally, recall that as a corollary to the Orbit-Stabilizer theorem, we know that $|C|\mid|G|$. Thus, in this case, $|C|=p^cq^d$ for $c\leq a$ and $d\leq b$. Moreover, by Theorem 2, $c,d\geq 1$. (If one equalled zero and the other did not, $|C|$ would be ov prime power order and $G$ could not be simple, a contradiction.) Thus, the order of any conjugacy class in $G$ either equals 1 or is divisible by $pq$.\par
+        Additionally, recall that as a corollary to the Orbit-Stabilizer theorem, we know that $|C|\mid|G|$. Thus, in this case, $|C|=p^cq^d$ for $c\leq a$ and $d\leq b$. Moreover, by Theorem 2, $c,d\geq 1$. (If one equalled zero and the other did not, $|C|$ would be of prime power order and $G$ could not be simple, a contradiction.) Thus, the order of any conjugacy class in $G$ either equals 1 or is divisible by $pq$.\par
         It follows that the sum in the above equation is divisible by $pq$. Thus,
         \begin{equation*}
             \frac{1}{pq} = \Bigg( \underbrace{p^{a-1}q^{b-1}\vphantom{\sum_{|C|>1}}}_{\in\Z}-\underbrace{\frac{1}{pq}\sum_{|C|>1}|C|}_{\in\Z} \Bigg)
@@ -683,10 +703,51 @@
     \item We will have to prove some parts of Burnside's theorem on the final. This is important because it's so complicated with so much stuff going on that you really have to learn everything by heart before you can understand it.
     \item Midterm.
     \begin{itemize}
-        \item Computation of character tables, find a character tables, compute wedge pwoers, tensor powers, symmetric powers, etc. Compute all this elementary stuff and then a few more complicated problems. We'll get an explicit list of topics. Construct character table for symmetries of a square, etc. Make sure you can construct the character table for $S_4$, etc. Can you sit and from scratch make a character table for $S_5$? If you can, you'll have no problem on the midterm.
+        \item Computation of character tables, find a character tables, compute wedge powers, tensor powers, symmetric powers, etc. Compute all this elementary stuff and then a few more complicated problems. We'll get an explicit list of topics. Construct character table for symmetries of a square, etc. Make sure you can construct the character table for $S_4$, etc. Can you sit and from scratch make a character table for $S_5$? If you can, you'll have no problem on the midterm.
     \end{itemize}
     \item Next HW is not for submission; it's just a few practice problems.
-    \item Next week: Old works by Spacht, which nobody thinks is useful but Rudenko. He thinks it's beautiful, though. Very 19th century feel. Then induction/restriction, and another approach using symmetric polynomials, etc.
+    \item Next week: Old works by Specht, which nobody thinks is useful but Rudenko. He thinks it's beautiful, though. Very 19th century feel. Then induction/restriction, and another approach using symmetric polynomials, etc.
+\end{itemize}
+
+
+
+\section{L Chapter XVIII: Representations of Finite Groups}
+\emph{From \textcite{bib:Lang}.}
+\setcounter{Lsection}{4}
+\begin{itemize}
+    \item \marginnote{11/11:}Section 4, Proposition 4.1 covers the proof of the first claim from Monday's class.
+    \begin{Lproposition}\marginnote{\textup{12/26:}}
+        An element of $k[G]$ commutes with every element of $G$ if and only if it is a linear combination of conjugacy classes with coefficients in $k$.
+        \begin{proof}
+            Let $\alpha=\sum_{\sigma\in G}a_\sigma\sigma$ and assume $\alpha\tau=\tau\alpha$ for all $\tau\in G$. Then
+            \begin{equation*}
+                \sum_{\sigma\in G}a_\sigma\tau\sigma\tau^{-1} = \sum_{\sigma\in G}a_\sigma\sigma
+            \end{equation*}
+            Hence $a_{\sigma_0}=a_\sigma$ whenever $\sigma$ is conjugate to $\sigma_0$, and this means that we can write
+            \begin{equation*}
+                \alpha = \sum_\gamma a_\gamma\gamma
+            \end{equation*}
+            where the sum is taken over all conjugacy classes $\gamma$.
+        \end{proof}
+    \end{Lproposition}
+\end{itemize}
+
+
+
+\section{S Chapter 6: The Group Algebra}
+\emph{From \textcite{bib:Serre}.}
+\begin{itemize}
+    \item \marginnote{11/12:}Covers some relevant topics from this week.
+    \item Section 6.5, Corollary 2 is the Frobenius divisibility theorem.
+\end{itemize}
+
+
+
+\section{E Chapter 5: Representations of Finite Groups --- Further Results}
+\emph{From \textcite{bib:Etingof}.}
+\begin{itemize}
+    \item Section 5.3 covers Frobenius divisibility.
+    \item Section 5.4 covers Burnside's theorem (very much the way we did it in class!).
 \end{itemize}
 
 

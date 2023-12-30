@@ -10,30 +10,33 @@
 
 
 \chapter{Representations of the Symmetric Group}
-\section{Specht Modules}
+\section{Partitions, Young Diagrams, and Specht Modules}
 \begin{itemize}
     \item \marginnote{11/6:}Announcements.
     \begin{itemize}
         \item Midterm description is on the Canvas page.
-        \item Review what he says to review, and then look at the PSets. The operator averaging stuff and $S_4$, $S_5$ examples are most important.
+        \item Review it then PSets. The operator averaging stuff and $S_4$, $S_5$ examples are most important.
         \item New HW will be due next Friday (not this Friday).
     \end{itemize}
     \item New topic: Representations of $S_n$.
     \begin{itemize}
-        \item We will talk about these almost until the end of the course.
-        \item Very hard.
-        \item Any specialist in rep theory will still say that they know some approaches, but nobody understands this stuff completely.
+        \item We will talk about these almost until the end of the course; very hard.
+        \item Any specialist in rep theory will say that they know some approaches, but nobody understands this stuff completely.
         \item We'll explore some phenomena, but if we feel after this course that we still don't understand everything about $S_n$, that's typical; if we think we understand everything, we're probably wrong.
     \end{itemize}
-    \item Representation theory of $GL_n(\F_{p^k})$ is related but even worse.
+    \item Aside: Representation theory of $GL_n(\F_{p^k})$ is related but even worse.
     \begin{itemize}
         \item Same with $O_n(\F_{p^k})$.
-        \item Recently, all this stuff was understood with something called linquistic (??) theory, but that's far beyond us.
+        \item Recently, all this stuff was understood with something called \textbf{linguistic theory} (right name??), but that's far beyond us.
     \end{itemize}
-    \item $|S_n|=n!$, and the conjugacy classes are in bijection with cyclic structures of a permutation.
+    \item Let's begin. What do we know about $S_n$?
     \begin{itemize}
-        \item Our good understanding of the conjugacy classes of $S_n$ is the only thing that makes this problem the slightest bit tractable.
-        \item Cyclic structures are also in bijection with the \textbf{partitions} of a number; recall that we briefly talked about these in MATH 25700!
+        \item $|S_n|=n!$.
+        \item The conjugacy classes of $S_n$ are in bijection with cyclic structures of a permutation.
+        \begin{itemize}
+            \item Our good understanding of the conjugacy classes of $S_n$ is the only thing that makes this problem the slightest bit tractable.
+        \end{itemize}
+        \item These cyclic structures are also in bijection with the \textbf{partitions} of a number; recall that we briefly talked about partitions in MATH 25700!
     \end{itemize}
     \item \textbf{Partition} (of $n\in\N$): An ordered tuple satisfying the following constraints. \emph{Denoted by} $\bm{\lambda}$, $\bm{(\lambda_1,\ldots,\lambda_k)}$. \emph{Constraints}
     \begin{enumerate}
@@ -54,7 +57,7 @@
         \sum_{n\geq 1}p(n)x^n = 1+x+2x^2+3x^3+5x^4+\cdots
     \end{equation*}
     \begin{itemize}
-        \item We can think of the above generating function as an actual function of $x$ if it converges for small $x$; of it doesn't converge, then we just think of it as a "meaningless" \textbf{formal power series}.
+        \item We can think of the above generating function as an actual function of $x$ if it converges for small $x$; if it doesn't converge, then we just think of it as a "meaningless" \textbf{formal power series}.
         \item To choose a partition, we need to choose a certain number of 1's, a certain number of 2's, a certain number of 3's, etc. all the way up to $n$.
         \item So let's look at
         \begin{equation*}
@@ -115,12 +118,12 @@
         \item We can see that $\lambda_1'\geq\cdots\geq\lambda_k'$.
         \item We can also see that the sum will still be $n$.
         \item Moreover, if we do this twice, we'll get back to $\lambda$, i.e., $(\lambda')'=\lambda$.
-        \item We can prove $(\lambda')'=\lambda$ combinatorially, too, (that is, without Young diagrams) but that gets pretty complicated.
+        \item We can prove $(\lambda')'=\lambda$ combinatorially, too, (that is, without Young diagrams) but that gets pretty complicated. We will do this in the HW.
     \end{itemize}
     \item Example: If $\lambda=(5,4,4,3,2,1,1)$ as above, then $\lambda'=(7,5,4,3,1)$.
     \begin{itemize}
         \item See Figure \ref{fig:youngDiagram20b}.
-        \item Moreover, the Young diagrams are related by a flip akin to matrix transposition.
+        \item The Young diagrams are related by a flip, akin to matrix transposition!
         \item Notice how the definition of inversion \emph{exactly} specifies this flip in the picture: The number of $\lambda_j$'s that have length at least 1 is all the first column of Figure \ref{fig:youngDiagram20a}, the number of length at least 2 is all the second column, etc.
     \end{itemize}
     \item Onto the next question, which is the main miracle.
@@ -132,7 +135,7 @@
             \item If you understand why intuitively, you will have started to understand the representation theory of $S_n$.
         \end{itemize}
     \end{itemize}
-    \item If we define $\lambda\mapsto n$ (??), then there is some irrep $V_\lambda$ corresponding to $\lambda$. We will look at the \textbf{Specht module} construction of $V_\lambda$.
+    \item Let $\lambda\vdash n$.\footnote{"Lambda partitions en."} Then there is some irrep $V_\lambda$ corresponding to $\lambda$. We will look at the \textbf{Specht module} construction of $V_\lambda$.
     \begin{itemize}
         \item Some of the proofs Rudenko will present, he stole from \textcite{bib:Etingof}, and some of the proofs he invented himself.
         \item This is \emph{by far} the best construction, even though it's exceedingly rare in the literature.
@@ -156,12 +159,12 @@
                 A_m = \left\{ \sum_{k_1+\cdots+k_n=m}a_{k_1\cdots k_n}x_1^{k_1}\cdots x_n^{k_n} \right\}
             \end{equation*}
             \begin{itemize}
-                \item I.e., $A_m$ is the sum of all polynomials with degree equal to $m$.
+                \item I.e., $A_m$ is the sum of all polynomials with \textbf{degree} equal to $m$.
                 \item Example: If we take $1+x_1^2x_2^3+x_1x_2+x_1^{100}+x_1x_2^{99}$, we can then break this polynomial up into polynomials of degree 1, 5, 2, and 100.
             \end{itemize}
             \item We also have $A_{m_1}\cdot A_{m_2}\subset A_{m_1+m_2}$.
             \begin{itemize}
-                \item Exmaple: $x_1x_2^2\cdot(x_1+x_2)=x_1^2x_2^2+x_1x_2^3$.
+                \item Example: $x_1x_2^2\cdot(x_1+x_2)=x_1^2x_2^2+x_1x_2^3$.
             \end{itemize}
         \end{itemize}
         \item With this algebra in hand, we may let $S_n\acts\Q[x_1,\dots,x_n]$ via
@@ -179,7 +182,7 @@
         \end{itemize}
         \item Then $A_2=S^2V^*$.
         \begin{itemize}
-            \item So if $A_1$ had basis $e^1,\dots,e^m$, $A_2$ has basis $e^ie^j$.
+            \item So if $A_1$ had basis $e^1,\dots,e^m$, $A_2$ has basis $\{e^ie^j\}$.
             \item Why are we choosing these sets??
         \end{itemize}
         \item Continuing, $A_3=S^3V^*$.
@@ -192,20 +195,27 @@
         \end{itemize}
     \end{itemize}
     \item \textbf{Graded} (algebra): An algebra for which the underlying additive group is a direct sum of abelian groups $A_i$ such that $A_iA_j\subset A_{i+j}$.
+    \item \textbf{Degree} (of a monomial $P$): The sum of the powers of its variables. \emph{Denoted by} $\bm{d(P)}$.
+    \begin{itemize}
+        \item Example: If $P=x_1^3x_2^4$, then $d(P)=2+3=5$.
+    \end{itemize}
+    \item \textbf{Degree} (of a polynomial $P$): The greatest degree of each of its monomials. \emph{Denoted by} $\bm{d(P)}$.
     \item So how do we construct representations?
     \begin{itemize}
         \item For $S_2$, $x_1-x_2$ changes sign when we apply $S_2$.
         \item For $S_3$\dots
         \begin{itemize}
-            \item The trivial's polynomial is 1 and \emph{tableaux}.
+            \item The trivial's polynomial is 1 and \ydiagram{3}.
             \item The standard is $(2,1)$. When we apply $S_3$ to $(x_1-x_2)$, we get
             \begin{equation*}
                 \langle (x_1-x_2),(x_2-x_1),(x_1-x_3),(x_3-x_1),(x_2-x_3),(x_3-x_2) \rangle
             \end{equation*}
             \begin{itemize}
-                \item If we let $a=x_1-x_2$, $b=x_2-x_3$, then some elements equal $a+b$. This is another way to think about the action.
+                \item If we let $a=x_1-x_2$, $b=x_2-x_3$, then the third element equals $a+b$.
+                \item Similarly, the the second element equals $-a$, the fourth element equals $-a-b$, and the sixth element equals $-b$.
+                \item This is another way to think about the action.
             \end{itemize}
-            \item What about the alternating representation? We have $(x_1-x_2)(x_2-x_3)(x_1-x_3)=\Delta_{123}$, which changes sign when we apply any element with sign $-1$!
+            \item What about the alternating representation? We have $(x_1-x_2)(x_2-x_3)(x_1-x_3)=\Delta_{123}$, which changes sign when we use any element with sign $-1$ to permute the $x_i$!
         \end{itemize}
         \item For $S_4$\dots
         \begin{itemize}
@@ -225,17 +235,17 @@
                 \end{equation*}
                 \item This formula appears in \textbf{cross ratios}, which we can discuss in Rudenko's algebraic geometry course next quarter.
             \end{itemize}
-            \item For $\lambda=(4,3,1)$, we have $\Delta_{123}\Delta_{45}\Delta_{67}$, and we act by $S_8$ upon this! Explicitly, we have $S_8(x_1-x_2)(x_1-x_3)(x_2-x_3)(x-4-x_5)(x_6-x_7)$.
+            \item For $\lambda=(4,3,1)$, we have $\Delta_{123}\Delta_{45}\Delta_{67}$, and we act by $S_8$ upon this! Explicitly, we have $S_8(x_1-x_2)(x_1-x_3)(x_2-x_3)(x_4-x_5)(x_6-x_7)$.
             \item Takeaway: It all depends on column length!
         \end{itemize}
         \item These polynomials are called \textbf{Vandermonde determinants}; those are the little $\Delta$ things with subscripts. We'll talk about these next times.
     \end{itemize}
-    \item We need to prove reducibility and not pairwise isomorphic to make sure that this construction is valid, but that's easy!
+    \item We need to prove reducibility and not pairwise isomorphic to make sure that this construction is valid, but that's easy! We'll do this next Monday.
 \end{itemize}
 
 
 
-\section{Vandermonde Determinants}
+\section{Symmetric Polynomials; Vandermonde Determinants}
 \begin{itemize}
     \item \marginnote{11/8:}Announcements.
     \begin{itemize}
@@ -272,9 +282,9 @@
         &\dots&
         a_0 &= (-1)^n\sigma_n
     \end{align*}
-    \item Fundamental theorem.
+    \item Intro to the fundamental theorem of symmetric polynomials.
     \begin{itemize}
-        \item Basic statement: Every polynomial is a polynomial in these polynomials.
+        \item Basically: Every symmetric polynomial is a polynomial in the elementary symmetric polynomials.
         \item A more precise statement follows.
     \end{itemize}
     \item Theorem (Fundamental theorem of symmetric polynomials): We have that
@@ -284,10 +294,10 @@
     \item Before we prove the fundamental theorem, there are a few points we need to discuss.
     \item Example:
     \begin{itemize}
-        \item Take $x^2+px+q=0$.
-        \item If it has two roots $x_1,x_2$, then $\sigma_1=x_1+x_2=-p$ and $\sigma_2=x_1x_2=q$.
-        \item Then $x_1^2+x_2^2=\sigma_1^2-2\sigma_2^2=p^2-2q$.
-        \item Thus, if we take $(x_1-x_2)^2=(x_1+x_2)^2-4x_1x_2=\sigma_1^2-4\sigma_2=p^2-4q$, which is the discriminant.
+        \item Consider the polynomial $x^2+px+q=0$.
+        \item Let $x_1,x_2$ denote its roots. Then $\sigma_1=x_1+x_2=-p$ and $\sigma_2=x_1x_2=q$.
+        \item We may observe that $x_1^2+x_2^2=\sigma_1^2-2\sigma_2^2=p^2-2q$.
+        \item We may observe that $(x_1-x_2)^2=(x_1+x_2)^2-4x_1x_2=\sigma_1^2-4\sigma_2=p^2-4q$, where the rightmost term is the discriminant of the original polynomial.
         \item In general, $x_1^n+x_2^n$ has an expression as a polynomial in $\sigma_1,\sigma_2$. This will be a homework problem.
         \item What is going on here?? Is $x^2+px+q$ even in $\Q[x]^{S_n}$? If so, why do we factor it into $\sigma_1,\sigma_2$ instead of just $\sigma$? What are the other examples about?
     \end{itemize}
@@ -329,9 +339,11 @@
     \end{enumerate}
     \item Lemma: If $P\in\Q[x_1,\dots,x_n]^{S_n}$ and $LM(P)=x_1^{a_1}\cdots x_n^{a_n}$, then $a_1\geq\cdots\geq a_n$.
     \begin{proof}
-        Let $i<j$. Suppose for the sake of contradiction that $a_j>a_i$. Let $\sigma=(ij)\in S_n$. Since $P$ is symmetric, $\sigma P=P$. But then in particular, the monomial $\sigma LM(P)$ in $P$ is lexicographically larger than $LM(P)$. Thus, $LM(P)$ is not the lexicographically largest monomial in $P$, a contradiction.\par
-        Here's a simple example to illustrate the idea behind this proof: Let $P=x^2y+xy^2\in\Q[x,y]^{S_n}$. Suppose we pick $LM(P)=xy^2$ (obviously this is the wrong choice, but that's the contradiction we'll see). We observe that $2=a_2>a_1=1$ in this case. Let $\sigma=(12)$. Then $\sigma LM(P)=yx^2=x^2y\succ xy^2=LM(P)$. So $\sigma LM(P)\succ LM(P)$. Thus, $LM(P)$ is not the lexicographically largest monomial in $P$, and we have \emph{formally} proven that our initial choice of $LM(P)$ was incorrect.
+        Let $i<j$. Suppose for the sake of contradiction that $a_i<a_j$. Let $\sigma=(ij)\in S_n$. Since $P$ is symmetric, $\sigma P=P$. But then in particular, the monomial $\sigma LM(P)$ in $P$ is lexicographically larger than $LM(P)$. Thus, $LM(P)$ is not the lexicographically largest monomial in $P$, a contradiction.
     \end{proof}
+    \begin{itemize}
+        \item Here's a simple example to illustrate the idea behind this proof: Let $P=x^2y+xy^2\in\Q[x,y]^{S_n}$. Suppose we pick $LM(P)=xy^2$ (obviously this is the wrong choice, but that's the contradiction we'll see). We observe that $2=a_2>a_1=1$ in this case. Let $\sigma=(12)$. Then $\sigma LM(P)=yx^2=x^2y\succ xy^2=LM(P)$. So $\sigma LM(P)\succ LM(P)$. Thus, $LM(P)$ is not the lexicographically largest monomial in $P$, and we have \emph{formally} proven that our initial choice of $LM(P)$ was incorrect.
+    \end{itemize}
     \item We now have everything we need to prove the fundamental theorem. As such, we will restate and prove it.
     \item Theorem (Fundamental theorem of symmetric polynomials): We have that
     \begin{equation*}
@@ -377,7 +389,7 @@
         Since $C_{LM}(P)\in\Q$ and $Q\in\Q[x_1,\dots,x_n]^{S_n}$, it also follows that $P-C_{LM}(P)\cdot Q\in\Q[x_1,\dots,x_n]^{S_n}$. But then by the assumption that $P$ was the counterexample with smallest $LM$, we know that $P-C_{LM}(P)\cdot Q\in\Q[\sigma_1,\dots,\sigma_n]$. It follows that $P\in\Q[\sigma_1,\dots,\sigma_n]$, a contradiction.
     \end{proof}
     \item Note: This is an effective proof; we can write an algorithm to do this for us, and it's actually pretty fast and efficient.
-    \item ?? (\emph{word in blackboard picture}) to show: $\sigma_1,\dots,\sigma_n$ are algebraically independent $P(\sigma_1,\dots,\sigma_n)=0$ implies that $P=0$.
+    \item Remain to show: $\sigma_1,\dots,\sigma_n$ are algebraically independent $P(\sigma_1,\dots,\sigma_n)=0$ implies that $P=0$.
     \begin{itemize}
         \item This will be a homework problem; hint, it's pretty easy.
     \end{itemize}

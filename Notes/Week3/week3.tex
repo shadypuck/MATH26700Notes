@@ -9,8 +9,8 @@
 
 
 
-\chapter{Character Theory}
-\section{Characters}
+\chapter{Characters}
+\section{Defining Characters}
 \begin{itemize}
     \item \marginnote{10/9:}Today, we talk about \textbf{characters}, arguably the most important idea in rep theory.
     \item As per usual, we begin by letting $G$ a finite group.
@@ -72,7 +72,7 @@
                     \item For example, if $G=S_3$, we know since $(23)(123)^2=(12)$ that
                     \begin{align*}
                         2+3(12)+i(123)+(-3+7i)(23)(123)^2 &= 2+[3+(-3+7i)](12)+i(123)\\
-                        &= 2+7i(12)+i(123)
+                        &= 2e+7i(12)+i(123)
                     \end{align*}
                 \end{itemize}
                 \item Such a polynomial is then easily mapped onto a complex-valued function by sending each $g_i$ to its coefficient $a_{g_i}$.
@@ -90,6 +90,7 @@
                     \end{align*}
                 \end{itemize}
                 \item Thus, $\C[G]$ (as a space of polynomials) is canonically isomorphic to $\C[G]$ (as a space of complex-valued functions on $G$), so the notation is well chosen.
+                \item What do we do for multiplication?? Because functions multiply pointwise but polynomials do not. It appears that we typically go with polynomial multiplication (but not always, potentially; see the claim from Lecture 6.1). \href{https://math.stackexchange.com/questions/2423220/thinking-about-the-group-algebra-kg-as-functions-on-g}{MSE} also supports polynomial multiplication. Perhaps $\C[G]$ for this function space with pointwise multiplication is just really misleading notation?
             \end{itemize}
             \item Inside this space, there is the subspace $\C_\text{cl}[G]$ of functions $f:G\to\C$ such that $f(xgx^{-1})=f(g)$ for all $x,g\in G$. These are functions from the sets of conjugacy classes, isomorphic to functions that are constant on conjugacy classes. $\dim\C_\text{cl}[G]$ is the number of conjugacy classes.
             \item Thus, for every $V$ a $G$-rep, we get a vector $\chi_V\in\C_\text{cl}[G]$. These class functions form a basis of the space; each $\chi_V$ for $V$ an irrep forms a linearly independent vector; the set is an \emph{orthogonal} basis. This is the reason for the original theorem holding true!
@@ -1050,7 +1051,7 @@
     \end{equation*}
     where $\phi$ is the character of $V=W_1^{m_1}\oplus\cdots\oplus W_h^{m_h}$.
     \item An \textbf{irreducibility criterion} based on Corollary 2 from Friday's class.
-    \begin{theorem}
+    \begin{theorem}\label{trm:irrepCriterion}
         If $\phi$ is the character of a representation $V$, $(\phi\mid\phi)$ is a positive integer and we have $(\phi\mid\phi)=1$ if and only if $V$ is irreducible.
         \begin{proof}
             See class.
