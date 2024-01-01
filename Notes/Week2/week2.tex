@@ -1291,30 +1291,97 @@
         \begin{itemize}
             \item Easily done with \textbf{character theory}, but we'll only get there later.
         \end{itemize}
-        \item Since the representation theory of finite abelian groups was jut proven to be very simple, we'll start by looking at the action of the finite abelian subgroup $A_3=\Z/3\Z\subset S_3$ on $W$.
+        \item Since the representation theory of finite abelian groups was just proven to be very simple, we'll start by looking at the action of the finite abelian subgroup $A_3\cong\Z/3\Z\subset S_3$ on $W$.
         \begin{itemize}
             \item Let $\tau$ be a generator of $A_3$. Explicitly, this means $\tau=(1,2,3)$ or $\tau=(1,3,2)$.
-            \item Then $W$ is spanned by eigenvectors $v_1,\dots,v_n$ of $\tau$ (why?? Schur's Lemma part 2? Relation to classification of abelian groups?) with corresponding eigenvalues $\omega=\e[2\pi i/3]$.
-            \item Thus, $W=\bigoplus V_i$ where $V_i=\C v_i$ and $\tau v_i=\omega^{\alpha_i}v_i$.
-            \item An example representation of $A_3$ (in the chemistry sense) is
+            \item By complete reducibility (Proposition \ref{prp:completeReducibility}), $W$ decomposes into a direct sum of irreducible representations:
             \begin{equation*}
+                W = \bigoplus V_i
+            \end{equation*}
+            \item Since $A_3$ is abelian, each $V_i$ is one-dimensional. Thus, we may let $V_i=\spn(v_i)$.
+            \item As subrepresentations of $W$, each $V_i$ is stable under $\rho_W(\tau)$. In other words, each $v_i$ is an \emph{eigenvector} of $\rho_W(\tau)$. Thus, the eigenvectors of $\rho_W(\tau)$ span $W$!\footnote{Errata: This implication is very confusingly reversed in \textcite{bib:FultonHarris}.}
+            \item What are the corresponding eigenvalues? Let $\omega$ denote the eigenvalue corresponding to $v_i$. Then
+            \begin{align*}
+                \omega^3v_i &= [\rho_W(\tau)]^3v_i = \rho_W(\tau^3)v_i = \rho_W(e)v_i = 1v_i\\
+                \omega^3 &= 1\\
+                \omega &= \left( \e[2\pi i/3] \right)^j
+            \end{align*}
+            where $j=0,1,2$.
+        \end{itemize}
+        \item Here are two example representations of $A_3$.
+        \begin{enumerate}
+            \item The permutational representation of $A_3$ is given by
+            \begin{align*}
+                \rho_{\C^3}(e) &=
+                \begin{bmatrix}
+                    1 & 0 & 0\\
+                    0 & 1 & 0\\
+                    0 & 0 & 1\\
+                \end{bmatrix}&
+                \rho_{\C^3}(\tau) &=
+                \begin{bmatrix}
+                    0 & 0 & 1\\
+                    1 & 0 & 0\\
+                    0 & 1 & 0\\
+                \end{bmatrix}&
+                \rho_{\C^3}(\tau^2) &=
+                \begin{bmatrix}
+                    0 & 1 & 0\\
+                    0 & 0 & 1\\
+                    1 & 0 & 0\\
+                \end{bmatrix}
+            \end{align*}
+            \begin{itemize}
+                \item Note here that the eigenvalues and corresponding eigenvectors of $\rho_{\C^3}(\tau)$ are
+                \begin{align*}
+                    \lambda_1 &= 1&
+                        \lambda_2 &= \e[2\pi i/3]&
+                            \lambda_3 &= \e[4\pi i/3]\\
+                    v_1 &=
+                    \begin{bmatrix}
+                        1\\
+                        1\\
+                        1\\
+                    \end{bmatrix}&
+                        v_2 &=
+                        \begin{bmatrix}
+                            \e[2\pi i/3]\\
+                            1\\
+                            \e[4\pi i/3]\\
+                        \end{bmatrix}&
+                            v_3 &=
+                            \begin{bmatrix}
+                                1\\
+                                \e[2\pi i/3]\\
+                                \e[4\pi i/3]\\
+                            \end{bmatrix}
+                \end{align*}
+            \end{itemize}
+            \item Separately, we have
+            \begin{align*}
+                \rho_{\C^n}(e) &=
                 \begin{bmatrix}
                     1 & \cdots & 0\\
                     \vdots & \ddots & \vdots\\
                     0 & \cdots & 1\\
-                \end{bmatrix},\
+                \end{bmatrix}&
+                \rho_{\C^n}(\tau) &=
                 \begin{bmatrix}
                     \e[2\pi i/3] & \cdots & 0\\
                     \vdots & \ddots & \vdots\\
                     0 & \cdots & \e[2\pi i/3]\\
-                \end{bmatrix},\
+                \end{bmatrix}&
+                \rho_{\C^n}(\tau^2) &=
                 \begin{bmatrix}
                     \e[4\pi i/3] & \cdots & 0\\
                     \vdots & \ddots & \vdots\\
                     0 & \cdots & \e[4\pi i/3]\\
                 \end{bmatrix}
-            \end{equation*}
-        \end{itemize}
+            \end{align*}
+            \begin{itemize}
+                \item Here, every vector is an eigenvector and there are infinitely many decompositions into direct sums of the one-dimensional representations.
+            \end{itemize}
+        \end{enumerate}
         \item Now we want to see how the remainder of $S_3$ acts on $W$.
         \begin{itemize}
             \item Let $\sigma$ be an arbitrary transposition in $S_3$.
@@ -1326,9 +1393,9 @@
                 = \sigma(\omega^{2j}v)
                 = \omega^{2j}\sigma(v)
             \end{equation*}
-            Takeaway: $v$ an eigenvector for $\tau$ with eigenvalue $\omega^j$ implies $\sigma(v)$ an eigenvector for $\tau$ with eigenvalue $\omega^{2j}$.
+            \item Takeaway: $v$ an eigenvector for $\tau$ with eigenvalue $\omega^j$ implies $\sigma(v)$ an eigenvector for $\tau$ with eigenvalue $\omega^{2j}$.
         \end{itemize}
-        \item Exercise 1.10 (A basis for the standard representation of $S_3$): Verify that with $\sigma=(12)$ and $\tau=(123)$, the standard representation has a basis $\alpha=(\omega,1,\omega^2),\beta(1,\omega,\omega^2)$, with
+        \item Exercise 1.10 (A basis for the standard representation of $S_3$): Verify that with $\sigma=(12)$ and $\tau=(123)$, the standard representation has a basis $\alpha=(\omega,1,\omega^2),\beta=(1,\omega,\omega^2)$, with
         \begin{align*}
             \tau\alpha &= \omega\alpha&
             \tau\beta &= \omega^2\beta&
@@ -1360,16 +1427,50 @@
             \end{equation*}
             for instance, as predicted.
             \item Note that both $\alpha,\beta$ are orthogonal to $(1,1,1)$, but while they are linearly independent, they are not orthogonal to each other. This is fine, because they're computationally simple, but it is noteworthy.
+            \item Also note that we derived $\alpha,\beta$ as eigenvalues $v_2,v_3$ of the permutational representation just above!
         \end{itemize}
-        \item The difference in eigenvalues between $v$ and $\sigma(v)$ indicates that these vectors are \emph{not} linearly dependent.
+        \item If the eigenvalue $\omega$ of $v$ is not equal to 1, then the eigenvalue $\omega^2$ of $\sigma(v)$ is not equal to 1.
+        \item Thus, if the eigenvalue of $v$ is not 1, then $v$ and $\sigma(v)$ are linearly independent (two linearly dependent eigenvectors necessarily have the same eigenvalue).
         \begin{itemize}
-            \item Rather, they span a 2D subspace $V'$ that is invariant under $S_3$!! This is because $v=\sigma(\sigma(v))$ as well.
+            \item Indeed, in this case, $v$ and $\sigma(v)$ span a 2D subspace $V'$ that is invariant under $S_3$!! This is because $v=\sigma(\sigma(v))$ as well.
             \item In fact, $V'$ is isomorphic to the standard representation!
+            \item Note that $V'$ does not decompose further because any eigenvectors of $\tau$ are not eigenvectors of $\sigma$ and vice versa (see below computation of the eigenvectors of $\sigma$).
         \end{itemize}
-        \item What if the eigenvalue of $v$ is 1?
+        \item What if the eigenvalue of $v$ (under $\tau$) is 1?
         \begin{itemize}
             \item If $\sigma(v)$ is not linearly independent of $v$, then the two span a 1D subrepresentation of $W$, isomorphic to the trivial representation (if $\sigma(v)=v$) and isomorphic to the alternating representation (if $\sigma(v)=-v$).
-            \item If $\sigma(v)$ is linearly independent of $v$, then $v+\sigma(v)$ spans a 1D subrepresentation of $W$ isomorphic to the trivial representation and $v-\sigma(v)$ spans a 1D subrepresentation of $W$ isomorphic to the alternating representation. 
+            \begin{itemize}
+                \item How we know that only the trivial and alternating representations are possible: If $\sigma(v)\in\spn(v)$, then $v$ is an eigenvector of $\sigma$. Thus, $\sigma(v)=\lambda v$. Since $\lambda^2v=\sigma^2(v)=e(v)=v$, we know that $\lambda^2=1$, so $\lambda=\pm 1$.
+            \end{itemize}
+            \item If $\sigma(v)$ is linearly independent of $v$, then $v+\sigma(v)$ spans a 1D subrepresentation of $W$ isomorphic to the trivial representation and $v-\sigma(v)$ spans a 1D subrepresentation of $W$ isomorphic to the alternating representation.
+            \begin{itemize}
+                \item If the eigenvalue of $v$ under $\tau$ is 1, then the eigenvalue of $\sigma(v)$ under $\tau$ is $1^2=1$. Thus, $\tau$ is the identity map on $\spn[v,\sigma(v)]$.
+                \item On the other hand, in the basis $\{v,\sigma(v)\}$, we can represent $\sigma$ with the matrix
+                \begin{equation*}
+                    \begin{bmatrix}
+                        0 & 1\\
+                        1 & 0\\
+                    \end{bmatrix}
+                \end{equation*}
+                \item This matrix has eigenvalues and corresponding eigenvectors
+                \begin{align*}
+                    \lambda_1 &= 1&
+                        \lambda_2 &= -1\\
+                    v_1 &=
+                    \begin{bmatrix}
+                        1\\
+                        1\\
+                    \end{bmatrix}
+                    = v+\sigma(v)&
+                        v_2 &=
+                        \begin{bmatrix}
+                            1\\
+                            -1\\
+                        \end{bmatrix}
+                        = v-\sigma(v)
+                \end{align*}
+                \item Thus, we see that the 2D subrepresentation spanned by $v,\sigma(v)$ decomposes into a trivial ($\lambda_1=1$, $v_1=v+\sigma(v)$) and alternating ($\lambda_2=-1$, $v_2=v-\sigma(v)$) irreducible representation.
+            \end{itemize}
         \end{itemize}
         \item It follows that the only three irreps of $S_3$ are the trivial, alternating, and standard ones.
     \end{itemize}
