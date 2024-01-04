@@ -117,7 +117,7 @@
         \end{equation*}
         \begin{itemize}
             \item So we have a ring that's hard to understand, but if we do something called an \textbf{extension of scalars} (shown above) we get an easy ring!
-            \item Why?? Clarify this construction.
+            \item Why?? Clarify this construction.\footnote{See Week 9 OH (Section \ref{sse:OH9}).}
         \end{itemize}
         \item This is interesting because we can look at the intermediate objects. For example, could we describe $R(G)\otimes\R$ or $R(G)\otimes\Q$. Interestingly, \textbf{Artin's theorem} describes $R(G)\otimes\Q$ completely.
         \item If we try to understand $R(S_n)$, this is still hard work, but if we take $\bigoplus_{n\geq 0}R(S_n)$, we obtain an object that is remarkably, surprisingly simple. That's where we're going. This is why rep theory of finite groups is simultaneously very hard and very simple.
@@ -150,14 +150,17 @@
     \item Another comment: A slightly refined question.
     \begin{itemize}
         \item Suppose you have a class function $f$ and an irrep $V$.
-        \item Then we know that $F=\sum f(g)g:V\to V$ is a $G$-morphism, so it is a \textbf{homothety} by Schur's lemma.
-        \item So let's find $\lambda$.
-        \item Thinking a big more carefully, we know that $F$ above is
+        \item Then by the lemma, $F=\sum f(g)g:V\to V$ is a $G$-morphism.
+        \item Thus, it is a \textbf{homothety} by Schur's lemma, i.e.,
         \begin{equation*}
             \sum_{g\in G}f(g)\rho_V(g)
             = \lambda I_{d_V}
         \end{equation*}
         where $d_V$ denotes the \textbf{degree} of $V$.
+        \begin{itemize}
+            \item It's basically tautological, but the following may help.
+            \item Note that we choose the $d_V$-dimensional identity matrix because $\rho_V(g)$ acts on $V$ (which has $\dim V=d_V$), so we need the identity map that does the same.
+        \end{itemize}
         \item Now, we will compute $\lambda$ using the trace. Take the trace of both sides. Then
         \begin{align*}
             \tr(\sum_{g\in G}f(g)\rho_V(g))
@@ -230,7 +233,7 @@
         \item What is the change of basis matrix between $\{\delta_{C_i}\}$ and $\{\chi_{V_i^*}\}$? It's the character table.
         \begin{itemize}
             \item The orthogonality condition for characters then just comes from the fact that we're going from one orthogonal basis to another.
-            \item What are the exact bases we change between??
+            \item What are the exact bases we change between??\footnote{See Week 9 OH (Section \ref{sse:OH9}).}
         \end{itemize}
     \end{itemize}
 \end{itemize}
@@ -348,6 +351,7 @@
     \item \textbf{Isotypical component}: A representation that is equal to the direct sum of isomorphic irreducible representations. \emph{Also known as} \textbf{isotypic component}.
     \begin{itemize}
         \item Illustrative example: For $V=V_1^{n_1}\oplus\cdots\oplus V_k^{n_k}$, each $V_i^{n_i}$ is an isotypical component.
+        \item Think "iso" "typical" = "same" "type" (of component).
     \end{itemize}
     \item Examples.
     \begin{enumerate}

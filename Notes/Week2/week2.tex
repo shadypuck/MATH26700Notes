@@ -26,7 +26,7 @@
     \begin{itemize}
         \item Rudenko will skim through tensor products really quickly.
     \end{itemize}
-    \item Reminder: Last time, we talked about how representation theory is really quite simple. If $G$ is a finite group and $F=\C$, there exist a finite set $V_1,\dots,V_s$ of irreps up to isomorphism, and every finite-dimensional representation $V\cong V_1^{n_1}\oplus\cdots\oplus V_s^{n_s}$.
+    \item Reminder: Last time, we talked about how representation theory is really quite simple. If $G$ is a finite group and $\F=\C$, there exist a finite set $V_1,\dots,V_s$ of irreps up to isomorphism, and every finite-dimensional representation $V\cong V_1^{n_1}\oplus\cdots\oplus V_s^{n_s}$.
     \item If $V$ is a representation of $G$, then there are loads of things we can do with it.
     \begin{itemize}
         \item We can construct the dual representation $V^*$.
@@ -37,13 +37,13 @@
     \end{itemize}
     \item Even when we take a very simple group and representation, there are some very interesting things that can fall out.
     \begin{itemize}
-        \item Example: If you take the symmetric powers of $S_3$, as in the homework, you get something really interesting.
+        \item Example: If you take the symmetric powers of $S_3$ --- as in PSet 1, Q4 --- you get something really interesting.
     \end{itemize}
     \item Now, we go to linear algebra.
     \item Let $V,W$ be vector spaces over a field $F$. How do we produce a new vector space out of these?
-    \item $\Hom_F(V,W)$ is the vector space of linear maps $F:V\to W$!
+    \item $\Hom_F(V,W)$ is the vector space of linear maps $f:V\to W$!
     \begin{itemize}
-        \item $\dim=(\dim V)(\dim W)$.
+        \item $\dim\Hom_\F(V,W)=(\dim V)(\dim W)$.
     \end{itemize}
     \item Can we make $\Hom_F(V,W)$ into a representation of $G$? Yes!
     \begin{figure}[H]
@@ -80,7 +80,7 @@
         \end{itemize}
         \item Basic fact 2: If $V$ is finite-dimensional, then $(V^*)^*\cong V$. The formula for this isomorphism is canonical, because it does not depend on a choice of basis. In particular, choose the map $V\to(V^*)^*$ sending $v$ to the map sending $\varphi\in V^*$ to $\varphi(v)$.
         \item If $V$ is infinite dimensional, none of this is true and you are in the realm of functional analysis.
-        \item Ok, so all of this was good information about the dual \emph{space}, but what is the dual \emph{representation}?? Does it matter, and do we need to know for now?
+        \item Ok, so all of this was good information about the dual \emph{space}, but what is the dual \emph{representation}??\footnote{This question is answered in this week's OH, and a formal definition of the dual representation is given on \textcite[4]{bib:FultonHarris} and transcribed in Section \ref{sse:FH1} of these notes.} Does it matter, and do we need to know for now?
         \begin{itemize}
             \item Defined below in the notes on the reading from \textcite{bib:FultonHarris}.
         \end{itemize}
@@ -102,10 +102,7 @@
     \item Abstract definition of the tensor product.
     \begin{itemize}
         \item We have discussed maps from $V\to W$, but there is another related space.
-        \item Indeed, we can look at the space of bilinear maps from $V\times W\to F$.
-        \begin{itemize}
-            \item Example: A map $f:V\times W\to F$ that satisfies the constraints $f(\lambda v,w)=\lambda f(v,w)$, $f(v_1+v_2,w)=f(v_1,w)+f(v_2,w)$, and likewise for the second index. Recall that this is a \textbf{bilinear map}.
-        \end{itemize}
+        \item Indeed, we can look at the space of \textbf{bilinear maps} from $V\times W\to F$.
         \item Let $V$ have basis $e_1,\dots,e_n$ and $W$ have basis $f_1,\dots,f_m$.
         \item Notice that every bilinear map $f$ can be defined as a linear combination of the $f(e_i,f_j)$. In other words, the $f(e_i,f_j)$ form the basis of a function space.
         \begin{itemize}
@@ -124,9 +121,12 @@
     \item We now look at a much more elementary definition of the tensor product.
     \item Explicit definition of the tensor product.
     \begin{itemize}
-        \item Start off with the hug, easy-to-work-with vector space with basis consisting of pairs of elements $(v,w)\in V\times W$. For example, even if $V,W$ are one dimensional, this is like all pairs of real numbers $(1,0)$, $(2,0)$, $(\pi,e)$, etc. \emph{as basis vectors}; it's huge.
+        \item Start off with the huge, easy-to-work-with vector space with basis consisting of pairs of elements $(v,w)\in V\times W$.
         \begin{itemize}
-            \item Then, we quotient it by the space of all elements satisfying the relations $\lambda(v,w)=(\lambda v,w)=(v,\lambda w)$, $(v_1+v_2,w)=(v_1,w)+(v_2,w)$, and the like. These elements will be linear combinations of basis vectors of the following form: $\lambda(v,w)-(\lambda v,w)$, $\lambda(v,w)-(v,\lambda w)$, and $(v_1+v_2,w)-(v_1,w)-(v_2,w)$.
+            \item For example, even if $V,W$ are one dimensional, this is like all pairs of real numbers $(1,0)$, $(2,0)$, $(\pi,e)$, etc. \emph{as basis vectors}; it's huge.
+        \end{itemize}
+        \item Then, we quotient it by the space of all elements satisfying the relations $\lambda(v,w)=(\lambda v,w)=(v,\lambda w)$, $(v_1+v_2,w)=(v_1,w)+(v_2,w)$, and the like. These elements will be linear combinations of basis vectors of the following form: $\lambda(v,w)-(\lambda v,w)$, $\lambda(v,w)-(v,\lambda w)$, and $(v_1+v_2,w)-(v_1,w)-(v_2,w)$.
+        \begin{itemize}
             \item This forces these relationships to be true. For example, in the final quotient space, we can still construct the element $\lambda(v,w)-(\lambda v,w)$. But its inclusion in the quotiented-out subspace will imply that in the quotient space, $\lambda(v,w)-(\lambda v,w)=0$. It follows from here that $\lambda(v,w)=(\lambda v,w)$, as desired.
         \end{itemize}
         \item What do these relations do?
@@ -178,7 +178,7 @@
                 \item Furthermore, note that since $-1=1\in F_2$, $-0\otimes 0=1(0\otimes 0)=0\otimes 0\in V\otimes V$.
             \end{itemize}
             \item Similarly, the subspace corresponding to $a\otimes(b+c)-a\otimes b-a\otimes c$ is $\spn(0\otimes 0,1\otimes 0)$. Thus, altogether, we quotient out the subspace $X=\spn(0\otimes 0,0\otimes 1,1\otimes 0)$. This leaves us with a 1-dimensional $V\otimes V$, as expected for the tensor product of two one-dimensional vector spaces. It is interesting to note that the one vector we didn't quotient out ($1\otimes 1$) is analogous to $e_1\otimes e_1$ since $e_1\in V$ might as well be defined $e_1:=1$.
-            \item Now let's see how well this quotienting worked. First off, a bit of notation: let $\pi:U\to V\otimes V$ be the projection $\pi:v\mapsto v+X$, and denote elements $\pi(v_1\otimes v_2)\in V\otimes V$ by $v_1\otimes_\pi v_2$ for now to differentiate them from elements of $U$.
+            \item Now let's see how well this quotienting worked. First off, a bit of notation: let $\pi:U\to V\otimes V$ be the projection $\pi:v\mapsto v+X$, and denote elements $\pi(v_1\otimes v_2)=v_1\otimes v_2+X\in V\otimes V$ by $v_1\otimes_\pi v_2$ for now to differentiate them from elements of $U$.
             \item Let $(0+1)\otimes_\pi 0=(0+1)\otimes 0+X$ be an element of the quotient space $V\otimes V$. Certainly, the elements $0\otimes_\pi 0$ and $1\otimes_\pi 0$ are also elements of this quotient space. Moreover, there is no reason we can't form the linear combination $(0+1)\otimes_\pi 0-0\otimes_\pi 0-1\otimes_\pi 0$. Indeed, when we do, we notice that this element lies in the quotiented-out subspace $X$. Thus,
             \begin{equation*}
                 (0+1)\otimes_\pi 0-0\otimes_\pi 0-1\otimes_\pi 0 = [(0+1)\otimes 0-0\otimes 0-1\otimes 0]+X
@@ -202,7 +202,7 @@
         \item Example: What we formally start with in the example above is the free $F_2$-module $V\times V$, \emph{not} the Cartesian product vector space $V\times V$.
         \item A terrific explanation of free vector spaces is available \href{https://math.stackexchange.com/questions/18315/free-vector-space-and-vector-space}{here}.
     \end{itemize}
-    \item These two definitions constitute a first approximation to what the tensor product is.
+    \item The two definitions above (abstract and explicit) constitute a first approximation to what the tensor product is.
     \item Example tensor product space.
     \begin{itemize}
         \item Suppose $V=\C e_1+\C e_2$. We want to look at $V\otimes V$.
@@ -220,7 +220,7 @@
         \begin{itemize}
             \item Why is this map well-defined?
             \item We invoke the \textbf{universal property of the tensor product operation}.
-            \item This guarantees us that given $g$ --- which is effectively a map from $V\times W\to V\otimes W$ as defined --- there nevertheless exists a complete extension $\tilde{g}:V\otimes W\to V\otimes W$.
+            \item This guarantees us that given $g$ --- which is effectively a map from $V\times W\to V\otimes W$, as defined --- there nevertheless exists a complete extension $\tilde{g}:V\otimes W\to V\otimes W$.
         \end{itemize}
         \item As a matrix, this map is pretty strange!
         \begin{itemize}
@@ -267,7 +267,7 @@
             \item Does this construction imply a canonical way to convert from tensors to column vectors??
         \end{itemize}
         \item Classically, this is called the \textbf{Kronecker product} of two matrices.
-        \item People discovered all of this stuff before they unified it as tensor math.
+        \item People discovered all of this stuff separately before they unified it as tensor math.
     \end{itemize}
     \item \textbf{Universal property of the tensor product operation}: For every bilinear map $h:V\times W\to Z$, there exists a \emph{unique} linear map $\tilde{h}:V\otimes W\to Z$ such that $h=\tilde{h}\circ\otimes$.
     \begin{figure}[h!]
@@ -306,12 +306,12 @@
     \item \textbf{Kronecker product} (of $A,B$): The matrix product defined as follows. \emph{Denoted by} $\bm{A\otimes B}$. \emph{Given by}
     \begin{equation*}
         A\otimes B =\
-        \begin{bNiceArray}{c}[first-row,first-col]
+        \begin{bNiceArray}{w{l}{1.3em}}[first-row,first-col]
               & n\\
             n & A\\
         \end{bNiceArray}
         \otimes\
-        \begin{bNiceArray}{c}[first-row,first-col]
+        \begin{bNiceArray}{w{l}{1.4em}}[first-row,first-col]
               & m\\
             m & B\\
         \end{bNiceArray}
@@ -324,14 +324,14 @@
         \end{bNiceArray}
     \end{equation*}
     \begin{itemize}
-        \item The Kronecker product is \emph{not} commutative, but the matrices you get are related by conjugacy and by commuting the columns.
+        \item The Kronecker product is \emph{not} commutative, but the matrices you get are related by conjugacy and by permuting the columns.
     \end{itemize}
     \item Vector spaces of the same dimension are all alike, but vector space representations are very interesting. By the end of this course, we'll understand what's going on.
     \item How we understand tensor stuff: Look at the abstract definition, look at the concrete definition, look at 5 examples, and then go in a circle. Repeat again and again until it makes sense.
     \begin{itemize}
         \item Rudenko is just trying to tell us all relevant words so that they will fit together later.
     \end{itemize}
-    \item Fact: If $V,W$ finite-dimensional, $\Hom_F(V,W)\cong V\otimes W^*$.
+    \item Fact: If $V,W$ finite-dimensional, $\Hom_F(V,W)\cong V\otimes W^*\cong V^*\otimes W$.
     \begin{itemize}
         \item Tensor products are very nice spaces from which to construct maps.
         \item Let's construct a reverse map, then.
@@ -367,8 +367,8 @@
     \begin{itemize}
         \item $\Lambda^2V$ is \emph{exterior powers}.
         \item The exact canonical isomorphism we need is briefly discussed on \textcite[473]{bib:FultonHarris}.
-        \item I.e., we have to construct isomorphisms between the structures that don't rely on the choice of any basis. Recall the classic example of $V\cong V^{**}$, as explained in the well-written MSE post "basic difference between canonical isomorphism and isomorphims." Recall that the isomorphism from $V\to V^*$ defined by sending each element of the basis of $V$ to the corresponding element of the dual basis of $V^*$ is \emph{not} canonical because \emph{it involves choosing bases}. Definitions of canonical maps are available in MATH20510Notes, p. 2.
-        \item From a quick look at this, it looks like the proof may be analogous to the classic middle-school algebra identity $(v+w)^2=v^2+vw+w^2$.
+        \item I.e., we have to construct isomorphisms between the structures that don't rely on the choice of any basis. Recall the classic example of $V\cong V^{**}$, as explained in \href{https://math.stackexchange.com/a/3203049/340652}{this} well-written MSE post. Recall that the isomorphism from $V\to V^*$ defined by sending each element of the basis of $V$ to the corresponding element of the dual basis of $V^*$ is \emph{not} canonical because \emph{it involves choosing bases}. Definitions of canonical maps are available in \href{https://github.com/shadypuck/MATH20510Notes/blob/master/Notes/notes.pdf}{MATH20510Notes}, p. 2.
+        \item From a quick look at this, it looks like the proof may be analogous to the classic middle-school algebra identity $(v+w)^2=v^2+2vw+w^2$.
         \item The second exterior power $\Lambda^2V$ of a finite-dimensional vector space $V$ is the dual space of the vector space of alternating bilinear forms on $V$. Elements of $\Lambda^2V$ are called 2-vectors.
     \end{itemize}
     \item Problem 2b:
@@ -469,12 +469,16 @@
     \begin{itemize}
         \item Again, it's much easier to think about the dual space.
     \end{itemize}
-    \item Consider the space $V^{\otimes n}$ (dimension $(\dim V)^n$).
+    \item Consider the space $V^{\otimes n}$.
     \begin{itemize}
-        \item $(V^{\otimes n})^*$ are \textbf{polylinear} maps $f:V^n\to F$.
+        \item $\dim V^{\otimes n}=(\dim V)^n$.
+        \item $(V^{\otimes n})^*$ are \emph{linear} maps $f:V^{\otimes n}\to F$.
         \begin{itemize}
-            \item Note: By contrast, $(V^n)^*$ is the space of all \emph{linear} maps $f:V^n\to F$.
-            \item This distinction is subtle but important. Note, for instance, that $\dim V^{\otimes n}\neq\dim V^n$ and likewise for the duals.
+            \item By contrast, $(V^n)^*$ is the space of all \textbf{polylinear} maps $f:V^n\to F$.
+        \end{itemize}
+        \item This distinction is subtle but important. 
+        \begin{itemize}
+            \item Note, for instance, that $\dim V^{\otimes n}\neq\dim V^n$ and likewise for the duals.
             \item The distinction comes out fully when considering that if, for example, $V=\R^3$, then $V^2\cong\R^6$ and any map in $(V^2)^*$ is determined by its action on $(e_1,0),(e_2,0),(e_3,0),(0,e_1),(0,e_2),(0,e_3)$. By contrast, any map in $(V^{\otimes 2})^*$ is determined by its action on $(e_1,e_1),(e_1,e_2),(e_1,e_3),(e_2,e_1)$, $(e_2,e_2),(e_2,e_3),(e_3,e_1),(e_3,e_2),(e_3,e_3)$.
             \item Important note: What $(V^{\otimes 2})^*$ does is consider these nine elements of $V^2$ as the basis of another space. This is what it truly means when we say "a bilinear map on $V^2$ is a linear map on $V^{\otimes 2}$."
             \item Takeaway: Polylinearity changes the basis upon which a function $f:V^n\to F$ fundamentally acts.
@@ -498,6 +502,7 @@
             f(x_1e_1+y_1e_2,x_2e_1+y_2e_2,x_3e_1+y_3e_2) = x_1x_2x_3f(e_1,e_1,e_1)+x_1x_2y_3f(e_1,e_1,e_2)+\cdots
         \end{equation*}
         \begin{itemize}
+            \item Consider the term $x_1x_2y_3f(e_1,e_1,e_2)$.
             \item Somewhere in there, you'll also have a $x_1y_2x_3f(e_1,e_2,e_1)$ term as well.
             \item However, because $f$ is symmetric, you know by symmetry that these "bases" are the same, so you don't count them as 2 towards the dimension but as 1.
             \item Thus, $\dim=4$ for symmetric maps.
@@ -513,9 +518,9 @@
                 g(e_1,e_1,e_1) &= 0
             \end{align*}
             \item But what about $g(e_1,e_1,e_2)$? We could apply $(23)$ and get $g(e_1,e_2,e_1)$, right? So it appears that we would just be shrinking two options into one. Technically, this is true, but what's more important is that applying $(12)$ again yields the same thing, meaning that $g(e_1,e_1,e_2)=g(e_1,e_2,e_1)=0$.
-            \item And thus, since $V$ has dimension 2 but $g$ takes three vectors, any argument submitted to $g$ will always be linearly dependent. Thus, $g=0$ and, in fact, the space of antisymmetric maps on $V^3$ has dimension 0.
+            \item And thus, since $V$ has dimension 2 but $g$ takes three vectors, any argument passed to $g$ will always be linearly dependent. Thus, $g=0$ and, in fact, the space of antisymmetric maps on $V^3$ has dimension 0.
         \end{itemize}
-        \item Takeaway: It's not always a rule that $V^{\otimes m}\cong S^mV\oplus\Lambda^mV$.
+        \item Takeaway: It's not a rule that $V^{\otimes m}\cong S^mV\oplus\Lambda^mV$ for \emph{any} $m\in\N$.
     \end{itemize}
     \item Mathematically, there's a more natural object to work with than symmetric and antisymmetric maps.
     \begin{itemize}
@@ -539,18 +544,33 @@
         \item The product notation is suggestive for symmetric vectors; you can commute $e_1\cdot e_2\in S^2V$, for instance.
         \item This allows us to, for example, shrink $e_1\otimes e_1$ to $2e_1^2$\footnote{Why the 2 coefficient? Because technically, the symmetrization operator takes $e_1\otimes e_1\mapsto e_1\otimes e_1+e_1\otimes e_1=2e_1\cdot e_1=2e_1^2$.}, but $e_1\otimes e_2+e_2\otimes e_1$ only to $e_1\cdot e_2$.
         \item Note that $e_1\wedge e_2=e_1\otimes e_2-e_2\otimes e_1$ by definition.
-        \item Fact/exercise: Let $V$ be a vector space of dimension $n$. $V^*$ is the dual space, but it is also a function space. If $V=\R^k$, its a space of \emph{functions from the blackboard}.
+        \item Fact/exercise: Let $V$ be a vector space of dimension $n$. $V^*$ is the dual space, and hence a function space. In particular, if $V=\R^k$, then elements of $V^*$ are of the form
+        \begin{equation*}
+            f(x_1,\dots,x_k) = a_1x_1+\cdots+a_kx_k
+        \end{equation*}
+        where $a_i=f(e_i)$.
         \begin{itemize}
-            \item Note that $(\Lambda^kV)^*=\Lambda^kV^*$.
+            \item In other words, elements of $V^*$ are polynomials of the above form in elements $(x_1,\dots,x_k)\in\R^k$.
         \end{itemize}
-        \item $S^nV^*$ is homogeneous polynomials of degree $n$.
-        \item You can take higher degree polynomials and just keep pushing through.
+        \item Consequences.
         \begin{itemize}
-            \item Ask about this??
+            \item $(\Lambda^kV)^*=\Lambda^kV^*$.
+            \item $S^nV^*$ is the vector space of homogeneous polynomials of degree $n$.
+            \begin{itemize}
+                \item Prove this by taking higher degree polynomials and just keeping pushing through.
+                \item For example, $e^1\cdot e^2\in S^2(\R^3)^*$ and
+                \begin{equation*}
+                    [e^2\cdot e^3](x_1,x_2,x_3) = e^2(x_1,x_2,x_3)\cdot e^3(x_1,x_2,x_3) = x_2\cdot x_3 = x_2x_3
+                \end{equation*}
+                \item Evidently, $x_1x_2$ is a degree $n=2$ polynomial!
+            \end{itemize}
         \end{itemize}
         \item Wedge powers now.
         \item By convention, $\Lambda^0V=F$ and $\Lambda^1V=V$. But then you get to $\Lambda^2V$ and $\Lambda^3V$. They grow but then shrink down as the power approaches $\dim V$.
-        \item Truth: The dimension of wedge powers $\Lambda^iV$ is $\binom{k}{i}$ for $\dim V=k$. Figuring out why this is the case is another good exercise.
+        \item Fact: The dimension of wedge powers $\Lambda^iV$ is $\binom{k}{i}$ for $\dim V=k$. Figuring out why this is the case is another good exercise.
+        \begin{proof}
+            A basis vector $e_{j_1}\wedge\cdots\wedge e_{j_i}$ must be the wedge product of $i$ distinct elements of a basis of $V$ because if there are any repeats, the wedge product will equal zero. Thus, the number of possible wedge products (and hence dimension of $\Lambda^iV$) is equal to the number of the ways you can choose $i$ elements from the $k$ possible basis vectors.
+        \end{proof}
     \end{itemize}
     \item An interesting connection between wedge powers and the determinant.
     \begin{itemize}
@@ -602,7 +622,7 @@
         \begin{itemize}
             \item This is exactly when we take a representation and then go to the dual\footnote{Relation to MATH 20510 when we discussed dual matrices and pullbacks of matrices.}.
         \end{itemize}
-        \item This will be on next week's homework!
+        \item This will be on next week's homework!\footnote{I don't believe a related problem ended up appearing in PSet 2.}
         \item Takeaway: This is an application of $\Lambda^jV^*$ to representation theory, $j\neq k,n$.
     \end{itemize}
     \item Another relation: An application of $\Lambda^nV^*$ to representation theory.
@@ -615,7 +635,7 @@
             \det(A_{g_1g_2}) &= (\det A_{g_1})(\det A_{g_2})&
             \det(A_{g^{-1}}) &= \det(A_g)^{-1}
         \end{align*}
-        \item In particular, we make formal the transition $G\to GL_j(\C)\to\C$ with the \textbf{top wedge power} $\Lambda^nV^*$.
+        \item In particular, we make formal the transition $G\to GL_j(\C)\to\C$ with the \textbf{top wedge power} $\Lambda^nV^*$, i.e., by composing with $\rho:G\to GL_j(\C)$ the map sending $(v_1\mid\cdots\mid v_n)\mapsto v_1\wedge\cdots\wedge v_n$.
     \end{itemize}
     \item A last note.
     \begin{itemize}
@@ -626,7 +646,10 @@
         \end{equation*}
         and the like as well!
         \item Similarly, we can define $\Lambda^2$ of a matrix.
-        \item We'll get into some weird Kronecker product stuff again, but we can sort through it.
+        \begin{itemize}
+            \item We'll get into some weird Kronecker product stuff again, but we can sort through it.
+            \item This will not actually be done in this course, though.
+        \end{itemize}
     \end{itemize}
     \item Plan for Friday and next time.
     \begin{itemize}
@@ -648,7 +671,7 @@
     \end{itemize}
     \item Problem 3a:
     \begin{itemize}
-        \item Bezout and Gauss's lemma is good to learn on my own. Put polynomials in each variable. Throw some stuff about this shit into my answers.
+        \item Bezout and Gauss's lemma is good to learn on my own. Put polynomials in each variable. Throw some stuff about these results into my answers.
         \item Relearn polynomial division.
         \item $(1,1,1,1)$, $(1,1,-1,-1)$, $(1,-1,1,-1)$, and $(1,-1,-1,1)$.
         \item This is a symmetric matrix.
@@ -668,7 +691,6 @@
         \item See FH 1.3. Standard rep, not wedge. Treat $\tau,\sigma$ (generators of the action) on the basis vectors.
         \item If both fix, it's the trivial; if one flips, you have alternating; if both flip, you have standard.
         \item $(2,1)\oplus(1,1,1)$. Use problem 2.
-        \item See FH Exercise 1.2??
         \item The action of $\tau$ on this basis vector can be computed:
         \begin{equation*}
             \tau(\alpha\wedge\beta) = 1\alpha\wedge\beta
@@ -677,7 +699,8 @@
     \end{itemize}
     \item Problem 4b:
     \begin{itemize}
-        \item $\{\alpha\otimes\alpha\otimes\alpha,\alpha\otimes\alpha\otimes\beta+\alpha\otimes\beta\otimes\alpha+\beta\otimes\alpha\otimes\alpha,\beta\otimes\beta\otimes\beta\}$
+        \item $\{\alpha\otimes\alpha\otimes\alpha,\alpha\otimes\alpha\otimes\beta+\alpha\otimes\beta\otimes\alpha+\beta\otimes\alpha\otimes\alpha,\beta\otimes\beta\otimes\beta\}$.
+        \item See Exercise 1.2 in \textcite{bib:FultonHarris}.
     \end{itemize}
     \item Problem 5a:
     \begin{itemize}
@@ -711,7 +734,7 @@
         \item Trivial representation: All $g\in G$ get mapped to $1\in GL(V)$.
         \item Part (a) gives us the identity in $\Hom(V,V)$.
         \item So we have $\rho:G\to GL(V)$.
-        \item Is any line acceptable? Span of the identity function? Rudenko: It depends on $V$. It has \emph{infinitely many} trivial sub representations.
+        \item Is any line acceptable? Span of the identity function? Rudenko: It depends on $V$. It has \emph{infinitely many} trivial subrepresentations.
         \item Example: $G\acts \C^2$. with $\rho(g)=I_2$.
         \item Dual representation: Defined analogously to the $\Hom_F(V,W)$ representation. We also need an inverse.
     \end{itemize}
@@ -834,7 +857,7 @@
     \end{itemize}
     \item Proof.
     \begin{itemize}
-        \item See Lemma \ref{lem:Schur} (Rudenko replicates all aspects of the "limited conditions" proof).
+        \item See Lemma \ref{lem:Schur} or Proposition \ref{prp:Schur}.
         \item For $f:V\to V$, consider $\ker(f)$ and $\im(f)$. The latter two are subrepresentations of $V,W$, respectively. $\ker(f)=V$ implies $f=0$; symmetric with $\im(f)$. If nonzero, then $\ker=0$ and $\im=W$, implies $f$ is an isomorphism.
     \end{itemize}
     \item Schur's Lemma is the easiest step to learn in the whole story.
@@ -1134,7 +1157,7 @@
 
 
 
-\section{FH Chapter 1: Representations of Finite Groups}
+\section{FH Chapter 1: Representations of Finite Groups}\label{sse:FH1}
 \emph{From \textcite{bib:FultonHarris}.}
 \begin{itemize}
     \item \marginnote{10/1:}Starts with a justification for beginning their investigation of rep theory with finite groups.
@@ -1153,10 +1176,10 @@
     \item \textbf{Degree} (of $\rho$): The dimension of $V$.
     \item \textbf{$\bm{G}$-linear} (map): See class notes. \emph{Also known as} \textbf{map}, \textbf{morphism}.
     \item The \textbf{kernel}, \textbf{image}, and \textbf{cokernel} of $\varphi$ are all $G$-submodules.
-    \item \textbf{Kernel} (of a map): The vector subspace containing all $v\in V$ for which $\varphi(v)=0$. \emph{Denoted by} $\bm{\ker\varphi}$.
-    \item \textbf{Image} (of a map): The vector subspace containing all $w\in W$ for which there exists $v\in V$ such that $\varphi(v)=w$. \emph{Denoted by} $\bm{\im\varphi}$.
-    \item \textbf{Cokernel} (of a map): The quotient space $W/\im\varphi$.
-    \item Definitions of \textbf{subrepresentation}, \textbf{irreducible} representation, and \textbf{direct sum} of representations.
+    \item \textbf{Kernel} (of a map $\varphi$): The vector subspace containing all $v\in V$ for which $\varphi(v)=0$. \emph{Denoted by} $\bm{\ker\varphi}$.
+    \item \textbf{Image} (of a map $\varphi$): The vector subspace containing all $w\in W$ for which there exists $v\in V$ such that $\varphi(v)=w$. \emph{Denoted by} $\bm{\im\varphi}$.
+    \item \textbf{Cokernel} (of a map): The quotient space $W/\im\varphi$. \emph{Denoted by} $\bm{\coker\varphi}$.
+    \item Definitions of \textbf{subrepresentation}, \textbf{irreducible} (representation), and \textbf{direct sum} (of representations).
     \item \textbf{Tensor product} (of $V,W$): The representation with the space $V\otimes W$ where $g(v\otimes w)=gv\otimes gw$.
     \begin{itemize}
         \item \marginnote{10/5:}The $n^\text{th}$ tensor power is also a representation by this rule.
@@ -1179,7 +1202,7 @@
         \begin{align*}
             \langle \rho^*(g)(v^*),\rho(g)(v) \rangle &= \rho^*(g)(v^*)^T\rho(g)v\\
             &= [\rho(g^{-1})^T(v^*)]^T\rho(g)v\\
-            &= (v^*)^T\rho(g^{-1})T\rho(g)v\\
+            &= (v^*)^T\rho(g^{-1})^T\rho(g)v\\
             &= (v^*)^Tv\\
             &= \langle v^*,v \rangle
         \end{align*}
@@ -1229,11 +1252,11 @@
             \item If $V=W$, then $\varphi=\lambda I$ for some $\lambda\in\C$, $I$ being the identity.
         \end{enumerate}
         \begin{proof}
-            Suppose for the sake of contradiction that $\varphi$ is neither an isomorphism nor zero. Then it has a nontrivial kernel and image, both of which are necessarily invariant under the representation\footnote{See the proof of Schur's Lemma in \textcite{bib:Serre} for an explanation of this fact.}. Therefore, neither $V$ nor $W$ are irreducible representations of $G$, a contradiction.\par
+            Suppose for the sake of contradiction that $\varphi$ is neither an isomorphism nor zero. Then it has a nontrivial kernel and image, both of which are necessarily invariant under the representation\footnote{See the proof of Schur's Lemma in \textcite{bib:Serre} for an explanation of this fact; Proposition \ref{prp:Schur}.}. Therefore, neither $V$ nor $W$ are irreducible representations of $G$, a contradiction.\par
             Since $\C$ is algebraically closed, $\varphi$ must have an eigenvalue $\lambda$. Equivalently, for some $\lambda\in\C$, $\varphi-\lambda I$ has nonzero kernel. But then by part (1), we must have $\varphi-\lambda I=0$, implying that $\varphi=\lambda I$, as desired.
         \end{proof}
     \end{FHlemma}
-    \item Direct sum irreducible decomposition.
+    \item Complete reducibility.
     \begin{FHproposition}\label{prp:completeReducibility}
         For any representation $V$ of a finite group $G$, there is a decomposition
         \begin{equation*}

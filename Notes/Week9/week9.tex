@@ -437,7 +437,7 @@
 
 
 
-\section{Office Hours}
+\section{Office Hours}\label{sse:OH9}
 \begin{itemize}
     \item I got a 68/100 on the midterm: 30, 24, 0, 14.
     \begin{itemize}
@@ -475,6 +475,84 @@
     \item *Week 4, Lecture 1: Does multiplying a column vector in the basis $\{\delta_{C_i}\}$ by the character table put it in the basis $\{\chi_{V_i^*}\}$, or vice versa? See p. 66.
     \begin{itemize}
         \item Derive it for yourself.
+        \item Example: Consider the character table for $S_3$ (Table \ref{tab:charTableS3}) represented as the following matrix.
+        \begin{equation*}
+            A =
+            \begin{bmatrix}
+                1 & 1 & 1\\
+                1 & -1 & 1\\
+                2 & 0 & 1\\
+            \end{bmatrix}
+        \end{equation*}
+        \item Denote the conjugacy classes of $S_3$ by $e$, $(xx)$, $(xxx)$.
+        \item Interpretation 1.
+        \begin{itemize}
+            \item We see that the standard representation is the class function sending
+            \begin{align*}
+                e &\mapsto 2&
+                (xx) &\mapsto 0&
+                (xxx) &\mapsto -1
+            \end{align*}
+            \item Additionally, we have
+            \begin{align*}
+                e &\mapsto 1& (xx) &\mapsto 0& (xxx) &\mapsto 0\tag{$\delta_e$}\\
+                e &\mapsto 0& (xx) &\mapsto 1& (xxx) &\mapsto 0\tag{$\delta_{(xx)}$}\\
+                e &\mapsto 0& (xx) &\mapsto 0& (xxx) &\mapsto 1\tag{$\delta_{(xxx)}$}
+            \end{align*}
+            \item Thus, we can express $\chi_{(2,1)}$ as a linear combination of the $\delta$'s via
+            \begin{align*}
+                \chi_{(2,1)} &= (2)\delta_e+(0)\delta_{(xx)}+(-1)\delta_{(xxx)}\\
+                &= \chi_{(2,1)}(e)\delta_e+\chi_{(2,1)}(xx)\delta_{(xx)}+\chi_{(2,1)}(xxx)\delta_{(xxx)}\\
+                &= \sum_{C_i}\chi_{(2,1)}(C_i)\delta_{C_i}
+            \end{align*}
+            \item It follows in particular that if we represent the $\delta_{C_i}$'s as the standard column vector basis of $\C^3$, then
+            \begin{equation*}
+                \chi_{(2,1)} = A^T\delta_{(xxx)}
+            \end{equation*}
+        \end{itemize}
+        \item Interpretation 2.
+        \begin{itemize}
+            \item If we multiply $A$ by the column vector equal to each representation weighted by $|C_i|$, then we recover the $\delta$ basis:
+            \begin{align*}
+                \begin{bmatrix}
+                    1\\
+                    0\\
+                    0\\
+                \end{bmatrix}
+                &= A
+                \begin{bmatrix}
+                    1\cdot 1\\
+                    3\cdot 1\\
+                    1\cdot 1\\
+                \end{bmatrix}&
+                \begin{bmatrix}
+                    0\\
+                    1\\
+                    0\\
+                \end{bmatrix}
+                &= A
+                \begin{bmatrix}
+                    1\cdot 1\\
+                    3\cdot -1\\
+                    1\cdot 1\\
+                \end{bmatrix}&
+                \begin{bmatrix}
+                    0\\
+                    0\\
+                    1\\
+                \end{bmatrix}
+                &= A
+                \begin{bmatrix}
+                    1\cdot 2\\
+                    3\cdot 0\\
+                    1\cdot -1\\
+                \end{bmatrix}
+            \end{align*}
+            \item This interpretation is also what is expressed by the following formula from Lecture 4.2.
+            \begin{equation*}
+                \delta_{C_j}(g) = \sum_{V_i}\frac{|C_j|\bar{\chi}_{V_i}(g)}{|G|}\cdot\chi_{V_i}(g)
+            \end{equation*}
+        \end{itemize}
     \end{itemize}
     \item *Week 4, Lecture 2: Isotypical components example. See p. 68.
     \item **Week 4, Lecture 3: Proof the $\C$ is the only finite-dimensional division algebra? See p. 71.

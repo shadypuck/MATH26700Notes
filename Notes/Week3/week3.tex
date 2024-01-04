@@ -45,15 +45,19 @@
     \end{itemize}
     \item In fact, we could also take any coefficient of the characteristic polynomial, but others would get complicated.
     \begin{itemize}
-        \item Any characteristic polynomial coefficient can be expressed in terms of traces; this will be an exercise in PSet 3; it's not hard.
+        \item Any characteristic polynomial coefficient can be expressed in terms of traces; this will be an exercise in PSet 3\footnote{I don't believe a related problem ended up appearing in PSet 3.}; it's not hard.
         \item For example, the second characteristic polynomial coefficient (sum of products of eigenvalues) can be written as follows.
         \begin{equation*}
             \sum\lambda_i\lambda_j = \frac{\tr(A)^2-\tr(A^2)}{2}
         \end{equation*}
     \end{itemize}
-    \item So what do we have at this point?
+    \item At this point, we can define the \textbf{character}.
+    \item \textbf{Character} (of $\rho$): The function from $G\to\C$ defined as follows. \emph{Denoted by} $\bm{\chi_\rho}$. \emph{Given by}
+    \begin{equation*}
+        \chi_\rho(g) = \tr[\rho(g)]
+    \end{equation*}
     \begin{itemize}
-        \item We can associate to $\rho$ a function $\chi_\rho:G\to\C$ defined by $\chi_\rho(g)=\tr(A_g)=\tr(\rho(g))$.
+        \item Essentially, we can associate to $\rho$ a function $\chi_\rho:G\to\C$ defined by $\chi_\rho(g)=\tr(A_g)=\tr(\rho(g))$.
         \item This function is invariant under isomorphism.
         \item If we know $\tr(A)$, we know $\tr(A^2)$ since $A_g^2=A_{g^2}$. Thus, if we know all traces, we know all power traces.
         \item We form a ring of polynomials?? Equivalently, $\chi_\rho$ has a representation as a polynomial with coefficients in $\C$?
@@ -216,7 +220,7 @@
                 \item We can compute these traces via a thought experiment.
                 \item Visualize a triangle in a plane.
                 \item The $2\times 2$ identity matrix (the standard representation of $e\in G$) acts on it by doing nothing, and has trace 2.
-                \item In \emph{some} basis, our matrix fixes one vector and inverts another, so matrix is
+                \item In \emph{some} basis, the matrix of $(12)$ fixes one vector and inverts another, so matrix is
                 \begin{equation*}
                     \begin{pmatrix}
                         1 & 0\\
@@ -224,6 +228,9 @@
                     \end{pmatrix}
                 \end{equation*}
                 and character is 0.
+                \begin{itemize}
+                    \item More details in Section 1.3 of \textcite{bib:FultonHarris} and transcribed in Section \ref{sse:FH1} of these notes.
+                \end{itemize}
                 \item Last one is rotation by $2\pi/3$, so
                 \begin{equation*}
                     \begin{pmatrix}
@@ -385,7 +392,11 @@
     \begin{equation*}
         V^G = \{v\in V\mid gv=v\ \forall\ g\in G\}
     \end{equation*}
-    \item Lemma 1: Let $G$ be a finite group, let $\rho:G\to GL(V)$ be a finite-dimensional representation of it, and let $p$ be defined as above. Then $p\in\Hom_G(V,V)$.
+    \item Lemma 1: Let $G$ be a finite group, let $\rho:G\to GL(V)$ be a finite-dimensional representation of it, and let $p$ be defined via
+    \begin{equation*}
+        p = \frac{1}{|G|}\sum_{g\in G}g = \frac{1}{|G|}\sum_{g\in G}\rho_V(g)
+    \end{equation*}
+    Then $p\in\Hom_G(V,V)$.
     \begin{proof}
         We can view $p$ as an element of $\Hom(V,V)$. This combined with the fact that for every $h\in G$,
         \begin{equation*}
@@ -406,10 +417,7 @@
         \end{align*}
     \end{proof}
     \item Why do we need this result?? What does it do for the rest of the proof?
-    \item Lemma 2: Let $G$ be a finite group, and let $\rho:G\to GL(V)$ be a finite-dimensional representation of it. Then the map $p$, defined as follows, is a projector from $V\to V^G$.
-    \begin{equation*}
-        p = \frac{1}{|G|}\sum_{g\in G}g = \frac{1}{|G|}\sum_{g\in G}\rho_V(g)
-    \end{equation*}
+    \item Lemma 2: Let $G$ be a finite group, and let $\rho:G\to GL(V)$ be a finite-dimensional representation of it. Then the map $p$, defined as in Lemma 1, is a projector from $V\to V^G$.
     \begin{proof}
         To prove that $p$ is a projector, it will suffice to show that $p^2=p$. To prove that $p$ projects onto $V^G$, it will suffice to show that $\im(p)=V^G$. Let's begin.\par
         To show that $p^2=p$, we have
@@ -504,8 +512,8 @@
             &= \dim[\Hom_G(V,W)]\tag*{PSet 2, Q4b}\\
             &=
             \begin{cases}
-                \dim(\spn(I)) & V\cong W\\
-                \dim(\spn(0)) & V\ncong W
+                \dim(\spn(0)) & V\ncong W\\
+                \dim(\spn(I)) & V\cong W
             \end{cases}
             \tag*{Schur's Lemma}\\
             &=
@@ -515,7 +523,7 @@
             \end{cases}
         \end{align*}
     \end{proof}
-    \item In the above proof, Rudenko first surveys the following special case. Why??
+    \item In the above proof, Rudenko first surveys the following special case. Why??\footnote{See Week 9 OH (Section \ref{sse:OH9}); just as an example to warm up basically.}
     \begin{itemize}
         \item Then if $V$ is irreducible and trivial, we have
         \begin{equation*}
@@ -533,6 +541,7 @@
     \end{itemize}
     \item Corollary: The number of irreps is less than or equal to the number of conjugacy classes.
     \begin{itemize}
+        \item Proved in Corollary \ref{cly:lowerBoundConjCl} of \textcite{bib:FultonHarris}.
         \item We'll leave it to next time to prove that equality holds.
     \end{itemize}
     \item Whenever we have a sec, we should try to form a mental picture the whole class function thing.
@@ -579,7 +588,7 @@
         \item Will mostly involve computing character tables; HW will be good prep.
     \end{itemize}
     \item Review of the general picture from the first part of the course.
-    \begin{figure}[h!]
+    \begin{figure}[H]
         \centering
         \begin{tikzpicture}
             \footnotesize
@@ -626,7 +635,7 @@
             \item We get this result with the Theorem above and \hyperref[lem:Schur]{Schur's Lemma}.
         \end{itemize}
         \item Next time, we'll prove that $\chi_{V_1},\dots,\chi_{V_k}$ spans $\C_\text{cl}[G]$, i.e., the number of irreps is the number of conjugacy classes.
-        \item \emph{Cube thing??}
+        \item \emph{Cube thing??}\footnote{See Week 9 OH (Section \ref{sse:OH9}); it was drawn to illustrate a possible relation between the orthonormal basis $\chi_1,\chi_2,\chi_3$ (cube) and the orthogonal basis $\chi_{C_1},\chi_{C_2},\chi_{C_3}$.}
         \item This picture is remarkable because it's so simple.
     \end{itemize}
     \item We now look at some corollaries to last time's main theorem.
@@ -689,7 +698,7 @@
         \end{cases}
     \end{equation*}
     \begin{proof}
-        We can compute its character $\chi_{V_R}$ by considering the corresponding permutation matrices. Indeed, the action $\chi_{V_R}(g)$ of this character on $g$ is equal to the number of 1's on the diagonal in the permuttion matrix, which is equal to the number of fixed points of the permutation, i.e., the number of $i$'s such that $gg_i=g_i$. But in a group, $gg_i=g_i$ iff $g=e$, so this number of fixed points is
+        We can compute its character $\chi_{V_R}$ by considering the corresponding permutation matrices. Indeed, the action $\chi_{V_R}(g)$ of this character on $g$ is equal to the number of 1's on the diagonal in the permutation matrix, which is equal to the number of fixed points of the permutation, i.e., the number of $i$'s such that $gg_i=g_i$. But in a group, $gg_i=g_i$ iff $g=e$, so this number of fixed points is
         \begin{equation*}
             \chi_{V_R}(g) = \Fix(g)
             =
@@ -728,6 +737,9 @@
         \end{align*}
         \begin{itemize}
             \item The first result follows directly by substituting $n_i=\dim V_i$ into complete reducibility.
+            \begin{itemize}
+                \item Notice how this decomposition applies to the one we found of the regular representation of $S_3$ in PSet 1, Q4c.
+            \end{itemize}
             \item The second result follows because $|G|=\dim(V_R)=\dim(\bigoplus_{i=1}^kV_i^{\dim V_i})=\sum(\dim V_i)^2$.
             \item The third result follows because if there were infinitely many irreps, each with $\dim V_i\geq 1$, then $|G|=\sum_{i=1}^k(\dim V_i)^2=\infty$, contradicting the hypothesis that $|G|$ is finite.
         \end{itemize}
@@ -772,7 +784,7 @@
             \inp{\chi_{V_\text{perm}},\chi_{V_\text{triv}}} = 1
         \end{gather*}
         \begin{itemize}
-            \item What is the point of these calculations??
+            \item What is the point of these calculations??\footnote{See Week 9 OH (Section \ref{sse:OH9}); just to show an example of using the orthogonality relations.}
         \end{itemize}
         \item Thus, we can derive representations without having any geometric notion of it using characters!
         \item To see any of these representations geometrically, look at actions on the tetrahedron in $\R^3$!
@@ -786,7 +798,7 @@
         \end{equation*}
         where $\sim$ denotes conjugacy and $C_G(g)$ is the number of elements in the conjugacy class of $g$ (where we borrow centralizer notation).
         \begin{itemize}
-            \item Prove the new one with $AB=1=BA$. This very simple thing leads to a very powerful statement about systems of equations that we will discuss later. How does this proof work??
+            \item Prove the new one with $AB=1=BA$. This very simple thing leads to a very powerful statement about systems of equations that we will discuss later. How does this proof work??\footnote{See Week 9 OH (Section \ref{sse:OH9}).}
             \item We can start doing this stuff in the new homework!
             \item We constructed the fifth representation using this.
         \end{itemize}
@@ -800,7 +812,7 @@
             \item These are called \textbf{exceptional homomorphisms}.
             \item Since we have $S_4\to S_3$ and $\rho:S_3\to GL_n$, we have $S_4\to GL_n$ with a the same character table. Takeaway: This $(2,0,1)$ thing in the big character table comes from this map, geometrically.
             \item Takeaway: The geometry of the fifth irrep comes from $S_3$.
-            \item What is going on here??
+            \item What is going on here??\footnote{See Week 9 OH (Section \ref{sse:OH9}); essentially, we are piggybacking off of a representation of $S_3$ via $\rho:S_4\twoheadrightarrow S_3\xrightarrow{\tilde{\rho}}GL_n$.}
         \end{itemize}
     \end{itemize}
     \item Final announcements.
@@ -882,7 +894,7 @@
 \subsection*{Section 2.2: Schur's Lemma; Basic Applications}
 \begin{itemize}
     \item \textcite{bib:Serre} states and proves Schur's Lemma.
-    \begin{proposition}[Schur's Lemma]
+    \begin{proposition}[Schur's Lemma]\label{prp:Schur}
         Let $\rho^1:G\to GL(V_1)$ and $\rho^2:G\to GL(V_2)$ be two irreducible representations of $G$, and let $f$ be a linear mapping of $V_1$ into $V_2$ such that $\rho_s^2\circ f=f\circ\rho_s^1$ for all $s\in G$. Then\dots
         \begin{enumerate}[label={\textup{(\roman*)}}]
             \item If $\rho^1$ and $\rho^2$ are not isomorphic, then $f=0$;
@@ -1263,7 +1275,7 @@
                 \chi_{\C^4}-\chi_{(5)} = (4,2,1,0,0)-(1,1,1,1,1)
                 = (3,1,0,-1,-1)
             \end{equation*}
-            by the fact that the regular representation always decomposes into the sum of the trivial and standard.
+            by the fact that the permutation representation always decomposes into the sum of the trivial and standard.
             \begin{itemize}
                 \item We can double check that this representation is irreducible via the irreducibility criterion $|\chi_V|=\sqrt{(\chi_V,\chi_V)}=1$.
             \end{itemize}

@@ -59,7 +59,7 @@
         \item We can identify orbits with cosets.
         \item If we understand all possible subgroups, we understand all possible actions.
     \end{itemize}
-    \item This story is not boring, but it's simplistic.
+    \item This story is not boring, but it is simplistic.
     \item Rudenko doesn't assume we remember everything (phew!).
     \item Main definition (general to start, then we simplify).
     \item \textbf{Group representation} (of $G$ on $V$): A group homomorphism $G\to GL(V)$, for $G$ a group, $V$ a finite-dimensional vector space over some field $\F$ with basis $\{e_1,\dots,e_n\}$, and $GL(V)$ the set of isomorphic linear maps $L:V\to V$. \emph{Denoted by} $\bm{\rho}$.
@@ -75,16 +75,18 @@
     \item In this course, $G$ is finite, $\F=\C$, and $V$ is finite dimensional.
     \begin{itemize}
         \item This is the most simple case, but also a very interesting one. The theory is much, much easier, so we can get much more complicated, but this is a good place to start.
-        \item We could make $G$ compact, but we're not gonna go that far.
+        \item We could make $G$ compact, but we're not going to go that far.
     \end{itemize}
     \item Examples to get an idea of what's going on.
     \begin{enumerate}
-        \item $\deg\rho=1$ (means $\dim V=1$). Then $\rho:G\to GL_1(V)\cong\C^\times$. The codomain is referred to as the \textbf{character} of the group??
+        \item Let $\deg\rho=1$ (which means $\dim V=1$).
         \begin{itemize}
-            \item An example group homomorphism $S_n\to\C^\times$ is the sign function $\sigma\to\sign(\sigma)=\{\pm 1\}$.
-            \item Another example is the \textbf{trivial representation}, $G\to\C^\times$ and $g\mapsto 1$.
+            \item Then $\rho:G\to GL_1(V)\cong\C^*$.
+            \item The codomain is referred to as the \textbf{character} of the group.
+            \item An example group homomorphism $S_n\to\C^*$ is the sign function $\sigma\mapsto\sign(\sigma)=\{\pm 1\}$.
+            \item Another example is the \textbf{trivial representation}, which goes from $G\to\C^*$ and sends $g\mapsto 1$.
         \end{itemize}
-        \item Smallest one: Let $G=S_3$. The structure is already pretty rich, and this will be part of the homework.
+        \item Smallest group with an interesting theory of representations: Let $G=S_3$. The structure is already pretty rich, and this will be part of the homework.
         \begin{itemize}
             \item \textbf{Trivial representation} again.
             \item \textbf{Alternating representation}.
@@ -92,20 +94,20 @@
             \item \textbf{Regular representation}.
         \end{itemize}
     \end{enumerate}
-    \item \textbf{Trivial representation}: The representation $\rho:G\to GL(V)$ sending $g\mapsto 1$ for all $g\in G$. \emph{Denoted by} $\pmb{\ydiagram{3}}$, $\bm{(3)}$.
+    \item \textbf{Trivial representation}: The representation $\rho:G\to GL(V)$ sending $g\mapsto 1$ for all $g\in G$. \emph{Denoted by} $\pmb{\ydiagram{3}}$, $\bm{(3)}$ when $G=S_3$ and $V=\C$.
     \begin{itemize}
         \item The boxes notation is too much of a detour to explain now.
         \item Note that $1\in GL(V)$ is the identity map on $V$!
         \item Also note that you may define \emph{a} trivial representation on any space $V$, but \emph{the} trivial \emph{irreducible} representation is necessarily on $\C$. (We'll define \textbf{irreducible} and deal much more with this specific trivial representation later.)
     \end{itemize}
-    \item \textbf{Alternating representation}: The representation $\rho:G\to GL(V)$ sending $g\mapsto\sign(g)$ for all $g\in G$. \emph{Denoted by} $\pmb{\ydiagram{1,1,1}}$, $\bm{(1,1,1)}$.
-    \item \textbf{Standard representation}: The representation $\rho:S_n\to GL(V)$ sending $\sigma\mapsto(x_{\sigma(1)},\dots,x_{\sigma(n)})$, where $V=\{(x_1,\dots,x_n)\in\C^n\mid x_1+\cdots+x_n=0\}$ is a $(n-1)$-dimensional vector space. \emph{Denoted by} $\pmb{\ydiagram{2,1}}$, $\bm{(2,1)}$.
+    \item \textbf{Alternating representation}: The representation $\rho:G\to GL(\C)$ sending $g\mapsto\sign(g)$ for all $g\in G$. \emph{Denoted by} $\pmb{\ydiagram{1,1,1}}$, $\bm{(1,1,1)}$ when $G=S_3$.
+    \item \textbf{Standard representation}: The representation $\rho:S_n\to GL(V)$ sending $\sigma\mapsto(x_{\sigma(1)},\dots,x_{\sigma(n)})$, where $V=\{(x_1,\dots,x_n)\in\C^n\mid x_1+\cdots+x_n=0\}$ is a $(n-1)$-dimensional vector space. \emph{Denoted by} $\pmb{\ydiagram{2,1}}$, $\bm{(2,1)}$ when $G=S_3$ and $n=3$.
     \begin{itemize}
         \item A 2D representation like rotating a triangle.
         \item This gives something with real numbers.
         \item Example: $S_3\acts V$ by $\sigma((x_1,x_2,x_3))=(x_{\sigma(1)},x_{\sigma(2)},x_{\sigma(3)})$.
     \end{itemize}
-    \item \textbf{Regular representation}: The representation $\rho:G\to\Hom(\C^n)$ defined by $g\mapsto\sigma_g$, where $G=\{g_1,\dots,g_n\}$, $\{e_{g_1},\dots,e_{g_n}\}$ is a basis of $\C^n$, $\cdot$ is the group action of $\rho(G)\acts\C^n$ defined by $\rho(g)\cdot e_g=e_{gg_i}$, and $\sigma_g(e_{g_i})=\rho(g)\cdot e_g=e_{gg_i}$.
+    \item \textbf{Regular representation}: The representation $\rho:G\to\Hom(\C^n)$ defined by $g\mapsto\sigma_g$, where $G=\{g_1,\dots,g_n\}$, $\{e_{g_1},\dots,e_{g_n}\}$ is a basis of $\C^n$, $\cdot$ is the group action of $\rho(G)\acts\C^n$ defined by $\rho(g)\cdot e_{g_i}=e_{gg_i}$, and $\sigma_g(e_{g_i})=\rho(g)\cdot e_g=e_{gg_i}$.
     \begin{itemize}
         \item This is a permutation of vectors.
         \item Thus, for $S_3$, it will already be 6-dimensional (it's very high dimensional).
@@ -126,7 +128,7 @@
             But then $w\in\ker(A-E)$, so $v=(A-E)w=0$.
         \end{proof}
         \item This combined with the fact that every vector in a vector space is in either the image or the kernel of a linear map\footnote{See Theorem 3.6 of \textcite{bib:Axler}.} implies that $V=\ker(A-E)\oplus\im(A-E)$.
-        \item Let $\ker(A-E)$ have basis $e_1,\dots,e_k$ and let $\im(A-E)$ have basis $e_{k+1},\dots,n$; then all $A$ are of the following form.
+        \item Let $\ker(A-E)$ have basis $e_1,\dots,e_k$ and let $\im(A-E)$ have basis $e_{k+1},\dots,e_n$; then all $A$ are of the following form.
         \begin{equation*}
             \begin{bNiceArray}{ccc|ccc}[margin,first-row,first-col]
                     & 1 &        & k & k+1 &        &  n\\
@@ -139,17 +141,55 @@
                 n   &   &        &   &     &        & -1\\
             \end{bNiceArray}
         \end{equation*}
-        \item Next time, we will discuss sums of representations, of which this is an example of the theory.
+        \item Essentially, we have shown that group-theoretic constraints (e.g., $E_n=\rho(e)=\rho(g^2)=\rho(g)^2=A^2$) can limit the possible forms a matrix can take quite a bit! In this example, we narrowed this matrix all the way down to the direct sum of only two kinds of matrices, i.e.,
+        \begin{equation*}
+            A = \underbrace{
+                \begin{bmatrix}
+                    1\\
+                \end{bmatrix}
+                \oplus\cdots\oplus
+                \begin{bmatrix}
+                    1\\
+                \end{bmatrix}
+            }_{k\text{ times}}\oplus\underbrace{
+                \begin{bmatrix}
+                    -1\\
+                \end{bmatrix}
+                \oplus\cdots\oplus
+                \begin{bmatrix}
+                    -1\\
+                \end{bmatrix}
+            }_{n-k\text{ times}}
+        \end{equation*}
+        \begin{itemize}
+            \item This is a key process in representation theory.
+            \item Next time, we will discuss such sums of representations, of which this is an example of the theory.
+            \item This same kind of thing, decomposition of a representation $A$ into the direct sum of \textbf{simple representations}, happens with all finite groups.
+            \item This is where we're going. It's not rocket science; in fact, once again, we'll see it next week.
+        \end{itemize}
     \end{itemize}
-    \item The same kind of thing, \textbf{simple representations}, happens with all finite groups?? This is where we're going. It's not rocket science; in fact, we'll see it next week.
     \item Last thing for today: A remarkable story.
     \begin{itemize}
-        \item The story of representation theory started quite different.
-        \item A beautiful theorem that we can prove now!
-        \item Frobenius determinant.
-        \item Think of $G=\{g_1,\dots,g_n\}$. Picture its multiplication table.
-        \item In every row and column, you see each element once.
-        \item Let's associate to the multiplication table an actual determinant in the linear algebra sense. Consider elements $x_{g_1},\dots,x_{g_n}$. Define the $n\times n$ matrix $(x_{g_ig_j})$. Take its determinant. It will be a polynomial in $n$ variables, i.e., an element of the ring $\Z[x_{g_1},\dots,x_{g_n}]$.
+        \item The story of representation theory started quite differently from the above.
+        \item In 1896, Dedekind (of Dedekind cut fame) wrote a letter to Frobenius with a conjecture that he couldn't prove.
+        \item Frobenius proved Dedekind's beautiful theorem, developing representation theory to do so.
+        \item We can prove it now, however!
+        \item We first define the \textbf{Frobenius determinant}.
+        \item Theorem (Frobenius determinant theorem): If $G$ is a finite group and we take this Frobenius determinant, then this determinant is equal to ${P_1}^{d_1}\cdots{P_k}^{d_k}$, where $P_1,\dots,P_k$ are irreducible polynomials in $x_g,\dots,x_{g_j}$, $\deg P_i=d_i$, and $k$ is the number of conjugacy classes.
+        \item Example: Take $S_3$; we'll get a polynomial of degree $|S_3|=6$ via Frobenius determinant
+        \begin{equation*}
+            \text{FD} = (x_{g_1}+\cdots+x_{g_k})(x_{g_1}\pm\cdots)(\text{some pol. of deg 2})^2
+        \end{equation*}
+        \item The proof is remarkable and deep and uses what would become character theory. These polynomials are related to representations and the number of simplest irreducible representations. The theory that came out came as a way to understand this miracle. We'll forget FD's for now, but then come back and prove it later.
+    \end{itemize}
+    \item \textbf{Frobenius determinant} (of finite $G$): The determinant of the $n\times n$ matrix $(x_{g_ig_j})$ --- that is, the multiplication table of $G$ subscripted to $x$ --- where $G=\{g_1,\dots,g_n\}$. \emph{Also known as} \textbf{group determinant}.
+    \begin{itemize}
+        \item Essentially, we first consider a finite group $G=\{g_1,\dots,g_n\}$.
+        \item Then we picture its multiplication table.
+        \begin{itemize}
+            \item In every row and column, you should see each element once.
+        \end{itemize}
+        \item Then we associate to the multiplication table an actual determinant in the linear algebra sense. Consider elements $x_{g_1},\dots,x_{g_n}$. Define the $n\times n$ matrix $(x_{g_ig_j})$. Take its determinant. It will be a polynomial in $n$ variables, i.e., an element of the ring $\Z[x_{g_1},\dots,x_{g_n}]$.
         \item Example: Consider
         \begin{equation*}
             \begin{vmatrix}
@@ -158,7 +198,7 @@
             \end{vmatrix}
         \end{equation*}
         \begin{itemize}
-            \item The determinant is $x_e^2-x_g^2=(x_e-x_g)(x_e+x_g)$.
+            \item The Frobenius determinant is $x_e^2-x_g^2=(x_e-x_g)(x_e+x_g)$.
         \end{itemize}
         \item Example: $G=\Z/3\Z$.
         \begin{itemize}
@@ -176,11 +216,13 @@
                     c & a & b\\
                 \end{vNiceMatrix}
             \end{equation*}
-            \item The determinant is $3abc-a^3-b^3-c^3=(a+b+c)(a^2+b^2+c^2-ab-bc-ac)=(a+b+c)(a+\zeta b+\zeta^2c)(a+\zeta^2b+\zeta c)$ where $\zeta\in\mu_3$ is a third root of unity, i.e., we have that $\zeta^3=1$.
+            \item The determinant is
+            \begin{align*}
+                3abc-a^3-b^3-c^3 &= (a+b+c)(a^2+b^2+c^2-ab-bc-ac)\\
+                &= (a+b+c)(a+\zeta b+\zeta^2c)(a+\zeta^2b+\zeta c)
+            \end{align*}
+            where $\zeta\in\mu_3$ is a third root of unity, i.e., we have that $\zeta^3=1$.\footnote{Note the relation between the above polynomial decomposition and the eigenvectors of the permutation representation of $\Z/3\Z\cong A_3$, discussed in Section 1.3 of \textcite{bib:FultonHarris} and transcribed in Section \ref{sse:FH1} of these notes.}\textsuperscript{,}\footnote{Note also that $3abc-a^3-b^3-c^3$ is a symmetric polynomial.}
         \end{itemize}
-        \item Frobenius's theorem: If $G$ is a finite group and we take this Frobenius determinant, then this determinant is equal to ${P_1}^{d_1}\cdots{P_k}^{d_k}$, where $P_1,\dots,P_k$ are irreducible polynomials in $x_g,\dots,x_{g_j}$, $\deg P_i=d_i$, and $k$ is the number of conjugacy classes.
-        \item Example: Take $S_3$; we'll get a polynomial of degree $|S_3|=6$ but the Frobenius determinant $FD=(x_{g_1}+\cdots+x_{g_k})(x_{g_1}\pm\cdots)(\text{some pol. of deg 2})^2$
-        \item The proof is remarkable and deep and uses what would become character theory. These polynomials are related to representations and the number of simplest irreducible representations. The theory that came out came as a way to understand this miracle. We'll forget FD's for now, but then come back and prove it later.
     \end{itemize}
 \end{itemize}
 
@@ -190,7 +232,7 @@
 \begin{itemize}
     \item \marginnote{9/29:}OH: TW 4:30 or 5:00 most likely; he will confirm later.
     \item Today: Definitions in greater generality.
-    \item As before, let $G$ be a finite group and $V$ be a finite-dimensional vector space.
+    \item As before, let $G$ be a finite group and $V$ be a finite-dimensional complex vector space.
     \item Goal of this course: Understand representations of $G$, that is\dots
     \begin{itemize}
         \item Homomorphisms $\rho:G\to GL(V)\cong GL_n(\C)$;
@@ -249,7 +291,7 @@
                 \item Example: If $f\in\Hom(a,b)$, then $\id_b\circ f=f=f\circ\id_a$.
             \end{itemize}
         \end{enumerate}
-        \item Rudenko: So a category is basically two pieces of data and a bunch of properties.
+        \item Rudenko: "So a category is basically two pieces of data and a bunch of properties."
     \end{itemize}
     \item Examples of categories.
     \begin{itemize}
@@ -260,7 +302,6 @@
         \item Category of abelian groups.
         \item Trivial category and the identity map; thus, categories need not be chonky.
     \end{itemize}
-    \pagebreak
     \item Comments on category theory.
     \begin{itemize}
         \item We'll see some pretty significant category theory at the end of the course.
@@ -335,15 +376,15 @@
             \item Since addition is commutative, the commutativity of Figure \ref{fig:CDmorphisms} holds.
             \item More explicitly,
             \begin{align*}
-                f[\rho_\text{perm}(\sigma)((x_1,x_2,x_3))] &= f((x_{\sigma(1)},x_{\sigma(2)},x_{\sigma(3)}))\\
+                \tilde{f}[\rho_\text{perm}(\sigma)((x_1,x_2,x_3))] &= \tilde{f}((x_{\sigma(1)},x_{\sigma(2)},x_{\sigma(3)}))\\
                 &= x_{\sigma(1)}+x_{\sigma(2)}+x_{\sigma(3)}\\
                 &= x_1+x_2+x_3\tag*{Commutativity of addition}\\
-                &= f((x_1,x_2,x_3))\\
-                &= \rho_{(3)}(\sigma)[f((x_1,x_2,x_3))]\\
+                &= \rho_{(3)}(\sigma)(x_1+x_2+x_3)\\
+                &= \rho_{(3)}(\sigma)[\tilde{f}((x_1,x_2,x_3))]\\
             \end{align*}
         \end{itemize}
-        \item Takeaway: The existence of maps between representations is interesting.
     \end{itemize}
+    \item Takeaway: The existence of maps between representations is interesting.
     \item Next question: How do we define an \textbf{isomorphism} of two representations?
     \item \textbf{Isomorphism} (of $G$-representations): A morphism of G-reps that is an isomorphism of vector spaces.
     \item Category theory helps us again here because it generalizes the concept of an isomorphism!
@@ -353,16 +394,20 @@
     \end{itemize}
     \item Recall the condition $FA_g=B_gF$. Supposing $F$ is an isomorphism (and thus has an inverse), we get $FA_gF^{-1}=B_g$ as our new condition.
     \begin{itemize}
-        \item Essentially, we can do \emph{simultaneous conjugation} of all matrices.
+        \item Essentially, we can do \emph{simultaneous conjugation} of all matrices.\footnote{Relation to the similarity transformation of CHEM20100Notes.}
         \item As per usual with isomorphisms, we get to \emph{change bases}.
         \item Essentially, we can represent the nice permutation representation in a very nasty basis but still have it be valid.
     \end{itemize}
     \item Many other notions (e.g., direct sum) will not be explained by Rudenko, but we can read about them!
     \item However, we'll do a few more.
     \item A representation sitting inside another: a \textbf{subrepresentation}.
-    \item \textbf{Subrepresentation} (of $V$): A subspace $W\subset V$ such that for all $w\in W$ and $g\in G$, we have that $\rho_V(g)W\subset W$, where $V$ is a $G$-representation with $\rho_V:G\to GL(V)$.
+    \item \textbf{Subrepresentation} (of $V$): A subspace $W\subset V$ such that for all $w\in W$ and $g\in G$, we have that
+    \begin{equation*}
+        \rho_V(g)W \subset W
+    \end{equation*}
+    where $V$ is a $G$-representation with $\rho_V:G\to GL(V)$.
     \begin{itemize}
-        \item Many people will just write the critical condition as $gW\subset W$.
+        \item Many people will write the critical condition as just $gW\subset W$.
     \end{itemize}
     \item Subrepresentations in category theory: We have another commutative diagram.
     \begin{figure}[h!]
@@ -377,13 +422,17 @@
         \caption{Commutative diagram, subrepresentations.}
         \label{fig:CDsubreps}
     \end{figure}
-    \item Example: The trivial representation, the standard representation, and (of course) the \textbf{zero representation} are subrepresentations of the permutation representation.
+    \item Example: The trivial representation, the standard representation, and (of course) the \textbf{zero representation} are subrepresentations of the permutation representation of $S_3$.
     \item \textbf{Zero representation}: The representation $\rho:G\to GL(\{0\})$ sending $g\mapsto 1$ for all $g\in G$. \emph{Denoted by} $\bm{(0)}$.
     \item What about representations that don't have subrepresentations?
     \item \textbf{Simple} (representation): A $G$-representation $V$ that has only two subrerpesentations: $(0)$ and $V$. \emph{Also known as} \textbf{irreducible}, \textbf{irreps}.
     \item Example irreducible representations: Line in $\C^2$, triangle in $\C^2$, $A_5$ and dodecahedron in $\C^3$.
     \item Notion of a direct sum.
-    \item \textbf{Direct sum} (of $V_1,V_2$): The $G$-rep associated with the space $V_1\oplus V_2=\{(v_1,v_2)\mid v_1\in V_1,v_2\in V_2\}$, where $\rho_{V_1\oplus V_2}(g)(v_1,v_2)=(\rho_{V_1}(g)v_1,\rho_{V_2}(g)v_2)$. \emph{Denoted by} $\bm{V_1\oplus V_2}$.
+    \item \textbf{Direct sum} (of $V_1,V_2$): The $G$-rep associated with the space $V_1\oplus V_2=\{(v_1,v_2)\mid v_1\in V_1,v_2\in V_2\}$, where
+    \begin{equation*}
+        \rho_{V_1\oplus V_2}(g)(v_1,v_2) = (\rho_{V_1}(g)v_1,\rho_{V_2}(g)v_2)
+    \end{equation*}
+    \emph{Denoted by} $\bm{V_1\oplus V_2}$.
     \begin{itemize}
         \item The matrix of $\rho_{V_1\oplus V_2}(g)$ is the following block matrix.
         \begin{equation*}
@@ -396,6 +445,7 @@
                  & & & \\
             \end{bNiceArray}
         \end{equation*}
+        \item Relate this definition to the example from last class about $A^2=E_n$!
     \end{itemize}
     \item Example: $V_\text{perm}=V_{(3)}\oplus V_{(2,1)}$, with $\C^3=\C\oplus\C^2$ where
     \begin{align*}
@@ -406,6 +456,31 @@
         \item The decomposition is into simple representations.
         \item Relate this to the fact that the JCF of any $3\times 3$ permutation matrix has at most a 1-block and a 2-block, if not three 1-blocks. There will always be one 1D subspace on which the permutation matrix is an identity, i.e., $\spn(1,1,1)$, and a 2D orthogonal complement!
         \item As a fun and simple exercise, prove that there is no line fixed under the standard representation.
+        \begin{proof}
+            % \begin{equation*}
+            %     x =
+            %     \begin{bmatrix}
+            %         x_1\\
+            %         \vdots\\
+            %         x_{n-1}\\
+            %         -(x_1+\cdots+x_{n-1})\\
+            %     \end{bmatrix}
+            % \end{equation*}
+            % In particular, since permutation matrices (such that of $(12)$) are unitary, $\lambda=1$. Thus, $(12)\cdot x=x$
+
+            Suppose for the sake of contradiction that $x=(x_1,\dots,x_n)$ is a nonzero vector that is fixed under the standard representation, that is, $\sigma x=\lambda_\sigma x$ for all $\sigma\in S_n$. Note that $n\geq 3$. (If $n=2$, the definition of the standard representation renders it equal to the alternating representation; if $n\in\{0,1\}$, its definition renders it equal to the zero representation.) Then for $i=2,\dots,n$, we have
+            \begin{equation*}
+                (x_i,x_2,\dots,x_{i-1},x_1,x_{i+1},\dots,x_n) = (1i)\cdot x
+                = \lambda x
+                = (\lambda x_1,\dots,\lambda x_n)
+            \end{equation*}
+            Let $j\notin\{1,i\}$; recall that such a $j$ is guaranteed to exist since $n\geq 3$. It follows since $x_j=\lambda x_j$ that $\lambda=1$. Thus, it follows that $x_i=\lambda x_1=x_1$. Therefore, $x=(x_1,\dots,x_1)$. But since $x_1+\cdots+x_n=0$ for any $x$ in the standard representation, we have that
+            \begin{align*}
+                0 &= x_1+\cdots+x_n = x_1+\cdots+x_1 = n\cdot x_1\\
+                0 &= x_1
+            \end{align*}
+            It follows that $x=(0,\dots,0)=0$, contradicting the hypothesis that $x$ is nonzero.
+        \end{proof}
     \end{itemize}
     \item A simple and important theorem to prove next week.
     \item Theorem: Let $G$ be a finite group and $\F=\C$. Then\dots
@@ -427,9 +502,9 @@
         \end{itemize}
         \item $G=S_3$.
         \begin{itemize}
-            \item $V_{(3)},V_{(1,1,1)},V_{(2,1)}$.
+            \item Irreps: $V_{(3)},V_{(1,1,1)},V_{(2,1)}$.
             \item $GL_5(\F_4)$.
-            \item Proven in an elementary way in Section 1.3 of \textcite{bib:FultonHarris}, which we have to read for the HW; will be useful for later in the course's HW.
+            \item Proven in an elementary way in Section 1.3 of \textcite{bib:FultonHarris}, which we have to read for the HW; will be useful for HWs later in the course as well.
         \end{itemize}
     \end{enumerate}
     \item Plan: Next time, we'll talk about some more abstract stuff like the tensor products of vector spaces.
@@ -464,10 +539,12 @@
     \begin{itemize}
         \item The latter term is a self-identified "abuse of language" \parencite[3]{bib:Serre}.
     \end{itemize}
-    \item "For most applications, one is interested in dealing with a \emph{finite number of elements} $x_i$ of $V$, and can always find a subrepresentation of $V$\dots of finite dimension, which contains the $x_i$; just take the vector subspace generated by the images $\rho_s(x_i)$ of the $x_i$" \parencite[4]{bib:Serre}.
+    \item "For most applications, one is interested in dealing with a \emph{finite} number of elements $x_i$ of $V$, and can always find a subrepresentation of $V$\dots of finite dimension, which contains the $x_i$; just take the vector subspace generated by the images $\rho_s(x_i)$ of the $x_i$" \parencite[4]{bib:Serre}.
     \item \textbf{Degree} (of a representation): The dimension of the representation space of this representation.
     \item To give a representation \textbf{in matrix form} is to give a set of invertible matrices that are isomorphic to the group elements.
-    \item Important converse: Given invertible matrices satisfying the appropriate homomorphism identities, there is a corresponding group that these matrices represent.
+    \begin{itemize}
+        \item Important converse: Given invertible matrices satisfying the appropriate homomorphism identities, there is a corresponding group that these matrices represent.
+    \end{itemize}
     \item \textbf{Similar} (representations of $G$): Two representations $\rho:G\to GL(V)$ and $\rho':G\to GL(V')$ of $G$ for which there exists a linear isomorphism $\tau:V\to V'$ such that
     \begin{equation*}
         \tau\circ\rho(s) = \rho'(s)\circ\tau
@@ -541,19 +618,28 @@
             \begin{equation*}
                 p^0 := \frac{1}{|G|}\sum_{t\in G}\rho_t\cdot p\cdot\rho_t^{-1}
             \end{equation*}
-            We now seek to prove that $p^0$ is a projection by showing that it satisfies the two properties of a "$p$." First, notice that by assumption, every $\rho_t$ (and thus $\rho_t^{-1}$) preserves $W$. This combined with the fact that $p(V)=W$ implies that $p^0(V)=W$, as desired. Additionally, for any $x\in W$ and $t\in G$, we know by property (2) of a $p$ and the fact that $p_t^{-1}(x)\in W$ that $p\cdot p_t^{-1}(x)=p_t^{-1}(x)$. Applying $p_t$ to both sides of this equation yields $[p_t\cdot p\cdot p_t^{-1}](x)=x$. Hence, $p^0(x)=x$, as desired. Thus, $p^0$ is a projection of $V$ onto $W$, associated with some complement $W^0$ of $W$.\par
+            We now seek to prove that $p^0$ is a projection by showing that it satisfies the two properties of a "$p$." First, notice that by assumption, every $\rho_t$ (and thus $\rho_t^{-1}$) preserves $W$. This combined with the fact that $p(V)=W$ implies that $p^0(V)=W$, as desired. Additionally, for any $x\in W$ and $t\in G$, we know by property (2) of a $p$ and the fact that $\rho_t^{-1}(x)\in W$ that $p\cdot\rho_t^{-1}(x)=\rho_t^{-1}(x)$. Applying $\rho_t$ to both sides of this equation yields $[\rho_t\cdot p\cdot\rho_t^{-1}](x)=x$. Hence, $p^0(x)=x$, as desired. Thus, $p^0$ is a projection of $V$ onto $W$, associated with some complement $W^0$ of $W$.\par
             So that we can make a substitution later, we will now prove that
             \begin{equation*}
                 \rho_s\cdot p^0 = p^0\cdot\rho_s
             \end{equation*}
-            for all $s\in G$. Pick such an $s$. Then
+            for all $s\in G$. Pick an arbitrary $s\in G$. Then
             \begin{equation*}
                 \rho_s\cdot p^0\cdot\rho_s^{-1} = \frac{1}{|G|}\sum_{t\in G}\rho_s\cdot\rho_t\cdot p\cdot\rho_t^{-1}\cdot\rho_s^{-1}
                 = \frac{1}{|G|}\sum_{st\in G}\rho_{st}\cdot p\cdot\rho_{st}^{-1}
                 = p^0
             \end{equation*}
-            so we can post-compose both sides of the above equation with $\rho_s$ to yield the final result. This line here should make it clear why we needed to form a projection like $p^0$.\par
-            We now have all of the tools we need to prove that $W^0$ is stable under $G$. To do so, it will suffice to show that for all $x\in W^0$ and $s\in G$, we have $\rho_s(x)\in W^0$. Let $x\in W^0$ and $s\in G$ be arbitrary. Since $x\in W^0$, $p^0(x)=0$ by definition. This combined with the above commutativity rule implies that $p^0\cdot\rho_s(x)=\rho_s\cdot p^0(x)=\rho_s(0)=0$. But the only way that $p^0$ could map $\rho_s(x)$ to 0 is if $\rho_s(x)\in W^0$, as desired.
+            so we can post-compose both sides of the above equation with $\rho_s$ to yield the final result. This is a special property of $p^0$ than an arbitrary projection $p$ would not have in general; it is the reason why we needed to form $p^0$.\par
+            We now have all of the tools we need to prove that $W^0$ is stable under $G$. To do so, it will suffice to show that for all $x\in W^0$ and $s\in G$, we have $\rho_s(x)\in W^0$. Let $x\in W^0$ and $s\in G$ be arbitrary. Since $x\in W^0$, $p^0(x)=0$ by definition. This combined with the above commutativity rule implies that
+            \begin{equation*}
+                p^0[\rho_s(x)] 
+                = [p^0\cdot\rho_s](x)
+                = [\rho_s\cdot p^0](x)
+                = \rho_s[p^0(x)]
+                = \rho_s(0)
+                = 0
+            \end{equation*}
+            But the only way that $p^0$ could map $\rho_s(x)$ to 0 is if $\rho_s(x)\in W^0$, as desired.
         \end{proof}
         \begin{proof}[Proof 2 (orthogonal complement)]
             Let $W^0$ be the orthogonal complement of $W$, and endow $V$ with a \textbf{scalar product} $(x\mid y)$ to turn it into an inner product space. Replace $(x\mid y)$ with the new inner product $\sum_{t\in G}(\rho_tx\mid\rho_ty)$. Now, if it wasn't already, the inner product is invariant under $\rho_s$ for all $s$, i.e., for $s$ arbitrary, we have
@@ -564,11 +650,15 @@
         \end{proof}
     \end{theorem}
     \item Note: Since we can define a scalar product that is invariant under $\rho_s$, if $(e_i)$ is an orthonormal basis of $V$, then the matrix of $\rho_s$ with respect to this basis is a \textbf{unitary} matrix.
+    \begin{itemize}
+        \item Takeaway (the \textbf{Unitarity theorem}): If $\rho$ is a representation of a finite group, then $\rho_s$ is a unitary matrix for all $s\in G$!
+    \end{itemize}
     \item Consequence of the second, stronger proof: The representations $W$ and $W^0$ determine the representation $V$.
     \begin{itemize}
         \item This allows us to rigorously say that the representation $V=W\oplus W^0$.
         \item If $W,W^0$ are given in matrix form by $R_s,R_s^0$, then $W\oplus W^0$ is given in matrix form by
         \begin{equation*}
+            \renewcommand{\arraystretch}{1.2}
             \begin{pNiceArray}{c|c}[margin]
                 R_s & 0\\
                 \hline
@@ -599,7 +689,7 @@
     \end{theorem}
     \item Fact: The direct-sum decomposition is not necessarily unique.
     \begin{itemize}
-        \item Counterexample: If $\rho_s=1$ for all $s\in G$, then there are a plethora of decompositions of a vector space into a direct sum of lines.
+        \item Example: If $\rho_s=1$ for all $s\in G$, then there are a plethora of decompositions of a vector space into a direct sum of lines.
     \end{itemize}
     \item Fact: The number of $W_i$ (in a direct sum decomposition $V=W_1\oplus\cdots\oplus W_k$) that are isomorphic to a given irreducible representation \emph{does not} depend on the chosen decomposition.
     \begin{itemize}

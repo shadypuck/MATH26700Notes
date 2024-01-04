@@ -14,7 +14,56 @@
     \item \marginnote{10/20:}\textbf{Permutational representation}. Let $X$ be a finite set on which the group $G$ acts. Let $\rho$ be the corresponding permutational representation with character $\chi$.
     \begin{enumerate}
         \item Consider an orbit $Gx$ of an element $x\in X$; let $c$ be the number of orbits. Prove that $c$ equals the number of times $\rho$ contains the trivial representation. Deduce that $(\chi,1)=c$. In particular, if the action is transitive, $\rho=1\oplus\theta$ for some representation $\theta$.
+        \begin{proof}
+            % WTS: $c=|\ker\rho|=|\bigcap_{x\in X}\Stab(x)|=...$
+
+            % Let's begin.\par
+            % First off, notice that 
+            % Therefore
+
+
+            By the proof of Corollary 1 from Lecture 3.3, the number of times $\rho$ contains the trivial representation (i.e., the multiplicity $n_1$ of the trivial representation) is equal to $(\chi,1)$. Thus, to prove that the number of times $\rho$ contains the trivial representation is equal to $c$, we will show that $(\chi,1)=c$. Indeed, from the Hermitian inner product definition, we have that
+            \begin{align*}
+                (\chi,1) &= \frac{1}{|G|}\sum_{g\in G}\chi(g)\cdot\bar{1}(g)\\
+                &= \frac{1}{|G|}\sum_{g\in G}\chi(g)\cdot 1\\
+                &= \frac{1}{|G|}\sum_{g\in G}\chi(g)\\
+                &= \frac{1}{|G|}\sum_{g\in G}\Fix(g)\\
+                &= \frac{1}{|G|}\sum_{g\in G}|\{x\in X\mid g\cdot x=x\}| = \frac{1}{|G|}\sum_{g\in G}\sum_{x\in X}1_{g\cdot x=x}\\
+                &= \frac{1}{|G|}\sum_{x\in X}|\{g\in G\mid g\cdot x=x\}| = \frac{1}{|G|}\sum_{x\in X}\sum_{g\in G}1_{g\cdot x=x}\\
+                &= \frac{1}{|G|}\sum_{x\in X}|\Stab(x)|\\
+                &= \sum_{x\in X}\frac{1}{|G|/|\Stab(x)|}\\
+                &= \sum_{x\in X}\frac{1}{|Gx|}\tag*{Orbit-Stabilizer Theorem}\\
+                &= c\cdot\sum_{x\in Gx}\frac{1}{|Gx|}\\
+                &= c\cdot 1\\
+                &= c
+            \end{align*}
+            as desired.\par
+            If the action is transitive, then $Gx=X$ for any $x\in X$, so there is only one orbit and $(\chi,1)=1$. Thus, the multiplicity of the trivial representation in $\rho$ is 1, so by complete reducibility,
+            \begin{equation*}
+                \rho = 1^1\oplus\underbrace{V_2^{n_2}\oplus\cdots\oplus V_k^{n_k}}_\theta
+            \end{equation*}
+            as desired.
+        \end{proof}
         \item Consider a diagonal action of $G$ on $X\times X$. Prove that the character of the corresponding permutational representation is $\chi^2$.
+        \begin{proof}
+            % A diagonal action of $G$ on $X\times X$ is isomorphic to the typical action of $G$ on $(e_x)_{x\in X}^{\otimes 2}$ via
+            % \begin{equation*}
+            %     (gx_1,gx_2) \mapsto \rho_ge_{x_1}\otimes\rho_ge_{x_2}
+            % \end{equation*}
+            % Thus,
+            % \begin{equation*}
+            %     \chi_{X\times X}^{} = \chi_{X\otimes X}^{} = \chi\cdot\chi = \chi^2
+            % \end{equation*}
+
+            Since $\rho$ is a permutational representation, we have that $\chi(g)=|\Fix_X(g)|$, where here we let $\Fix_X(g)=\{x\in X\mid g\cdot x=x\}$. It follows via a simple bidirectional inclusion proof that $\Fix_{X\times X}(g)=\Fix_X(g)\times\Fix_X(g)$. Thus,
+            \begin{equation*}
+                \chi_{X\times X}^{} = |\Fix_{X\times X}(g)|
+                = |\Fix_X(g)\times\Fix_X(g)|
+                = |\Fix_X(g)|^2
+                = \chi^2
+            \end{equation*}
+            as desired.
+        \end{proof}
         \item Suppose that $G$ acts transitively on $X$ and $|X|\geq 2$. We call this action \textbf{doubly transitive} if every pair of distinct elements of $X$ can be sent to any other pair by some element of $G$. Prove that the following are equivalent.
         \begin{enumerate}
             \item The action is doubly transitive.
@@ -22,8 +71,52 @@
             \item $(\chi^2,1)=2$.
             \item The representation $\theta$ is irreducible.
         \end{enumerate}
+        \begin{proof}
+            We will prove that (i) $\Leftrightarrow$ (ii) $\Leftrightarrow$ (iii) $\Leftrightarrow$ (iv). Let's begin.\par\medskip
+            (i $\Leftrightarrow$ ii): First, suppose $G\acts X$ is doubly transitive. Since $|X|\geq 2$, we may choose $x,y\in X$ to be distinct, i.e., satisfying $x\neq y$. We will show that the two orbits of the diagonal action of $G$ on $X\times X$ are $G(x,x)$ and $G(x,y)$.\par
+            First, we will show that every $(x_1,x_2)\in X\times X$ is in one of these two orbits. Let $(x_1,x_2)\in X\times X$ be arbitrary. We divide into two cases ($x_1=x_2$ and $x_1\neq x_2$). If $x_1=x_2$, then since $G\acts X$ is transitive, there exists $g\in G$ such that $g\cdot x=x_1$. Thus,
+            \begin{equation*}
+                g\cdot(x,x) = (g\cdot x,g\cdot x) = (x_1,x_1) = (x_1,x_2)
+            \end{equation*}
+            so $(x_1,x_2)\in G(x,x)$, as desired. If $x_1\neq x_2$, then since $G\acts X$ is doubly transitive, there exists $g\in G$ such that $g\cdot x=x_1$ and $g\cdot y=x_2$. Thus,
+            \begin{equation*}
+                g\cdot(x,y) = (g\cdot x,g\cdot y) = (x_1,x_2)
+            \end{equation*}
+            so $(x_1,x_2)\in G(x,y)$, as desired.\par
+            Now, we will show that $(x,y)\notin G(x,x)$. This follows immediately from the well-definedness of the group action: Suppose for the sake of contradiction that there exists $g\in G$ such that $g\cdot(x,x)=(x,y)$. Then $(g\cdot x,g\cdot x)=(x,y)$, so $x=g\cdot x=y$, contradicting the hypothesis that $x\neq y$.\par\smallskip
+            Second, suppose the diagonal action has exactly two orbits. Since $G\acts X$ is transitive, by the same reasoning as before, $G(x,x)$ is an orbit. Thus, since there are only two orbits, the other orbit must be $X\times X\setminus G(x,x)=G(x,y)$. The existence of this second orbit implies that any distinct $x,y\in X$ can be mapped to any other pair of elements of $X$ by some $g\in G$, i.e., that the action is doubly transitive.\par\medskip
+            (ii $\Leftrightarrow$ iii): Suppose the diagonal action on $X\times X$ has exactly two orbits. Then by part (b), the character of the corresponding permutational representation is $\chi^2$. Thus, by part (a), $(\chi^2,1)=c$, where $c$ is the number of orbits. But by hypothesis (ii), $c=2$, so $(\chi^2,1)=2$, as desired.\par\smallskip
+            Suppose $(\chi^2,1)=2$. Then by parts (a) and (b) once again, the diagonal action on $X\times X$ has $2=c$ orbits.\par\medskip
+            (iii $\Leftrightarrow$ iv): Suppose $(\chi^2,1)=2$. Note that by $\theta$, we mean the $\theta$ defined in part (a), \emph{not} the representation $\theta'$ defined by $\rho_2=1^2\oplus\theta$ where $\rho_2$ is the permutational representation corresponding to the diagonal action of $G$ on $X\times X$. Moving on, observe that $(\chi,\chi)=(\chi^2,1)$, $(1,\chi)=(\chi,1)$, and $(1,1)=1$ by the definition of the inner product. Observe also that $(\chi,1)=1$ by part (a) since the action is transitive. Therefore,
+            \begin{align*}
+                (\theta,\theta) &= (\chi-1,\chi-1)\\
+                &= (\chi-1,\chi)-(\chi-1,1)\\
+                &= [(\chi,\chi)-(1,\chi)]-[(\chi,1)-(1,1)]\\
+                &= (\chi^2,1)-2(\chi,1)+(1,1)\\
+                &= 2-2\cdot 1+1\\
+                &= 1
+            \end{align*}
+            so $\theta$ is irreducible by Corollary 2 from Lecture 3.3.\par\smallskip
+            Suppose that $\theta$ is irreducible. Then $(\theta,\theta)=1$. We still have $(\chi,\chi)=(\chi^2,1)$, $(\chi,1)=(1,\chi)=1$, and $(1,1)=1$ because these claims relied on the definition of the inner product and part (a), not the hypothesis that $(\chi^2,1)=2$. Thus, we have that
+            \begin{equation*}
+                (\chi^2,1) = (\theta,\theta)+2(\chi,1)-(1,1)
+                = 1+2-1
+                = 2
+            \end{equation*}
+            as desired.
+        \end{proof}
     \end{enumerate}
     \item Find the character table of the group $A_4$.
+    \begin{proof}
+        The conjugacy classes of $A_4$ in $S_4$ are $\{e\},\{(xxx)\},\{(xx)(xx)\}$. The true conjugacy classes of $A_4$ vary slightly, however. $e$ is still in a class by itself
+
+        Permutation representation: 4,1,0
+        \begin{tabular}{c|c|c|c}
+             & $e$ & $(xxx)$ & $(xx)(xx)$\\
+            Trivial & 1 & 1 & 1\\
+            Standard & 3 & 0 & $-1$
+        \end{tabular}
+    \end{proof}
     \item Consider the space of functions $V$ from the set of faces of a cube to $\C$. This is a representation of $S_4$.
     \begin{enumerate}
         \item Compute the character of $V$.
