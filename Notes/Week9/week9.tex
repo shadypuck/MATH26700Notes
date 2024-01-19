@@ -128,7 +128,7 @@
             &= \frac{1}{|H|\cdot|G|}\sum_{g_1,g_2\in G}\chi_V(\underbrace{g_2g_1g_2^{-1}}_h)\tilde{\chi}_W(\underbrace{g_2g_1^{-1}g_2^{-1}}_{h^{-1}})\\
             &= \frac{1}{|H|}\frac{1}{|G|}\sum_{h\in G}|G|\chi_V(h)\tilde{\chi}_W(h^{-1})\\
             &= (\chi_V|_H,\chi_W)_H\\
-            &= (\res_H^GV,\chi_W)_H
+            &= (\chi_{\res_H^GV},\chi_W)_H
         \end{align*}
         From line 4 to line 5: Fix $h$; then $g_2g_1g_2^{-1}=h$ iff $g_1=g_2^{-1}hg_2$, so we have overcounted by $|G|$ times. From line 5 to line 6: $\tilde{\chi}_W$ is zero whenever $h^{-1}\notin H$, so this ostensible sum over all $h\in G$ is \emph{de facto} only a sum over all $h\in H$; this is what allows us to consider $\chi_V$ as "restricted to $H$" in line 6.
     \end{proof}
@@ -756,6 +756,483 @@
     \end{proof}
     \item After another 10 years of trying to understand the representations of the symmetric group, we'll be here.
     \item At this point, we can study compact Lie groups.
+\end{itemize}
+
+
+
+\section{Final Review Sheet}
+\begin{itemize}
+    \item \marginnote{1/18:}Problem-by-problem breakdown.
+    \item (30 points) Question 1: One of the following three prompts. I can memorize answers to these. This is for speed and for credit.
+    \item Define algebraic integers. Prove that they form a ring. Prove that the dimension of an irreducible representation divides the order of the group.
+    \begin{proof}[Answer]
+        ${\color{white}hi}$\\
+        \textbf{Algebraic integers}: The set of all $x\in\C$ such that there exist some $a_0,\dots,a_{n-1}\in\Z$ such that
+        \begin{equation*}
+            x^n+a_{n-1}x^{n-1}+\cdots+a_1x+a_0 = 0
+        \end{equation*}
+        To prove that the algebraic integers form a ring, it will suffice to show that if $x,y\in\bar{\Z}$, then $x+y,xy\in\bar{\Z}$. Let $x,y\in\bar{\Z}$. Then there exist monic polynomials with integer coefficients such that
+        \begin{align*}
+            x^n+a_{n-1}x^{n-1}+\cdots+a_0 &= 0&
+            y^m+b_{m-1}y^{m-1}+\cdots+b_0 &= 0
+        \end{align*}
+        To each of these polynomials corresponds a matrix with integer coefficients for which $x,y$, respectively, is an eigenvalue. Explicitly, these matrices are the Frobenius matrices
+        \begin{align*}
+            A &=
+            \begin{bmatrix}
+                0 & 1 &  & \\
+                 & \ddots & \ddots & \\
+                 &  & 0 & 1\\
+                -a_0 & -a_1 & \cdots & -a_{n-1}\\
+            \end{bmatrix}&
+            B &=
+            \begin{bmatrix}
+                0 & 1 &  & \\
+                 & \ddots & \ddots & \\
+                 &  & 0 & 1\\
+                -b_0 & -b_1 & \cdots & -b_{m-1}\\
+            \end{bmatrix}
+        \end{align*}
+        which have characteristic polynomials equal to the above polynomials and thus have $x,y$ as eigenvalues. To these eigenvalues must correspond some eigenvectors $v,w$, which we will not explicitly solve for. The important thing is that we now know that
+        \begin{align*}
+            Av &= xv&
+            Bw &= yw
+        \end{align*}
+        Now, using the Kronecker product, we have that
+        \begin{align*}
+            (A\otimes B)(v\otimes w) &= Av\otimes Bw
+                = xv\otimes yw
+                = xy(v\otimes w)\\
+            (A\otimes I_m+I_n\otimes B)(v\otimes w) &= Av\otimes I_mw+I_nv\otimes Bw
+                = xv\otimes 1w+1v\otimes yw
+                % = x(v\otimes w)+y(v\otimes w)
+                = (x+y)(v\otimes w)
+        \end{align*}
+        Thus, $x+y,xy$ are eigenvalues of matrices with integer coefficients. Thus, they are zeroes of the characteristic polynomials, which will be monic polynomials with coefficients that are the sums and products of integers, and hence are integers, too. Therefore, $x+y,xy\in\bar{\Z}$.\par\medskip
+        We now prove that the dimension $d_V$ of an irrep divides the order $|G|$ of a group.\par
+        We begin with three definitions: Let $C:=\{g_1,\dots,g_s\}\subset G$ be a conjugacy class of the finite group $G$ where naturally $s=|C|$, let $e_C:=g_1+\cdots+g_s\in\Z[G]\subset\C[G]$, and let $\rho:\C[G]\to GL(V)$ be the group homomorphism corresponding to the irreducible representation $V$.\par
+        Recall that the $e_C$'s for all conjugacy classes form a basis of the center of the group algebra $\C[G]$. Thus, $e_C\in Z(\C[G])$. It follows easily that $\rho(e_C)$ satisfies Schur's lemma for associative algebras, and from there that there exists $\lambda\in\C$ such that $\rho(e_C)=\lambda I_{d_V}$. Moreover,
+        \begin{align*}
+            \rho(g_1+\cdots+g_s) &= \lambda I_{d_V}\\
+            \tr(\rho(g_1+\cdots+g_s)) &= \tr(\lambda I_{d_V})\\
+            \tr(\rho(g_1))+\cdots+\tr(\rho(g_s)) &= \lambda\tr(I_{d_V})\\
+            |C|\chi(C) &= \lambda d_V\\
+            \lambda &= \frac{|C|\chi(C)}{d_V}
+        \end{align*}
+        Additionally, we can prove that $\lambda\in\bar{\Z}$. Recall that there exist $a_0,\dots,a_{n-1}\in\Z$ such that
+        \begin{equation*}
+            e_C^n+a_{n-1}e_C^{n-1}+\cdots+a_0 = 0
+        \end{equation*}
+        Recall that the essential reason that this is true is that the left multiplication by $e_C$ map from $\Z[G]\to\Z[G]$ will have eigenvalue $e_C$ (by definition) and a matrix of integers (because of its domain and range), so we use the characteristic polynomial as before. Anyway, back to the point: Let $v\in V$ be nonzero. Then
+        \begin{align*}
+            0 &= \rho(0)v\\
+            &= \rho(e_C^n+a_{n-1}e_C^{n-1}+\cdots+a_0)v\\
+            &= \left[ \rho(e_C)^n+a_{n-1}\rho(e_C)^{n-1}+\cdots+a_0 \right]v\\
+            &= \left[ \lambda^n+a_{n-1}\lambda^{n-1}+\cdots+a_0 \right]I_{d_V}v\\
+            &= \left[ \lambda^n+a_{n-1}\lambda^{n-1}+\cdots+a_0 \right]v
+        \end{align*}
+        It follows by the zero product property that the coefficient in brackets must be zero, giving us the monic, integer coefficient polynomial we need to prove that $\lambda\in\bar{\Z}$.\par
+        Additionally, recall that $\chi(C)\in\bar{\Z}$. This is because $g_i^n=e$ for some $n$, so $\rho(g)$ may be diagonal with roots of unity along the diagonal (i.e., \emph{unitary}), so the character is the sum of $n^\text{th}$ roots of unity. All of these roots of unity are algebraic integers, meaning that their sum is, too, since we've already proven that the algebraic integers form a ring. Moreover, it follows because complex roots of a polynomial imply that their conjugate is also a root that $\overline{\chi(C)}\in\bar{\Z}$, too. Thus, by the first orthogonality relation,
+        \begin{align*}
+            |G| &= \sum_C|C|\chi(C)\overline{\chi(C)}\\
+            \frac{|G|}{d_V} &= \sum_C\frac{|C|\chi(C)}{d_V}\cdot\overline{\chi(C)}
+        \end{align*}
+        Thus, since $\bar{\Z}$ is a ring, $|G|/d_V\in\bar{\Z}$. Naturally, it is also in $\Q$. It follows that it is in $\Q\cap\bar{\Z}=\Z$. Note that this last equality holds via a somewhat complicated polynomial argument with prime divisors and such. Regardless, since $|G|/d_V$ is an integer, this means that $d_V\mid|G|$, as desired.
+    \end{proof}
+    \item Explain the construction of irreducible representations of $S_n$ via Specht polynomials. Prove irreducibility of these representations.
+    \begin{proof}[Answer]
+        ${\color{white}hi}$\\
+        Roughly speaking, we establish a bijective correspondence between the partitions $\lambda\vdash n$ and the irreps of $S_n$ as follows. Take a partition of $n$. For the sake of clarity, we will look at a representative example. Consider $S_7$ and let $\lambda=(4,2,1)$. Then letting $\lambda'=(3,2,1,1)$, we define the Specht polynomial of $\lambda$ to be
+        \begin{equation*}
+            \Sp_\lambda(x_1,\dots,x_7) := \Delta(x_1,x_2,x_3)\Delta(x_4,x_5)\Delta(x_6)\Delta(x_7)
+        \end{equation*}
+        based off of the inverse partition. Each $\Delta$ term denotes a Vandermonde determinant, which we can evaluate to get the final, expanded Specht polynomial as follows:
+        \begin{equation*}
+            \Sp_\lambda = (x_1-x_2)(x_1-x_3)(x_2-x_3)(x_4-x_5)
+        \end{equation*}
+        This is how to construct a Specht polynomial.\par
+        Now let's look at a different, simpler example for the full construction of irreducible representations. In particular, let's look at $\lambda=(2,1)$ for $S_3$. Here,
+        \begin{equation*}
+            \Sp_\lambda = x_1-x_2
+        \end{equation*}
+        Now we apply all of the elements of $S_3$ to it to generate a basis of the vector space that will be our irrep. Applying $e,(123),(132),(12),(13),(23)$ in order via the permutation representation, we get
+        \begin{equation*}
+            \inp{x_1-x_2,x_2-x_3,x_3-x_1,x_2-x_1,x_3-x_2,x_1-x_3}
+        \end{equation*}
+        Since $x_1-x_2$ and $x_2-x_3$ don't even contain the same variables, they're clearly linearly independent in the polynomial space. Let's call them $a,b$ respectively. However, every other polynomial present is linearly dependent on $a,b$: For example, $x_3-x_1=-(a+b)$ and $x_2-x_1=-a$. Thus, the true basis of the Specht module, which we will denote $V_\lambda$ and is our final irrep, is
+        \begin{equation*}
+            \inp{x_1-x_2,x_2-x_3}
+        \end{equation*}
+        Alternatively, we can construct a basis directly using standard Young tableaux. The two possible SYTs for $(2,1)$ put $x_1,x_2$ vertically stacked and $x_1,x_3$ vertically stacked. This implies a basis $\inp{\Delta(x_1,x_2),\Delta(x_1,x_3)}=\inp{x_1-x_2,x_1-x_3}$, which works just as well as the one above.\par\medskip
+        We now prove that Specht modules constitute irreducible representations. Let $\lambda\vdash n$, let $V_\lambda$ be the corresponding Specht module, let $d:=d(\lambda)$ be the degree of $\Sp_\lambda$, and let $R_d$ be the subset of $\C[x_1,\dots,x_n]$ consisting of polynomials of degree $d$. By complete reducibility, let $V_\lambda=\bigoplus W_i^{n_i}$ and $R_d=\bigoplus W_i^{m_i}$, where the $W_i$ are the irreps of $S_n$. Recall that by Schur's lemma,
+        \begin{equation*}
+            \dim\Hom_{S_n}(V_\lambda,R_d) = \sum_in_im_i
+        \end{equation*}
+        Moreover, if we actually inspect a homomorphism in this set, we will find that it is a linear map sending polynomials to polynomials. In particular, since the argument is antisymmetric in $x_1,\dots,x_{\lambda_1'}$, so is its image. This pattern continues for all Vandermonde determinants. In fact, what it ends up implying --- since any antisymmetric polynomial is equal to the product of a symmetric polynomial and a Vandermonde determinant --- is that the image is divisible by all of the Vandermonde determinants composing the argument. Indeed, the image is divisible by the argument. But since both image and argument have the same degree, that means that they are only related by a scalar factor, so the homomorphism must be a homothety. For our purposes, the takeaway is that
+        \begin{equation*}
+            \dim\Hom_{S_n}(V_\lambda,R_d) = 1
+        \end{equation*}
+        It follows by transitivity that there must exist some $i$ for which $n_i=m_i=1$, and we must have $n_j=m_j=0$ for all $j\neq i$. But this means that $V_\lambda=W_i$ is irreducible, as desired.
+    \end{proof}
+    \item Define induction and restriction, state the formula for the character of an induced representation. State and prove Frobenius reciprocity.
+    \begin{proof}[Answer]
+        \textbf{Restriction} takes a representation $\rho:G\to GL(V)$ and a subgroup $H\leq G$, and returns the restricted representation $\tilde{\rho}:H\to GL(V)$ defined by $\tilde{\rho}(g):=\rho(g)$.\par
+        \textbf{Induction} takes a subgroup $H\leq G$ and a representation $\rho:H\to GL(W)$, and returns an induced representation $\tilde{\rho}:G\to GL(V)$. Defining this one is a bit trickier. In a nutshell, let $g_1H,\dots,g_sH$ be all cosets of $H$ in $G$, where $s=(G:H)$ and we pick $g_1\in H$. Define vector spaces $g_1W,\dots,g_sW$ identical to $W$ except for the name, and let $V:=g_1W\oplus\cdots\oplus g_sW$. Then if $g\in G$ is arbitrary, we say $\tilde{\rho}(g)$ acts on the basis of $V$ as follows: Let $g_jw$ be a basis vector. $gg_j=g_kh$ for some $g_k$ in the system of representatives and $h\in H$. Thus,
+        \begin{equation*}
+            [\tilde{\rho}(g)](g_jw) = g_k\rho(h)w
+        \end{equation*}
+        The formula for the character of an induced representation is as follows.
+        \begin{equation*}
+            \chi_{\ind_H^GW}(g) = \frac{1}{|H|}\sum_{\substack{x\in G\\x^{-1}gx\in H}}\chi_W(x^{-1}gx)
+        \end{equation*}
+        Frobenius reciprocity relates the inner product of the characters of two $G$-reps to the inner product of two related $H$-reps: In simplified notation, we have
+        \begin{equation*}
+            (V,\ind_H^GW)_G = (\res_H^GV,W)
+        \end{equation*}
+        We can prove this equality through a long transitivity chain as follows.
+        \begin{align*}
+            (\chi_V,\chi_{\ind_H^GW})_G &= \frac{1}{|G|}\sum_{g_1\in G}\chi_V(g_1)\overline{\chi_{\ind_H^GW}(g_1)}\\
+            &= \frac{1}{|G|}\sum_{g_1\in G}\chi_V(g_1)\chi_{\ind_H^GW}(g_1^{-1})\\
+            &= \frac{1}{|G|}\sum_{g_1\in G}\chi_V(g_1)\left( \frac{1}{|H|}\sum_{\substack{g_2\in G\\g_2^{-1}g_1^{-1}g_2\in H}}\chi_W(g_2^{-1}g_1^{-1}g_2) \right)\\
+            &= \frac{1}{|H|\cdot|G|}\sum_{g_1\in G}\sum_{g_2\in G}\chi_V(g_1)\chi_W(g_2^{-1}g_1^{-1}g_2)\\
+            &= \frac{1}{|H|\cdot|G|}\sum_{g_2\in G}\sum_{g_1\in G}\chi_V(g_2^{-1}g_1g_2)\chi_W(g_2^{-1}g_1^{-1}g_2)\\
+            &= \frac{1}{|H|\cdot|G|}\cdot|G|\sum_{g_1\in G}\chi_V(g_2^{-1}g_1g_2)\chi_W(g_2^{-1}g_1^{-1}g_2)\\
+            &= \frac{1}{|H|}\sum_{h\in G}\chi_V(h)\chi_W(h^{-1})\\
+            &= \frac{1}{|H|}\sum_{h\in H}\chi_V(h)\chi_W(h^{-1})\\
+            &= \frac{1}{|H|}\sum_{h\in H}\chi_V(h)\overline{\chi_W(h)}\\
+            &= (\chi_V|_H,\chi_W)_H\\
+            &= (\chi_{\res_H^GV},\chi_W)_H
+        \end{align*}
+        Note that we can expand the second summation to be over all $g_2\in G$ by defining $\chi_W$ to be zero whenever its argument $g_2^{-1}g_1^{-1}g_2\notin H$.
+    \end{proof}
+    \item Tips for remembering the answers to each questions/quick generalized outlines.
+    \begin{enumerate}
+        \item Algebraic integers.
+        \begin{itemize}
+            \item Define: Easy.
+            \item Steps to prove they form a ring.
+            \begin{itemize}
+                \item $x,y\in\bar{\Z}$, then $x+y,xy\in\bar{\Z}$.
+                \item Apply definition of algebraic integers to $x,y$.
+                \item Pull back into Frobenius matrices.
+                \item Use $A\otimes B$ and $A\otimes I_m+I_n\otimes B$.
+                \item Pull back to characteristic polynomials.
+            \end{itemize}
+            \item Steps to prove that $d_V\mid|G|$.
+            \begin{itemize}
+                \item Three definitions: $C:=\{g_1,\dots,g_s\}$, $e_C=g_1+\cdots+g_s$, $\rho:\C[G]\to GL(V)$.
+                \item $e_C\in Z(\C[G])$ implies $\rho(e_C)=\lambda I_{d_V}$.
+                \item Expand above result into $\lambda=|C|\chi(C)/d_V$.
+                \item Left multiplication map on $\Z[G]$ implies $e_C^n+a_{n-1}e_C^{n-1}+\cdots+a_0=0$.
+                \item Use above to prove $\lambda$ is an algebraic integer.
+                \item Use roots of unity and complex roots of a polynomial to prove $\overline{\chi(C)}\in\bar{\Z}$.
+                \item Use first orthogonality relation and $\Q\cap\bar{\Z}=\Z$ to finish the proof.
+            \end{itemize}
+        \end{itemize}
+        \item Specht modules.
+        \begin{itemize}
+            \item Logical way.
+            \begin{itemize}
+                \item Take $\lambda$.
+                \item Make a Specht polynomial.
+                \item Apply everything to it.
+                \item Choose some elements as a basis.
+            \end{itemize}
+            \item Quick way.
+            \begin{itemize}
+                \item Take $\lambda$.
+                \item Apply the hook length formula.
+                \item Make SYTs.
+                \item Write the basis in Specht polynomials.
+            \end{itemize}
+            \item Prove irreducibility.
+            \begin{itemize}
+                \item Definitions: $V_\lambda$, $d=d_\lambda$, $R_d$ (polynomials of degree $d$).
+                \item Apply complete reducibility.
+                \item Look at $\dim\Hom_{S_n}(V_\lambda,R_d)$.
+                \item Get sum.
+                \item Get 1. ($P=f(\Delta)$.)
+            \end{itemize}
+        \end{itemize}
+        \item Induction/restriction.
+        \begin{itemize}
+            \item Induction: $gg_j=g_kh$.
+            \item Frobenius recipricity is very much like saying restriction is the \emph{adjoint} (functor) of induction. In fact, that's exactly what the statement says.
+        \end{itemize}
+    \end{enumerate}
+    \item (25 points) Question 2: Given a representation of $S_n$, write down its basis using standard tableaux, prove that the corresponding polynomials indeed form a basis, and compute the character.
+    \item Let's work some examples.
+    \item Example: $(2,2)$.
+    \begin{proof}[Answer]
+        The hook length formula tells us that we can write
+        \begin{equation*}
+            \frac{4!}{3\cdot 2\cdot 2\cdot 1} = 2
+        \end{equation*}
+        SYTs for $\lambda=(2,2)$. By inspection, these are
+        \begin{align*}
+            \ytableaushort{13,24}&&
+            \ytableaushort{12,34}
+        \end{align*}
+        It follows by taking Vandermonde determinants of the columns that our basis is\footnote{This does, indeed, match with our example from the 11/13 class. See also Figure \ref{fig:SYT4}.}
+        \begin{equation*}
+            V_{(2,2)} = \langle\underbrace{(x_1-x_2)(x_3-x_4)}_a,\underbrace{(x_1-x_3)(x_2-x_4)}_b\rangle
+        \end{equation*}
+        We will see as we work toward computing the character that $a,b$ suffice as basis vectors.\par
+        We will compute the character directly, that is by finding a matrix for a representative member of each conjugacy class of $S_4$ and taking the trace. Take as representative members of the five conjugacy classes the elements
+        \begin{equation*}
+            \{e,(12),(123),(1234),(12)(34)\}
+        \end{equation*}
+        To simplify computations, it will be useful to introduce the vector
+        \begin{equation*}
+            b-a = (x_1-x_4)(x_2-x_3)
+        \end{equation*}
+        $e$ will send $a\mapsto a$ and $b\mapsto b$. $(12)$ will send $a\mapsto -a$ and $b\mapsto b-a$. $(123)$ will send $a\mapsto b-a$ and $b\mapsto -a$. $(1234)$ will send $a\mapsto a-b$ and $b\mapsto -b$. $(12)(34)$ will send $a\mapsto a$ and $b\mapsto b$. Thus, the matrices of these five elements are
+        \begin{align*}
+            \underbrace{
+                \begin{bmatrix}
+                    1 & 0\\
+                    0 & 1\\
+                \end{bmatrix}
+            }_e&&
+            \underbrace{
+                \begin{bmatrix}
+                    -1 & -1\\
+                    0 & 1\\
+                \end{bmatrix}
+            }_{(12)}&&
+            \underbrace{
+                \begin{bmatrix}
+                    -1 & -1\\
+                    1 & 0\\
+                \end{bmatrix}
+            }_{(123)}&&
+            \underbrace{
+                \begin{bmatrix}
+                    1 & 0\\
+                    -1 & -1\\
+                \end{bmatrix}
+            }_{(1234)}&&
+            \underbrace{
+                \begin{bmatrix}
+                    1 & 0\\
+                    0 & 1\\
+                \end{bmatrix}
+            }_{(12)(34)}
+        \end{align*}
+        Thus, the character is
+        \begin{equation*}
+            (2,0,-1,0,2)
+        \end{equation*}
+        Notice how all of the representative elements send $a,b$ to linear combinations of themselves verifying $\inp{a,b}$ as the basis of $V_{(2,2)}$.
+    \end{proof}
+    \item Steps.
+    \begin{enumerate}
+        \item Hook length formula.
+        \item Standard Young tableaux.
+        \item Specht module basis.
+        \item Explicit character computation.
+        \begin{itemize}
+            \item Look for linear combinations that show up often and write them down!
+            \item Use the procedural method if necessary.
+        \end{itemize}
+        \item Proof of basis validity falls out.
+    \end{enumerate}
+    \item (25 points) A problem about characters similar to problems 1 and 2 from the midterm.
+    \item Problem 1 from the midterm tested the following skills.
+    \begin{itemize}
+        \item You are given the character table for a group.
+        \item Fill in holes using the orthogonality relations.
+        \item Compute tensor products, wedge/symmetric squares, and/or the permutational representation.
+        \item Decompose reducible representations into irreducibles.
+    \end{itemize}
+    \item Problem 2 from the midterm tested the following skills.
+    \begin{itemize}
+        \item You are given a small group (like the quaternion group, the symmetries of a square, $A_4$, etc.).
+        \item Compute conjugacy classes.
+        \item Compute the character table.
+        \item Decompose reducible representations into isotypical components.
+        \item Diagonalize an endomorphism.
+    \end{itemize}
+    \item Example: Character table for the quaternion group.
+    \begin{proof}[Answer]
+        We are given
+        \begin{equation*}
+            Q_8 = \{1,-1,i,-i,j,-j,k,-k\}
+        \end{equation*}
+        with relations
+        \begin{align*}
+            (-1)^2 &= 1&
+            i^2 &= j^2 = k^2 = ijk = -1
+        \end{align*}
+        To compute the conjugacy classes, start by putting the identity (1) by itself, as per usual. Similarly, $-1$ will commute out of any $g(-1)g^{-1}$, so it's in a class by itself. Then we may observe that $(j)(i)(-j)=-i$, so $i,-i$ are in the same conjugacy class. Similar relations hold for $j,-j$ and $k,-k$. Moreover, there is no way to conjugate $i$ over to $\pm j,\pm k$, so these three classes are disjoint. Thus, the five conjugacy classes are
+        \begin{equation*}
+            \{1\},\{-1\},\{i,-i\},\{j,-j\},\{k,-k\}
+        \end{equation*}
+        We know from the sum of the squares of the dimensionalities that we're gonna have one 2D representation and four 1D representations. We can immediately construct a trivial representation $(1,1,1,1,1)$. For the first character to always be 1 and orthogonality to be satisfied, our remaining options are $(1,1,-1,-1,1)$, $(1,1,-1,1,-1)$, and $(1,1,1,-1,-1)$. These correspond to various ways we can assign $-1$ to $i,j$ for instance and have it multiply with the rest per the rules. We can then recover the 2D one via orthogonality relations. In particular, the second orthogonality relation tells us that it is of the form $(\pm 2,\pm 2,0,0,0)$. Our knowledge that characters of the identity are always positive gets us to $(2,\pm 2,0,0,0)$. And then the first orthogonality relation with the first row gets us to $(2,-2,0,0,0)$. Thus, altogether, the character table is
+        \begin{table}[h!]
+            \centering
+            \small
+            \renewcommand{\arraystretch}{1.4}
+            \begin{tabular}{c|c|c|c|c|c|}
+                      & $\{1\}$ & $\{-1\}$ & $\{i,-i\}$ & $\{j,-j\}$ & $\{k,-k\}$\\
+                \hline
+                $V_1$ & 1 & 1 & 1 & 1 & 1\\ \hline
+                $V_2$ & 1 & 1 & $-1$ & $-1$ & 1\\ \hline
+                $V_3$ & 1 & 1 & $-1$ & 1 & $-1$\\ \hline
+                $V_4$ & 1 & 1 & 1 & $-1$ & $-1$\\ \hline
+                $V_5$ & 2 & $-2$ & 0 & 0 & 0\\
+            \end{tabular}
+            \caption{Character table for $Q_8$.}
+            \label{tab:charTableQ8}
+        \end{table}
+    \end{proof}
+    \item Review the Midterm 1 review sheet!
+    \item Memorize rotation matrix form:
+    \begin{equation*}
+        \begin{bmatrix}
+            \cos\theta & -\sin\theta\\
+            \sin\theta & \cos\theta\\
+        \end{bmatrix}
+    \end{equation*}
+    \item Pull together content from the last few weeks.
+    \item \textbf{Partition} (of $n\in\N$): An ordered tuple satisfying the following constraints. \emph{Denoted by} $\bm{\lambda}$, $\bm{(\lambda_1,\ldots,\lambda_k)}$. \emph{Constraints}
+    \begin{enumerate}
+        \item $\lambda_i\in\N$ for $i=1,\dots,k$;
+        \item $\lambda_1\geq\cdots\geq\lambda_k$;
+        \item $\lambda_1+\cdots+\lambda_k=n$.
+    \end{enumerate}
+    \item \textbf{Inverse} (of $\lambda$): The partition $(\lambda_1',\dots,\lambda_k')$ defined as follows. \emph{Denoted by} $\bm{\lambda'}$. \emph{Given by}
+    \begin{equation*}
+        \lambda_i' = |\{\lambda_j\mid\lambda_j>i\}|
+    \end{equation*}
+    for all $i=1,\dots,k$.
+    \item \textbf{Young diagram} (of $\lambda$): A left-aligned set of vertically stacked rows of boxes, with $\lambda_i$ boxes in the $i^\text{th}$ row and $\lambda_1'$ rows total.
+    \item Recall \textbf{graded algebras}, though I don't think they're too important.
+    \item \textbf{Elementary symmetric polynomial} (of degree $k$ in $n$): The symmetric polynomial defined as follows. \emph{Denoted by} $\bm{\sigma_k}$. \emph{Given by}
+    \begin{equation*}
+        \sigma_k = \sum_{1\leq i_1<\cdots<i_k\leq n}x_{i_1}\cdots x_{i_k}
+    \end{equation*}
+    \item Examples:
+    \begin{itemize}
+        \item $\sigma_1=x_1+\cdots+x_n=\sum_{1\leq i\leq n}x_i$.
+        \item $\sigma_2=x_1x_2+\cdots+x_1x_n+x_2x_3+\cdots=\sum_{1\leq i<j\leq n}x_ix_j$.
+        \item $\sigma_n=x_1\cdots x_n$.
+    \end{itemize}
+    \item \textbf{Lexicographic order} (on monomials): An ordering of monomials based on the following rule. \emph{Denoted by} $\bm{\succ}$. \emph{Given by}\par
+    $x_1^{a_1}\cdots x_n^{a_n}\succ x_1^{b_1}\cdots x_n^{b_n}$\dots
+    \begin{enumerate}
+        \item If $a_1>b_1$ OR\dots
+        \item If $a_1=b_1$ and $a_2>b_2$ OR\dots
+        \item $a_1=b_1$ and $a_2=b_2$ and $a_3>b_3$ OR\dots
+        \item So on and so forth.
+    \end{enumerate}
+    \item \textbf{Largest monomial} (of $P\neq 0$); The monomial in $P(x_1,\dots,x_n)\neq 0$ that is the largest lexicographically. \emph{Denoted by} $\bm{LM(P)}$.
+    \item $\bm{C_{LM}(P)}$: The coefficient of $LM(P)$.
+    \item $LM(PQ)=LM(P)LM(Q)$, if $P,Q\neq 0$.
+    \item Lemma: If $P\in\Q[x_1,\dots,x_n]^{S_n}$ and $LM(P)=x_1^{a_1}\cdots x_n^{a_n}$, then $a_1\geq\cdots\geq a_n$.
+    \item Fundamental theorem of symmetric polynomials:
+    \begin{equation*}
+        \Q[x_1,\dots,x_n]^{S_n} = \Q[\sigma_1,\dots,\sigma_n]
+    \end{equation*}
+    \item \textbf{Antisymmetric} (polynomial): A polynomial $P(x_1,\dots,x_n)$ such that
+    \begin{equation*}
+        \sigma P=(-1)^\sigma P
+    \end{equation*}
+    \item \textbf{Vandermonde determinant}:
+    \begin{equation*}
+        \Delta(x_1,\dots,x_n) = \prod_{1\leq i<j\leq n}(x_j-x_i) =
+        \begin{bmatrix}
+            1 & 1 & \cdots & 1\\
+            x_1 & x_2 & \cdots & x_n\\
+            \vdots & \vdots & \vdots & \vdots\\
+            x_1^{n-1} & x_2^{n-1} & \cdots & x_n^{n-1}\\
+        \end{bmatrix}
+    \end{equation*}
+    \item Theorem: If $P\in\Q[x_1,\dots,x_n]^\text{alt}$ (i.e., $P\in\Q[x_1,\dots,x_n]$ and $P$ is antisymmetric), then $P=P'\Delta(x_1,\dots,x_n)$ where $P'$ is symmetric (i.e., $P'\in\Q[x_1,\dots,x_n]^{S_n}$).
+    \item Corollary: If $P$ is antisymmetric and $\deg(P)<n(n-1)/2$, then $P=0$.
+    \item \textbf{Specht polynomial} (of $\lambda$): The polynomial derived by taking the Young diagram of $\lambda$, writing numbers down the columns from the left all the way until $n$, and taking Vandermonde determinants of the columns. \emph{Denoted by} $\bm{\Sp_\lambda}$. \emph{Given by}
+    \begin{equation*}
+        \Sp_\lambda = \Delta(x_1,\dots,x_{\lambda_1'})\Delta(x_{\lambda_1'+1},\dots,x_{\lambda_2'})\cdots\Delta(x_{\lambda_1'+\cdots+\lambda_{k-1}'+1},\dots,x_n)
+    \end{equation*}
+    \begin{itemize}
+        \item For example, $\Sp_{(4,2,1)}$ is written from
+        \begin{equation*}
+            \ytableaushort{1467,25,3}
+        \end{equation*}
+        and equals
+        \begin{equation*}
+            \Sp_{(4,2,1)} = \Delta(x_1,x_2,x_3)\Delta(x_4,x_5)\Delta(x_6)\Delta(x_7)
+            = (x_1-x_2)(x_1-x_3)(x_2-x_3)(x_4-x_5)
+        \end{equation*}
+    \end{itemize}
+    \item \textbf{Degree} (of a Specht polynomial): The degree of the given polynomial as defined in Lecture 7.1. \emph{Denoted by} $\bm{d(\lambda)}$. \emph{Given by}
+    \begin{equation*}
+        d(\lambda) = \sum_{i=1}^{k'}\frac{\lambda_i'(\lambda_i'-1)}{2}
+    \end{equation*}
+    \item Corollary: If $d'<d$, then $\Hom(V_\lambda,R_{d'})=0$.
+    \item Theorem 2: Let $\lambda_1,\lambda_2$ be partitions of $n$. Then $V_{\lambda_1}\cong V_{\lambda_2}$ iff $\lambda_1=\lambda_2$.
+    \item Corollary: $V_\lambda$'s are all irreps of $S_n$.
+    \item We have that
+    \begin{equation*}
+        d = \binom{\lambda_1}{2}+\binom{\lambda_2}{2}+\cdots
+    \end{equation*}
+    \item \textbf{Young tableau}: A Young diagram filled with integers. \emph{Also known as} \textbf{YT}.
+    \item \textbf{Standard} (Young tableau): A YT filled in with numbers $1,\dots,n$, wherein each appears exactly once and the numbers increase in rows and in columns. \emph{Also known as} \textbf{SYT}.
+    \item \textbf{Specht module} (of $\lambda$): The vector space where each basis element is a polynomial written from a standard Young tableau of $\lambda$ in the same manner that $\Sp_\lambda$ is written from its filled-in Young diagram. \emph{Denoted by} $\bm{V_\lambda}$.
+    \begin{itemize}
+        \item For example, the Specht module of $(2,2)$ is written from
+        \begin{align*}
+            \ytableaushort{13,24}&&
+            \ytableaushort{12,34}
+        \end{align*}
+        and equals
+        \begin{equation*}
+            V_{(2,2)} = \langle(x_1-x_2)(x_3-x_4),(x_1-x_3)(x_2-x_4)\rangle
+        \end{equation*}
+    \end{itemize}
+    \item Theorem: $\dim V_\lambda$ is the number of SYTs of shape $\lambda$.
+    \item Corollary: $\dim V_\lambda=\dim V_{\lambda'}$.
+    \item Fact: We have the following identity.
+    \begin{equation*}
+        V_{\lambda'} = V_\lambda\otimes(\text{sign})
+    \end{equation*}
+    \item Theorem (RSK): There exists a bijection between permutations in $S_n$ and pairs of SYTs of the same shape (i.e., of \textbf{area} $n$).
+    \begin{itemize}
+        \item See Figure \ref{fig:SchenstedAlgorithm} and the associated discussion.
+    \end{itemize}
+    \item \textbf{Hook} (of a cell): The set of all cells in a Young diagram directly to the right of or directly beneath the cell in question, including the cell in question.
+    \item \textbf{Length} (of a hook): The cardinality of the hook in question.
+    \item \textbf{Hook length formula}: The formula given as follows, where $n$ is the number being partitioned. \emph{Given by}
+    \begin{equation*}
+        \#\SYT_\lambda = \frac{n!}{\prod\text{length of all hooks}}
+    \end{equation*}
+    \item \textbf{Restriction} (of $V$ to $H\leq G$): The vector space $V$ viewed as an $H$-representation, i.e., a straight-up functional restriction of $\rho_V$. \emph{Denoted by} $\bm{\res_H^G(V)}$.
+    \begin{itemize}
+        \item Sometimes, we see how the space breaks into subrepresentations under the subgroup.
+    \end{itemize}
+    \item \textbf{Induction}: \emph{See above}.
+    \item The dimension of an induced representation can be calculated via
+    \begin{equation*}
+        \dim\ind_H^GW = (\dim W)(G:H)
+    \end{equation*}
+    \item Theorem (Frobenius): Let $H<G$, and let $W$ be an $H$-rep. Then
+    \begin{equation*}
+        \chi_{\ind_H^GW}(g) = \frac{1}{|H|}\sum_{\substack{x\in G\\x^{-1}gx\in H}}\chi_W(x^{-1}gx)
+    \end{equation*}
+    \item \textbf{Frobenius reciprocity}: The following equality. \emph{Given by}
+    \begin{equation*}
+        (\chi_V^{},\chi_{\ind_H^GW})_G^{} = (\chi_{\res_H^GV},\chi_W^{})_H^{}
+    \end{equation*}
+    \item Recall the Branching Theorem.
+    \item Recall the Frobenius characteristic map.
+    \item Search for any place I wrote something down about the final!
+    \begin{itemize}
+        \item Learn representations of $S_4$ by heart. See Table \ref{tab:charTableS4}.
+        \item Final will include some stuff from the last HW, but it will be easier.
+        \item Rudenko did not expect that finding conjugacy classes would be so difficult for us; he will adjust for this difficulty on the final.
+        \item No Burnside's theorem on the final.
+    \end{itemize}
+    \item Review PSets!
 \end{itemize}
 
 

@@ -31,7 +31,7 @@
             \item Then we define $V_\lambda$\footnote{Something about $V_\lambda=\C[S_n]$?? I though we were "just say NO!"-ing this usual construction, though?} to be the subspace of the polynomial space $\C[x_1,\dots,x_n]$ that is spanned by the Vandermonde determinants polynomial and all actions of $S_n$ on it.
             \item In particular, take Vandermonde determinant of variables corresponding to the successive columns to obtain
             \begin{equation*}
-                \Delta(x_1,\dots,x_{\lambda_1'})\Delta(x_{\lambda_1'+1},\dots,x_{\lambda_2'})\cdots\Delta(x_{\lambda_{k-1}'+1},\dots,\lambda_k')
+                \Delta(x_1,\dots,x_{\lambda_1'})\Delta(x_{\lambda_1'+1},\dots,x_{\lambda_2'})\cdots\Delta(x_{\lambda_1'+\cdots+\lambda_{k-1}'+1},\dots,x_n)
             \end{equation*}
             \item Thus, in our specific example, we let $\C[S_n]$ act on $(x_1-x_2)(x_1-x_3)(x_2-x_3)(x_4-x_5)$.
         \end{itemize}
@@ -107,6 +107,107 @@
             so $\chi(123)=-1$.
         \end{itemize}
         \item One of the HW problems is to do exactly this for $S_4$ just for practice.
+    \end{itemize}
+    \item A note on determining that $(x_1-x_4)(x_2-x_3)$ is equal to $b-a$.
+    \begin{itemize}
+        \item In this case, we were able to observe this pretty clearly. However, we may not be able to in every case, so there is an advantage to be had in developing a procedural method. We will do this now through the above representative example.
+        \item Multiplying out $a$ and $b$, we get
+        \begin{align*}
+            x_1x_3-x_1x_4-x_2x_3+x_2x_4&&
+            x_1x_2-x_1x_4-x_2x_3+x_3x_4
+        \end{align*}
+        \item Thus, we see that $a,b$ are linear combinations of the six nonsquared basis elements of the subset of $\C[x_1,x_2,x_3,x_4]$ consisting of polynomials of degree two. Explicitly, $a,b$ are linear combinations of "vectors"
+        \begin{align*}
+            x_1x_2&&
+            x_1x_3&&
+            x_1x_4&&
+            x_2x_3&&
+            x_2x_4&&
+            x_3x_4
+        \end{align*}
+        \item In fact, any permutation of the Specht polynomial $(x_1-x_2)(x_3-x_4)$ will be in this space, including $b-a$ (which we'll call by that name for shorthand).
+        \item Represented as column vectors, we have
+        \begin{align*}
+            \begin{matrix}
+                x_1x_2\\
+                x_1x_3\\
+                x_1x_4\\
+                x_2x_3\\
+                x_2x_4\\
+                x_3x_4\\
+            \end{matrix}
+            \quad
+            \underbrace{
+                \begin{bmatrix}
+                    1\\
+                    0\\
+                    -1\\
+                    -1\\
+                    0\\
+                    1\\
+                \end{bmatrix}
+            }_a&&
+            \underbrace{
+                \begin{bmatrix}
+                    1\\
+                    0\\
+                    -1\\
+                    -1\\
+                    0\\
+                    1\\
+                \end{bmatrix}
+            }_b&&
+            \underbrace{
+                \begin{bmatrix}
+                    1\\
+                    -1\\
+                    0\\
+                    0\\
+                    -1\\
+                    1\\
+                \end{bmatrix}
+            }_{b-a}
+        \end{align*}
+        \item From here, even if $b-a$ wasn't so suggestively labeled, we could probably pick out by inspection that $b-a$ is equal to $b$ minus $a$.
+        \item However, let's keep going to make this procedure fully general and not rely on inspection at all.
+        \item To determine if a vector is in the span of two others, form an augmented matrix, specifically the one on the left below.
+        \begin{equation*}
+            \begin{bNiceArray}{cc|c}
+                1 & 0 & 1\\
+                0 & 1 & -1\\
+                -1 & -1 & 0\\
+                -1 & -1 & 0\\
+                0 & 1 & -1\\
+                1 & 0 & 1\\
+            \end{bNiceArray}
+            \quad\to\quad
+            \begin{bNiceArray}{cc|c}
+                1 & 0 & 1\\
+                0 & 1 & -1\\
+                0 & -1 & 1\\
+                0 & -1 & 1\\
+                0 & -1 & 1\\
+                0 & 0 & 0\\
+            \end{bNiceArray}
+            \quad\to\quad
+            \begin{bNiceArray}{cc|c}
+                1 & 0 & 1\\
+                0 & 1 & -1\\
+                0 & 0 & 0\\
+                0 & 0 & 0\\
+                0 & 0 & 0\\
+                0 & 0 & 0\\
+            \end{bNiceArray}
+        \end{equation*}
+        \begin{itemize}
+            \item To have a pivot in the upper left-hand corner, this will require listing $b$ to the left of $a$.
+            \item After Gaussian elimination, the final result is the right matrix above.
+            \item We read it as indicating that 1 times the original first column plus $-1$ times the original second column gives the original third column. In terms of $a,b$, this means
+            \begin{equation*}
+                (1)b+(-1)a = b-a
+            \end{equation*}
+            as desired.
+        \end{itemize}
     \end{itemize}
     \item Today: A theorem that proves the $V_\lambda$ are irreducible (as our notation would suggest), and a theorem that proves the $V_\lambda$ are well-defined (i.e., only one $V_\lambda$ can be constructed from each $\lambda$).
     \item Note: $V_\lambda$ is a \textbf{Specht module} and the original polynomial constructed is the \textbf{Specht polynomial}.
@@ -222,7 +323,7 @@
     \end{itemize}
     \item Guiding question for today: Which Specht polynomials $\Sp_\lambda(x_{\sigma(1)},\dots,x_{\sigma(n)})$ form a basis of $V_{\lambda'}$?
     \item \textbf{Young tableau}: A Young diagram filled with integers. \emph{Also known as} \textbf{YT}.
-    \item \textbf{Standard} (Young tableaux): A YT filled in with numbers $1,\dots,n$, wherein each appears exactly once and the numbers increase in rows and in columns. \emph{Also known as} \textbf{SYT}.
+    \item \textbf{Standard} (Young tableau): A YT filled in with numbers $1,\dots,n$, wherein each appears exactly once and the numbers increase in rows and in columns. \emph{Also known as} \textbf{SYT}.
     \item Example of an SYT.
     \begin{figure}[H]
         \centering
@@ -556,12 +657,13 @@
     \item Example.
     \begin{figure}[h!]
         \centering
-        \begin{ytableau}
-            7 & 4 & 3 & 1\\
-            5 & 2 & 1\\
-            2\\
-            1\\
-        \end{ytableau}
+        % \begin{ytableau}
+        %     7 & 4 & 3 & 1\\
+        %     5 & 2 & 1\\
+        %     2\\
+        %     1\\
+        % \end{ytableau}
+        \ytableaushort{7431,521,2,1}
         \caption{Hook length formula.}
         \label{fig:hookLengthForm}
     \end{figure}
@@ -795,7 +897,7 @@
     \item We will do a bunch of computations of such \textbf{induced representations} on the homework.
     \item Theorem (Frobenius): Let $H<G$, and let $W$ be an $H$-rep. Then
     \begin{equation*}
-        \chi_{\ind_H^GW}(g) = \frac{1}{|H|}\sum_{\substack{x\in G\\g_i^{-1}gg_i\in H}}\chi_W(g_i^{-1}gg_i)
+        \chi_{\ind_H^GW}(g) = \frac{1}{|H|}\sum_{\substack{x\in G\\x^{-1}gx\in H}}\chi_W(x^{-1}gx)
     \end{equation*}
     \item Discussion.
     \begin{itemize}
@@ -1147,7 +1249,7 @@
             \begin{equation*}
                 \chi_\rho(u) = \sum_{\substack{r\in R\\r^{-1}ur\in H}}\tr_{\rho_rW}(\rho_u|_{\rho_rW})
             \end{equation*}
-            Recall that the origin of the condition $ur=rt$ is that we needed $\rho_u\rho_r=\rho_r\theta_t$ with $t=r^{-1}ur\in H$. More specifically, since we only care about the action of $\rho_u$ on $\rho_RW$ right now, we have $\rho_u|_{\rho_rW}\rho_r=\rho_r\theta_t$. It follows since $\tr(ab)=\tr(ba)$ and hence $\tr(aba^{-1})=\tr(b)$ that $\tr(\rho_u|_{\rho_rW})=\tr(\rho_r\theta_t\rho_{r^{-1}})=\tr(\theta_t)=\chi_\theta(t)=\chi_\theta(r^{-1}ur)$, which yields
+            Recall that the origin of the condition $ur=rt$ is that we needed $\rho_u\rho_r=\rho_r\theta_t$ with $t=r^{-1}ur\in H$. More specifically, since we only care about the action of $\rho_u$ on $\rho_rW$ right now, we have $\rho_u|_{\rho_rW}\rho_r=\rho_r\theta_t$. It follows since $\tr(ab)=\tr(ba)$ and hence $\tr(aba^{-1})=\tr(b)$ that $\tr(\rho_u|_{\rho_rW})=\tr(\rho_r\theta_t\rho_{r^{-1}})=\tr(\theta_t)=\chi_\theta(t)=\chi_\theta(r^{-1}ur)$, which yields
             \begin{equation*}
                 \chi_\rho(u) = \sum_{\substack{r\in R\\r^{-1}ur\in H}}\chi_\theta(r^{-1}ur)
             \end{equation*}

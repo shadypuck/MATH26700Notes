@@ -886,8 +886,55 @@
             As in class.
         \end{proof}
     \end{proposition}
-    \item \textcite{bib:Serre} defines the characters of the symmetric square and alternating square representations.
-    \stepcounter{proposition}
+    \item Characters of the symmetric square and alternating square representations.
+    \begin{proposition}
+        Let $\rho:G\to GL(V)$ be a linear representation of $G$, and let $\chi$ be its character. Let $\chi_\sigma^2$ be the character of the symmetric square $S^2(V)$ of $V$, and let $\chi_\alpha^2$ be that of $\Lambda^2(V)$. Then for each $s\in G$, we have
+        \begin{align*}
+            \chi_\sigma^2(s) &= \frac{1}{2}(\chi(s)^2+\chi(s^2))&
+            \chi_\alpha^2(s) &= \frac{1}{2}(\chi(s)^2-\chi(s^2))
+        \end{align*}
+        We also have the relation
+        \begin{equation*}
+            \chi_\sigma^2+\chi_\alpha^2 = \chi^2
+        \end{equation*}
+        \begin{proof}
+            Let $s\in G$ be arbitrary. Pick an eigenbasis $\inp{e_i}$ of $\rho_s$ for $V$; recall that we can do this because $\rho_s$ is unitary. Let $\lambda_i\in\C$ be corresponding eigenvalues.\par
+            We now establish a couple of facts. First, note that
+            \begin{align*}
+                \chi(s) &= \tr(\rho_s)
+                    = \tr(\diag(\lambda_1,\dots,\lambda_n))
+                    = \sum\lambda_i\\
+                \chi(s^2) &= \tr(\rho_s^2)
+                    = \tr(\diag(\lambda_1^2,\dots,\lambda_n^2))
+                    = \sum\lambda_i^2
+            \end{align*}
+            Second, since we will compute $\chi_\sigma^2,\chi_\alpha^2$ directly by looking at the action of $\rho_s\otimes\rho_s$ on the bases of these spaces, it will be useful to know that
+            \begin{align*}
+                (\rho_s\otimes\rho_s)(e_i\cdot e_j) &= (\rho_s\otimes\rho_s)(e_i\otimes e_j+e_j\otimes e_i)
+                    = \lambda_i\lambda_j(e_i\otimes e_j+e_j\otimes e_i)\\
+                (\rho_s\otimes\rho_s)(e_i\wedge e_j) &= (\rho_s\otimes\rho_s)(e_i\otimes e_j-e_j\otimes e_i)
+                    = \lambda_i\lambda_j(e_i\otimes e_j-e_j\otimes e_i)
+            \end{align*}
+            Therefore, via clever algebraic rearrangements, we have that
+            \begin{align*}
+                \chi_\sigma^2(s) &= \sum_{i\leq j}\lambda_i\lambda_j
+                    = \sum\lambda_i^2+\sum_{i<j}\lambda_i\lambda_j
+                    = \frac{1}{2}\left( \sum\lambda_i \right)^2+\frac{1}{2}\sum\lambda_i^2
+                    = \frac{1}{2}(\chi(s)^2+\chi(s^2))\\
+                \chi_\sigma^2(s) &= \sum_{i<j}\lambda_i\lambda_j
+                    = \frac{1}{2}\left( \sum\lambda_i \right)^2-\frac{1}{2}\sum\lambda_i^2
+                    = \frac{1}{2}(\chi(s)^2-\chi(s^2))
+            \end{align*}
+            as desired.\par
+            The last relation in the statement of the theorem may be derived as follows.
+            \begin{align*}
+                S^2V\oplus\Lambda^2V &= V\otimes V\\
+                \chi_{S^2V\oplus\Lambda^2V} &= \chi_{V\otimes V}\\
+                \chi_{S^2V}+\chi_{\Lambda^2V} &= \chi_V\cdot\chi_V\\
+                \chi_\sigma^2+\chi_\alpha^2 &= \chi^2
+            \end{align*}
+        \end{proof}
+    \end{proposition}
 \end{itemize}
 
 
