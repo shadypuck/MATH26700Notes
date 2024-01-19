@@ -1237,5 +1237,140 @@
 
 
 
+\section{Final}
+\begin{enumerate}
+    \item \textbf{(30)} Explain the construction of the irreducible representations of $S_n$ via Specht polynomials. Prove irreducibility of these representations.
+    \begin{proof}[Answer]
+        \emph{See corresponding answer in Final Review Sheet above.}
+    \end{proof}
+    \item \textbf{(25)} Fill in the character of the group $S_4$. You can use the permutational representation, induction/restriction, orthogonality relations, Specht modules, tensor products, wedge/symmetric powers, etc.
+    \begin{center}
+        \begin{tabular}{||cccccc||}
+            \hline
+            Representation & $(1)(2)(3)(4)$ & $(12)(34)$ & $(12)(3)(4)$ & $(1234)$ & $(123)(4)$\\
+            \hline\hline
+            $(4)$       &  &  &  &  & \\ \hline
+            $(1,1,1,1)$ &  &  &  &  & \\ \hline
+            $(2,2)$     &  &  &  &  & \\ \hline
+            $(3,1)$     &  &  &  &  & \\ \hline
+            $(2,1,1)$   &  &  &  &  & \\ \hline
+        \end{tabular}
+    \end{center}
+    \begin{proof}[Answer]
+        \underline{$(4)$}: This is the trivial representation, which always has character
+        \begin{equation*}
+            (1,1,1,1,1)
+        \end{equation*}
+        \underline{$(1,1,1,1)$}: This is the alternating representation, which has character equal to the sign of each element.\par
+        $e=(12)(12)$, for example, which is an \emph{even} number of transpositions, so sign = 1.\\
+        $(12)(34)$ has an even number, so sign = 1.\\
+        $(12)$: Odd, sign = $-1$.\\
+        $(1234)=(12)(23)(34)$: Odd, sign = $-1$.\\
+        $(123)=(12)(23)$: Even, sign = 1.\par
+        Thus, overall, the character is
+        \begin{equation*}
+            (1,1,-1,-1,1)
+        \end{equation*}
+        \underline{$(2,2)$}: Use Specht modules, as in the example from the Final Review Sheet above. This yields the character
+        \begin{equation*}
+            (2,2,0,0,-1)
+        \end{equation*}
+        \underline{$(3,1)$}: Subtract the trivial from the permutational representation. The trivial, we've already found. The permutational is given by the number of elements fixed under each type of permutation, i.e., is $(4,0,2,0,1)$. Subtracting 1 from each of these values yields
+        \begin{equation*}
+            (3,-1,1,-1,0)
+        \end{equation*}
+        \underline{$(2,1,1)$}: Try $(3,1)\otimes(1,1,1,1)$. This yields the following representation, distinct from the others, that is still irreducible by the irreducibility criterion.
+        \begin{equation*}
+            (3,-1,-1,1,0)
+        \end{equation*}
+        Note: An alternative, quicker way to solve this question would have been to save $(2,2)$ until last and then fill it in with orthogonality relations.
+    \end{proof}
+    \item \textbf{(25)} Consider a representation $(3,2)$ of the group $S_5$.
+    \begin{enumerate}
+        \item Write the corresponding Specht polynomial (it has degree 2). Compute its dimension (using any theorems that we discussed). Write a basis for this representation (the natural way to do it is to use standard Young tableaux). Prove that this is indeed a basis.
+        \begin{proof}[Answer]
+            Using the construction discussed in Question 1,
+            \begin{align*}
+                \Sp_{(3,2)} &= \Delta(x_1,x_2)\Delta(x_3,x_4)\Delta(x_5)\\
+                \Aboxed{\Sp_{(3,2)} &= (x_1-x_2)(x_3-x_4)}
+            \end{align*}
+            Using the hook length formula, we have that
+            \begin{align*}
+                \dim V_{(3,2)} &= \frac{5!}{4\cdot 3\cdot 2\cdot 1\cdot 1}\\
+                \Aboxed{\dim V_{(3,2)} &= 5}
+            \end{align*}
+            The 5 SYTs we can write are
+            \begin{align*}
+                \ytableaushort{135,24}&&
+                \ytableaushort{125,34}&&
+                \ytableaushort{123,45}&&
+                \ytableaushort{134,25}&&
+                \ytableaushort{124,35}
+            \end{align*}
+            which correspond to
+            \begin{empheq}[box=\fbox]{align*}
+                \begin{split}
+                    V_{(3,2)} ={}& \big\langle\overbrace{(x_1-x_2)(x_3-x_4)}^a,\overbrace{(x_1-x_3)(x_2-x_4)}^b,\overbrace{(x_1-x_4)(x_2-x_5)}^c\\
+                &\hspace{4.5em}
+                    \underbrace{(x_1-x_2)(x_3-x_5)}_d,
+                    \underbrace{(x_1-x_3)(x_2-x_5)}_e
+                \big\rangle
+                \end{split}
+            \end{empheq}
+            To prove that the above basis is a basis, we need to show that it is spanning and linearly independent. Since there are 5 vectors in it and the hook length formula tells us that we only need 5 vectors, it is spanning. We will prove that the vectors are linearly independent by considering them as column vectors in $R_2\subset\C[x_1,\dots,x_5]$:
+            \vspace{-0.5em}
+            \begin{equation*}
+                \begin{bNiceMatrix}[first-col,first-row]
+                           & a  & b  & c  & d  & e \\
+                    x_1x_2 & 0  & 1  & 1  & 0  & 1 \\
+                    x_1x_3 & 1  & 0  & 0  & 1  & 0 \\
+                    x_1x_4 & -1 & -1 & 0  & 0  & 0 \\
+                    x_1x_5 & 0  & 0  & -1 & -1 & -1\\
+                    x_2x_3 & -1 & -1 & 0  & -1 & -1\\
+                    x_2x_4 & 1  & 0  & -1 & 0  & 0 \\
+                    x_2x_5 & 0  & 0  & 0  & 1  & 0 \\
+                    x_3x_4 & 0  & 1  & 0  & 0  & 0 \\
+                    x_3x_5 & 0  & 0  & 0  & 0  & 1 \\
+                    x_4x_5 & 0  & 0  & 1  & 0  & 0 \\
+                \end{bNiceMatrix}
+            \end{equation*}
+            \vspace{-0.3em}
+            Although we could row-reduce this matrix to prove that it is full column rank, we can also observe that $b,c,d,e$ each have a different nonzero entry in the bottom four slots, while $a$ is zero in all four slots, thus proving linear independence.
+        \end{proof}
+        \item Compute the character of this representation.
+        \begin{proof}[Answer]
+            We do this directly by looking at where certain representative elements of $S_5$ map the basis of $V_{(3,2)}$. Filling in the following table, to matrices, to traces finishes the problem.
+            \begin{center}
+                \small
+                \renewcommand{\arraystretch}{1.2}
+                \begin{tabular}{c|c|c|c|c|c|c|c|}
+                        & $e$ & $(12)$ & $(123)$ & $(1234)$ & $(12345)$ & $(12)(34)$ & $(123)(45)$\\
+                    \hline
+                    $a$ &     &        &         &          &           &            &            \\ \hline
+                    $b$ &     &        &         &          &           &            &            \\ \hline
+                    $c$ &     &        &         &          &           &            &            \\ \hline
+                    $d$ &     &        &         &          &           &            &            \\ \hline
+                    $e$ &     &        &         &          &           &            &            \\ \hline
+                \end{tabular}
+            \end{center}
+        \end{proof}
+    \end{enumerate}
+    \item \textbf{(20)} Consider finite groups $G$ and $H$. Suppose that $V_1,\dots,V_n$ are irreducible representations of $G$ and $W_1,\dots,W_m$ are irreducible representations of $H$. Define representations of the group $G\times H$ on the vector spaces $V_i\otimes W_j$. Prove that these representations are irreducible and that these are all irreducible representations of $G\times H$.
+    \begin{proof}[Answer]
+        Let $\rho_i^G:G\to GL(V_i)$ and $\rho_j^H:H\to GL(W_j)$ denote the group homomorphisms corresponding to the irreps $V_i,W_j$. Define $\rho_{ij}:G\times H\to GL(V_i\otimes W_j)$ by
+        \begin{equation*}
+            \rho_{ij}(g,h)(v_i,w_j) = \rho_i^G(g)(v_i)\otimes\rho_j^H(h)(w_j)
+        \end{equation*}
+        Then if we suppose that $U\subsetneq V_i\otimes W_j$ is stable under $\rho_{ij}$, this implies the existence of a proper stable subspace of $V_i$ under $\rho_i^G$, contradicting the hypothesis that $V_i$ is irreducible. Therefore, the $V_i\otimes W_j$ must be irreducible.\par
+        Moreover, these account for all irreps. The number of irreps is equal to the number of conjugacy classes, and since $xgx^{-1}\in C_g$ and $yhy^{-1}\in C_h$ imply that
+        \begin{equation*}
+            (x,y)(g,h)(x,y)^{-1} \in C_{(g,h)}
+        \end{equation*}
+        we can see that the number of conjugacy classes of the product is equal to the product of the number of conjugacy classes of the groups. Specifically, this number is $nm$ since $n$ irreps of $G$ means $n$ conjugacy classes, and similarly for $H$. But we already have $nm$ irreps in the $V_i\otimes W_j$, so this must be all of them!
+    \end{proof}
+\end{enumerate}
+
+
+
 
 \end{document}
