@@ -1357,16 +1357,7 @@
     \end{enumerate}
     \item \textbf{(20)} Consider finite groups $G$ and $H$. Suppose that $V_1,\dots,V_n$ are irreducible representations of $G$ and $W_1,\dots,W_m$ are irreducible representations of $H$. Define representations of the group $G\times H$ on the vector spaces $V_i\otimes W_j$. Prove that these representations are irreducible and that these are all irreducible representations of $G\times H$.
     \begin{proof}[Answer]
-        Let $\rho_i^G:G\to GL(V_i)$ and $\rho_j^H:H\to GL(W_j)$ denote the group homomorphisms corresponding to the irreps $V_i,W_j$. Define $\rho_{ij}:G\times H\to GL(V_i\otimes W_j)$ by
-        \begin{equation*}
-            \rho_{ij}(g,h)(v_i,w_j) = \rho_i^G(g)(v_i)\otimes\rho_j^H(h)(w_j)
-        \end{equation*}
-        Then if we suppose that $U\subsetneq V_i\otimes W_j$ is stable under $\rho_{ij}$, this implies the existence of a proper stable subspace of $V_i$ under $\rho_i^G$, contradicting the hypothesis that $V_i$ is irreducible. Therefore, the $V_i\otimes W_j$ must be irreducible.\par
-        Moreover, these account for all irreps. The number of irreps is equal to the number of conjugacy classes, and since $xgx^{-1}\in C_g$ and $yhy^{-1}\in C_h$ imply that
-        \begin{equation*}
-            (x,y)(g,h)(x,y)^{-1} \in C_{(g,h)}
-        \end{equation*}
-        we can see that the number of conjugacy classes of the product is equal to the product of the number of conjugacy classes of the groups. Specifically, this number is $nm$ since $n$ irreps of $G$ means $n$ conjugacy classes, and similarly for $H$. But we already have $nm$ irreps in the $V_i\otimes W_j$, so this must be all of them!
+        See Theorem \ref{trm:productIrreps} from \textcite{bib:Serre}.
     \end{proof}
 \end{enumerate}
 
